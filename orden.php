@@ -40,6 +40,29 @@ else //Continue to current page
 			usuario_id = '".$_SESSION['usuario_id']."' "; 
 		$rs_resultdatosgeneral = mysqli_query($conn, $sql_datosusuariosgeneral);
 		$row_profile_general = mysqli_fetch_assoc($rs_resultdatosgeneral);
+		
+		
+		// Función para cambiar estado a "Pendiente de confirmación"
+		if(isset($_POST['cambiarestado-submit']))
+		{
+
+			// Consulta que actualiza el valor del estado de la orden
+			$sql1 = "UPDATE ordencompra SET estado_orden = 'Pendiente de confirmación' WHERE ordencompra_id = '".$url_id."' "; 
+
+			if ($conn->query($sql1) === TRUE) 
+			{
+				// Refrescamos la página
+				header("Refresh:0");
+
+			} else {
+				//echo "Error updating record: " . $conn->error;
+				echo "Error sql update.";
+			}
+
+			$conn->close();
+		}
+		
+		
 	}
 
 ?> 
@@ -54,13 +77,13 @@ else //Continue to current page
 		<title>Gestión Pedagógica</title>
 
 		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<link href="css/fontawesome.min.css" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
-		<script src="js/moment.min.js"></script>
+		<script data-ad-client="ca-pub-2522486668045838" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 	</head>
 <body class="text-center">
 
-    <div class="d-flex h-100 p-3 mx-auto flex-column">
+    <div class="container d-flex p-3 mx-auto flex-column">
 
 	<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-color border-bottom box-shadow">
       <h5 class="my-0 mr-md-auto font-weight-normal">Gestión Pedagógica</h5>
@@ -68,8 +91,8 @@ else //Continue to current page
 		<a href="http://repositorio.gestionpedagogica.cl"><button class="btn btn-secondary" type="button">Inicio</button></a>
 		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hola <?php echo $row_profile_general["nombres"]; ?></button>
 		<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-			<a href="https://repositorio.gestionpedagogica.cl/perfil"><button class="dropdown-item" type="button">Perfil</button></a>
-			<a href="https://repositorio.gestionpedagogica.cl/logout"><button class="dropdown-item" type="button">Desconectar</button></a>
+			<a href="/perfil"><button class="dropdown-item" type="button">Perfil</button></a>
+			<a href="/logout"><button class="dropdown-item" type="button">Desconectar</button></a>
 		</div>
         <a href="#"><button class="btn btn-secondary" type="button">Contacto</button></a>
       </nav>
@@ -146,17 +169,17 @@ else //Continue to current page
 				echo'<hr class="mb-4">';
 				echo'<div class="container">';
 					echo'<div class="row">';
-					echo'<div class="col">';
-						echo'<p>La verificación de confirmación de pago puede demorar entre 5 a 24 horas. Recuerda hacer tus compras con anticipación.<p>';
+					echo '<div class="alert alert-info">';
+						echo'<span class="material-icons">announcement</span> La verificación de confirmación de pago puede demorar entre 5 a 24 horas';
 					echo'</div>';
 					echo'<div class="col text-right">';
-						echo'<button type="submit" class="btn btn-primary btn-lg">Notificar orden pagada</button>';
+						echo'<form method="post" action=""><button type="submit" name="cambiarestado-submit" class="btn btn-primary btn-lg">Notificar orden pagada</button></form>';
 					echo'</div>';
 					echo'</div>';
 				echo'</div>';
 			echo'</div>';
 		}
-		elseif($consulta_planificacion["estado_orden"] == '2')
+		elseif($consulta_planificacion["estado_orden"] == 'Pendiente de confirmación')
 		{
 			// Si no, mostramos ventana que muestra que la orden esta pendiente de aprobación
 			
@@ -168,25 +191,26 @@ else //Continue to current page
 					echo'<p><b>Orden ID: </b> '.$url_id.'</p>';
 					echo'<p><b>Creado hace:</b> '.$consulta_planificacion["fecha_compra"].'</p>';
 					echo'<p><b>Última actualización:</b> '.$consulta_planificacion["fecha_actualizacion"].'</p>';
-					echo'<p>Tu transacción esta pendiente de aprobación.</p>';
-					echo'<p>La verificación de confirmación de pago demora entre 5 a 24 horas. Una vez que tu pago sea aprobado, el archivo será liberado y estará disponible en tu perfil.</p>';
+					echo'<hr class="message-inner-separator">';
+					echo'<strong>Tu pago está en espera de confirmación</strong>';
+					echo'<p>La verificación del pago demora entre 5 a 24 horas. Una vez que tu pago sea aprobado, el documento será liberado y estará disponible en tu perfil.</p>';
 					echo'</div>';
-				echo'</li>';
-				echo'</ul>';
+				echo '</li>';
+				echo '</ul>';
 
-				echo'<hr class="mb-4">';
+				echo '<hr class="mb-4">';
 				
-				echo'<div class="container">';
-					echo'<div class="row">';
-					echo'<div class="col">';
-						echo'<p>Las notificaciones por correo electrónico están activadas. Recibirás un aviso cuando tu pago sea aprobado.<p>';
-					echo'</div>';
-					echo'<div class="col text-right">';
-						echo'<button type="submit" class="btn btn-success btn-lg" disabled>Notificación activada</button>';
-					echo'</div>';
-					echo'</div>';
-				echo'</div>';
-			echo'</div>';
+				echo '<div class="container">';
+					echo '<div class="row">';
+					echo '<div class="alert alert-info">';
+						echo '<span class="material-icons">announcement</span> Recibirás un aviso cuando tu pago sea aprobado';
+					echo '</div>';
+					echo '<div class="col text-right">';
+						echo '<button type="submit" class="btn btn-success btn-lg" disabled>Notificación activada</button>';
+					echo '</div>';
+					echo '</div>';
+				echo '</div>';
+			echo '</div>';
 		}
 		else
 		{
@@ -200,7 +224,9 @@ else //Continue to current page
 					echo'<p><b>Orden ID: </b> '.$url_id.'</p>';
 					echo'<p><b>Creado hace:</b> '.$consulta_planificacion["fecha_compra"].'</p>';
 					echo'<p><b>Última actualización:</b> '.$consulta_planificacion["fecha_actualizacion"].'</p>';
-					echo'<p>Tu transacción fue confirmada y el archivo fue agregado a tu cuenta.</p>';
+					echo'<hr class="message-inner-separator">';
+					echo'<strong>Buenas noticias '.$row_profile_general["nombres"].'</strong>';
+					echo'<p>Tu orden fue confirmada y el archivo fue agregado a tu cuenta.</p>';
 					echo'</div>';
 				echo'</li>';
 				echo'</ul>';
@@ -209,11 +235,11 @@ else //Continue to current page
 				
 				echo'<div class="container">';
 					echo'<div class="row">';
-					echo'<div class="col">';
-						echo'<p>Ya puedes ver el archivo '.$consulta_planificacion["nombre"].'. Presiona el botón "Ver archivo" para ir.<p>';
+					echo'<div class="alert alert-success">';
+						echo'<span class="material-icons">check_circle_outline</span> Ya puedes usar el archivo '.$consulta_planificacion["nombre"].' ';
 					echo'</div>';
 					echo'<div class="col text-right">';
-						echo'<a href="#"><button type="submit" class="btn btn-primary btn-lg">Ver archivo</button></a>';
+						echo'<a href="archivo?id="><button type="submit" class="btn btn-primary btn-lg">Ver archivo</button></a>';
 					echo'</div>';
 					echo'</div>';
 				echo'</div>';

@@ -76,12 +76,13 @@ else //Continue to current page
 		<title>Gestión Pedagógica</title>
 
 		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<link href="css/fontawesome.min.css" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
+		<script data-ad-client="ca-pub-2522486668045838" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 	</head>
 <body class="text-center">
 
-    <div class="d-flex h-100 p-3 mx-auto flex-column">
+    <div class="container d-flex p-3 mx-auto flex-column">
 
 	<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-color border-bottom box-shadow">
       <h5 class="my-0 mr-md-auto font-weight-normal">Gestión Pedagógica</h5>
@@ -89,8 +90,8 @@ else //Continue to current page
 		<a href="http://repositorio.gestionpedagogica.cl"><button class="btn btn-secondary" type="button">Inicio</button></a>
 		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hola <?php echo $row_profile_general["nombres"]; ?></button>
 		<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-			<a href="https://repositorio.gestionpedagogica.cl/perfil"><button class="dropdown-item" type="button">Perfil</button></a>
-			<a href="https://repositorio.gestionpedagogica.cl/logout"><button class="dropdown-item" type="button">Desconectar</button></a>
+			<a href="/perfil"><button class="dropdown-item" type="button">Perfil</button></a>
+			<a href="/logout"><button class="dropdown-item" type="button">Desconectar</button></a>
 		</div>
         <a href="#"><button class="btn btn-secondary" type="button">Contacto</button></a>
       </nav>
@@ -181,7 +182,7 @@ else //Continue to current page
 			<hr class="mb-4">
             <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input" id="same-address">
-              <label class="custom-control-label" for="same-address">Acepto los <a href="#">Términos y Condiciones</a>.</label>
+              <label class="custom-control-label" for="same-address">Acepto los <a href="https://repositorio.gestionpedagogica.cl/terminos-y-condiciones" target="_blank">Términos y Condiciones</a>.</label>
             </div>
             <hr class="mb-4">
             <button class="btn btn-primary btn-lg btn-block" name="crearorden-submit" type="submit">Comprar</button>
