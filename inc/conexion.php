@@ -2,9 +2,9 @@
 
 // configuraciónes
 $servername = "localhost";
-$username = "gestionp_usuario";
-$password = "4mk12447h747h";
-$dbname = "gestionp_repositorio";
+$username = "root";
+$password = "";
+$dbname = "repositorio";
 
 // conexión
 $conn = mysqli_connect($servername, $username, $password, $dbname) or die("Connection failed: " . mysqli_connect_error());

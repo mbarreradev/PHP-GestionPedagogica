@@ -33,7 +33,16 @@ a:hover {
 }
 
 .card-deck .card {
-  min-width: 290px;
+  min-width: 13rem;
+  /* min-width: 290px; */
+}
+
+.card-title.pricing-card-title.price {
+  font-size: 1rem;
+}
+
+h1.card-title.pricing-card-title.asignatura {
+  font-size: 1.23rem;
 }
 
 .border-top { border-top: 1px solid #e5e5e5; }
@@ -219,10 +228,6 @@ body {
 	border-radius: .3rem;
 }
 
-.card-title.pricing-card-title.price {
-    font-size: 1.4rem;
-}
-
 .index-description {
     margin-bottom: 30px;
 	padding-left: 17%;
@@ -354,3 +359,46 @@ table.dataTable tbody tr {
   pointer-events: none;
   cursor: default;
 }
+
+/* Carusel */
+
+.MultiCarousel { 
+  float: left; 
+  overflow: hidden; 
+  padding: 15px; 
+  width: 100%; 
+  position:relative; 
+  margin-top: -24px;
+}
+.MultiCarousel .MultiCarousel-inner { 
+  transition: 1s ease all; 
+  float: left; 
+}
+.MultiCarousel .MultiCarousel-inner .item { 
+  float: left;
+}
+.MultiCarousel .MultiCarousel-inner .item > div { 
+  text-align: center; 
+  padding:10px; margin:10px; 
+  background:#f1f1f1; 
+  color:#666; 
+  box-shadow:0 0.25rem 0.75rem rgba(0, 0, 0, .05);
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: .25rem;
+}
+.MultiCarousel .leftLst, .MultiCarousel .rightLst { 
+  position:absolute; 
+  border-radius:50%;
+  top:calc(50% - 20px); 
+}
+.MultiCarousel .leftLst { 
+  left:0; 
+}
+.MultiCarousel .rightLst { 
+  right:0; 
+}
+.MultiCarousel .leftLst.over, .MultiCarousel .rightLst.over { 
+  pointer-events: none; 
+  background:#ccc; 
+}
+

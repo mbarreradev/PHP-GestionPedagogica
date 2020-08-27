@@ -2,16 +2,23 @@
 session_start();
 require 'inc/conexion.php';
 
-// BOX Archivos
-$sql1 = "SELECT * FROM archivo ORDER BY archivo_id ASC";  
-$rs_result1 = mysqli_query($conn, $sql1);  
+// BOX planificaciones
+$sql_planificaciones = "SELECT * FROM archivo WHERE tipo = '0' ORDER BY RAND()";  
+$rs_result_planificaciones = mysqli_query($conn, $sql_planificaciones);  
+
+// BOX guias
+$sql_guias = "SELECT * FROM archivo WHERE tipo = '1' ORDER BY RAND()";  
+$rs_result_guias = mysqli_query($conn, $sql_guias);  
 
 // BOX Recomendados
-$sql2 = "SELECT * FROM archivo ORDER BY archivo_id WHERE recomendado = '1' ASC LIMIT 4";  
-$rs_result2 = mysqli_query($conn, $sql2);  
+$sql_recomendados = "SELECT * FROM archivo WHERE recomendado = '1' ORDER BY RAND() LIMIT 10";  
+$rs_result_recomendados = mysqli_query($conn, $sql_recomendados);  
 
-// BOX Contador
-$row_cnt = $rs_result1->num_rows;
+// Contador planificaciones
+$cnt_planificaciones = $rs_result_planificaciones->num_rows;
+
+// Contador guias
+$cnt_guias = $rs_result_guias->num_rows;
 
 ?> 
 <!doctype html>
@@ -27,7 +34,10 @@ $row_cnt = $rs_result1->num_rows;
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
+		<script src="https://code.jquery.com/jquery-3.5.0.slim.min.js" integrity="sha256-MlusDLJIP1GRgLrOflUQtshyP0TwT/RHXsI1wWGnQhs=" crossorigin="anonymous"></script>
+    	<script src="js/bootstrap.bundle.min.js"></script>
 		<script src="js/list.min.js"></script>
+		<script src="js/carousel.js"></script>
 		<script data-ad-client="ca-pub-2522486668045838" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 	</head>
 <body class="text-center">
@@ -59,7 +69,7 @@ $row_cnt = $rs_result1->num_rows;
     	<div class="jumbotron">
         	<div class="container">
           	<h1 class="display-4">Bienvenido a Gestión Pedagógica</h1>
-          	<p class="index-description">En esta página encontrarás más de <?php echo $row_cnt; ?> planificaciones para casi todos los cursos de enseñanza básica.</p>
+          	<p class="index-description">En esta página encontrarás más de <?php echo $cnt_planificaciones; ?> planificaciones y <?php echo $cnt_guias; ?> guías para casi todos los cursos de enseñanza básica.</p>
 
 			<!-- GestionPedagogica Index -->
 			<ins class="adsbygoogle"
@@ -76,48 +86,82 @@ $row_cnt = $rs_result1->num_rows;
 		<h4 class="d-flex justify-content-between align-items-center mb-3">
             <span>Recomendados</span>
         </h4>
+
+		<div class="row">
+			<div class="MultiCarousel" data-items="1,3,5,6" data-slide="1" id="MultiCarousel"  data-interval="1000">
+				<div class="MultiCarousel-inner">
+					
+					<?php  
+						while ($row = mysqli_fetch_assoc($rs_result_recomendados)) {
+					?>
+				
+					<div class="item">
+						<div class="pad15">
+							<p class="lead"><?php echo $row['asignatura']; ?></p>
+							<p><?php echo $row['nombre']; ?></p>
+							<p><?php echo $row['curso']; ?></p>
+							<?php
+						if($row["estado"] === '1' AND !isset($_SESSION["fb_access_token"])) // 1 disponible 0 no disponible
+						{
+							echo '<a href="/comprar?id='.$row["archivo_id"].'"><button type="button" class="btn btn-sm btn-block btn-outline-primary">Seleccionar</button></a>';
+						}
+						else
+						{
+							echo '<button type="button" class="btn btn-sm btn-block btn-outline-secondary" disabled>No disponible</button>';
+						}
+						?>
+						</div>
+					</div>
+
+					<?php  
+						};  
+					?>
+
+				</div>
+				<button class="btn btn-primary leftLst"><</button>
+				<button class="btn btn-primary rightLst">></button>
+				</div>
+			</div>
 		</div>
+
 		
 		<div id="tabla-archivos">
 		
 		<h4 class="d-flex justify-content-between align-items-center mb-3">
-            <span>Busqueda de planificaciones</span>
-        </h4>
-		
-			<div class="container-separado">
-				<input type="text" class="search form-control" placeholder="Puedes buscar por Curso, Asignatura, Unidad o Nombre"/>
-			</div>
-			
-		<h4 class="d-flex justify-content-between align-items-center mb-3">
             <span>Lista de planificaciones</span>
-        </h4>	
+		</h4>	
+		
+		<div class="container-separado">
+			<input type="text" class="search form-control" placeholder="Puedes buscar por curso, asignatura, unidad o temática"/>
+		</div>
+
 		<div class="card-deck mb-3 text-center">
 			<ul class="list">
 			
 			<?php  
-				while ($row = mysqli_fetch_assoc($rs_result1)) {
+				while ($row = mysqli_fetch_assoc($rs_result_planificaciones)) {
 			?>
 
 			<div class="card mb-4 box-shadow">
 				<div class="card-header">
-					<h4 class="my-0 font-weight-normal nombre"><?php echo $row['nombre']; ?></h4>
+					<h4 class="my-0 font-weight-normal nombre"><?php echo $row['asignatura']; ?></h4>
 				</div>
 				<div class="card-body">
-					<h1 class="card-title pricing-card-title asignatura"><?php echo $row['asignatura']; ?></h1>
+					<h1 class="card-title pricing-card-title asignatura"><?php echo $row['nombre']; ?></h1>
+					<hr/>
 					<ul class="list-unstyled mt-3 mb-4">
 						<li class="unidad"><?php echo $row['curso']; ?></li>
 						<li class="unidad"><?php echo $row['unidad']; ?></li>
 					</ul>
 					<h1 class="card-title pricing-card-title price">Precio $<?php echo $row['precio']; ?></h1>
 					<?php
-					// PENDIENTE: Tiene que estar conectada para poder comprar
-						if($row["estado"] === '0') // 0 disponible 1 no disponible
+						if($row["estado"] === '1' AND !isset($_SESSION["fb_access_token"])) // 1 disponible 0 no disponible
 						{
-							echo '<a href="/comprar?id='.$row["archivo_id"].'"><button type="button" class="btn btn-lg btn-block btn-outline-primary">Seleccionar</button></a>';
+							echo '<a href="/comprar?id='.$row["archivo_id"].'"><button type="button" class="btn btn-xs btn-outline-primary">Seleccionar</button></a>';
 						}
 						else
 						{
-							echo '<button type="button" class="btn btn-lg btn-block btn-outline-secondary" disabled>No disponible</button>';
+							echo '<button type="button" class="btn btn-xs btn-outline-secondary" disabled>No disponible</button>';
 						}
 					?>
 				</div>
@@ -131,7 +175,45 @@ $row_cnt = $rs_result1->num_rows;
 
 	  	<h4 class="d-flex justify-content-between align-items-center mb-3">
             <span>Lista de guías</span>
-        </h4>	
+		</h4>	
+		
+		<div class="card-deck mb-3 text-center">
+			<ul class="list">
+			
+			<?php  
+				while ($row = mysqli_fetch_assoc($rs_result_guias)) {
+			?>
+
+			<div class="card mb-4 box-shadow">
+				<div class="card-header">
+					<h4 class="my-0 font-weight-normal nombre"><?php echo $row['asignatura']; ?></h4>
+				</div>
+				<div class="card-body">
+					<h1 class="card-title pricing-card-title asignatura"><?php echo $row['nombre']; ?></h1>
+					<hr/>
+					<ul class="list-unstyled mt-3 mb-4">
+						<li class="unidad"><?php echo $row['curso']; ?></li>
+						<li class="unidad"><?php echo $row['unidad']; ?></li>
+					</ul>
+					<h1 class="card-title pricing-card-title price">Precio $<?php echo $row['precio']; ?></h1>
+					<?php
+						if($row["estado"] === '1' AND !isset($_SESSION["fb_access_token"])) // 1 disponible 0 no disponible
+						{
+							echo '<a href="/comprar?id='.$row["archivo_id"].'"><button type="button" class="btn btn-xs btn-outline-primary">Seleccionar</button></a>';
+						}
+						else
+						{
+							echo '<button type="button" class="btn btn-xs btn-outline-secondary" disabled>No disponible</button>';
+						}
+					?>
+				</div>
+			</div>
+			
+			<?php  
+				};  
+			?>
+			</ul>
+      	</div>
 
 	  </div>
 	</div>
@@ -143,13 +225,10 @@ $row_cnt = $rs_result1->num_rows;
         </div>
       </footer>
     </div>
-
-    <script src="https://code.jquery.com/jquery-3.5.0.slim.min.js" integrity="sha256-MlusDLJIP1GRgLrOflUQtshyP0TwT/RHXsI1wWGnQhs=" crossorigin="anonymous"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
 	
 	<SCRIPT type="text/javascript">
 		var options = {
-  valueNames: [ 'nombre', 'asignatura', 'unidad' ]
+  valueNames: [ 'nombre', 'asignatura', 'unidad', 'curso' ]
 };
 
 var tablaArchivos = new List('tabla-archivos', options);

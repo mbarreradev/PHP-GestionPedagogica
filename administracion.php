@@ -190,7 +190,7 @@ $(document).ready(function() {
 												<td><?php echo $row['asignatura']; ?></td>
 												<td><?php echo $row['curso']; ?></td>
 												<td><?php echo $row['unidad']; ?></td>
-												<td><?php echo $row['precio']; ?></td>
+												<td>$<?php echo $row['precio']; ?></td>
 												<td><?php echo $row['estado']; ?></td>
 												<td>
 												<a href="/orden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver</button></a>
@@ -224,7 +224,7 @@ $(document).ready(function() {
 												<td><?php echo $row['asignatura']; ?></td>
 												<td><?php echo $row['curso']; ?></td>
 												<td><?php echo $row['unidad']; ?></td>
-												<td><?php echo $row['precio']; ?></td>
+												<td>$<?php echo $row['precio']; ?></td>
 												<td><?php echo $row['estado']; ?></td>
 												<td>
 												<a href="/orden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver</button></a>
