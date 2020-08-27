@@ -74,8 +74,14 @@ else //Continue to current page
 		<script src="https://code.jquery.com/jquery-3.5.0.slim.min.js" integrity="sha256-MlusDLJIP1GRgLrOflUQtshyP0TwT/RHXsI1wWGnQhs=" crossorigin="anonymous"></script>
 		<script type="text/javascript" charset="utf8" src="js/jquery.dataTables.js"></script>
 		<script data-ad-client="ca-pub-2522486668045838" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+		<script src="js/moment.min.js"></script>
 	</head>
 <body class="text-center">
+
+<?php
+// values
+$registradotime = $row_profile_general["registrado_el"];
+?>
 
 <script>
 
@@ -93,6 +99,19 @@ $(document).ready(function() {
 	} );
 } );
 
+$(function(){
+  setInterval(function(){
+	  
+	var dateFormat = 'YYYY-DD-MM HH:mm:ss';
+	var registrado_utctime = moment.utc('<?php echo $registradotime; ?>');
+	var registrado_localdate = registrado_utctime.local();
+	
+	var modificardivregistrado = document.getElementById('registrado');
+	modificardivregistrado.innerHTML =  moment(registrado_localdate, "YYYY-MM-DD hh:mm:ss").fromNow();
+	
+  },1000);
+});
+
 </script>
 
     <div class="container d-flex p-3 mx-auto flex-column">
@@ -106,7 +125,7 @@ $(document).ready(function() {
 			<a href="/perfil"><button class="dropdown-item" type="button">Perfil</button></a>
 			<a href="/logout"><button class="dropdown-item" type="button">Desconectar</button></a>
 		</div>
-        <a href="#"><button class="btn btn-secondary" type="button">Contacto</button></a>
+        <a href="/contacto"><button class="btn btn-secondary" type="button">Contacto</button></a>
       </nav>
       <a class="btn btn-outline-success" href="#">Contactar por Whatsapp</a>
     </div>
@@ -118,9 +137,9 @@ $(document).ready(function() {
 		<h4 class="d-flex justify-content-between align-items-center mb-3">
             <span>Tu perfil</span>
             <?php 
-			if($_SESSION['facebook_id'] === '35641670636104575') 
+			if($_SESSION['facebook_id'] === '10222464871078931' or $_SESSION['facebook_id'] === '3564167063610457') // perfil papa - perfil mio
 			{ 
-				echo '<div class="btn-group dropup btn-block options2">';
+				echo '<div class="btn-group dropup btn-block options">';
 				echo '<a href="/administracion"><button type="button" class="btn btn-primary margin"><span class="material-icons">build</span> Administración</button></a>';
 				echo '<a href="/opciones"><button type="button" class="btn btn-primary"><span class="material-icons">settings</span> Opciones</button></a>';
 				echo '</div>';
@@ -150,16 +169,12 @@ $(document).ready(function() {
 
             <div class="row">
                 <div class="col-sm">
-                    <h4><?php echo $row_profile_general["nombres"]; ?></h4>
-					<small class="text-muted">Facebook ID: <?php echo $row_profile_general["facebook_id"]; ?></small>
-					<small class="text-muted">Registrado el: <?php echo $row_profile_general["registrado_el"]; ?></small>
-                    <small class="text-muted">Correo: <?php echo $row_profile_general["correo"]; ?></small>
+                    <h4><?php echo $row_profile_general["nombres"]; ?> <?php echo $row_profile_general["apellidos"]; ?></h4>
+					Registrado: <small id="registrado" class="text-muted">Registrado el: <?php echo $row_profile_general["registrado_el"]; ?></small></br>
+                    Correo electronico: <small class="text-muted"><?php echo $row_profile_general["correo"]; ?></small>
 					<hr class="mb-4">
                     <p><strong>Asignaturas: </strong>
-                        <span class="tags">html5</span> 
-                        <span class="tags">css3</span>
-                        <span class="tags">jquery</span>
-                        <span class="tags">bootstrap3</span>
+                        <span class="tags">x1</span>
                     </p>
                 </div>             
                 <div class="col-sm text-center">
@@ -192,7 +207,6 @@ $(document).ready(function() {
         </h4>	
 
 		<section id="tabs" class="project-tab">
-            <div class="container">
                 <div class="row">
                     <div class="col-md-12">
                         <nav>
@@ -207,7 +221,7 @@ $(document).ready(function() {
                                     <thead>
                                         <tr>
 											<th>Orden ID</th>
-                                            <th>Nombre</th>
+                                            <th>Tema</th>
 											<th>Curso</th>
 											<th>Unidad</th>
                                             <th>Fecha de compra</th>
@@ -224,7 +238,7 @@ $(document).ready(function() {
 												<td><?php echo $row['archivo_unidad']; ?></td>
 												<td><?php echo $row['fecha_compra']; ?></td>
 												<td>
-												<a href="/orden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">list_alt</span> Ver orden</button></a>
+												<a href="/orden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver orden</button></a>
 												<a href="/archivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">folder_open</span> Ver documento</button></a>
 												<a href="/descarga?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar documento</button></a>
 												</td>
@@ -239,7 +253,7 @@ $(document).ready(function() {
                                     <thead>
                                         <tr>
 											<th>Orden ID</th>
-                                            <th>Nombre</th>
+                                            <th>Tema</th>
 											<th>Curso</th>
 											<th>Unidad</th>
                                             <th>Fecha de compra</th>
@@ -256,7 +270,7 @@ $(document).ready(function() {
 												<td><?php echo $row['archivo_unidad']; ?></td>
 												<td><?php echo $row['fecha_compra']; ?></td>
 												<td>
-												<a href="/orden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">list_alt</span> Ver orden</button></a>
+												<a href="/orden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver orden</button></a>
 												<a href="/archivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">folder_open</span> Ver archivo</button></a>
 												<a href="/descarga?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar archivo</button></a>
 												</td>
@@ -269,8 +283,11 @@ $(document).ready(function() {
                         </div>
                     </div>
                 </div>
-            </div>
         </section>
+
+		<h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span>Tus guías</span>
+        </h4>	
 
 	</div>
     </div>

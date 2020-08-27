@@ -17,43 +17,25 @@ else //Continue to current page
 		usuario_id = '".$_SESSION['usuario_id']."' "; 
 	$rs_resultdatosgeneral = mysqli_query($conn, $sql_datosusuariosgeneral);
 	$row_profile_general = mysqli_fetch_assoc($rs_resultdatosgeneral);
-	
-	// PENDIENTE: Falta filtrar por Matematicas y Lenguaje
 		
 		// BOX: Tabla Matematica
 		// Primero entramos a la tabla ordencompra y luego archivo para sacar los datos requeridos, luego entramos a usuarios con la condición de que usuario_id sea iguales y luego filtramos todos los datos para que aparescan los que tienen el mismo facebook_id
-		$sql1 = "SELECT ordencompra.ordencompra_id, ordencompra.fecha_compra, archivo.unidad AS archivo_unidad, archivo.asignatura AS archivo_asignatura, archivo.archivo_id AS archivo_id, archivo.nombre AS archivo_nombre, archivo.curso AS archivo_curso
+		$sql1 = "SELECT nombre, asignatura, curso, unidad, precio, estado
 		FROM 
-			ordencompra
-		INNER JOIN 
 			archivo
-		ON
-			ordencompra.archivo_id=archivo.archivo_id
-		INNER JOIN 
-			usuario
-		ON
-			ordencompra.usuario_id=usuario.usuario_id
 		WHERE 
-			ordencompra.usuario_id = '".$_SESSION['usuario_id']."' AND archivo.asignatura = 'Matemáticas'
-		ORDER BY ordencompra.ordencompra_id DESC LIMIT 0, 5"; 
+			asignatura = 'Matemáticas'
+		ORDER BY archivo_id DESC LIMIT 0, 5"; 
 		$rs_result1 = mysqli_query($conn, $sql1);
 		
 		// BOX: Tabla Lenguaje
 		// Primero entramos a la tabla ordencompra y luego archivo para sacar los datos requeridos, luego entramos a usuarios con la condición de que usuario_id sea iguales y luego filtramos todos los datos para que aparescan los que tienen el mismo facebook_id
-		$sql2 = "SELECT ordencompra.ordencompra_id, ordencompra.fecha_compra, archivo.unidad AS archivo_unidad, archivo.asignatura AS archivo_asignatura, archivo.archivo_id AS archivo_id, archivo.nombre AS archivo_nombre, archivo.curso AS archivo_curso
-		FROM 
-			ordencompra
-		INNER JOIN 
+		$sql2 = "SELECT nombre, asignatura, curso, unidad, precio, estado
+		FROM
 			archivo
-		ON
-			ordencompra.archivo_id=archivo.archivo_id
-		INNER JOIN 
-			usuario
-		ON
-			ordencompra.usuario_id=usuario.usuario_id
 		WHERE 
-			ordencompra.usuario_id = '".$_SESSION['usuario_id']."' AND archivo.asignatura = 'Lenguaje'
-		ORDER BY ordencompra.ordencompra_id DESC LIMIT 0, 5"; 
+			asignatura = 'Lenguaje'
+		ORDER BY archivo_id DESC LIMIT 0, 5"; 
 		$rs_result2 = mysqli_query($conn, $sql2);
 
 ?>
@@ -106,7 +88,7 @@ $(document).ready(function() {
 			<a href="/perfil"><button class="dropdown-item" type="button">Perfil</button></a>
 			<a href="/logout"><button class="dropdown-item" type="button">Desconectar</button></a>
 		</div>
-        <a href="#"><button class="btn btn-secondary" type="button">Contacto</button></a>
+        <a href="/contacto"><button class="btn btn-secondary" type="button">Contacto</button></a>
       </nav>
       <a class="btn btn-outline-success" href="#">Contactar por Whatsapp</a>
     </div>
@@ -116,69 +98,50 @@ $(document).ready(function() {
 		
 		
 		<h4 class="d-flex justify-content-between align-items-center mb-3">
-            <span>Tu perfil</span>
-            <?php 
-			if($_SESSION['facebook_id'] === '35641670636104575') 
-			{ 
-				echo '<div class="btn-group dropup btn-block options2">';
-				echo '<a href="/administracion"><button type="button" class="btn btn-primary margin"><span class="material-icons">build</span> Administración</button></a>';
-				echo '<a href="/opciones"><button type="button" class="btn btn-primary"><span class="material-icons">settings</span> Opciones</button></a>';
-				echo '</div>';
-			}
-			else
-			{
-				echo '<div class="btn-group dropup btn-block options">';
-				echo '<a href="/opciones"><button type="button" class="btn btn-primary"><span class="material-icons">settings</span> Opciones</button></a>';
-				echo '</div>';
-			}
-			?>
+            <span>Estadísticas</span>
+
+			<div class="btn-group dropup btn-block options">
+			<a href="/perfil"><button type="button" class="btn btn-primary"><span class="material-icons">person</span> Volver al perfil</button></a>
+			</div>
 				
         </h4>
 		
-			<div class="card mb-3 profile">
+			<div class="card mb-3">
 			  <div class="row no-gutters">
-				<div class="col-md-4">
-				  <img src="<?php echo $row_profile_general["avatar_url"]; ?>" class="card-img profile">
-				</div>
-				<div class="col-md-8">
+
+				<div class="col">
 				  <div class="card-body">
-				  
-				  
-				  
-				  
 
 
             <div class="row">
-                <div class="col-sm">
-                    <h4><?php echo $row_profile_general["nombres"]; ?></h4>
-					<small class="text-muted">Facebook ID: <?php echo $row_profile_general["facebook_id"]; ?></small>
-					<small class="text-muted">Registrado el: <?php echo $row_profile_general["registrado_el"]; ?></small>
-                    <small class="text-muted">Correo: <?php echo $row_profile_general["correo"]; ?></small>
-					<hr class="mb-4">
-                    <p><strong>Asignaturas: </strong>
-                        <span class="tags">html5</span> 
-                        <span class="tags">css3</span>
-                        <span class="tags">jquery</span>
-                        <span class="tags">bootstrap3</span>
-                    </p>
-                </div>             
-                <div class="col-sm text-center">
-				<div class="row counter-profile">
-				<div class="col-sm">
-                    <h2><strong>0</strong></h2>                    
-                    <p><small>documentos disponibles</small></p>
-                </div>
-                <div class="col-sm">
-                    <h2><strong>0</strong></h2>                    
-                    <p><small>compras realizadas</small></p>
-                </div>
-                <div class="col-sm">
-                    <h2><strong>0</strong></h2>                    
-                    <p><small>ordenes pendientes</small></p>
-                </div>
-
-				</div>
-                </div>
+				<div class="col-sm text-center">
+					<div class="row counter-profile">
+						<div class="col-sm">
+							<h2><strong>0</strong></h2>                    
+							<p><small>documentos disponibles</small></p>
+							<hr class="mb-4">
+							<h2><strong>0</strong></h2>    
+						</div>
+						<div class="col-sm">
+							<h2><strong>0</strong></h2>                    
+							<p><small>compras realizadas</small></p>
+							<hr class="mb-4">
+							<h2><strong>0</strong></h2>    
+						</div>
+						<div class="col-sm">
+							<h2><strong>0</strong></h2>                    
+							<p><small>ordenes pendientes</small></p>
+							<hr class="mb-4">
+							<h2><strong>0</strong></h2>    
+						</div>
+						<div class="col-sm">
+							<h2><strong>0</strong></h2>                    
+							<p><small>ordenes pendientes</small></p>
+							<hr class="mb-4">
+							<h2><strong>0</strong></h2>    
+						</div>
+					</div>
+                </div>            
             </div>
 				  
 				  
@@ -188,11 +151,15 @@ $(document).ready(function() {
 			</div>
 			
 		<h4 class="d-flex justify-content-between align-items-center mb-3">
-            <span>Tus planificaciones</span>
+            <span>Viendo todas las planificaciones</span>
+
+			<div class="btn-group dropup btn-block options">
+			<a href="/nuevoarchivo"><button type="button" class="btn btn-primary"><span class="material-icons">add</span> Agregar nuevo</button></a>
+			</div>
+
         </h4>	
 
 		<section id="tabs" class="project-tab">
-            <div class="container">
                 <div class="row">
                     <div class="col-md-12">
                         <nav>
@@ -206,11 +173,12 @@ $(document).ready(function() {
                                 <table id="tabla-matematica" class="table" cellspacing="0">
                                     <thead>
                                         <tr>
-											<th>Orden ID</th>
-                                            <th>Nombre</th>
+											<th>Tema</th>
+                                            <th>Asignatura</th>
 											<th>Curso</th>
 											<th>Unidad</th>
-                                            <th>Fecha de compra</th>
+                                            <th>Precio</th>
+											<th>Estado</th>
                                             <th>Opciones</th>
                                         </tr>
                                     </thead>
@@ -218,15 +186,16 @@ $(document).ready(function() {
                                         <?php while ($row = mysqli_fetch_assoc($rs_result1)) {?>	
 
 											<tr>
-												<td><?php echo $row['ordencompra_id']; ?></td>
-												<td><?php echo $row['archivo_nombre']; ?></td>
-												<td><?php echo $row['archivo_curso']; ?></td>
-												<td><?php echo $row['archivo_unidad']; ?></td>
-												<td><?php echo $row['fecha_compra']; ?></td>
+												<td><?php echo $row['nombre']; ?></td>
+												<td><?php echo $row['asignatura']; ?></td>
+												<td><?php echo $row['curso']; ?></td>
+												<td><?php echo $row['unidad']; ?></td>
+												<td><?php echo $row['precio']; ?></td>
+												<td><?php echo $row['estado']; ?></td>
 												<td>
-												<a href="/orden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">list_alt</span> Ver orden</button></a>
-												<a href="/archivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">folder_open</span> Ver documento</button></a>
-												<a href="/descarga?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar documento</button></a>
+												<a href="/orden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver</button></a>
+												<a href="/archivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">edit</span> Modificar</button></a>
+												<a href="/descarga?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-danger tabla"><span class="material-icons">delete</span> Eliminar</button></a>
 												</td>
 											</tr>
 
@@ -238,11 +207,12 @@ $(document).ready(function() {
                                 <table id="tabla-lenguaje" class="table" cellspacing="0">
                                     <thead>
                                         <tr>
-											<th>Orden ID</th>
-                                            <th>Nombre</th>
+											<th>Tema</th>
+                                            <th>Asignatura</th>
 											<th>Curso</th>
 											<th>Unidad</th>
-                                            <th>Fecha de compra</th>
+                                            <th>Precio</th>
+											<th>Estado</th>
                                             <th>Opciones</th>
                                         </tr>
                                     </thead>
@@ -250,15 +220,16 @@ $(document).ready(function() {
                                         <?php while ($row = mysqli_fetch_assoc($rs_result2)) {?>	
 
 											<tr>
-												<td><?php echo $row['ordencompra_id']; ?></td>
-												<td><?php echo $row['archivo_nombre']; ?></td>
-												<td><?php echo $row['archivo_curso']; ?></td>
-												<td><?php echo $row['archivo_unidad']; ?></td>
-												<td><?php echo $row['fecha_compra']; ?></td>
+												<td><?php echo $row['nombre']; ?></td>
+												<td><?php echo $row['asignatura']; ?></td>
+												<td><?php echo $row['curso']; ?></td>
+												<td><?php echo $row['unidad']; ?></td>
+												<td><?php echo $row['precio']; ?></td>
+												<td><?php echo $row['estado']; ?></td>
 												<td>
-												<a href="/orden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">list_alt</span> Ver orden</button></a>
-												<a href="/archivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">folder_open</span> Ver archivo</button></a>
-												<a href="/descarga?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar archivo</button></a>
+												<a href="/orden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver</button></a>
+												<a href="/archivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">edit</span> Modificar</button></a>
+												<a href="/descarga?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-danger tabla"><span class="material-icons">delete</span> Eliminar</button></a>
 												</td>
 											</tr>
 
@@ -269,7 +240,6 @@ $(document).ready(function() {
                         </div>
                     </div>
                 </div>
-            </div>
         </section>
 
 	</div>

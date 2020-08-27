@@ -53,7 +53,7 @@ $row_cnt = $rs_result1->num_rows;
 				</div>
 				<a href="/contacto"><button class="btn btn-secondary" type="button">Contacto</button></a>
 			</nav>
-			<a class="btn btn-outline-success" href="#">Contactar por Whatsapp</a>
+			<a class="btn btn-outline-success" href="https://api.whatsapp.com/send?phone=56912345678">Contactar por WhatsApp</a>
 		</div>
 
     	<div class="jumbotron">
@@ -72,7 +72,7 @@ $row_cnt = $rs_result1->num_rows;
 				(adsbygoogle = window.adsbygoogle || []).push({});
 			</script>
 
-		<div id="tabla-archivos">
+		<div id="tabla-archivos-2">
 		<h4 class="d-flex justify-content-between align-items-center mb-3">
             <span>Recomendados</span>
         </h4>
@@ -128,6 +128,11 @@ $row_cnt = $rs_result1->num_rows;
 			?>
 			</ul>
       </div>
+
+	  	<h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span>Lista de guías</span>
+        </h4>	
+
 	  </div>
 	</div>
     </div>

@@ -93,7 +93,7 @@ else //Continue to current page
 			<a href="/perfil"><button class="dropdown-item" type="button">Perfil</button></a>
 			<a href="/logout"><button class="dropdown-item" type="button">Desconectar</button></a>
 		</div>
-        <a href="#"><button class="btn btn-secondary" type="button">Contacto</button></a>
+        <a href="/contacto"><button class="btn btn-secondary" type="button">Contacto</button></a>
       </nav>
       <a class="btn btn-outline-success" href="#">Contactar por Whatsapp</a>
     </div>
@@ -182,7 +182,7 @@ else //Continue to current page
 			<hr class="mb-4">
             <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input" id="same-address">
-              <label class="custom-control-label" for="same-address">Acepto los <a href="https://repositorio.gestionpedagogica.cl/terminos-y-condiciones" target="_blank">Términos y Condiciones</a>.</label>
+              <label class="custom-control-label" for="same-address">Acepto los <a class="terminosycondiciones" href="https://repositorio.gestionpedagogica.cl/terminos-y-condiciones" target="_blank">Términos y Condiciones</a>.</label>
             </div>
             <hr class="mb-4">
             <button class="btn btn-primary btn-lg btn-block" name="crearorden-submit" type="submit">Comprar</button>

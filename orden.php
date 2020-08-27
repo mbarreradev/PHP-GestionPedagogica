@@ -94,7 +94,7 @@ else //Continue to current page
 			<a href="/perfil"><button class="dropdown-item" type="button">Perfil</button></a>
 			<a href="/logout"><button class="dropdown-item" type="button">Desconectar</button></a>
 		</div>
-        <a href="#"><button class="btn btn-secondary" type="button">Contacto</button></a>
+        <a href="/contacto"><button class="btn btn-secondary" type="button">Contacto</button></a>
       </nav>
       <a class="btn btn-outline-success" href="#">Contactar por Whatsapp</a>
     </div>
@@ -189,7 +189,7 @@ else //Continue to current page
 				echo'<li class="list-group-item d-flex lh-condensed">';
 					echo'<div class="col-sm">';
 					echo'<p><b>Orden ID: </b> '.$url_id.'</p>';
-					echo'<p><b>Creado hace:</b> '.$consulta_planificacion["fecha_compra"].'</p>';
+					echo'<p><b>Creado el:</b> '.$consulta_planificacion["fecha_compra"].'</p>';
 					echo'<p><b>Última actualización:</b> '.$consulta_planificacion["fecha_actualizacion"].'</p>';
 					echo'<hr class="message-inner-separator">';
 					echo'<strong>Tu pago está en espera de confirmación</strong>';

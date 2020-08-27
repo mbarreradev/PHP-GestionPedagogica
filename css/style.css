@@ -52,6 +52,10 @@ a:hover {
   color: #333;
 }
 
+a.terminosycondiciones {
+  color: #007bff;
+}
+
 /* Custom default button */
 .btn-secondary,
 .btn-secondary:hover,
@@ -273,12 +277,7 @@ hr.message-inner-separator
 }
 
 .btn-group.dropup.btn-block.options {
-    width: 121px;
-    height: 44px;
-}
-
-.btn-group.dropup.btn-block.options2 {
-    width: 290px;
+    width: auto;
     height: 44px;
 }
 
@@ -288,8 +287,8 @@ button.btn.btn-primary.margin {
 
 img.card-img.profile {
     width: 43%;
+    margin-top: 8px;
 }
-
 
 .card.mb-3.profile {
     padding-right: 3rem;
