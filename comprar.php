@@ -132,29 +132,33 @@ else //Continue to current page
             </li>
           </ul>
 		  
-		  <h4 class="d-flex justify-content-between align-items-center mb-3">
+		      <h4 class="d-flex justify-content-between align-items-center mb-3">
             <span>Descripción</span>
           </h4>
-		  <ul class="list-group mb-3">
+		      <ul class="list-group mb-3">
             <li class="list-group-item d-flex lh-condensed">
                 <h6 class="my-0"><?php echo $consulta_planificacion["descripcion_larga"]; ?></h6>
             </li>
           </ul>
-		  
         </div>
-        <div class="col-md-8 order-md-1">
-          <h4 class="mb-3">Datos de tu perfil</h4>
+
+        <div class="col-md-8 order-md-1 text-left">
+          <h4 class="mb-3">Detalles de la orden</h4>
           <form method="post" action="">
+          <ul class="list-group mb-3">
+				  <li class="list-group-item d-flex lh-condensed">
+					<div class="col-sm">
+          <h4 class="mb-3">Datos del comprador</h4>
             <div class="row">
               <div class="col-md-6 mb-3">
-                <label for="nombres">Nombres</label>
+                <label for="nombres">Nombre</label>
                 <input type="text" class="form-control" id="nombres" placeholder="" value="<?php echo $row_profile_general["nombres"]; ?>" required disabled>
                 <div class="invalid-feedback">
                   Valid first name is required.
                 </div>
               </div>
               <div class="col-md-6 mb-3">
-                <label for="apellidos">Apellidos</label>
+                <label for="apellidos">Apellido</label>
                 <input type="text" class="form-control" id="apellidos" placeholder="" value="<?php echo $row_profile_general["apellidos"]; ?>" required disabled>
                 <div class="invalid-feedback">
                   Valid last name is required.
@@ -169,8 +173,12 @@ else //Continue to current page
                 Please enter a valid email address for shipping updates.
               </div>
             </div>
-            <hr class="mb-4">
 
+          <div class="alert alert-info">
+            <span class="material-icons">announcement</span> Si necesitas actualizar tus datos, ve a <a href="/opciones">opciones de cuenta</a>
+					</div>
+
+            <hr class="mb-4">
             <h4 class="mb-3">Método de Pago</h4>
 
             <div class="d-block my-3">
@@ -179,13 +187,16 @@ else //Continue to current page
                 <label class="custom-control-label" for="transferenciaelectronica">Transferencia electrónica</label>
               </div>
             </div>
-			<hr class="mb-4">
+			      <hr class="mb-4">
             <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input" id="same-address">
-              <label class="custom-control-label" for="same-address">Acepto los <a class="terminosycondiciones" href="https://repositorio.gestionpedagogica.cl/terminos-y-condiciones" target="_blank">Términos y Condiciones</a>.</label>
+              <label class="custom-control-label" for="same-address">Acepto los <a class="terminosycondiciones" href="/terminos-y-condiciones" target="_blank">Términos y Condiciones</a>.</label>
             </div>
             <hr class="mb-4">
             <button class="btn btn-primary btn-lg btn-block" name="crearorden-submit" type="submit">Comprar</button>
+          </div>
+          </li>
+          </ul>
           </form>
         </div>
       </div>

@@ -17,6 +17,7 @@ else //Continue to current page
 		usuario_id = '".$_SESSION['usuario_id']."' "; 
 	$rs_resultdatosgeneral = mysqli_query($conn, $sql_datosusuariosgeneral);
 	$row_profile_general = mysqli_fetch_assoc($rs_resultdatosgeneral);
+
 		
 	// PLANIFICACIONES
 	// BOX: Tabla Matematica
@@ -70,21 +71,41 @@ else //Continue to current page
 	$rs_result_artesvisuales_planificacion = mysqli_query($conn, $sql_artesvisuales_planificacion);
 
 
-	// Contador ordenes pendientes
-	$sql_ordenes_pendientes = "SELECT * FROM ordencompra WHERE estado_orden == 'Pendiente de pago'";  
-	$rs_result_ordenes_pendientes = mysqli_query($conn, $sql_ordenes_pendientes);  
-	$cnt_ordenes_pendientes = $rs_result_ordenes_pendientes->num_rows;
+	// Contador ordenes pendientes de revisión - confirmación
+	$sql_ordenes_pendientes_confirmacion = "SELECT * FROM ordencompra WHERE estado_orden = 'Pendiente de confirmación'";  
+	$rs_result_ordenes_pendientes_confirmacion = mysqli_query($conn, $sql_ordenes_pendientes_confirmacion);  
+	$cnt_ordenes_pendientes_confirmacion = $rs_result_ordenes_pendientes_confirmacion->num_rows;
+
+	// Contador ordenes pendientes de pago
+	$sql_ordenes_pendientes_pago = "SELECT * FROM ordencompra WHERE estado_orden = 'Pendiente de pago'";  
+	$rs_result_ordenes_pendientes_pago = mysqli_query($conn, $sql_ordenes_pendientes_pago);  
+	$cnt_ordenes_pendientes_pago = $rs_result_ordenes_pendientes_pago->num_rows;
 
 	// Contador ordenes completadas
-	$sql_ordenes_completados = "SELECT * FROM ordencompra WHERE estado_orden == 'Pagado'";  
+	$sql_ordenes_completados = "SELECT * FROM ordencompra WHERE estado_orden = 'Pagado'";  
 	$rs_result_ordenes_completados = mysqli_query($conn, $sql_ordenes_completados);  
 	$cnt_ordenes_completadas = $rs_result_ordenes_completados->num_rows;
 
+	// Contador usuarios registrados
+	$sql_usuarios_registrados = "SELECT * FROM usuario";  
+	$rs_result_usuarios_registrados = mysqli_query($conn, $sql_usuarios_registrados);  
+	$cnt_usuarios_registrados = $rs_result_usuarios_registrados->num_rows;
+
 	// Contador planificaciones
-	//$cnt_planificaciones = $rs_result_planificaciones->num_rows;
+	$cnt_planificaciones1 = $rs_result_matematica_planificacion->num_rows;
+	$cnt_planificaciones2 = $rs_result_lenguaje_planificacion->num_rows;
+	$cnt_planificaciones3 = $rs_result_tecnologia_planificacion->num_rows;
+	$cnt_planificaciones4 = $rs_result_musica_planificacion->num_rows;
+	$cnt_planificaciones5 = $rs_result_artesvisuales_planificacion->num_rows;
+	$cnt_planificaciones_total = ($cnt_planificaciones1 + $cnt_planificaciones2 + $cnt_planificaciones3 + $cnt_planificaciones4 + $cnt_planificaciones5);
 
 	// Contador guias
-	//$cnt_guias = $rs_result_guias->num_rows;
+	//$cnt_guias1 = $rs_result_guias->num_rows;
+	//$cnt_guias2 = $rs_result_guias->num_rows;
+	//$cnt_guias3 = $rs_result_guias->num_rows;
+	//$cnt_guias4 = $rs_result_guias->num_rows;
+	//$cnt_guias5 = $rs_result_guias->num_rows;
+	//$cnt_guias_total = ($cnt_guias1 + $cnt_guias2 + $cnt_guias3 + $cnt_guias4 + $cnt_guias5);
 
 ?>
 <!doctype html>
@@ -183,31 +204,37 @@ $(document).ready(function() {
 				<div class="col-sm text-center">
 					<div class="row counter-profile">
 						<div class="col-sm">
-							<h2><strong>0</strong></h2>                    
-							<p><small>planificaciones disponibles</small></p>
+							<h2><strong><?php echo $cnt_planificaciones_total; ?></strong></h2>                    
+							<p><small>planificaciones</small></p>
 							<hr class="mb-4">
 							<h2><strong></strong></h2>    
 						</div>
 						<div class="col-sm">
 							<h2><strong>0</strong></h2>                    
-							<p><small>guías disponibles</small></p>
+							<p><small>guías</small></p>
 							<hr class="mb-4">
 							<h2><strong></strong></h2>    
 						</div>
 						<div class="col-sm">
-							<h2><strong>0</strong></h2>                    
+							<h2><strong><?php echo $cnt_usuarios_registrados; ?></strong></h2>                    
 							<p><small>usuarios registrados</small></p>
 							<hr class="mb-4">
 							<h2><strong></strong></h2>    
 						</div>
 						<div class="col-sm">
-							<h2><strong><?php echo $cnt_ordenes_pendientes; ?>0</strong></h2>                    
-							<p><small>ordenes pendientes</small></p>
+							<h2><strong><?php echo $cnt_ordenes_pendientes_pago; ?></strong></h2>                    
+							<p><small>ordenes pendientes de pago</small></p>
 							<hr class="mb-4">
 							<h2><strong></strong></h2>    
 						</div>
 						<div class="col-sm">
-							<h2><strong><?php echo $cnt_ordenes_completadas; ?>0</strong></h2>                    
+							<h2><strong><?php echo $cnt_ordenes_pendientes_confirmacion; ?></strong></h2>                    
+							<p><small>ordenes pendientes de revisión</small></p>
+							<hr class="mb-4">
+							<h2><strong></strong></h2>    
+						</div>
+						<div class="col-sm">
+							<h2><strong><?php echo $cnt_ordenes_completadas; ?></strong></h2>                    
 							<p><small>ordenes completadas</small></p>
 							<hr class="mb-4">
 							<h2><strong></strong></h2>    
@@ -223,7 +250,7 @@ $(document).ready(function() {
 			</div>
 
 		<h4 class="d-flex justify-content-between align-items-center mb-3">
-            <span>Viendo todas las planificaciones</span>
+            <span>Planificaciones</span>
 
 			<div class="btn-group dropup btn-block options">
 			<a href="/nuevoarchivo"><button type="button" class="btn btn-primary"><span class="material-icons">add</span> Agregar nuevo</button></a>
@@ -266,7 +293,17 @@ $(document).ready(function() {
 												<td><?php echo $row['curso']; ?></td>
 												<td><?php echo $row['unidad']; ?></td>
 												<td>$<?php echo $row['precio']; ?></td>
-												<td><?php echo $row['estado']; ?></td>
+												<td><?php 
+												if($row['estado'] == '0') // desactivado
+												{
+													echo 'Activado';
+												}
+												else // será 1 - activado
+												{
+													echo 'Desactivado';
+												}
+
+												?></td>
 												<td>
 												<a href="/archivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver</button></a>
 												<a href="/editar?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">edit</span> Modificar</button></a>
@@ -300,7 +337,17 @@ $(document).ready(function() {
 												<td><?php echo $row['curso']; ?></td>
 												<td><?php echo $row['unidad']; ?></td>
 												<td>$<?php echo $row['precio']; ?></td>
-												<td><?php echo $row['estado']; ?></td>
+												<td><?php 
+												if($row['estado'] == '0') // desactivado
+												{
+													echo 'Activado';
+												}
+												else // será 1 - activado
+												{
+													echo 'Desactivado';
+												}
+
+												?></td>
 												<td>
 												<a href="/archivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver</button></a>
 												<a href="/editar?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">edit</span> Modificar</button></a>
@@ -334,7 +381,17 @@ $(document).ready(function() {
 												<td><?php echo $row['curso']; ?></td>
 												<td><?php echo $row['unidad']; ?></td>
 												<td>$<?php echo $row['precio']; ?></td>
-												<td><?php echo $row['estado']; ?></td>
+												<td><?php 
+												if($row['estado'] == '0') // desactivado
+												{
+													echo 'Activado';
+												}
+												else // será 1 - activado
+												{
+													echo 'Desactivado';
+												}
+
+												?></td>
 												<td>
 												<a href="/archivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver</button></a>
 												<a href="/editar?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">edit</span> Modificar</button></a>
@@ -368,7 +425,17 @@ $(document).ready(function() {
 												<td><?php echo $row['curso']; ?></td>
 												<td><?php echo $row['unidad']; ?></td>
 												<td>$<?php echo $row['precio']; ?></td>
-												<td><?php echo $row['estado']; ?></td>
+												<td><?php 
+												if($row['estado'] == '0') // desactivado
+												{
+													echo 'Activado';
+												}
+												else // será 1 - activado
+												{
+													echo 'Desactivado';
+												}
+
+												?></td>
 												<td>
 												<a href="/archivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver</button></a>
 												<a href="/editar?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">edit</span> Modificar</button></a>
@@ -402,7 +469,17 @@ $(document).ready(function() {
 												<td><?php echo $row['curso']; ?></td>
 												<td><?php echo $row['unidad']; ?></td>
 												<td>$<?php echo $row['precio']; ?></td>
-												<td><?php echo $row['estado']; ?></td>
+												<td><?php 
+												if($row['estado'] == '0') // desactivado
+												{
+													echo 'Activado';
+												}
+												else // será 1 - activado
+												{
+													echo 'Desactivado';
+												}
+
+												?></td>
 												<td>
 												<a href="/archivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver</button></a>
 												<a href="/editar?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">edit</span> Modificar</button></a>

@@ -212,6 +212,7 @@ body {
 .progressbar li.active:before {
   background: #00E676;
   content: "\2714\0020";
+  z-index: 100;
 }
 
 .progressbar li.active + li:after {
@@ -220,6 +221,10 @@ body {
 
 .compraactiva {
     font-weight: bold;
+}
+
+li.active {
+  z-index: 50;
 }
 
 /* FIN */

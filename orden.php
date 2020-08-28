@@ -110,7 +110,7 @@ else //Continue to current page
 		<div class="container">
 		  <ul class="progressbar">
 			<li class="active">Creación de orden</li>
-			<li><p class="compraactiva">Pago</p></li>
+			<li class="active"><p class="compraactiva">Pago</p></li>
 			<li>Confirmación de pago</li>
 		  </ul>
 		</div>
@@ -156,9 +156,9 @@ else //Continue to current page
 				echo'<ul class="list-group mb-3">';
 				echo'<li class="list-group-item d-flex lh-condensed">';
 					echo'<div class="col-sm">';
-					echo'<div class="alert alert-warning alert-dismissible fade show" role="alert">';
-						echo'<strong>Recuerda</strong> verificar los datos antes de realizar la transferencia, para evitar perdidas de dinero.';
-					echo'</div>';
+						echo'<div class="alert alert-warning alert-dismissible fade show" role="alert">';
+							echo'<strong>Recuerda</strong> verificar los datos antes de realizar la transferencia, para evitar perdidas de dinero.';
+						echo'</div>';
 					echo'<p><b>Banco:</b> Banco Estado</p>';
 					echo'<p><b>Rut:</b> Banco Estado</p>';
 					echo'<p><b>Tipo de cuenta:</b> Banco Estado</p>';
