@@ -79,6 +79,8 @@ else //Continue to current page
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
+		<script src="https://code.jquery.com/jquery-3.5.0.slim.min.js" integrity="sha256-MlusDLJIP1GRgLrOflUQtshyP0TwT/RHXsI1wWGnQhs=" crossorigin="anonymous"></script>
+		<script src="js/moment.min.js"></script>
 		<script data-ad-client="ca-pub-2522486668045838" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 	</head>
 <body class="text-center">
@@ -161,7 +163,7 @@ else //Continue to current page
 					echo'<p><b>Rut:</b> Banco Estado</p>';
 					echo'<p><b>Tipo de cuenta:</b> Banco Estado</p>';
 					echo'<p><b>Nº de cuenta:</b> Banco Estado</p>';
-					echo'<p><b>Correo:</b> ventas@gestionpedagogica.cl</p>';
+					echo'<p><b>Correo electrónico:</b> &#118;&#101;&#110;&#116;&#097;&#115;&#064;&#103;&#101;&#115;&#116;&#105;&#111;&#110;&#112;&#101;&#100;&#097;&#103;&#111;&#103;&#105;&#099;&#097;&#046;&#099;&#108;</p>';
 					echo'<p><b>Comentario:</b> Pago Orden #ID</p>';
 					echo'</div>';
 				echo'</li>';
@@ -259,7 +261,6 @@ else //Continue to current page
       </footer>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.0.slim.min.js" integrity="sha256-MlusDLJIP1GRgLrOflUQtshyP0TwT/RHXsI1wWGnQhs=" crossorigin="anonymous"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

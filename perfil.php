@@ -17,44 +17,98 @@ else //Continue to current page
 		usuario_id = '".$_SESSION['usuario_id']."' "; 
 	$rs_resultdatosgeneral = mysqli_query($conn, $sql_datosusuariosgeneral);
 	$row_profile_general = mysqli_fetch_assoc($rs_resultdatosgeneral);
-	
-	// PENDIENTE: Falta filtrar por Matematicas y Lenguaje
 		
-		// BOX: Tabla Matematica
-		// Primero entramos a la tabla ordencompra y luego archivo para sacar los datos requeridos, luego entramos a usuarios con la condición de que usuario_id sea iguales y luego filtramos todos los datos para que aparescan los que tienen el mismo facebook_id
-		$sql1 = "SELECT ordencompra.ordencompra_id, ordencompra.fecha_compra, archivo.unidad AS archivo_unidad, archivo.asignatura AS archivo_asignatura, archivo.archivo_id AS archivo_id, archivo.nombre AS archivo_nombre, archivo.curso AS archivo_curso
-		FROM 
-			ordencompra
-		INNER JOIN 
-			archivo
-		ON
-			ordencompra.archivo_id=archivo.archivo_id
-		INNER JOIN 
-			usuario
-		ON
-			ordencompra.usuario_id=usuario.usuario_id
-		WHERE 
-			ordencompra.usuario_id = '".$_SESSION['usuario_id']."' AND archivo.asignatura = 'Matemáticas'
-		ORDER BY ordencompra.ordencompra_id DESC LIMIT 0, 5"; 
-		$rs_result1 = mysqli_query($conn, $sql1);
+
+	// PLANIFICACIONES
+	// BOX: Tabla Matematica
+	// Primero entramos a la tabla ordencompra y luego archivo para sacar los datos requeridos, luego entramos a usuarios con la condición de que usuario_id sea iguales y luego filtramos todos los datos para que aparescan los que tienen el mismo facebook_id
+	$sql_matematica_planificacion = "SELECT ordencompra.ordencompra_id, ordencompra.fecha_compra, archivo.unidad AS archivo_unidad, archivo.asignatura AS archivo_asignatura, archivo.archivo_id AS archivo_id, archivo.nombre AS archivo_nombre, archivo.curso AS archivo_curso
+	FROM 
+		ordencompra
+	INNER JOIN 
+		archivo
+	ON
+		ordencompra.archivo_id=archivo.archivo_id
+	INNER JOIN 
+		usuario
+	ON
+		ordencompra.usuario_id=usuario.usuario_id
+	WHERE 
+		ordencompra.usuario_id = '".$_SESSION['usuario_id']."' AND archivo.asignatura = 'Matemáticas'
+	ORDER BY ordencompra.ordencompra_id DESC"; 
+	$rs_result_matematica_planificacion = mysqli_query($conn, $sql_matematica_planificacion);
 		
-		// BOX: Tabla Lenguaje
-		// Primero entramos a la tabla ordencompra y luego archivo para sacar los datos requeridos, luego entramos a usuarios con la condición de que usuario_id sea iguales y luego filtramos todos los datos para que aparescan los que tienen el mismo facebook_id
-		$sql2 = "SELECT ordencompra.ordencompra_id, ordencompra.fecha_compra, archivo.unidad AS archivo_unidad, archivo.asignatura AS archivo_asignatura, archivo.archivo_id AS archivo_id, archivo.nombre AS archivo_nombre, archivo.curso AS archivo_curso
-		FROM 
-			ordencompra
-		INNER JOIN 
-			archivo
-		ON
-			ordencompra.archivo_id=archivo.archivo_id
-		INNER JOIN 
-			usuario
-		ON
-			ordencompra.usuario_id=usuario.usuario_id
-		WHERE 
-			ordencompra.usuario_id = '".$_SESSION['usuario_id']."' AND archivo.asignatura = 'Lenguaje'
-		ORDER BY ordencompra.ordencompra_id DESC LIMIT 0, 5"; 
-		$rs_result2 = mysqli_query($conn, $sql2);
+	// BOX: Tabla Lenguaje
+	// Primero entramos a la tabla ordencompra y luego archivo para sacar los datos requeridos, luego entramos a usuarios con la condición de que usuario_id sea iguales y luego filtramos todos los datos para que aparescan los que tienen el mismo facebook_id
+	$sql_lenguaje_planificacion = "SELECT ordencompra.ordencompra_id, ordencompra.fecha_compra, archivo.unidad AS archivo_unidad, archivo.asignatura AS archivo_asignatura, archivo.archivo_id AS archivo_id, archivo.nombre AS archivo_nombre, archivo.curso AS archivo_curso
+	FROM 
+		ordencompra
+	INNER JOIN 
+		archivo
+	ON
+		ordencompra.archivo_id=archivo.archivo_id
+	INNER JOIN 
+		usuario
+	ON
+		ordencompra.usuario_id=usuario.usuario_id
+	WHERE 
+		ordencompra.usuario_id = '".$_SESSION['usuario_id']."' AND archivo.asignatura = 'Lenguaje'
+	ORDER BY ordencompra.ordencompra_id DESC"; 
+	$rs_result_lenguaje_planificacion = mysqli_query($conn, $sql_lenguaje_planificacion);
+
+	// BOX: Tabla Tecnologia
+	// Primero entramos a la tabla ordencompra y luego archivo para sacar los datos requeridos, luego entramos a usuarios con la condición de que usuario_id sea iguales y luego filtramos todos los datos para que aparescan los que tienen el mismo facebook_id
+	$sql_tecnologia_planificacion = "SELECT ordencompra.ordencompra_id, ordencompra.fecha_compra, archivo.unidad AS archivo_unidad, archivo.asignatura AS archivo_asignatura, archivo.archivo_id AS archivo_id, archivo.nombre AS archivo_nombre, archivo.curso AS archivo_curso
+	FROM 
+		ordencompra
+	INNER JOIN 
+		archivo
+	ON
+		ordencompra.archivo_id=archivo.archivo_id
+	INNER JOIN 
+		usuario
+	ON
+		ordencompra.usuario_id=usuario.usuario_id
+	WHERE 
+		ordencompra.usuario_id = '".$_SESSION['usuario_id']."' AND archivo.asignatura = 'Tecnología'
+	ORDER BY ordencompra.ordencompra_id DESC"; 
+	$rs_result_tecnologia_planificacion = mysqli_query($conn, $sql_tecnologia_planificacion);
+
+	// BOX: Tabla Musica
+	// Primero entramos a la tabla ordencompra y luego archivo para sacar los datos requeridos, luego entramos a usuarios con la condición de que usuario_id sea iguales y luego filtramos todos los datos para que aparescan los que tienen el mismo facebook_id
+	$sql_musica_planificacion = "SELECT ordencompra.ordencompra_id, ordencompra.fecha_compra, archivo.unidad AS archivo_unidad, archivo.asignatura AS archivo_asignatura, archivo.archivo_id AS archivo_id, archivo.nombre AS archivo_nombre, archivo.curso AS archivo_curso
+	FROM 
+		ordencompra
+	INNER JOIN 
+		archivo
+	ON
+		ordencompra.archivo_id=archivo.archivo_id
+	INNER JOIN 
+		usuario
+	ON
+		ordencompra.usuario_id=usuario.usuario_id
+	WHERE 
+		ordencompra.usuario_id = '".$_SESSION['usuario_id']."' AND archivo.asignatura = 'Música'
+	ORDER BY ordencompra.ordencompra_id DESC"; 
+	$rs_result_musica_planificacion = mysqli_query($conn, $sql_musica_planificacion);
+
+	// BOX: Tabla Artes Visuales
+	// Primero entramos a la tabla ordencompra y luego archivo para sacar los datos requeridos, luego entramos a usuarios con la condición de que usuario_id sea iguales y luego filtramos todos los datos para que aparescan los que tienen el mismo facebook_id
+	$sql_artesVisuales_planificacion = "SELECT ordencompra.ordencompra_id, ordencompra.fecha_compra, archivo.unidad AS archivo_unidad, archivo.asignatura AS archivo_asignatura, archivo.archivo_id AS archivo_id, archivo.nombre AS archivo_nombre, archivo.curso AS archivo_curso
+	FROM 
+		ordencompra
+	INNER JOIN 
+		archivo
+	ON
+		ordencompra.archivo_id=archivo.archivo_id
+	INNER JOIN 
+		usuario
+	ON
+		ordencompra.usuario_id=usuario.usuario_id
+	WHERE 
+		ordencompra.usuario_id = '".$_SESSION['usuario_id']."' AND archivo.asignatura = 'Artes Visuales'
+	ORDER BY ordencompra.ordencompra_id DESC"; 
+	$rs_result_artesvisuales_planificacion = mysqli_query($conn, $sql_artesVisuales_planificacion);
 
 ?>
 <!doctype html>
@@ -75,6 +129,7 @@ else //Continue to current page
 		<script type="text/javascript" charset="utf8" src="js/jquery.dataTables.js"></script>
 		<script data-ad-client="ca-pub-2522486668045838" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 		<script src="js/moment.min.js"></script>
+		<script src="js/functions.js"></script>
 	</head>
 <body class="text-center">
 
@@ -84,21 +139,6 @@ $registradotime = $row_profile_general["registrado_el"];
 ?>
 
 <script>
-
-$(document).ready(function() {
-	$('#tabla-matematica').DataTable( {
-	"lengthChange": false,
-	"pageLength": 10,
-	"order": [ 0, 'desc' ]
-	} );
-	
-	$('#tabla-lenguaje').DataTable( {
-	"lengthChange": false,
-	"pageLength": 10,
-	"order": [ 0, 'desc' ]
-	} );
-} );
-
 $(function(){
   setInterval(function(){
 	  
@@ -170,8 +210,8 @@ $(function(){
             <div class="row">
                 <div class="col-sm">
                     <h4><?php echo $row_profile_general["nombres"]; ?> <?php echo $row_profile_general["apellidos"]; ?></h4>
-					Registrado: <small id="registrado" class="text-muted">Registrado el: <?php echo $row_profile_general["registrado_el"]; ?></small></br>
-                    Correo electronico: <small class="text-muted"><?php echo $row_profile_general["correo"]; ?></small>
+					Registrado: <small id="registrado">Registrado el: <?php echo $row_profile_general["registrado_el"]; ?></small></br>
+                    Correo electrónico: <small><?php echo $row_profile_general["correo"]; ?></small>
 					<hr class="mb-4">
                     <p><strong>Asignaturas: </strong>
                         <span class="tags">x1</span>
@@ -211,16 +251,19 @@ $(function(){
                     <div class="col-md-12">
                         <nav>
                             <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                                <a class="nav-item nav-link active" id="nav-matematica-tab" data-toggle="tab" href="#nav-matematica" role="tab" aria-controls="nav-matematica" aria-selected="true">Planificaciones de Matemáticas</a>
-                                <a class="nav-item nav-link" id="nav-lenguaje-tab" data-toggle="tab" href="#nav-lenguaje" role="tab" aria-controls="nav-lenguaje" aria-selected="false">Planificaciones de Lenguaje</a>
+                                <a class="nav-item nav-link active" id="nav-matematica-tab" data-toggle="tab" href="#nav-matematica" role="tab" aria-controls="nav-matematica" aria-selected="true">Matemáticas</a>
+								<a class="nav-item nav-link" id="nav-lenguaje-tab" data-toggle="tab" href="#nav-lenguaje" role="tab" aria-controls="nav-lenguaje" aria-selected="false">Lenguaje</a>
+								<a class="nav-item nav-link" id="nav-tecnologia-tab" data-toggle="tab" href="#nav-tecnologia" role="tab" aria-controls="nav-tecnologia" aria-selected="false">Tecnología</a>
+								<a class="nav-item nav-link" id="nav-musica-tab" data-toggle="tab" href="#nav-musica" role="tab" aria-controls="nav-musica" aria-selected="false">Música</a>
+								<a class="nav-item nav-link" id="nav-artesvisuales-tab" data-toggle="tab" href="#nav-artesvisuales" role="tab" aria-controls="nav-artesvisuales" aria-selected="false">Artes Visuales</a>
                             </div>
                         </nav>
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="nav-matematica" role="tabpanel" aria-labelledby="nav-matematica-tab">
-                                <table id="tabla-matematica" class="table" cellspacing="0">
+                                <table id="tabla-matematica-planificaciones" class="table" cellspacing="0">
                                     <thead>
                                         <tr>
-											<th>Orden ID</th>
+											<th>Orden</th>
                                             <th>Tema</th>
 											<th>Curso</th>
 											<th>Unidad</th>
@@ -229,7 +272,7 @@ $(function(){
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result1)) {?>	
+                                        <?php while ($row = mysqli_fetch_assoc($rs_result_matematica_planificacion)) {?>	
 
 											<tr>
 												<td><?php echo $row['ordencompra_id']; ?></td>
@@ -239,8 +282,8 @@ $(function(){
 												<td><?php echo $row['fecha_compra']; ?></td>
 												<td>
 												<a href="/orden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver orden</button></a>
-												<a href="/archivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">folder_open</span> Ver documento</button></a>
-												<a href="/descarga?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar documento</button></a>
+												<a href="/archivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">folder_open</span> Ver archivo</button></a>
+												<a href="/descarga?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar archivo</button></a>
 												</td>
 											</tr>
 
@@ -249,10 +292,10 @@ $(function(){
                                 </table>
                             </div>
                             <div class="tab-pane fade" id="nav-lenguaje" role="tabpanel" aria-labelledby="nav-lenguaje-tab">
-                                <table id="tabla-lenguaje" class="table" cellspacing="0">
+                                <table id="tabla-lenguaje-planificaciones" class="table" cellspacing="0">
                                     <thead>
                                         <tr>
-											<th>Orden ID</th>
+											<th>Orden</th>
                                             <th>Tema</th>
 											<th>Curso</th>
 											<th>Unidad</th>
@@ -261,7 +304,103 @@ $(function(){
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result2)) {?>	
+                                        <?php while ($row = mysqli_fetch_assoc($rs_result_lenguaje_planificacion)) {?>	
+
+											<tr>
+												<td><?php echo $row['ordencompra_id']; ?></td>
+												<td><?php echo $row['archivo_nombre']; ?></td>
+												<td><?php echo $row['archivo_curso']; ?></td>
+												<td><?php echo $row['archivo_unidad']; ?></td>
+												<td><?php echo $row['fecha_compra']; ?></td>
+												<td>
+												<a href="/orden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver orden</button></a>
+												<a href="/archivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">folder_open</span> Ver archivo</button></a>
+												<a href="/descarga?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar archivo</button></a>
+												</td>
+											</tr>
+
+										<?php };  ?>
+                                    </tbody>
+                                </table>
+							</div>
+							<div class="tab-pane fade" id="nav-tecnologia" role="tabpanel" aria-labelledby="nav-tecnologia-tab">
+                                <table id="tabla-tecnologia-planificaciones" class="table" cellspacing="0">
+                                    <thead>
+                                        <tr>
+											<th>Orden</th>
+                                            <th>Tema</th>
+											<th>Curso</th>
+											<th>Unidad</th>
+                                            <th>Fecha de compra</th>
+                                            <th>Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php while ($row = mysqli_fetch_assoc($rs_result_tecnologia_planificacion)) {?>	
+
+											<tr>
+												<td><?php echo $row['ordencompra_id']; ?></td>
+												<td><?php echo $row['archivo_nombre']; ?></td>
+												<td><?php echo $row['archivo_curso']; ?></td>
+												<td><?php echo $row['archivo_unidad']; ?></td>
+												<td><?php echo $row['fecha_compra']; ?></td>
+												<td>
+												<a href="/orden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver orden</button></a>
+												<a href="/archivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">folder_open</span> Ver archivo</button></a>
+												<a href="/descarga?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar archivo</button></a>
+												</td>
+											</tr>
+
+										<?php };  ?>
+                                    </tbody>
+                                </table>
+							</div>
+							<div class="tab-pane fade" id="nav-musica" role="tabpanel" aria-labelledby="nav-musica-tab">
+                                <table id="tabla-musica-planificaciones" class="table" cellspacing="0">
+                                    <thead>
+                                        <tr>
+											<th>Orden</th>
+                                            <th>Tema</th>
+											<th>Curso</th>
+											<th>Unidad</th>
+                                            <th>Fecha de compra</th>
+                                            <th>Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php while ($row = mysqli_fetch_assoc($rs_result_musica_planificacion)) {?>	
+
+											<tr>
+												<td><?php echo $row['ordencompra_id']; ?></td>
+												<td><?php echo $row['archivo_nombre']; ?></td>
+												<td><?php echo $row['archivo_curso']; ?></td>
+												<td><?php echo $row['archivo_unidad']; ?></td>
+												<td><?php echo $row['fecha_compra']; ?></td>
+												<td>
+												<a href="/orden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver orden</button></a>
+												<a href="/archivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">folder_open</span> Ver archivo</button></a>
+												<a href="/descarga?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar archivo</button></a>
+												</td>
+											</tr>
+
+										<?php };  ?>
+                                    </tbody>
+                                </table>
+							</div>
+							<div class="tab-pane fade" id="nav-artesvisuales" role="tabpanel" aria-labelledby="nav-artesvisuales-tab">
+                                <table id="tabla-artesvisuales-planificaciones" class="table" cellspacing="0">
+                                    <thead>
+                                        <tr>
+											<th>Orden</th>
+                                            <th>Tema</th>
+											<th>Curso</th>
+											<th>Unidad</th>
+                                            <th>Fecha de compra</th>
+                                            <th>Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php while ($row = mysqli_fetch_assoc($rs_result_artesvisuales_planificacion)) {?>	
 
 											<tr>
 												<td><?php echo $row['ordencompra_id']; ?></td>
@@ -285,7 +424,7 @@ $(function(){
                 </div>
         </section>
 
-		<h4 class="d-flex justify-content-between align-items-center mb-3">
+		<h4 class="d-flex justify-content-between align-items-center mb-3 margin-top">
             <span>Tus guías</span>
         </h4>	
 

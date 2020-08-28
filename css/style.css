@@ -1,5 +1,6 @@
 html {
   font-size: 14px;
+  height: 100%;
 }
 @media (min-width: 768px) {
   html {
@@ -83,7 +84,7 @@ a.terminosycondiciones {
 html,
 body {
 	background-color: #bdd4e7;
-	background-image: linear-gradient(315deg, #bdd4e7 0%, #8693ab 74%);
+	/* background-image: linear-gradient(315deg, #bdd4e7 0%, #8693ab 74%); */
 }
 
 body {
@@ -238,8 +239,16 @@ body {
     word-break: break-word;
 }
 
-#tabla-archivos {
+#tabla-lista-planificaciones {
     width: 100%;
+}
+
+#tabla-lista-recomendados {
+  width: 100%;
+}
+
+#tabla-lista-guias {
+  width: 100%;
 }
 
 .list {
@@ -348,7 +357,19 @@ div#nav-tabContent {
 /* Fixes DataTables */
 
 table.dataTable tbody tr {
-    background-color: #f5f2f2 !important;
+    background-color: rgba(0,0,0,.03) !important;
+}
+
+.nav-tabs .nav-link {
+  background: none;
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+  background-color: #fff;
+}
+
+input.form-control.left {
+  margin-left: 0px;
 }
 
 /* Others fixes */
@@ -358,6 +379,14 @@ table.dataTable tbody tr {
   background-color: transparent;
   pointer-events: none;
   cursor: default;
+}
+
+.jumbotron {
+  padding-bottom: 20px;
+}
+
+h4.d-flex.justify-content-between.align-items-center.mb-3.margin-top {
+  margin-top: 1rem;
 }
 
 /* Carusel */

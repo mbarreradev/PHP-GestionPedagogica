@@ -18,25 +18,73 @@ else //Continue to current page
 	$rs_resultdatosgeneral = mysqli_query($conn, $sql_datosusuariosgeneral);
 	$row_profile_general = mysqli_fetch_assoc($rs_resultdatosgeneral);
 		
-		// BOX: Tabla Matematica
-		// Primero entramos a la tabla ordencompra y luego archivo para sacar los datos requeridos, luego entramos a usuarios con la condición de que usuario_id sea iguales y luego filtramos todos los datos para que aparescan los que tienen el mismo facebook_id
-		$sql1 = "SELECT nombre, asignatura, curso, unidad, precio, estado
-		FROM 
-			archivo
-		WHERE 
-			asignatura = 'Matemáticas'
-		ORDER BY archivo_id DESC LIMIT 0, 5"; 
-		$rs_result1 = mysqli_query($conn, $sql1);
+	// PLANIFICACIONES
+	// BOX: Tabla Matematica
+	// Primero entramos a la tabla ordencompra y luego archivo para sacar los datos requeridos
+	$sql_matematicas_planificacion = "SELECT archivo_id, nombre, asignatura, curso, unidad, precio, estado
+	FROM 
+		archivo
+	WHERE 
+		asignatura = 'Matemáticas'
+	ORDER BY archivo_id DESC"; 
+	$rs_result_matematica_planificacion = mysqli_query($conn, $sql_matematicas_planificacion);
 		
-		// BOX: Tabla Lenguaje
-		// Primero entramos a la tabla ordencompra y luego archivo para sacar los datos requeridos, luego entramos a usuarios con la condición de que usuario_id sea iguales y luego filtramos todos los datos para que aparescan los que tienen el mismo facebook_id
-		$sql2 = "SELECT nombre, asignatura, curso, unidad, precio, estado
-		FROM
-			archivo
-		WHERE 
-			asignatura = 'Lenguaje'
-		ORDER BY archivo_id DESC LIMIT 0, 5"; 
-		$rs_result2 = mysqli_query($conn, $sql2);
+	// BOX: Tabla Lenguaje
+	// Primero entramos a la tabla ordencompra y luego archivo para sacar los datos requeridos
+	$sql_lenguaje_planificacion = "SELECT archivo_id, nombre, asignatura, curso, unidad, precio, estado
+	FROM
+		archivo
+	WHERE 
+		asignatura = 'Lenguaje'
+	ORDER BY archivo_id DESC"; 
+	$rs_result_lenguaje_planificacion = mysqli_query($conn, $sql_lenguaje_planificacion);
+
+	// BOX: Tabla Tecnología
+	// Primero entramos a la tabla ordencompra y luego archivo para sacar los datos requeridos
+	$sql_tecnologia_planificacion = "SELECT archivo_id, nombre, asignatura, curso, unidad, precio, estado
+	FROM
+		archivo
+	WHERE 
+		asignatura = 'Tecnología'
+	ORDER BY archivo_id DESC"; 
+	$rs_result_tecnologia_planificacion = mysqli_query($conn, $sql_tecnologia_planificacion);
+
+	// BOX: Tabla Música
+	// Primero entramos a la tabla ordencompra y luego archivo para sacar los datos requeridos
+	$sql_musica_planificacion = "SELECT archivo_id, nombre, asignatura, curso, unidad, precio, estado
+	FROM
+		archivo
+	WHERE 
+		asignatura = 'Música'
+	ORDER BY archivo_id DESC"; 
+	$rs_result_musica_planificacion = mysqli_query($conn, $sql_musica_planificacion);
+
+	// BOX: Tabla Artes Visuales
+	// Primero entramos a la tabla ordencompra y luego archivo para sacar los datos requeridos
+	$sql_artesvisuales_planificacion = "SELECT archivo_id, nombre, asignatura, curso, unidad, precio, estado
+	FROM
+		archivo
+	WHERE 
+		asignatura = 'Artes Visuales'
+	ORDER BY archivo_id DESC"; 
+	$rs_result_artesvisuales_planificacion = mysqli_query($conn, $sql_artesvisuales_planificacion);
+
+
+	// Contador ordenes pendientes
+	$sql_ordenes_pendientes = "SELECT * FROM ordencompra WHERE estado_orden == 'Pendiente de pago'";  
+	$rs_result_ordenes_pendientes = mysqli_query($conn, $sql_ordenes_pendientes);  
+	$cnt_ordenes_pendientes = $rs_result_ordenes_pendientes->num_rows;
+
+	// Contador ordenes completadas
+	$sql_ordenes_completados = "SELECT * FROM ordencompra WHERE estado_orden == 'Pagado'";  
+	$rs_result_ordenes_completados = mysqli_query($conn, $sql_ordenes_completados);  
+	$cnt_ordenes_completadas = $rs_result_ordenes_completados->num_rows;
+
+	// Contador planificaciones
+	//$cnt_planificaciones = $rs_result_planificaciones->num_rows;
+
+	// Contador guias
+	//$cnt_guias = $rs_result_guias->num_rows;
 
 ?>
 <!doctype html>
@@ -69,6 +117,24 @@ $(document).ready(function() {
 	} );
 	
 	$('#tabla-lenguaje').DataTable( {
+	"lengthChange": false,
+	"pageLength": 10,
+	"order": [ 0, 'desc' ]
+	} );
+
+	$('#tabla-tecnologia').DataTable( {
+	"lengthChange": false,
+	"pageLength": 10,
+	"order": [ 0, 'desc' ]
+	} );
+
+	$('#tabla-musica').DataTable( {
+	"lengthChange": false,
+	"pageLength": 10,
+	"order": [ 0, 'desc' ]
+	} );
+
+	$('#tabla-artesvisuales').DataTable( {
 	"lengthChange": false,
 	"pageLength": 10,
 	"order": [ 0, 'desc' ]
@@ -118,27 +184,33 @@ $(document).ready(function() {
 					<div class="row counter-profile">
 						<div class="col-sm">
 							<h2><strong>0</strong></h2>                    
-							<p><small>documentos disponibles</small></p>
+							<p><small>planificaciones disponibles</small></p>
 							<hr class="mb-4">
-							<h2><strong>0</strong></h2>    
+							<h2><strong></strong></h2>    
 						</div>
 						<div class="col-sm">
 							<h2><strong>0</strong></h2>                    
-							<p><small>compras realizadas</small></p>
+							<p><small>guías disponibles</small></p>
 							<hr class="mb-4">
-							<h2><strong>0</strong></h2>    
+							<h2><strong></strong></h2>    
 						</div>
 						<div class="col-sm">
 							<h2><strong>0</strong></h2>                    
+							<p><small>usuarios registrados</small></p>
+							<hr class="mb-4">
+							<h2><strong></strong></h2>    
+						</div>
+						<div class="col-sm">
+							<h2><strong><?php echo $cnt_ordenes_pendientes; ?>0</strong></h2>                    
 							<p><small>ordenes pendientes</small></p>
 							<hr class="mb-4">
-							<h2><strong>0</strong></h2>    
+							<h2><strong></strong></h2>    
 						</div>
 						<div class="col-sm">
-							<h2><strong>0</strong></h2>                    
-							<p><small>ordenes pendientes</small></p>
+							<h2><strong><?php echo $cnt_ordenes_completadas; ?>0</strong></h2>                    
+							<p><small>ordenes completadas</small></p>
 							<hr class="mb-4">
-							<h2><strong>0</strong></h2>    
+							<h2><strong></strong></h2>    
 						</div>
 					</div>
                 </div>            
@@ -149,7 +221,7 @@ $(document).ready(function() {
 				</div>
 			  </div>
 			</div>
-			
+
 		<h4 class="d-flex justify-content-between align-items-center mb-3">
             <span>Viendo todas las planificaciones</span>
 
@@ -164,8 +236,11 @@ $(document).ready(function() {
                     <div class="col-md-12">
                         <nav>
                             <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                                <a class="nav-item nav-link active" id="nav-matematica-tab" data-toggle="tab" href="#nav-matematica" role="tab" aria-controls="nav-matematica" aria-selected="true">Planificaciones de Matemáticas</a>
-                                <a class="nav-item nav-link" id="nav-lenguaje-tab" data-toggle="tab" href="#nav-lenguaje" role="tab" aria-controls="nav-lenguaje" aria-selected="false">Planificaciones de Lenguaje</a>
+                                <a class="nav-item nav-link active" id="nav-matematica-tab" data-toggle="tab" href="#nav-matematica" role="tab" aria-controls="nav-matematica" aria-selected="true">Matemáticas</a>
+								<a class="nav-item nav-link" id="nav-lenguaje-tab" data-toggle="tab" href="#nav-lenguaje" role="tab" aria-controls="nav-lenguaje" aria-selected="false">Lenguaje</a>
+								<a class="nav-item nav-link" id="nav-tecnologia-tab" data-toggle="tab" href="#nav-tecnologia" role="tab" aria-controls="nav-tecnologia" aria-selected="false">Tecnología</a>
+								<a class="nav-item nav-link" id="nav-musica-tab" data-toggle="tab" href="#nav-musica" role="tab" aria-controls="nav-musica" aria-selected="false">Música</a>
+								<a class="nav-item nav-link" id="nav-artesvisuales-tab" data-toggle="tab" href="#nav-artesvisuales" role="tab" aria-controls="nav-artesvisuales" aria-selected="false">Artes Visuales</a>
                             </div>
                         </nav>
                         <div class="tab-content" id="nav-tabContent">
@@ -183,7 +258,7 @@ $(document).ready(function() {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result1)) {?>	
+                                        <?php while ($row = mysqli_fetch_assoc($rs_result_matematica_planificacion)) {?>	
 
 											<tr>
 												<td><?php echo $row['nombre']; ?></td>
@@ -193,9 +268,9 @@ $(document).ready(function() {
 												<td>$<?php echo $row['precio']; ?></td>
 												<td><?php echo $row['estado']; ?></td>
 												<td>
-												<a href="/orden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver</button></a>
-												<a href="/archivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">edit</span> Modificar</button></a>
-												<a href="/descarga?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-danger tabla"><span class="material-icons">delete</span> Eliminar</button></a>
+												<a href="/archivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver</button></a>
+												<a href="/editar?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">edit</span> Modificar</button></a>
+												<a href="/eliminar?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-danger tabla"><span class="material-icons">delete</span> Eliminar</button></a>
 												</td>
 											</tr>
 
@@ -217,7 +292,7 @@ $(document).ready(function() {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result2)) {?>	
+                                        <?php while ($row = mysqli_fetch_assoc($rs_result_lenguaje_planificacion)) {?>	
 
 											<tr>
 												<td><?php echo $row['nombre']; ?></td>
@@ -227,9 +302,111 @@ $(document).ready(function() {
 												<td>$<?php echo $row['precio']; ?></td>
 												<td><?php echo $row['estado']; ?></td>
 												<td>
-												<a href="/orden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver</button></a>
-												<a href="/archivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">edit</span> Modificar</button></a>
-												<a href="/descarga?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-danger tabla"><span class="material-icons">delete</span> Eliminar</button></a>
+												<a href="/archivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver</button></a>
+												<a href="/editar?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">edit</span> Modificar</button></a>
+												<a href="/eliminar?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-danger tabla"><span class="material-icons">delete</span> Eliminar</button></a>
+												</td>
+											</tr>
+
+										<?php };  ?>
+                                    </tbody>
+                                </table>
+							</div>
+							<div class="tab-pane fade" id="nav-tecnologia" role="tabpanel" aria-labelledby="nav-tecnologia-tab">
+                                <table id="tabla-tecnologia" class="table" cellspacing="0">
+                                    <thead>
+                                        <tr>
+											<th>Tema</th>
+                                            <th>Asignatura</th>
+											<th>Curso</th>
+											<th>Unidad</th>
+                                            <th>Precio</th>
+											<th>Estado</th>
+                                            <th>Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php while ($row = mysqli_fetch_assoc($rs_result_tecnologia_planificacion)) {?>	
+
+											<tr>
+												<td><?php echo $row['nombre']; ?></td>
+												<td><?php echo $row['asignatura']; ?></td>
+												<td><?php echo $row['curso']; ?></td>
+												<td><?php echo $row['unidad']; ?></td>
+												<td>$<?php echo $row['precio']; ?></td>
+												<td><?php echo $row['estado']; ?></td>
+												<td>
+												<a href="/archivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver</button></a>
+												<a href="/editar?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">edit</span> Modificar</button></a>
+												<a href="/eliminar?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-danger tabla"><span class="material-icons">delete</span> Eliminar</button></a>
+												</td>
+											</tr>
+
+										<?php };  ?>
+                                    </tbody>
+                                </table>
+							</div>
+							<div class="tab-pane fade" id="nav-musica" role="tabpanel" aria-labelledby="nav-musica-tab">
+                                <table id="tabla-musica" class="table" cellspacing="0">
+                                    <thead>
+                                        <tr>
+											<th>Tema</th>
+                                            <th>Asignatura</th>
+											<th>Curso</th>
+											<th>Unidad</th>
+                                            <th>Precio</th>
+											<th>Estado</th>
+                                            <th>Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php while ($row = mysqli_fetch_assoc($rs_result_musica_planificacion)) {?>	
+
+											<tr>
+												<td><?php echo $row['nombre']; ?></td>
+												<td><?php echo $row['asignatura']; ?></td>
+												<td><?php echo $row['curso']; ?></td>
+												<td><?php echo $row['unidad']; ?></td>
+												<td>$<?php echo $row['precio']; ?></td>
+												<td><?php echo $row['estado']; ?></td>
+												<td>
+												<a href="/archivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver</button></a>
+												<a href="/editar?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">edit</span> Modificar</button></a>
+												<a href="/eliminar?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-danger tabla"><span class="material-icons">delete</span> Eliminar</button></a>
+												</td>
+											</tr>
+
+										<?php };  ?>
+                                    </tbody>
+                                </table>
+							</div>
+							<div class="tab-pane fade" id="nav-artesvisuales" role="tabpanel" aria-labelledby="nav-artesvisuales-tab">
+                                <table id="tabla-artesvisuales" class="table" cellspacing="0">
+                                    <thead>
+                                        <tr>
+											<th>Tema</th>
+                                            <th>Asignatura</th>
+											<th>Curso</th>
+											<th>Unidad</th>
+                                            <th>Precio</th>
+											<th>Estado</th>
+                                            <th>Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php while ($row = mysqli_fetch_assoc($rs_result_artesvisuales_planificacion)) {?>	
+
+											<tr>
+												<td><?php echo $row['nombre']; ?></td>
+												<td><?php echo $row['asignatura']; ?></td>
+												<td><?php echo $row['curso']; ?></td>
+												<td><?php echo $row['unidad']; ?></td>
+												<td>$<?php echo $row['precio']; ?></td>
+												<td><?php echo $row['estado']; ?></td>
+												<td>
+												<a href="/archivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver</button></a>
+												<a href="/editar?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">edit</span> Modificar</button></a>
+												<a href="/eliminar?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-danger tabla"><span class="material-icons">delete</span> Eliminar</button></a>
 												</td>
 											</tr>
 
