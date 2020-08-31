@@ -55,7 +55,7 @@ else //Continue to current page
 			$ultimaordencompra_id = $row['ordencompra_id'];
 			
 			// Enviamos al usuario a la siguiente pantalla
-			header("Location: https://repositorio.gestionpedagogica.cl/orden?id=$ultimaordencompra_id");
+			header("Location: https://repositorio.gestionpedagogica.cl/verorden?id=$ultimaordencompra_id");
 		}
 		else
 		{
@@ -85,14 +85,21 @@ else //Continue to current page
     <div class="container d-flex p-3 mx-auto flex-column">
 
 	<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-color border-bottom box-shadow">
-      <h5 class="my-0 mr-md-auto font-weight-normal">Gestión Pedagógica</h5>
-      <nav class="my-2 my-md-0 mr-md-3">
+    <img class="logo" src="/images/Logo.png" width="32" height="32"><h5 class="my-0 mr-md-auto font-weight-normal">Gestión Pedagógica</h5>
+    <nav class="my-2 my-md-0 mr-md-3">
 		<a href="http://repositorio.gestionpedagogica.cl"><button class="btn btn-secondary" type="button">Inicio</button></a>
 		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hola <?php echo $row_profile_general["nombres"]; ?></button>
 		<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
 			<a href="/perfil"><button class="dropdown-item" type="button">Perfil</button></a>
+      <a href="/ordenes"><button class="dropdown-item" type="button">Mis ordenes</button></a>
 			<a href="/logout"><button class="dropdown-item" type="button">Desconectar</button></a>
 		</div>
+    <?php 
+			if (isset($_SESSION["rango"]) == '2')
+			{ 
+				echo '<a href="/administracion"><button class="btn btn-secondary" type="button">Administración</button></a>';
+			}
+		?>
         <a href="/contacto"><button class="btn btn-secondary" type="button">Contacto</button></a>
       </nav>
       <a class="btn btn-outline-success" href="#">Contactar por Whatsapp</a>

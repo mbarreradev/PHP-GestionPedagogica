@@ -2,6 +2,15 @@
 session_start();
 require 'inc/conexion.php';
 
+// Consulta para traer los datos de usuario generales
+$sql_datosusuariosgeneral = "SELECT nombres
+FROM 
+	usuario
+WHERE 
+	usuario_id = '".$_SESSION['usuario_id']."' "; 
+$rs_resultdatosgeneral = mysqli_query($conn, $sql_datosusuariosgeneral);
+$row_profile_general = mysqli_fetch_assoc($rs_resultdatosgeneral);
+
 // BOX planificaciones
 $sql_planificaciones = "SELECT * FROM archivo WHERE tipo = '0' ORDER BY RAND() LIMIT 6";  
 $rs_result_planificaciones = mysqli_query($conn, $sql_planificaciones);  
@@ -43,23 +52,30 @@ $cnt_guias = $rs_result_guias->num_rows;
 <body class="text-center">
     <div class="container d-flex p-3 mx-auto flex-column">
 		<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-color border-bottom box-shadow">
-			<h5 class="my-0 mr-md-auto font-weight-normal">Gestión Pedagógica</h5>
+			<img class="logo" src="/images/Logo.png" width="32" height="32"><h5 class="my-0 mr-md-auto font-weight-normal">Gestión Pedagógica</h5>
 			<nav class="my-2 my-md-0 mr-md-3">
 				<a href="http://repositorio.gestionpedagogica.cl"><button class="btn btn-secondary" type="button">Inicio</button></a>
-				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Panel Usuarios</button>
+				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hola <?php echo $row_profile_general["nombres"]; ?></button>
 				<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
 					<?php
-					if (!isset($_SESSION["fb_access_token"]))
-					{
-						echo '<a href="/login"><button class="dropdown-item" type="button">Ingresar con Facebook</button></a>';
-					}
-					else
-					{
-						echo '<a href="/perfil"><button class="dropdown-item" type="button">Perfil</button></a>';
-						echo '<a href="/logout"><button class="dropdown-item" type="button">Desconectar</button></a>';
-					}
-					?> 
+						if (!isset($_SESSION["fb_access_token"]))
+						{
+							echo '<a href="/login"><button class="dropdown-item" type="button">Ingresar con Facebook</button></a>';
+						}
+						else
+						{
+							echo '<a href="/perfil"><button class="dropdown-item" type="button">Perfil</button></a>';
+							echo '<a href="/ordenes"><button class="dropdown-item" type="button">Mis ordenes</button></a>';
+							echo '<a href="/logout"><button class="dropdown-item" type="button">Desconectar</button></a>';
+						}
+					?>
 				</div>
+				<?php
+					if (isset($_SESSION["rango"]) == '2')
+					{ 
+						echo '<a href="/administracion"><button class="btn btn-secondary" type="button">Administración</button></a>';
+					}
+				?>
 				<a href="/contacto"><button class="btn btn-secondary" type="button">Contacto</button></a>
 			</nav>
 			<a class="btn btn-outline-success" href="https://api.whatsapp.com/send?phone=56912345678">Contactar por WhatsApp</a>

@@ -1,0 +1,58 @@
+TABLA ARCHIVO
+
+Estado (para comprar)
+
+0 => Desactivado 
+1 => Activado
+
+Recomendado
+
+0 => Desactivado
+1 => Activado
+
+Tipo
+
+0 => Planificación
+1 => Guía
+
+
+TABLA ORDENCOMPRA
+
+estado_orden
+
+Pendiente de pago
+Pendiente de confirmación
+Pagado
+
+
+TABLA USUARIO
+
+Rango
+
+0 => Usuario
+2 => Administrador
+
+
+
+
+
+
+FALTA POR HACER
+
+perfil:
+opciones
+misordenes
+descargararchivo
+verarchivo
+
+administración:
+usuarios
+verperfil
+nuevoarchivo
+editararchivo
+eliminararchivo
+nuevousuario
+ordenes
+
+
+quizas separar planificaciones y guias de la página de administración y solo dejarla para estadisticas

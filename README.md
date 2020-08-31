@@ -21,3 +21,4 @@
 - $userNode->getVariable() => 
 - $_SESSION['usuario_id']
 - $_SESSION['facebook_id']
+- $_SESSION['rango']

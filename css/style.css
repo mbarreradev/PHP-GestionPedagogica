@@ -51,6 +51,21 @@ h1.card-title.pricing-card-title.asignatura {
 
 .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
 
+img.logo {
+  margin-right: 15px;
+}
+
+button#btnGroupDrop1 {
+  background: #6c757d2e;
+  border-color: #6c757d;
+}
+
+button#btnGroupDrop1:focus {
+  background-color: #6c757d2e;
+  border-color: #6c757d !important;
+  color: black;
+}
+
 /*
  * Globals
  */
@@ -246,6 +261,7 @@ li.active {
 
 #tabla-lista-planificaciones {
     width: 100%;
+    margin-bottom: -34px;
 }
 
 #tabla-lista-recomendados {
@@ -307,6 +323,7 @@ button.btn.btn-primary.margin {
 img.card-img.profile {
     width: 43%;
     margin-top: 8px;
+    margin-bottom: 8px;
 }
 
 .card.mb-3.profile {
@@ -391,6 +408,10 @@ input.form-control.left {
 }
 
 h4.d-flex.justify-content-between.align-items-center.mb-3.margin-top {
+  margin-top: 1rem;
+}
+
+h4.d-flex.justify-content-between.align-items-center.mb-3.margin-bottom {
   margin-top: 1rem;
 }
 

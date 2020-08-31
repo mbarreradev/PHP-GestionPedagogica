@@ -71,7 +71,7 @@ $userNode = $response->getGraphUser();
 	exit;
 }
 
-
+// obtenemos el facebook id y lo guardamos en la sesión
 $facebook_id = $userNode->getId();
 $_SESSION['facebook_id'] = $userNode->getId();
 
@@ -85,14 +85,18 @@ if(mysqli_num_rows($rs_check) > 0)
 	// Guardamos el usuario_id en la sesión
 	$sql_selectusuarioid1 = "SELECT usuario_id from usuario WHERE facebook_id = '$facebook_id' ";
 		
-    $rs_usuario_id = mysqli_query($conn, $sql_selectusuarioid1) or die ("(1) Problemas al seleccionar ".mysqli_error($conn));
+  $rs_usuario_id = mysqli_query($conn, $sql_selectusuarioid1) or die ("(1) Problemas al seleccionar ".mysqli_error($conn));
 
-    // Se guarda en un variable el usuario_id
-    $row = mysqli_fetch_assoc($rs_usuario_id);
-    // Guardamos el usuario_id del usuario en una variable
-    $usuario_id = $row['usuario_id'];
-		
-	$_SESSION['usuario_id'] = $usuario_id;
+  // Se guarda en un variable el usuario_id
+  $row = mysqli_fetch_assoc($rs_usuario_id);
+  // Guardamos el usuario_id del usuario en una variable
+  $usuario_id = $row['usuario_id'];
+    
+  // Guardamos usuario_id y rango en la sesión
+  $_SESSION['usuario_id'] = $usuario_id;
+  $_SESSION['rango'] = '0';
+
+  // ACTUALIZAMOS ULTIMA IP E INICIO DE SESION
 	
 	// Enviamos al usuario devuelta a la página de usuario
 	header('Location: https://repositorio.gestionpedagogica.cl/perfil');
@@ -105,23 +109,38 @@ else
 	$apellidos = $userNode->getLastname();
 	$correo = $userNode->getEmail();
 	$usuario_imagen = $userNode->getPicture();
-	$avatar_url = $usuario_imagen['url'];
+  $avatar_url = $usuario_imagen['url'];
+  $rango = '0';
+  $ultimo_iniciosesion = date("Y-m-d H:i:s");
+
+  // Capturamos la IP del usuario
+  if (getenv('HTTP_X_FORWARDED_FOR')) { 
+    $pipaddress = getenv('HTTP_X_FORWARDED_FOR');
+    $ipaddress = getenv('REMOTE_ADDR'); 
+    $ultima_ip = $ipaddress;
+  } 
+  else 
+  { 
+    $ipaddress = getenv('REMOTE_ADDR'); 
+    $ultima_ip = $ipaddress; 
+  }
 				
-	$sql1 = "INSERT INTO usuario (usuario_id, registrado_el, nombres, apellidos, correo, avatar_url, facebook_id) VALUES (DEFAULT, '$registrado_el', '$nombres', '$apellidos', '$correo', '$avatar_url', '$facebook_id')";
+	$sql1 = "INSERT INTO usuario (usuario_id, registrado_el, nombres, apellidos, correo, avatar_url, facebook_id, rango, ultimo_iniciosesion, ultima_ip) VALUES (DEFAULT, '$registrado_el', '$nombres', '$apellidos', '$correo', '$avatar_url', '$facebook_id', '$rango', '$ultimo_iniciosesion', '$ultima_ip')";
 
 	if ($conn->query($sql1) === TRUE) 
 	{
 		// Seleccionamos el usuario_id
 		$sql_selectusuarioid2 = "SELECT usuario_id from usuario WHERE facebook_id = '$facebook_id' ";
 		
-        $rs_usuario_id = mysqli_query($conn, $sql_selectusuarioid2) or die ("(1) Problemas al seleccionar ".mysqli_error($conn));
+    $rs_usuario_id = mysqli_query($conn, $sql_selectusuarioid2) or die ("(1) Problemas al seleccionar ".mysqli_error($conn));
 
-        // Se guarda en un variable el usuario_id
-        $row = mysqli_fetch_assoc($rs_usuario_id);
-        // Guardamos el usuario_id del usuario en una variable
-        $usuario_id = $row['usuario_id'];
-		// Guardamos usuario_id en la sesión
-		$_SESSION['usuario_id'] = $usuario_id;
+    // Se guarda en un variable el usuario_id
+    $row = mysqli_fetch_assoc($rs_usuario_id);
+    // Guardamos el usuario_id del usuario en una variable
+    $usuario_id = $row['usuario_id'];
+		// Guardamos usuario_id y rango en la sesión
+    $_SESSION['usuario_id'] = $usuario_id;
+    $_SESSION['rango'] = '0';
 		
 		// Enviamos al usuario devuelta a la página de usuario
 		header('Location: https://repositorio.gestionpedagogica.cl/perfil');
