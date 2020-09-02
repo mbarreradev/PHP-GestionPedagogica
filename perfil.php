@@ -263,7 +263,7 @@ $(function(){
 
     <div class="container d-flex p-3 mx-auto flex-column">
 
-	<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-color border-bottom box-shadow">
+	<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-color border-azul-claro">
 		<img class="logo" src="/images/Logo.png" width="32" height="32"><h5 class="my-0 mr-md-auto font-weight-normal">Gestión Pedagógica</h5>
       	<nav class="my-2 my-md-0 mr-md-3">
 		<a href="http://repositorio.gestionpedagogica.cl"><button class="btn btn-secondary" type="button">Inicio</button></a>
@@ -284,7 +284,7 @@ $(function(){
       <a class="btn btn-outline-success" href="#">Contactar por Whatsapp</a>
     </div>
 
-      <div class="jumbotron">
+      <div class="rounded border border-azul-claro p-3">
         <div class="container">
 		
 		
@@ -310,7 +310,7 @@ $(function(){
 				
         </h4>
 		
-			<div class="card mb-3 profile">
+			<div class="card mb-3 profile border-plomo">
 			  <div class="row no-gutters">
 				<div class="col-md-4">
 				  <img src="<?php echo $row_profile_general["avatar_url"]; ?>" class="card-img profile">
@@ -327,8 +327,8 @@ $(function(){
                 <div class="col-sm">
                     <h4><?php echo $row_profile_general["nombres"]; ?> <?php echo $row_profile_general["apellidos"]; ?></h4>
 					Registrado: <span id="registrado"><?php echo $row_profile_general["registrado_el"]; ?></span></br>
-                    Correo electrónico: <span><?php echo $row_profile_general["correo"]; ?></span></br>
-					Rango: <span><?php echo $row_profile_general["rango"]; ?></span></br></br>
+					Correo electrónico: <span><?php echo $row_profile_general["correo"]; ?></span></br>
+					<hr class="bg-azul"/>
                     <span class="tags">Conectado desde Facebook</span>
                 </div>             
                 <div class="col-sm text-center">
@@ -703,7 +703,7 @@ $(function(){
 	</div>
     </div>
 
-      <footer class="mastfoot mt-auto">
+      <footer class="mastfoot margin-top">
         <div class="inner">
           <p class="footer">Copyright © 2020 Gestión Pedagógica</p>
         </div>

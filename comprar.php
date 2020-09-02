@@ -84,7 +84,7 @@ else //Continue to current page
 
     <div class="container d-flex p-3 mx-auto flex-column">
 
-	<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-color border-bottom box-shadow">
+	<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-color border-azul-claro">
     <img class="logo" src="/images/Logo.png" width="32" height="32"><h5 class="my-0 mr-md-auto font-weight-normal">Gestión Pedagógica</h5>
     <nav class="my-2 my-md-0 mr-md-3">
 		<a href="http://repositorio.gestionpedagogica.cl"><button class="btn btn-secondary" type="button">Inicio</button></a>
@@ -105,7 +105,7 @@ else //Continue to current page
       <a class="btn btn-outline-success" href="#">Contactar por Whatsapp</a>
     </div>
 
-      <div class="jumbotron">
+      <div class="rounded border border-azul-claro p-3">
         <div class="container">
           <h1 class="display-4">Proceso de compra</h1>
           <p class="index-description">En esta página podrás validar los datos para la compra de tu planificación. Posteriormente podrás ver los datos para realizar la transferecia a la cuenta asignada.</p>
@@ -123,7 +123,7 @@ else //Continue to current page
 	<div class="row">
         <div class="col-md-4 order-md-2 mb-4">
           <h4 class="d-flex justify-content-between align-items-center mb-3">
-            <span>Tu carro</span>
+            <span>Productos</span>
           </h4>
           <ul class="list-group mb-3">
             <li class="list-group-item d-flex justify-content-between lh-condensed">
@@ -133,8 +133,8 @@ else //Continue to current page
               </div>
               <span class="text-muted">$<?php echo $consulta_planificacion["precio"]; ?></span>
             </li>
-            <li class="list-group-item d-flex justify-content-between">
-              <span>Total a transferir</span>
+            <li class="list-group-item d-flex justify-content-between bg-azul-claro">
+              <span>Total a pagar</span>
               <strong>$<?php echo $consulta_planificacion["precio"]; ?></strong>
             </li>
           </ul>
@@ -211,7 +211,7 @@ else //Continue to current page
 	</div>
     </div>
 
-      <footer class="mastfoot mt-auto">
+      <footer class="mastfoot margin-top">
         <div class="inner">
           <p class="footer">Copyright © 2020 Gestión Pedagógica</p>
         </div>

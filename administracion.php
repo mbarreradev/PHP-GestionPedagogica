@@ -58,7 +58,7 @@ else // Continuamos a la página
 
     <div class="container d-flex p-3 mx-auto flex-column">
 
-	<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-color border-bottom box-shadow">
+	<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-color border-azul-claro">
 		<img class="logo" src="/images/Logo.png" width="32" height="32"><h5 class="my-0 mr-md-auto font-weight-normal">Gestión Pedagógica</h5>
       	<nav class="my-2 my-md-0 mr-md-3">
 		<a href="http://repositorio.gestionpedagogica.cl"><button class="btn btn-secondary" type="button">Inicio</button></a>
@@ -79,7 +79,7 @@ else // Continuamos a la página
       <a class="btn btn-outline-success" href="#">Contactar por Whatsapp</a>
     </div>
 
-      <div class="jumbotron">
+      <div class="rounded border border-azul-claro p-3">
         <div class="container">
 		
 		
@@ -140,7 +140,7 @@ else // Continuamos a la página
 	</div>
     </div>
 
-      <footer class="mastfoot mt-auto">
+      <footer class="mastfoot margin-top">
         <div class="inner">
           <p class="footer">Copyright © 2020 Gestión Pedagógica</p>
         </div>
