@@ -34,7 +34,7 @@ else // Continuamos a la página
 	ON
 		ordencompra.usuario_id=usuario.usuario_id
 	WHERE 
-		ordencompra.usuario_id = '".$_SESSION['usuario_id']."' AND archivo.asignatura = 'Matemáticas' AND tipo = '0'
+		ordencompra.usuario_id = '".$_SESSION['usuario_id']."' AND ordencompra.estado_orden = 'Pagado' AND archivo.asignatura = 'Matemáticas' AND tipo = '0'
 	ORDER BY ordencompra.ordencompra_id DESC"; 
 	$rs_result_matematica_planificacion = mysqli_query($conn, $sql_matematica_planificacion);
 		
@@ -52,7 +52,7 @@ else // Continuamos a la página
 	ON
 		ordencompra.usuario_id=usuario.usuario_id
 	WHERE 
-		ordencompra.usuario_id = '".$_SESSION['usuario_id']."' AND archivo.asignatura = 'Lenguaje' AND tipo = '0'
+		ordencompra.usuario_id = '".$_SESSION['usuario_id']."' AND ordencompra.estado_orden = 'Pagado' AND archivo.asignatura = 'Lenguaje' AND tipo = '0'
 	ORDER BY ordencompra.ordencompra_id DESC"; 
 	$rs_result_lenguaje_planificacion = mysqli_query($conn, $sql_lenguaje_planificacion);
 
@@ -70,7 +70,7 @@ else // Continuamos a la página
 	ON
 		ordencompra.usuario_id=usuario.usuario_id
 	WHERE 
-		ordencompra.usuario_id = '".$_SESSION['usuario_id']."' AND archivo.asignatura = 'Tecnología' AND tipo = '0'
+		ordencompra.usuario_id = '".$_SESSION['usuario_id']."' AND ordencompra.estado_orden = 'Pagado' AND archivo.asignatura = 'Tecnología' AND tipo = '0'
 	ORDER BY ordencompra.ordencompra_id DESC"; 
 	$rs_result_tecnologia_planificacion = mysqli_query($conn, $sql_tecnologia_planificacion);
 
@@ -88,7 +88,7 @@ else // Continuamos a la página
 	ON
 		ordencompra.usuario_id=usuario.usuario_id
 	WHERE 
-		ordencompra.usuario_id = '".$_SESSION['usuario_id']."' AND archivo.asignatura = 'Música' AND tipo = '0'
+		ordencompra.usuario_id = '".$_SESSION['usuario_id']."' AND ordencompra.estado_orden = 'Pagado' AND archivo.asignatura = 'Música' AND tipo = '0'
 	ORDER BY ordencompra.ordencompra_id DESC"; 
 	$rs_result_musica_planificacion = mysqli_query($conn, $sql_musica_planificacion);
 
@@ -106,7 +106,7 @@ else // Continuamos a la página
 	ON
 		ordencompra.usuario_id=usuario.usuario_id
 	WHERE 
-		ordencompra.usuario_id = '".$_SESSION['usuario_id']."' AND archivo.asignatura = 'Artes Visuales' AND tipo = '0'
+		ordencompra.usuario_id = '".$_SESSION['usuario_id']."' AND ordencompra.estado_orden = 'Pagado' AND archivo.asignatura = 'Artes Visuales' AND tipo = '0'
 	ORDER BY ordencompra.ordencompra_id DESC"; 
 	$rs_result_artesvisuales_planificacion = mysqli_query($conn, $sql_artesVisuales_planificacion);
 
@@ -126,7 +126,7 @@ else // Continuamos a la página
 	ON
 		ordencompra.usuario_id=usuario.usuario_id
 	WHERE 
-		ordencompra.usuario_id = '".$_SESSION['usuario_id']."' AND archivo.asignatura = 'Matemáticas' AND tipo = '1'
+		ordencompra.usuario_id = '".$_SESSION['usuario_id']."' AND ordencompra.estado_orden = 'Pagado' AND archivo.asignatura = 'Matemáticas' AND tipo = '1'
 	ORDER BY ordencompra.ordencompra_id DESC"; 
 	$rs_result_matematica_guia = mysqli_query($conn, $sql_matematica_guia);
 		
@@ -144,7 +144,7 @@ else // Continuamos a la página
 	ON
 		ordencompra.usuario_id=usuario.usuario_id
 	WHERE 
-		ordencompra.usuario_id = '".$_SESSION['usuario_id']."' AND archivo.asignatura = 'Lenguaje' AND tipo = '1'
+		ordencompra.usuario_id = '".$_SESSION['usuario_id']."' AND ordencompra.estado_orden = 'Pagado' AND archivo.asignatura = 'Lenguaje' AND tipo = '1'
 	ORDER BY ordencompra.ordencompra_id DESC"; 
 	$rs_result_lenguaje_guia = mysqli_query($conn, $sql_lenguaje_guia);
 
@@ -162,7 +162,7 @@ else // Continuamos a la página
 	ON
 		ordencompra.usuario_id=usuario.usuario_id
 	WHERE 
-		ordencompra.usuario_id = '".$_SESSION['usuario_id']."' AND archivo.asignatura = 'Tecnología' AND tipo = '1'
+		ordencompra.usuario_id = '".$_SESSION['usuario_id']."' AND ordencompra.estado_orden = 'Pagado' AND archivo.asignatura = 'Tecnología' AND tipo = '1'
 	ORDER BY ordencompra.ordencompra_id DESC"; 
 	$rs_result_tecnologia_guia = mysqli_query($conn, $sql_tecnologia_guia);
 
@@ -180,7 +180,7 @@ else // Continuamos a la página
 	ON
 		ordencompra.usuario_id=usuario.usuario_id
 	WHERE 
-		ordencompra.usuario_id = '".$_SESSION['usuario_id']."' AND archivo.asignatura = 'Música' AND tipo = '1'
+		ordencompra.usuario_id = '".$_SESSION['usuario_id']."' AND ordencompra.estado_orden = 'Pagado' AND archivo.asignatura = 'Música' AND tipo = '1'
 	ORDER BY ordencompra.ordencompra_id DESC"; 
 	$rs_result_musica_guia = mysqli_query($conn, $sql_musica_guia);
 
@@ -198,13 +198,15 @@ else // Continuamos a la página
 	ON
 		ordencompra.usuario_id=usuario.usuario_id
 	WHERE 
-		ordencompra.usuario_id = '".$_SESSION['usuario_id']."' AND archivo.asignatura = 'Artes Visuales' AND tipo = '1'
+		ordencompra.usuario_id = '".$_SESSION['usuario_id']."' AND ordencompra.estado_orden = 'Pagado' AND archivo.asignatura = 'Artes Visuales' AND tipo = '1'
 	ORDER BY ordencompra.ordencompra_id DESC"; 
 	$rs_result_artesvisuales_guia = mysqli_query($conn, $sql_artesVisuales_guia);
 
 
 	// Contador documentos disponibles
-	//$cnt_documentos_disponible_total = $rs_result_usuarios_registrados->num_rows;
+	$sql_documentos_disponibles = "SELECT * FROM ordencompra INNER JOIN usuario ON ordencompra.usuario_id=usuario.usuario_id WHERE ordencompra.usuario_id = '".$_SESSION['usuario_id']."' AND estado_orden = 'Pagado' ";  
+	$rs_result_documentos_disponibles = mysqli_query($conn, $sql_documentos_disponibles);  
+	$cnt_documentos_disponible_total = $rs_result_documentos_disponibles->num_rows;
 
 	// Contador compras realizadas
 	$sql_compras_realizadas = "SELECT * FROM ordencompra INNER JOIN usuario ON ordencompra.usuario_id=usuario.usuario_id WHERE ordencompra.usuario_id = '".$_SESSION['usuario_id']."' AND estado_orden = 'Pagado' ";  
@@ -334,7 +336,7 @@ $(function(){
                 <div class="col-sm text-center">
 				<div class="row counter-profile">
 				<div class="col-sm">
-                    <h2><strong>0</strong></h2>                    
+                    <h2><strong><?php echo $cnt_documentos_disponible_total; ?></strong></h2>                    
                     <p><small>documentos disponibles</small></p>
                 </div>
                 <div class="col-sm">

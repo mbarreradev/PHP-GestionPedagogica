@@ -41,7 +41,6 @@ FALTA POR HACER
 
 perfil:
 opciones
-misordenes
 descargararchivo
 verarchivo
 
@@ -53,6 +52,3 @@ editararchivo
 eliminararchivo
 nuevousuario
 ordenes
-
-
-quizas separar planificaciones y guias de la página de administración y solo dejarla para estadisticas

@@ -65,7 +65,7 @@ else // Continuamos a la página
 		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hola <?php echo $row_profile_general["nombres"]; ?></button>
 		<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
 			<a href="/perfil"><button class="dropdown-item" type="button">Perfil</button></a>
-			<a href="/ordenes"><button class="dropdown-item" type="button">Mis ordenes</button></a>
+			<a href="/misordenes"><button class="dropdown-item" type="button">Mis ordenes</button></a>
 			<a href="/logout"><button class="dropdown-item" type="button">Desconectar</button></a>
 		</div>
 		<?php 

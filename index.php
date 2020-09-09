@@ -68,7 +68,7 @@ $cnt_guias = $rs_result_guias->num_rows;
 							echo '<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hola '.$row_profile_general["nombres"].'</button>';
 							echo '<div class="dropdown-menu" aria-labelledby="dropdownMenu2">';
 							echo '<a href="/perfil"><button class="dropdown-item" type="button">Perfil</button></a>';
-							echo '<a href="/ordenes"><button class="dropdown-item" type="button">Mis ordenes</button></a>';
+							echo '<a href="/misordenes"><button class="dropdown-item" type="button">Mis ordenes</button></a>';
 							echo '<a href="/logout"><button class="dropdown-item" type="button">Desconectar</button></a>';
 							echo '</div>';
 						}

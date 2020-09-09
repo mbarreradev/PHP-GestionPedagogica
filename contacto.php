@@ -56,7 +56,7 @@ $row_cnt = $rs_result1->num_rows;
                 else
                 {
                     echo '<a href="/perfil"><button class="dropdown-item" type="button">Perfil</button></a>';
-                    echo '<a href="/ordenes"><button class="dropdown-item" type="button">Mis ordenes</button></a>';
+                    echo '<a href="/misordenes"><button class="dropdown-item" type="button">Mis ordenes</button></a>';
                     echo '<a href="/logout"><button class="dropdown-item" type="button">Desconectar</button></a>';
                 }
                 ?> 
@@ -89,14 +89,15 @@ $row_cnt = $rs_result1->num_rows;
                         <div class="form-group">
                             <input type="text" name="txtPhone" class="form-control" placeholder="Tu número de teléfono" value="" />
                         </div>
-                        <div class="form-group">
-                            <button type="button" class="btn btn-lg btn-block btn-outline-primary">Enviar mensaje</button>
-                        </div>
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+							<strong>Recuerda</strong> verificar los datos antes de enviar el formulario
+						</div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <textarea name="txtMsg" class="form-control" placeholder="Tu mensaje" style="width: 100%; height: 150px;"></textarea>
                         </div>
+                        <button type="submit" name="enviar-submit" class="btn btn-primary btn-lg float-center">Enviar mensaje</button>
                     </div>
                 </div>
             </form>
