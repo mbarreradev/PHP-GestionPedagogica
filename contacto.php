@@ -56,7 +56,7 @@ $row_cnt = $rs_result1->num_rows;
                 else
                 {
                     echo '<a href="/perfil"><button class="dropdown-item" type="button">Perfil</button></a>';
-                    echo '<a href="/misordenes"><button class="dropdown-item" type="button">Mis ordenes</button></a>';
+                    echo '<a href="/ordenes"><button class="dropdown-item" type="button">Mis ordenes</button></a>';
                     echo '<a href="/logout"><button class="dropdown-item" type="button">Desconectar</button></a>';
                 }
                 ?> 
@@ -78,16 +78,18 @@ $row_cnt = $rs_result1->num_rows;
             <p class="index-description">Asegurese que el correo es válido y está bien escrito, para que podamos contactarnos con usted.</p>
 
             <form method="post">
+            <div class="card mb-3">
+            <div class="card-body">
                <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <input type="text" name="txtName" class="form-control" placeholder="Tu nombre" value="" />
                         </div>
                         <div class="form-group">
-                            <input type="text" name="txtEmail" class="form-control" placeholder="Tu correo electrónico" value="" />
+                            <input type="email" name="txtEmail" class="form-control" placeholder="Tu correo electrónico" value="" />
                         </div>
                         <div class="form-group">
-                            <input type="text" name="txtPhone" class="form-control" placeholder="Tu número de teléfono" value="" />
+                            <input type="number" name="txtPhone" class="form-control" placeholder="Tu número de teléfono" value="" />
                         </div>
                         <div class="alert alert-warning alert-dismissible fade show" role="alert">
 							<strong>Recuerda</strong> verificar los datos antes de enviar el formulario
@@ -100,6 +102,8 @@ $row_cnt = $rs_result1->num_rows;
                         <button type="submit" name="enviar-submit" class="btn btn-primary btn-lg float-center">Enviar mensaje</button>
                     </div>
                 </div>
+            </div>
+            </div>
             </form>
 		
 	    </div>

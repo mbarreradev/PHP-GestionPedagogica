@@ -253,7 +253,7 @@ else //Continue to current page
 							echo'<span class="material-icons">check_circle_outline</span> Ya puedes acceder al archivo '.$consulta_planificacion["nombre"].' ';
 						echo'</div>';
 						echo'<div class="col text-right">';
-							echo'<a href="archivo?id="><button type="submit" class="btn btn-primary btn-lg">Ver archivo</button></a>';
+							echo'<a href="verarchivo?id='.$consulta_planificacion["archivo_id"].'"><button type="submit" class="btn btn-primary btn-lg">Ver archivo</button></a>';
 						echo'</div>';
 					echo'</div>';
 				echo'</div>';

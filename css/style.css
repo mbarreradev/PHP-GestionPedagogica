@@ -484,3 +484,8 @@ h4.d-flex.justify-content-between.align-items-center.mb-3.margin-bottom {
   background:#ccc; 
 }
 
+/* FIN */
+
+input#fileArchivo {
+    padding-bottom: 36px;
+}
