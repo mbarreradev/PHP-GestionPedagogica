@@ -137,7 +137,7 @@ else // Continuamos a la página
         <div class="container">
 
 		<h4 class="d-flex justify-content-between align-items-center mb-3">
-            <span>Mis ordenes</span>
+			<span class="titulo">Mis ordenes</span>
 
 			<div class="btn-group dropup btn-block options">
 			<a href="/perfil"><button type="button" class="btn btn-primary"><span class="material-icons">person</span> Volver al perfil</button></a>

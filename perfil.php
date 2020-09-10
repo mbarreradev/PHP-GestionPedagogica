@@ -291,7 +291,7 @@ $(function(){
 		
 		
 		<h4 class="d-flex justify-content-between align-items-center mb-3">
-            <span>Mi perfil</span>
+			<span class="titulo">Mi perfil</span>
             <?php 
 			if (!isset($_SESSION["rango"]) == '2')
 			{ 
@@ -359,7 +359,7 @@ $(function(){
 			</div>
 			
 		<h4 class="d-flex justify-content-between align-items-center mb-3">
-            <span>Mis planificaciones</span>
+			<span class="titulo">Mis planificaciones</span>
         </h4>	
 
 		<section id="tabs" class="project-tab">
@@ -531,7 +531,7 @@ $(function(){
         </section>
 
 		<h4 class="d-flex justify-content-between align-items-center mb-3 margin-top">
-            <span>Mis guías</span>
+			<span class="titulo">Mis guías</span>
         </h4>	
 
 		<section id="tabs" class="project-tab">

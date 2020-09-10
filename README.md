@@ -11,6 +11,7 @@
 - Moment.js 2.24.0
 - Material Icons
 - JQuery 3.5.0
+- List.js v1.5.0
 
 # Características
 - Ingreso de usuarios con Facebook API, luego de esto registra una cuenta en la base de datos.

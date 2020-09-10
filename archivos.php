@@ -177,7 +177,7 @@ else // Continuamos a la página
 		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hola <?php echo $row_profile_general["nombres"]; ?></button>
 		<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
 			<a href="/perfil"><button class="dropdown-item" type="button">Perfil</button></a>
-			<a href="/ordenes"><button class="dropdown-item" type="button">Mis ordenes</button></a>
+			<a href="/misordenes"><button class="dropdown-item" type="button">Mis ordenes</button></a>
 			<a href="/logout"><button class="dropdown-item" type="button">Desconectar</button></a>
 		</div>
 		<?php 
@@ -196,7 +196,7 @@ else // Continuamos a la página
 		
 		
 		<h4 class="d-flex justify-content-between align-items-center mb-3">
-            <span>Estadísticas</span>
+            <span class="titulo">Estadísticas</span>
 
 			<div class="btn-group dropup btn-block options">
 			<a href="/administracion"><button type="button" class="btn btn-primary"><span class="material-icons">build</span> Volver a la administración</button></a>
@@ -240,7 +240,7 @@ else // Continuamos a la página
 			</div>
 
 		<h4 class="d-flex justify-content-between align-items-center mb-3">
-            <span>Planificaciones</span>
+            <span class="titulo">Planificaciones</span>
 
 			<div class="btn-group dropup btn-block options">
 			<a href="/nuevoarchivo"><button type="button" class="btn btn-primary"><span class="material-icons">add</span> Agregar nuevo</button></a>
@@ -477,7 +477,7 @@ else // Continuamos a la página
         </section>
 
 		<h4 class="d-flex justify-content-between align-items-center mb-3 margin-bottom">
-            <span>Guías</span>
+            <span class="titulo">Guías</span>
 
 			<div class="btn-group dropup btn-block options">
 			<a href="/nuevoarchivo"><button type="button" class="btn btn-primary"><span class="material-icons">add</span> Agregar nuevo</button></a>

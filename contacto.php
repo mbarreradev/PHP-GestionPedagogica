@@ -56,7 +56,7 @@ $row_cnt = $rs_result1->num_rows;
                 else
                 {
                     echo '<a href="/perfil"><button class="dropdown-item" type="button">Perfil</button></a>';
-                    echo '<a href="/ordenes"><button class="dropdown-item" type="button">Mis ordenes</button></a>';
+                    echo '<a href="/misordenes"><button class="dropdown-item" type="button">Mis ordenes</button></a>';
                     echo '<a href="/logout"><button class="dropdown-item" type="button">Desconectar</button></a>';
                 }
                 ?> 

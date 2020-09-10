@@ -143,7 +143,7 @@ else // Continuamos a la página
     <div class="rounded border border-azul-claro p-3">
         <div class="container">
             <h4 class="d-flex justify-content-between align-items-center mb-3">
-                <span>Crear nuevo archivo</span>
+                <span class="titulo">Crear nuevo archivo</span>
                 <div class="btn-group dropup btn-block options">
                 <a href="/administracion"><button type="button" class="btn btn-primary"><span class="material-icons">build</span> Volver a la administración</button></a>
                 </div>  

@@ -2,31 +2,35 @@
 session_start();
 require 'inc/conexion.php';
 
-// Consulta para traer los datos de usuario generales
-$sql_datosusuariosgeneral = "SELECT nombres
-FROM 
-	usuario
-WHERE 
-	usuario_id = '".$_SESSION['usuario_id']."' "; 
-$rs_resultdatosgeneral = mysqli_query($conn, $sql_datosusuariosgeneral);
-$row_profile_general = mysqli_fetch_assoc($rs_resultdatosgeneral);
+if (isset($_SESSION["fb_access_token"]))
+{
+    // Consulta para traer los datos de usuario generales
+    $sql_datosusuariosgeneral = "SELECT nombres
+    FROM 
+        usuario
+    WHERE 
+        usuario_id = '".$_SESSION['usuario_id']."' "; 
+    $rs_resultdatosgeneral = mysqli_query($conn, $sql_datosusuariosgeneral);
+    $row_profile_general = mysqli_fetch_assoc($rs_resultdatosgeneral);
+}
+
 
 // BOX planificaciones
-$sql_planificaciones = "SELECT * FROM archivo WHERE tipo = '0' ORDER BY RAND() LIMIT 6";  
+$sql_planificaciones = "SELECT * FROM archivo WHERE tipo = '0' ORDER BY RAND() LIMIT 5";  
 $rs_result_planificaciones = mysqli_query($conn, $sql_planificaciones);  
 
 // BOX guias
-$sql_guias = "SELECT * FROM archivo WHERE tipo = '1' ORDER BY RAND() LIMIT 6";  
+$sql_guias = "SELECT * FROM archivo WHERE tipo = '1' ORDER BY RAND() LIMIT 5";  
 $rs_result_guias = mysqli_query($conn, $sql_guias);  
 
 // BOX Recomendados
 $sql_recomendados = "SELECT * FROM archivo WHERE recomendado = '1' ORDER BY RAND() LIMIT 10";  
 $rs_result_recomendados = mysqli_query($conn, $sql_recomendados);  
 
-// Contador planificaciones
+// Contador planificaciones, ARREGLAR
 $cnt_planificaciones = $rs_result_planificaciones->num_rows;
 
-// Contador guias
+// Contador guias, ARREGLAR
 $cnt_guias = $rs_result_guias->num_rows;
 
 ?> 
@@ -45,7 +49,6 @@ $cnt_guias = $rs_result_guias->num_rows;
 		<link href="css/style.css" rel="stylesheet">
 		<script src="https://code.jquery.com/jquery-3.5.0.slim.min.js" integrity="sha256-MlusDLJIP1GRgLrOflUQtshyP0TwT/RHXsI1wWGnQhs=" crossorigin="anonymous"></script>
     	<script src="js/bootstrap.bundle.min.js"></script>
-		<script src="js/list.min.js"></script>
 		<script src="js/carousel.js"></script>
 		<script data-ad-client="ca-pub-2522486668045838" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 	</head>
@@ -103,7 +106,7 @@ $cnt_guias = $rs_result_guias->num_rows;
 
 				<div id="tabla-lista-recomendados">
 					<h4 class="d-flex justify-content-between align-items-center mb-3">
-						<span>Recomendados</span>
+                        <span class="titulo">Recomendados</span>
 					</h4>
 
 					<div class="row">
@@ -117,12 +120,12 @@ $cnt_guias = $rs_result_guias->num_rows;
 								<div class="item">
 									<div class="pad15">
 										<p class="lead"><?php echo $row['asignatura']; ?></p>
-										<p><?php echo $row['nombre']; ?></p>
+										<p class="titulo"><?php echo $row['nombre']; ?></p>
 										<p><?php echo $row['curso']; ?></p>
 										<?php
 									if($row["estado"] === '1' AND isset($_SESSION["fb_access_token"])) // 1 disponible 0 no disponible
 									{
-										echo '<a href="/comprar?id='.$row["archivo_id"].'"><button type="button" class="btn btn-sm btn-block btn-outline-primary">Seleccionar</button></a>';
+										echo '<a href="/comprar?id='.$row["archivo_id"].'"><button type="button" class="btn btn-sm btn-block btn-outline-primary">Ver documento</button></a>';
 									}
 									else
 									{
@@ -146,126 +149,118 @@ $cnt_guias = $rs_result_guias->num_rows;
 				<div id="tabla-lista-planificaciones">
 				
 					<h4 class="d-flex justify-content-between align-items-center mb-3">
-						<span>Lista de planificaciones</span>
+                        <span class="titulo">Lista de planificaciones</span>
 						<div class="btn-group dropup btn-block options">
 							<a href="/planificaciones"><button type="button" class="btn btn-primary"><span class="material-icons">select_all</span> Ver todos</button></a>
 						</div>
-					</h4>	
-				
-					<div class="container-separado">
-						<input type="text" class="search form-control" placeholder="Puedes buscar por curso, asignatura, unidad o temática"/>
-					</div>
+					</h4>
 
-					<div class="card-deck mb-3 text-center justify-content-center">
-						<ul class="list">
-						
-						<?php  
-							while ($row = mysqli_fetch_assoc($rs_result_planificaciones)) {
-						?>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="card-deck text-center justify-content-center">
+                                <ul class="list">
+                                
+                                <?php  
+                                    while ($row = mysqli_fetch_assoc($rs_result_planificaciones)) {
+                                ?>
 
-						<div class="card mb-4 box-shadow">
-							<div class="card-header bg-azul">
-								<h4 class="my-0 font-weight-normal nombre"><?php echo $row['asignatura']; ?></h4>
-							</div>
-							<div class="card-body">
-								<h1 class="card-title pricing-card-title asignatura"><?php echo $row['nombre']; ?></h1>
-								<hr class="bg-azul"/>
-								<ul class="list-unstyled mt-3 mb-4">
-									<li class="unidad"><?php echo $row['curso']; ?></li>
-									<li class="unidad"><?php echo $row['unidad']; ?></li>
-								</ul>
-								<h1 class="card-title pricing-card-title price">Precio $<?php echo $row['precio']; ?></h1>
-								<?php
-									if($row["estado"] === '1' AND isset($_SESSION["fb_access_token"])) // 1 disponible 0 no disponible
-									{
-										echo '<a href="/comprar?id='.$row["archivo_id"].'"><button type="button" class="btn btn-xs btn-outline-primary">Seleccionar</button></a>';
-									}
-									else
-									{
-										echo '<button type="button" class="btn btn-xs btn-outline-secondary" disabled>No disponible</button>';
-									}
-								?>
-							</div>
-						</div>
-						
-						<?php  
-							};  
-						?>
-						</ul>
-					</div>
+                                <div class="card mb-4 box-shadow">
+                                    <div class="card-header bg-azul">
+                                        <h4 class="my-0 font-weight-normal nombre"><?php echo $row['asignatura']; ?></h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <h1 class="card-title pricing-card-title asignatura"><?php echo $row['nombre']; ?></h1>
+                                        <hr class="bg-azul"/>
+                                        <ul class="list-unstyled mt-3 mb-4">
+                                            <li class="unidad"><?php echo $row['curso']; ?></li>
+                                            <li class="unidad"><?php echo $row['unidad']; ?></li>
+                                        </ul>
+                                        <h1 class="card-title pricing-card-title price">Precio $<?php echo $row['precio']; ?></h1>
+                                        <?php
+                                            if($row["estado"] === '1' AND isset($_SESSION["fb_access_token"])) // 1 disponible 0 no disponible
+                                            {
+                                                echo '<a href="/comprar?id='.$row["archivo_id"].'"><button type="button" class="btn btn-xs btn-outline-primary">Ver documento</button></a>';
+                                            }
+                                            else
+                                            {
+                                                echo '<button type="button" class="btn btn-xs btn-outline-secondary" disabled>No disponible</button>';
+                                            }
+                                        ?>
+                                    </div>
+                                </div>
+                                
+                                <?php  
+                                    };  
+                                ?>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
 				</div>
 		
 				<div id="tabla-lista-guias">
 
 					<h4 class="d-flex justify-content-between align-items-center mb-3">
-						<span>Lista de guías</span>
+						<span class="titulo">Lista de guías</span>
 						<div class="btn-group dropup btn-block options">
 							<a href="/guias"><button type="button" class="btn btn-primary"><span class="material-icons">select_all</span> Ver todos</button></a>
 						</div>
 					</h4>
+                    
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="card-deck text-center justify-content-center">
+                                <ul class="list">
+                                
+                                <?php  
+                                    while ($row = mysqli_fetch_assoc($rs_result_guias)) {
+                                ?>
 
-					<div class="container-separado">
-						<input type="text" class="search form-control" placeholder="Puedes buscar por curso, asignatura, unidad o temática"/>
-					</div>
-				
-					<div class="card-deck mb-3 text-center justify-content-center">
-						<ul class="list">
-						
-						<?php  
-							while ($row = mysqli_fetch_assoc($rs_result_guias)) {
-						?>
-
-						<div class="card mb-4 box-shadow">
-							<div class="card-header bg-azul">
-								<h4 class="my-0 font-weight-normal nombre"><?php echo $row['asignatura']; ?></h4>
-							</div>
-							<div class="card-body">
-								<h1 class="card-title pricing-card-title asignatura"><?php echo $row['nombre']; ?></h1>
-								<hr class="bg-azul"/>
-								<ul class="list-unstyled mt-3 mb-4">
-									<li class="unidad"><?php echo $row['curso']; ?></li>
-									<li class="unidad"><?php echo $row['unidad']; ?></li>
-								</ul>
-								<h1 class="card-title pricing-card-title price">Precio $<?php echo $row['precio']; ?></h1>
-								<?php
-									if($row["estado"] === '1' AND isset($_SESSION["fb_access_token"])) // 1 disponible 0 no disponible
-									{
-										echo '<a href="/comprar?id='.$row["archivo_id"].'"><button type="button" class="btn btn-xs btn-outline-primary">Seleccionar</button></a>';
-									}
-									else
-									{
-										echo '<button type="button" class="btn btn-xs btn-outline-secondary" disabled>No disponible</button>';
-									}
-								?>
-							</div>
-						</div>
-						
-						<?php  
-							};  
-						?>
-						</ul>
-					</div>
+                                <div class="card mb-4 box-shadow">
+                                    <div class="card-header bg-azul">
+                                        <h4 class="my-0 font-weight-normal nombre"><?php echo $row['asignatura']; ?></h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <h1 class="card-title pricing-card-title asignatura"><?php echo $row['nombre']; ?></h1>
+                                        <hr class="bg-azul"/>
+                                        <ul class="list-unstyled mt-3 mb-4">
+                                            <li class="unidad"><?php echo $row['curso']; ?></li>
+                                            <li class="unidad"><?php echo $row['unidad']; ?></li>
+                                        </ul>
+                                        <h1 class="card-title pricing-card-title price">Precio $<?php echo $row['precio']; ?></h1>
+                                        <?php
+                                            if($row["estado"] === '1' AND isset($_SESSION["fb_access_token"])) // 1 disponible 0 no disponible
+                                            {
+                                                echo '<a href="/comprar?id='.$row["archivo_id"].'"><button type="button" class="btn btn-xs btn-outline-primary">Seleccionar</button></a>';
+                                            }
+                                            else
+                                            {
+                                                echo '<button type="button" class="btn btn-xs btn-outline-secondary" disabled>No disponible</button>';
+                                            }
+                                        ?>
+                                    </div>
+                                </div>
+                                
+                                <?php  
+                                    };  
+                                ?>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
 				</div>
 			</div>
 
-			<footer class="mastfoot margin-top">
+			
+            </div>
+            <footer class="mastfoot margin-top">
 				<div class="inner">
 					<p class="footer">Copyright © 2020 Gestión Pedagógica</p>
 				</div>
 			</footer>
-			</div>
 		</div>
 	</div>
 
-    
-	
-	<SCRIPT type="text/javascript">
-		var options = {
-  valueNames: [ 'nombre', 'asignatura', 'unidad', 'curso' ]
-};
-
-var tablaPlanificaciones = new List('tabla-lista-planificaciones', options);
-var tablaGuias = new List('tabla-lista-guias', options);
-	</script>
   </body>
 </html>

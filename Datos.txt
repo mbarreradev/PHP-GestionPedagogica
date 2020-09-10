@@ -39,16 +39,17 @@ Rango
 
 FALTA POR HACER
 
+Index:
+
 perfil:
 opciones
-descargararchivo
-verarchivo
+descargararchivo -funcion
+verarchivo -funcion
 
 administración:
 usuarios
 verperfil
-nuevoarchivo
 editararchivo
-eliminararchivo
+eliminararchivo -funcion
 nuevousuario
 ordenes

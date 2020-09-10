@@ -36,7 +36,9 @@ else // Continuamos a la página
 	$cnt_usuarios_registrados = $rs_result_usuarios_registrados->num_rows;
 
 	// Contador archivos
-	$cnt_archivos_total = '0';
+	$sql_archivos_totales = "SELECT * FROM archivo";  
+	$rs_result_archivos_totales = mysqli_query($conn, $sql_archivos_totales);  
+	$cnt_archivos_total = $rs_result_archivos_totales->num_rows;
 
 ?>
 <!doctype html>
@@ -65,7 +67,7 @@ else // Continuamos a la página
 		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hola <?php echo $row_profile_general["nombres"]; ?></button>
 		<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
 			<a href="/perfil"><button class="dropdown-item" type="button">Perfil</button></a>
-			<a href="/ordenes"><button class="dropdown-item" type="button">Mis ordenes</button></a>
+			<a href="/misordenes"><button class="dropdown-item" type="button">Mis ordenes</button></a>
 			<a href="/logout"><button class="dropdown-item" type="button">Desconectar</button></a>
 		</div>
 		<?php 
@@ -84,7 +86,7 @@ else // Continuamos a la página
 		
 		
 		<h4 class="d-flex justify-content-between align-items-center mb-3">
-            <span>Estadísticas</span>
+            <span class="titulo">Estadísticas</span>
 
 			<div class="btn-group dropup btn-block options">
 			<a href="/perfil"><button type="button" class="btn btn-primary"><span class="material-icons">person</span> Volver al perfil</button></a>
@@ -128,14 +130,18 @@ else // Continuamos a la página
 						</div>
 					</div>
                 </div>            
-            </div>
-				  
-				  
+			</div>
+			
+
 				  </div>
 				</div>
 			  </div>
 			</div>
 
+
+			<h4 class="d-flex justify-content-between align-items-center mb-3 margin-bottom">
+            <span class="titulo">Última actividad</span>
+        	</h4>	
 
 	</div>
     </div>
