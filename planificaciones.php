@@ -82,7 +82,7 @@ $rs_result_planificaciones = mysqli_query($conn, $sql_planificaciones);
 					<h4 class="d-flex justify-content-between align-items-center mb-3">
                         <span class="titulo">Lista de planificaciones</span>
 						<div class="btn-group dropup btn-block options">
-							<a href="/planificaciones"><button type="button" class="btn btn-primary"><span class="material-icons">select_all</span> Volver al menú principal</button></a>
+							<a href="/planificaciones"><button type="button" class="btn btn-primary"><span class="material-icons">home</span> Volver al menú principal</button></a>
 						</div>
 					</h4>
 
@@ -98,7 +98,7 @@ $rs_result_planificaciones = mysqli_query($conn, $sql_planificaciones);
                     </script>	
 				
 					<div class="container-separado">
-						<input type="text" class="search form-control" placeholder="Puedes buscar por curso, asignatura, unidad o temática"/>
+						<input type="text" class="search form-control" placeholder="Puedes buscar por temática, curso, asignatura o unidad"/>
 					</div>
 
 					<div class="card-deck mb-3 text-center justify-content-center">

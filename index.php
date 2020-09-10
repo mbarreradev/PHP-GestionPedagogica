@@ -27,11 +27,15 @@ $rs_result_guias = mysqli_query($conn, $sql_guias);
 $sql_recomendados = "SELECT * FROM archivo WHERE recomendado = '1' ORDER BY RAND() LIMIT 10";  
 $rs_result_recomendados = mysqli_query($conn, $sql_recomendados);  
 
-// Contador planificaciones, ARREGLAR
-$cnt_planificaciones = $rs_result_planificaciones->num_rows;
+// Contador planificaciones
+$sql_planificaciones_totales = "SELECT * FROM archivo WHERE tipo ='0' ";  
+$rs_result_planificaciones_totales = mysqli_query($conn, $sql_planificaciones_totales);  
+$cnt_planificaciones = $rs_result_planificaciones_totales->num_rows;
 
-// Contador guias, ARREGLAR
-$cnt_guias = $rs_result_guias->num_rows;
+// Contador guias
+$sql_guias_totales = "SELECT * FROM archivo WHERE tipo ='1' ";  
+$rs_result_guias_totales = mysqli_query($conn, $sql_guias_totales);  
+$cnt_guias = $rs_result_guias_totales->num_rows;
 
 ?> 
 <!doctype html>

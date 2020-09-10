@@ -11,7 +11,7 @@ else //Continue to current page
 	
 	// Consulta que muestra todos los datos del archivo de la orden
 	$url_id = trim(mysqli_real_escape_string($conn,$_GET['id'])); 
-	$sql1 = "SELECT archivo.archivo_id, archivo.nombre, archivo.precio, archivo.descripcion_corta, archivo.descripcion_larga, ordencompra.estado_orden, ordencompra.fecha_compra, ordencompra.fecha_actualizacion
+	$sql1 = "SELECT archivo.archivo_id, archivo.nombre, archivo.descripcion_corta, archivo.descripcion_larga, ordencompra.estado_orden, ordencompra.fecha_compra, ordencompra.fecha_actualizacion, ordencompra.pagado
 	FROM ordencompra
 	INNER JOIN 
         archivo
@@ -148,11 +148,11 @@ else //Continue to current page
 					<h6 class="my-0"><?php echo $consulta_planificacion["nombre"]; ?></h6>
 					<small class="text-muted"><?php echo $consulta_planificacion["descripcion_corta"]; ?></small>
 				</div>
-				<span class="text-muted">$<?php echo $consulta_planificacion["precio"]; ?></span>
+				<span class="text-muted">$<?php echo $consulta_planificacion["pagado"]; ?></span>
 				</li>
 				<li class="list-group-item d-flex justify-content-between bg-azul-claro">
 				<span>Total a pagar</span>
-				<strong>$<?php echo $consulta_planificacion["precio"]; ?></strong>
+				<strong>$<?php echo $consulta_planificacion["pagado"]; ?></strong>
 				</li>
 			</ul>
 			

@@ -98,7 +98,7 @@ else // Continuamos a la página
 			  <div class="row no-gutters">
 
 				<div class="col">
-				  <div class="card-body">
+				  <div class="card-body bg-azul-claro">
 
 
             <div class="row">

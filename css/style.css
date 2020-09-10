@@ -318,12 +318,6 @@ li.active {
   width: 100%;
 }
 
-.list {
-    display: flex;
-	padding: 0;
-	flex-flow: row wrap;
-}
-
 .container-separado {
     margin-bottom: 25px;
 }
@@ -371,6 +365,7 @@ img.card-img.profile {
     width: 43%;
     margin-top: 8px;
     margin-bottom: 8px;
+    border-radius: 50%;
 }
 
 .card.mb-3.profile {
@@ -425,6 +420,38 @@ div#nav-tabContent {
   border-left: 1px solid;
   border-bottom: 1px solid;
   border-right: 1px solid ;
+}
+
+/* Tables */ 
+
+.buscador {
+  padding-top: 13px;
+  padding-bottom: 13px;
+  width: 32%;
+  float: right;
+}
+
+.buscador.arriba {
+  margin-top: -59px;
+}
+
+.list {
+  display: flex;
+  padding: 0;
+  flex-flow: row wrap;
+}
+
+tbody.list.limpio {
+  display: contents;
+}
+
+tbody.list tr {
+  background-color: rgba(0,0,0,.03);
+  border: 1px solid rgba(0,0,0,.125);
+}
+
+.table td, .table th {
+  vertical-align: middle !important;
 }
 
 /* Fixes DataTables */

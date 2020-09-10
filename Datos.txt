@@ -49,6 +49,7 @@ verarchivo -funcion
 administración:
 usuarios
 verperfil
+editarorden
 editararchivo
 eliminararchivo -funcion
 nuevousuario

@@ -16,7 +16,7 @@ else // Continuamos a la página
 	header( 'Content-Type: text/html; charset=utf-8' );
 	
 	// Consulta para traer los datos de usuario generales
-	$sql_datosusuariosgeneral = "SELECT usuario_id, registrado_el, nombres, apellidos, correo, avatar_url, facebook_id
+	$sql_datosusuariosgeneral = "SELECT nombres
 	FROM 
 		usuario
 	WHERE 
@@ -161,10 +161,8 @@ else // Continuamos a la página
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
 		<script src="https://code.jquery.com/jquery-3.5.0.slim.min.js" integrity="sha256-MlusDLJIP1GRgLrOflUQtshyP0TwT/RHXsI1wWGnQhs=" crossorigin="anonymous"></script>
-		<script type="text/javascript" charset="utf8" src="js/jquery.dataTables.js"></script>
-		<script src="js/functions.js"></script>
+		<script src="js/list.min.js"></script>
 	</head>
 <body class="text-center">
 
@@ -208,7 +206,7 @@ else // Continuamos a la página
 			  <div class="row no-gutters">
 
 				<div class="col">
-				  <div class="card-body">
+				  <div class="card-body bg-azul-claro">
 
 
             <div class="row">
@@ -262,26 +260,29 @@ else // Continuamos a la página
                         </nav>
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="nav-matematica-planificacion" role="tabpanel" aria-labelledby="nav-matematica-tab">
-                                <table id="tabla-matematica-planificaciones" class="table" cellspacing="0">
+								<div class="buscador">
+									<input type="text" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
+								</div>
+                                <table id="tabla-matematica-planificacion" class="table" cellspacing="0">
                                     <thead>
-                                        <tr>
-											<th>Tema</th>
-											<th>Curso</th>
-											<th>Unidad</th>
-                                            <th>Precio</th>
-											<th>Estado</th>
+										<tr class="bg-azul">
+											<th class="sort" data-sort="tema">Tema</th>
+											<th class="sort" data-sort="curso">Curso</th>
+											<th class="sort" data-sort="unidad">Unidad</th>
+                                            <th class="sort" data-sort="precio">Precio</th>
+											<th class="sort" data-sort="estado">Estado</th>
                                             <th>Opciones</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody class="list limpio">
                                         <?php while ($row = mysqli_fetch_assoc($rs_result_matematica_planificacion)) {?>	
 
 											<tr>
-												<td><?php echo $row['nombre']; ?></td>
-												<td><?php echo $row['curso']; ?></td>
-												<td><?php echo $row['unidad']; ?></td>
-												<td>$<?php echo $row['precio']; ?></td>
-												<td><?php 
+												<td class="tema"><?php echo $row['nombre']; ?></td>
+												<td class="curso"><?php echo $row['curso']; ?></td>
+												<td class="unidad"><?php echo $row['unidad']; ?></td>
+												<td class="precio">$<?php echo $row['precio']; ?></td>
+												<td class="estado"><?php 
 												if($row['estado'] == '0') // desactivado
 												{
 													echo 'Activado';
@@ -302,28 +303,38 @@ else // Continuamos a la página
 										<?php };  ?>
                                     </tbody>
                                 </table>
+
+								<div class="container">
+									<div class="row text-center justify-content-center">
+										<ul class="pagination"></ul>
+									</div>
+								</div>
+
                             </div>
                             <div class="tab-pane fade" id="nav-lenguaje-planificacion" role="tabpanel" aria-labelledby="nav-lenguaje-tab">
-                                <table id="tabla-lenguaje-planificaciones" class="table" cellspacing="0">
+								<div class="buscador">
+									<input type="text" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
+								</div>
+                                <table id="tabla-lenguaje-planificacion" class="table" cellspacing="0">
                                     <thead>
-                                        <tr>
-											<th>Tema</th>
-											<th>Curso</th>
-											<th>Unidad</th>
-                                            <th>Precio</th>
-											<th>Estado</th>
+										<tr class="bg-azul">
+											<th class="sort" data-sort="tema">Tema</th>
+											<th class="sort" data-sort="curso">Curso</th>
+											<th class="sort" data-sort="unidad">Unidad</th>
+                                            <th class="sort" data-sort="precio">Precio</th>
+											<th class="sort" data-sort="estado">Estado</th>
                                             <th>Opciones</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody class="list limpio">
                                         <?php while ($row = mysqli_fetch_assoc($rs_result_lenguaje_planificacion)) {?>	
 
 											<tr>
-												<td><?php echo $row['nombre']; ?></td>
-												<td><?php echo $row['curso']; ?></td>
-												<td><?php echo $row['unidad']; ?></td>
-												<td>$<?php echo $row['precio']; ?></td>
-												<td><?php 
+												<td class="tema"><?php echo $row['nombre']; ?></td>
+												<td class="curso"><?php echo $row['curso']; ?></td>
+												<td class="unidad"><?php echo $row['unidad']; ?></td>
+												<td class="precio">$<?php echo $row['precio']; ?></td>
+												<td class="estado"><?php 
 												if($row['estado'] == '0') // desactivado
 												{
 													echo 'Activado';
@@ -344,28 +355,38 @@ else // Continuamos a la página
 										<?php };  ?>
                                     </tbody>
                                 </table>
+
+								<div class="container">
+									<div class="row text-center justify-content-center">
+										<ul class="pagination"></ul>
+									</div>
+								</div>
+
 							</div>
 							<div class="tab-pane fade" id="nav-tecnologia-planificacion" role="tabpanel" aria-labelledby="nav-tecnologia-tab">
-                                <table id="tabla-tecnologia-planificaciones" class="table" cellspacing="0">
+								<div class="buscador">
+									<input type="text" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
+								</div>
+                                <table id="tabla-tecnologia-planificacion" class="table" cellspacing="0">
                                     <thead>
-                                        <tr>
-											<th>Tema</th>
-											<th>Curso</th>
-											<th>Unidad</th>
-                                            <th>Precio</th>
-											<th>Estado</th>
+										<tr class="bg-azul">
+											<th class="sort" data-sort="tema">Tema</th>
+											<th class="sort" data-sort="curso">Curso</th>
+											<th class="sort" data-sort="unidad">Unidad</th>
+                                            <th class="sort" data-sort="precio">Precio</th>
+											<th class="sort" data-sort="estado">Estado</th>
                                             <th>Opciones</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody class="list limpio">
                                         <?php while ($row = mysqli_fetch_assoc($rs_result_tecnologia_planificacion)) {?>	
 
 											<tr>
-												<td><?php echo $row['nombre']; ?></td>
-												<td><?php echo $row['curso']; ?></td>
-												<td><?php echo $row['unidad']; ?></td>
-												<td>$<?php echo $row['precio']; ?></td>
-												<td><?php 
+												<td class="tema"><?php echo $row['nombre']; ?></td>
+												<td class="curso"><?php echo $row['curso']; ?></td>
+												<td class="unidad"><?php echo $row['unidad']; ?></td>
+												<td class="precio">$<?php echo $row['precio']; ?></td>
+												<td class="estado"><?php 
 												if($row['estado'] == '0') // desactivado
 												{
 													echo 'Activado';
@@ -386,28 +407,38 @@ else // Continuamos a la página
 										<?php };  ?>
                                     </tbody>
                                 </table>
+
+								<div class="container">
+									<div class="row text-center justify-content-center">
+										<ul class="pagination"></ul>
+									</div>
+								</div>
+
 							</div>
 							<div class="tab-pane fade" id="nav-musica-planificacion" role="tabpanel" aria-labelledby="nav-musica-tab">
-                                <table id="tabla-musica-planificaciones" class="table" cellspacing="0">
+								<div class="buscador">
+									<input type="text" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
+								</div>
+                                <table id="tabla-musica-planificacion" class="table" cellspacing="0">
                                     <thead>
-                                        <tr>
-											<th>Tema</th>
-											<th>Curso</th>
-											<th>Unidad</th>
-                                            <th>Precio</th>
-											<th>Estado</th>
+										<tr class="bg-azul">
+											<th class="sort" data-sort="tema">Tema</th>
+											<th class="sort" data-sort="curso">Curso</th>
+											<th class="sort" data-sort="unidad">Unidad</th>
+                                            <th class="sort" data-sort="precio">Precio</th>
+											<th class="sort" data-sort="estado">Estado</th>
                                             <th>Opciones</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody class="list limpio">
                                         <?php while ($row = mysqli_fetch_assoc($rs_result_musica_planificacion)) {?>	
 
 											<tr>
-												<td><?php echo $row['nombre']; ?></td>
-												<td><?php echo $row['curso']; ?></td>
-												<td><?php echo $row['unidad']; ?></td>
-												<td>$<?php echo $row['precio']; ?></td>
-												<td><?php 
+												<td class="tema"><?php echo $row['nombre']; ?></td>
+												<td class="curso"><?php echo $row['curso']; ?></td>
+												<td class="unidad"><?php echo $row['unidad']; ?></td>
+												<td class="precio">$<?php echo $row['precio']; ?></td>
+												<td class="estado"><?php 
 												if($row['estado'] == '0') // desactivado
 												{
 													echo 'Activado';
@@ -428,28 +459,38 @@ else // Continuamos a la página
 										<?php };  ?>
                                     </tbody>
                                 </table>
+
+								<div class="container">
+									<div class="row text-center justify-content-center">
+										<ul class="pagination"></ul>
+									</div>
+								</div>
+
 							</div>
 							<div class="tab-pane fade" id="nav-artesvisuales-planificacion" role="tabpanel" aria-labelledby="nav-artesvisuales-tab">
-                                <table id="tabla-artesvisuales-planificaciones" class="table" cellspacing="0">
+								<div class="buscador">
+									<input type="text" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
+								</div>
+                                <table id="tabla-artesvisuales-planificacion" class="table" cellspacing="0">
                                     <thead>
-                                        <tr>
-											<th>Tema</th>
-											<th>Curso</th>
-											<th>Unidad</th>
-                                            <th>Precio</th>
-											<th>Estado</th>
+										<tr class="bg-azul">
+											<th class="sort" data-sort="tema">Tema</th>
+											<th class="sort" data-sort="curso">Curso</th>
+											<th class="sort" data-sort="unidad">Unidad</th>
+                                            <th class="sort" data-sort="precio">Precio</th>
+											<th class="sort" data-sort="estado">Estado</th>
                                             <th>Opciones</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody class="list limpio">
                                         <?php while ($row = mysqli_fetch_assoc($rs_result_artesvisuales_planificacion)) {?>	
 
 											<tr>
-												<td><?php echo $row['nombre']; ?></td>
-												<td><?php echo $row['curso']; ?></td>
-												<td><?php echo $row['unidad']; ?></td>
-												<td>$<?php echo $row['precio']; ?></td>
-												<td><?php 
+												<td class="tema"><?php echo $row['nombre']; ?></td>
+												<td class="curso"><?php echo $row['curso']; ?></td>
+												<td class="unidad"><?php echo $row['unidad']; ?></td>
+												<td class="precio">$<?php echo $row['precio']; ?></td>
+												<td class="estado"><?php 
 												if($row['estado'] == '0') // desactivado
 												{
 													echo 'Activado';
@@ -470,6 +511,13 @@ else // Continuamos a la página
 										<?php };  ?>
                                     </tbody>
                                 </table>
+
+								<div class="container">
+									<div class="row text-center justify-content-center">
+										<ul class="pagination"></ul>
+									</div>
+								</div>
+
                             </div>
                         </div>
                     </div>
@@ -499,26 +547,29 @@ else // Continuamos a la página
                         </nav>
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="nav-matematica-guia" role="tabpanel" aria-labelledby="nav-matematica-tab">
-                                <table id="tabla-matematica-guias" class="table" cellspacing="0">
+								<div class="buscador">
+									<input type="text" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
+								</div>
+                                <table id="tabla-matematica-guia" class="table" cellspacing="0">
                                     <thead>
-                                        <tr>
-											<th>Tema</th>
-											<th>Curso</th>
-											<th>Unidad</th>
-                                            <th>Precio</th>
-											<th>Estado</th>
+										<tr class="bg-azul">
+											<th class="sort" data-sort="tema">Tema</th>
+											<th class="sort" data-sort="curso">Curso</th>
+											<th class="sort" data-sort="unidad">Unidad</th>
+                                            <th class="sort" data-sort="precio">Precio</th>
+											<th class="sort" data-sort="estado">Estado</th>
                                             <th>Opciones</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody class="list limpio">
                                         <?php while ($row = mysqli_fetch_assoc($rs_result_matematica_guia)) {?>	
 
 											<tr>
-												<td><?php echo $row['nombre']; ?></td>
-												<td><?php echo $row['curso']; ?></td>
-												<td><?php echo $row['unidad']; ?></td>
-												<td>$<?php echo $row['precio']; ?></td>
-												<td><?php 
+												<td class="tema"><?php echo $row['nombre']; ?></td>
+												<td class="curso"><?php echo $row['curso']; ?></td>
+												<td class="unidad"><?php echo $row['unidad']; ?></td>
+												<td class="precio">$<?php echo $row['precio']; ?></td>
+												<td class="estado"><?php 
 												if($row['estado'] == '0') // desactivado
 												{
 													echo 'Activado';
@@ -539,28 +590,38 @@ else // Continuamos a la página
 										<?php };  ?>
                                     </tbody>
                                 </table>
+
+								<div class="container">
+									<div class="row text-center justify-content-center">
+										<ul class="pagination"></ul>
+									</div>
+								</div>
+
                             </div>
                             <div class="tab-pane fade" id="nav-lenguaje-guia" role="tabpanel" aria-labelledby="nav-lenguaje-tab">
-                                <table id="tabla-lenguaje-guias" class="table" cellspacing="0">
+								<div class="buscador">
+									<input type="text" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
+								</div>
+                                <table id="tabla-lenguaje-guia" class="table" cellspacing="0">
                                     <thead>
-                                        <tr>
-											<th>Tema</th>
-											<th>Curso</th>
-											<th>Unidad</th>
-                                            <th>Precio</th>
-											<th>Estado</th>
+										<tr class="bg-azul">
+											<th class="sort" data-sort="tema">Tema</th>
+											<th class="sort" data-sort="curso">Curso</th>
+											<th class="sort" data-sort="unidad">Unidad</th>
+                                            <th class="sort" data-sort="precio">Precio</th>
+											<th class="sort" data-sort="estado">Estado</th>
                                             <th>Opciones</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody class="list limpio">
                                         <?php while ($row = mysqli_fetch_assoc($rs_result_lenguaje_guia)) {?>	
 
 											<tr>
-												<td><?php echo $row['nombre']; ?></td>
-												<td><?php echo $row['curso']; ?></td>
-												<td><?php echo $row['unidad']; ?></td>
-												<td>$<?php echo $row['precio']; ?></td>
-												<td><?php 
+												<td class="tema"><?php echo $row['nombre']; ?></td>
+												<td class="curso"><?php echo $row['curso']; ?></td>
+												<td class="unidad"><?php echo $row['unidad']; ?></td>
+												<td class="precio">$<?php echo $row['precio']; ?></td>
+												<td class="estado"><?php 
 												if($row['estado'] == '0') // desactivado
 												{
 													echo 'Activado';
@@ -581,28 +642,38 @@ else // Continuamos a la página
 										<?php };  ?>
                                     </tbody>
                                 </table>
+
+								<div class="container">
+									<div class="row text-center justify-content-center">
+										<ul class="pagination"></ul>
+									</div>
+								</div>
+
 							</div>
 							<div class="tab-pane fade" id="nav-tecnologia-guia" role="tabpanel" aria-labelledby="nav-tecnologia-tab">
-                                <table id="tabla-tecnologia-guias" class="table" cellspacing="0">
+								<div class="buscador">
+									<input type="text" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
+								</div>
+                                <table id="tabla-tecnologia-guia" class="table" cellspacing="0">
                                     <thead>
-                                        <tr>
-											<th>Tema</th>
-											<th>Curso</th>
-											<th>Unidad</th>
-                                            <th>Precio</th>
-											<th>Estado</th>
+										<tr class="bg-azul">
+											<th class="sort" data-sort="tema">Tema</th>
+											<th class="sort" data-sort="curso">Curso</th>
+											<th class="sort" data-sort="unidad">Unidad</th>
+                                            <th class="sort" data-sort="precio">Precio</th>
+											<th class="sort" data-sort="estado">Estado</th>
                                             <th>Opciones</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody class="list limpio">
                                         <?php while ($row = mysqli_fetch_assoc($rs_result_tecnologia_guia)) {?>	
 
 											<tr>
-												<td><?php echo $row['nombre']; ?></td>
-												<td><?php echo $row['curso']; ?></td>
-												<td><?php echo $row['unidad']; ?></td>
-												<td>$<?php echo $row['precio']; ?></td>
-												<td><?php 
+												<td class="tema"><?php echo $row['nombre']; ?></td>
+												<td class="curso"><?php echo $row['curso']; ?></td>
+												<td class="unidad"><?php echo $row['unidad']; ?></td>
+												<td class="precio">$<?php echo $row['precio']; ?></td>
+												<td class="estado"><?php 
 												if($row['estado'] == '0') // desactivado
 												{
 													echo 'Activado';
@@ -623,28 +694,38 @@ else // Continuamos a la página
 										<?php };  ?>
                                     </tbody>
                                 </table>
+
+								<div class="container">
+									<div class="row text-center justify-content-center">
+										<ul class="pagination"></ul>
+									</div>
+								</div>
+
 							</div>
 							<div class="tab-pane fade" id="nav-musica-guia" role="tabpanel" aria-labelledby="nav-musica-tab">
-                                <table id="tabla-musica-guias" class="table" cellspacing="0">
+								<div class="buscador">
+									<input type="text" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
+								</div>
+                                <table id="tabla-musica-guia" class="table" cellspacing="0">
                                     <thead>
-                                        <tr>
-											<th>Tema</th>
-											<th>Curso</th>
-											<th>Unidad</th>
-                                            <th>Precio</th>
-											<th>Estado</th>
+										<tr class="bg-azul">
+											<th class="sort" data-sort="tema">Tema</th>
+											<th class="sort" data-sort="curso">Curso</th>
+											<th class="sort" data-sort="unidad">Unidad</th>
+                                            <th class="sort" data-sort="precio">Precio</th>
+											<th class="sort" data-sort="estado">Estado</th>
                                             <th>Opciones</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody class="list limpio">
                                         <?php while ($row = mysqli_fetch_assoc($rs_result_musica_guia)) {?>	
 
 											<tr>
-												<td><?php echo $row['nombre']; ?></td>
-												<td><?php echo $row['curso']; ?></td>
-												<td><?php echo $row['unidad']; ?></td>
-												<td>$<?php echo $row['precio']; ?></td>
-												<td><?php 
+												<td class="tema"><?php echo $row['nombre']; ?></td>
+												<td class="curso"><?php echo $row['curso']; ?></td>
+												<td class="unidad"><?php echo $row['unidad']; ?></td>
+												<td class="precio">$<?php echo $row['precio']; ?></td>
+												<td class="estado"><?php 
 												if($row['estado'] == '0') // desactivado
 												{
 													echo 'Activado';
@@ -665,28 +746,38 @@ else // Continuamos a la página
 										<?php };  ?>
                                     </tbody>
                                 </table>
+
+								<div class="container">
+									<div class="row text-center justify-content-center">
+										<ul class="pagination"></ul>
+									</div>
+								</div>
+
 							</div>
 							<div class="tab-pane fade" id="nav-artesvisuales-guia" role="tabpanel" aria-labelledby="nav-artesvisuales-tab">
-                                <table id="tabla-artesvisuales-guias" class="table" cellspacing="0">
+								<div class="buscador">
+									<input type="text" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
+								</div>
+                                <table id="tabla-artesvisuales-guia" class="table" cellspacing="0">
                                     <thead>
-                                        <tr>
-											<th>Tema</th>
-											<th>Curso</th>
-											<th>Unidad</th>
-                                            <th>Precio</th>
-											<th>Estado</th>
+										<tr class="bg-azul">
+											<th class="sort" data-sort="tema">Tema</th>
+											<th class="sort" data-sort="curso">Curso</th>
+											<th class="sort" data-sort="unidad">Unidad</th>
+                                            <th class="sort" data-sort="precio">Precio</th>
+											<th class="sort" data-sort="estado">Estado</th>
                                             <th>Opciones</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody class="list limpio">
                                         <?php while ($row = mysqli_fetch_assoc($rs_result_artesvisuales_guia)) {?>	
 
 											<tr>
-												<td><?php echo $row['nombre']; ?></td>
-												<td><?php echo $row['curso']; ?></td>
-												<td><?php echo $row['unidad']; ?></td>
-												<td>$<?php echo $row['precio']; ?></td>
-												<td><?php 
+												<td class="tema"><?php echo $row['nombre']; ?></td>
+												<td class="curso"><?php echo $row['curso']; ?></td>
+												<td class="unidad"><?php echo $row['unidad']; ?></td>
+												<td class="precio">$<?php echo $row['precio']; ?></td>
+												<td class="estado"><?php 
 												if($row['estado'] == '0') // desactivado
 												{
 													echo 'Activado';
@@ -707,6 +798,13 @@ else // Continuamos a la página
 										<?php };  ?>
                                     </tbody>
                                 </table>
+
+								<div class="container">
+									<div class="row text-center justify-content-center">
+										<ul class="pagination"></ul>
+									</div>
+								</div>
+
                             </div>
                         </div>
                     </div>
@@ -724,6 +822,25 @@ else // Continuamos a la página
       </footer>
     </div>
 
+	<SCRIPT type="text/javascript">
+		var options = {
+    valueNames: [ 'tema', 'curso', 'unidad', 'precio', 'estado'],
+    page: 10,
+    pagination: true
+	};
+
+	var tablaMatematicasPlanificaciones = new List('nav-matematica-planificacion', options);
+	var tablaLenguajePlanificaciones = new List('nav-lenguaje-planificacion', options);
+	var tablaTecnologiaPlanificaciones = new List('nav-tecnologia-planificacion', options);
+	var tablaMusicaPlanificaciones = new List('nav-musica-planificacion', options);
+	var tablaArtesVisualesPlanificaciones = new List('nav-artesvisuales-planificacion', options);
+
+	var tablaMatematicasGuias = new List('nav-matematica-guia', options);
+	var tablaLenguajeGuias = new List('nav-lenguaje-guia', options);
+	var tablaTecnologiaGuias = new List('nav-tecnologia-guia', options);
+	var tablaMusicaGuias = new List('nav-musica-guia', options);
+	var tablaArtesVisualesGuias = new List('nav-artesvisuales-guia', options);
+	</script>
     
     <script src="js/bootstrap.bundle.min.js"></script>
 	

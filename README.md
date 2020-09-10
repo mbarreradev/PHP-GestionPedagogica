@@ -6,7 +6,6 @@
 - Facebook SDK for PHP 5.7.0
 
 # Extras
-- DataTables 1.10.21
 - Bootstrap v4.4.1
 - Moment.js 2.24.0
 - Material Icons
