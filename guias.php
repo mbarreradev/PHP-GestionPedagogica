@@ -86,7 +86,7 @@ $rs_result_guias = mysqli_query($conn, $sql_guias);
 					</h4>
 
 					<div class="container-separado">
-						<input type="text" class="search form-control" placeholder="Puedes buscar por temática, curso, asignatura o unidad"/>
+						<input type="search" class="search form-control" placeholder="Puedes buscar por temática, curso, asignatura o unidad"/>
 					</div>
 				
 					<div class="card-deck mb-3 text-center justify-content-center">

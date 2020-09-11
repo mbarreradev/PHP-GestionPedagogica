@@ -26,15 +26,19 @@ else // Continuamos a la página
 
 	// BOX: Ordenes pendientes de confirmación
 	// Primero entramos a la tabla ordencompra y luego archivo para sacar los datos requeridos
-	$sql_pendientes_confirmacion = "SELECT ordencompra.ordencompra_id, ordencompra.fecha_actualizacion, ordencompra.estado_orden, ordencompra.pagado, usuario.nombres, usuario.apellidos
+	$sql_pendientes_confirmacion = "SELECT ordencompra.ordencompra_id, ordencompra.usuario_id, ordencompra.fecha_compra, ordencompra.fecha_actualizacion, ordencompra.estado_orden, ordencompra.pagado, usuario.nombres, usuario.apellidos, archivo.nombre, archivo.asignatura, archivo.curso, archivo.unidad, archivo.tipo, archivo.precio
 	FROM 
 		ordencompra
     INNER JOIN 
 		usuario
 	ON
 		ordencompra.usuario_id=usuario.usuario_id
+	INNER JOIN 
+		archivo
+	ON
+		ordencompra.archivo_id=archivo.archivo_id
 	WHERE 
-    ordencompra.estado_orden = 'Pendiente de confirmación'
+        ordencompra.estado_orden = 'Pendiente de confirmación'
 	ORDER BY ordencompra_id DESC"; 
     $rs_result_pendientes_confirmacion = mysqli_query($conn, $sql_pendientes_confirmacion);
 
@@ -57,7 +61,7 @@ else // Continuamos a la página
 	ON
 		ordencompra.usuario_id=usuario.usuario_id
 	WHERE 
-		archivo.asignatura = 'Matemáticas' AND != ordencompra.estado_orden = 'Pendiente de confirmación'
+		archivo.asignatura = 'Matemáticas' AND ordencompra.estado_orden != 'Pendiente de confirmación'
 	ORDER BY ordencompra.ordencompra_id DESC"; 
 	$rs_result_matematica_orden = mysqli_query($conn, $sql_matematicas_orden);
 		
@@ -75,7 +79,7 @@ else // Continuamos a la página
 	ON
 		ordencompra.usuario_id=usuario.usuario_id
 	WHERE 
-		archivo.asignatura = 'Lenguaje' AND != ordencompra.estado_orden = 'Pendiente de confirmación'
+		archivo.asignatura = 'Lenguaje' AND ordencompra.estado_orden != 'Pendiente de confirmación'
 	ORDER BY ordencompra.ordencompra_id DESC"; 
 	$rs_result_lenguaje_orden = mysqli_query($conn, $sql_lenguaje_orden);
 
@@ -93,7 +97,7 @@ else // Continuamos a la página
 	ON
 		ordencompra.usuario_id=usuario.usuario_id
 	WHERE 
-		archivo.asignatura = 'Tecnología' AND != ordencompra.estado_orden = 'Pendiente de confirmación'
+		archivo.asignatura = 'Tecnología' AND ordencompra.estado_orden != 'Pendiente de confirmación'
 	ORDER BY ordencompra.ordencompra_id DESC";  
 	$rs_result_tecnologia_orden = mysqli_query($conn, $sql_tecnologia_orden);
 
@@ -111,7 +115,7 @@ else // Continuamos a la página
 	ON
 		ordencompra.usuario_id=usuario.usuario_id
 	WHERE 
-		archivo.asignatura = 'Música' AND != ordencompra.estado_orden = 'Pendiente de confirmación'
+		archivo.asignatura = 'Música' AND ordencompra.estado_orden != 'Pendiente de confirmación'
 	ORDER BY ordencompra.ordencompra_id DESC"; 
 	$rs_result_musica_orden = mysqli_query($conn, $sql_musica_orden);
 
@@ -129,7 +133,7 @@ else // Continuamos a la página
 	ON
 		ordencompra.usuario_id=usuario.usuario_id
 	WHERE 
-		archivo.asignatura = 'Artes Visuales' AND != ordencompra.estado_orden = 'Pendiente de confirmación'
+		archivo.asignatura = 'Artes Visuales' AND ordencompra.estado_orden != 'Pendiente de confirmación'
 	ORDER BY ordencompra.ordencompra_id DESC"; 
 	$rs_result_artesvisuales_orden = mysqli_query($conn, $sql_artesvisuales_orden);
 
@@ -243,7 +247,7 @@ else // Continuamos a la página
 
                             <div id="ordenes-pendientes">
                                 <div class="buscador arriba">
-									<input type="text" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
+									<input type="search" class="search form-control" placeholder="Puedes buscar por ID, usuario, monto pagado o estado"/>
 								</div>
                                 <table id="tabla-matematica-planificacion" class="table" cellspacing="0">
                                     <thead>
@@ -259,6 +263,56 @@ else // Continuamos a la página
                                     <tbody class="list limpio">
                                         <?php while ($row = mysqli_fetch_assoc($rs_result_pendientes_confirmacion)) {?>	
 
+
+											<!-- Modal orden <?php echo $row['ordencompra_id']; ?> -->
+											<div class="modal fade" id="verorden<?php echo $row['ordencompra_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="verorden<?php echo $row['ordencompra_id']; ?>Label" aria-hidden="true">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+												<div class="modal-header bg-azul">
+													<h5 class="modal-title" id="verorden<?php echo $row['ordencompra_id']; ?>Label">Viendo orden <?php echo $row['ordencompra_id']; ?></h5>
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<div class="modal-body">
+													<p><strong>Creado por:</strong> <?php echo $row['nombres']." ".$row['apellidos']; ?> - <a href="/verperfil?id=<?php echo $row['usuario_id']; ?>">Ver perfil</a></p>
+													<p><strong>Fecha de creación de compra:</strong> <?php echo $row['fecha_compra']; ?></p>
+													<p><strong>Archivo:</strong> <?php echo $row['nombre']; ?></p>
+													<p><strong>Asignatura:</strong> <?php echo $row['asignatura']." ".$row['curso']; ?></p>
+													<p><strong>Valor del archivo:</strong> $<?php echo $row['precio']; ?></p>
+													<hr class="bg-azul"/>
+													<p><strong>DETALLES DE LA TRANSFERENCIA</strong></p>
+													<p><strong>Rut:</strong> </p>
+													<p><strong>Pagado:</strong> $<?php echo $row['pagado']; ?></p>
+													<p><strong>Comentario de la transferencia:</strong> Pago Orden <?php echo $row['ordencompra_id']; ?></p>
+													<hr class="bg-azul"/>
+													<p><strong>Última actualización:</strong> <?php echo $row['fecha_actualizacion']; ?></p>
+													<p><strong>Estado de la orden:</strong> <?php echo $row['estado_orden']; ?></p>
+													
+													<?php
+
+													if($row['estado_orden'] === 'Pendiente de confirmación')
+													{
+														echo '<div class="alert alert-warning alert-dismissible fade show" role="alert"><strong>Recuerda</strong> verificar el RUT y el número de orden en el comentario de la transferencia antes de aprobar una orden.</div>';
+													}
+													else
+													{
+														echo 'Aprobado';
+													}
+
+													?>
+												
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+													<button type="button" class="btn btn-primary">Aprobar orden</button>
+												</div>
+												</div>
+											</div>
+											</div>
+
+
+
 											<tr>
 												<td class="id"><?php echo $row['ordencompra_id']; ?></td>
 												<td class="creado"><a href="/verperfil?id="><?php echo $row['nombres']." ".$row['apellidos']; ?></a></td>
@@ -266,9 +320,8 @@ else // Continuamos a la página
 												<td class="estado"><?php echo $row['estado_orden']; ?></td>
                                                 <td><?php echo $row['fecha_actualizacion']; ?></td>
 												<td>
-												<a href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver</button></a>
-												<a href="/editarorder?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">edit</span> Modificar</button></a>
-                                                </td>
+												<button class="btn btn-info tabla" data-toggle="modal" data-target="#verorden<?php echo $row['ordencompra_id']; ?>"><span class="material-icons">zoom_in</span> Ver</button>
+												</td>
 											</tr>
 
 										<?php };  ?>
@@ -304,14 +357,14 @@ else // Continuamos a la página
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="nav-matematica-orden" role="tabpanel" aria-labelledby="nav-matematica-tab">
 								<div class="buscador">
-									<input type="text" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
+									<input type="search" class="search form-control" placeholder="Puedes buscar por ID, usuario, monto pagado o estado"/>
 								</div>
                                 <table id="tabla-matematica-orden" class="table" cellspacing="0">
                                     <thead>
 										<tr class="bg-azul">
                                             <th class="sort" data-sort="id">Orden ID</th>
                                             <th class="sort" data-sort="creado">Creado por</th>
-                                            <th class="sort" data-sort="pagado">Precio</th>
+                                            <th class="sort" data-sort="pagado">Pagado</th>
 											<th class="sort" data-sort="estado">Estado</th>
                                             <th>Última actualización</th>
                                             <th>Opciones</th>
@@ -327,8 +380,7 @@ else // Continuamos a la página
 												<td class="estado"><?php echo $row['estado_orden']; ?></td>
                                                 <td><?php echo $row['fecha_actualizacion']; ?></td>
 												<td>
-												<a href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver</button></a>
-												<a href="/editarorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">edit</span> Modificar</button></a>
+												<button class="btn btn-info tabla" data-toggle="modal" data-target="#verorden<?php echo $row['ordencompra_id']; ?>"><span class="material-icons">zoom_in</span> Ver</button>
 												</td>
 											</tr>
 
@@ -345,14 +397,14 @@ else // Continuamos a la página
                             </div>
                             <div class="tab-pane fade" id="nav-lenguaje-orden" role="tabpanel" aria-labelledby="nav-lenguaje-tab">
 								<div class="buscador">
-									<input type="text" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
+									<input type="search" class="search form-control" placeholder="Puedes buscar por ID, usuario, monto pagado o estado"/>
 								</div>
                                 <table id="tabla-lenguaje-orden" class="table" cellspacing="0">
                                     <thead>
 										<tr class="bg-azul">
                                             <th class="sort" data-sort="id">Orden ID</th>
                                             <th class="sort" data-sort="creado">Creado por</th>
-                                            <th class="sort" data-sort="pagado">Precio</th>
+                                            <th class="sort" data-sort="pagado">Pagado</th>
 											<th class="sort" data-sort="estado">Estado</th>
                                             <th>Última actualización</th>
                                             <th>Opciones</th>
@@ -368,8 +420,7 @@ else // Continuamos a la página
 												<td class="estado"><?php echo $row['estado_orden']; ?></td>
                                                 <td><?php echo $row['fecha_actualizacion']; ?></td>
 												<td>
-												<a href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver</button></a>
-												<a href="/editarorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">edit</span> Modificar</button></a>
+												<button class="btn btn-info tabla" data-toggle="modal" data-target="#verorden<?php echo $row['ordencompra_id']; ?>"><span class="material-icons">zoom_in</span> Ver</button>
 												</td>
 											</tr>
 
@@ -386,14 +437,14 @@ else // Continuamos a la página
 							</div>
 							<div class="tab-pane fade" id="nav-tecnologia-orden" role="tabpanel" aria-labelledby="nav-tecnologia-tab">
 								<div class="buscador">
-									<input type="text" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
+									<input type="search" class="search form-control" placeholder="Puedes buscar por ID, usuario, monto pagado o estado"/>
 								</div>
                                 <table id="tabla-tecnologia-orden" class="table" cellspacing="0">
                                     <thead>
 										<tr class="bg-azul">
                                             <th class="sort" data-sort="id">Orden ID</th>
                                             <th class="sort" data-sort="creado">Creado por</th>
-                                            <th class="sort" data-sort="pagado">Precio</th>
+                                            <th class="sort" data-sort="pagado">Pagado</th>
 											<th class="sort" data-sort="estado">Estado</th>
                                             <th>Última actualización</th>
                                             <th>Opciones</th>
@@ -409,8 +460,7 @@ else // Continuamos a la página
 												<td class="estado"><?php echo $row['estado_orden']; ?></td>
                                                 <td><?php echo $row['fecha_actualizacion']; ?></td>
 												<td>
-												<a href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver</button></a>
-												<a href="/editarorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">edit</span> Modificar</button></a>
+												<button class="btn btn-info tabla" data-toggle="modal" data-target="#verorden<?php echo $row['ordencompra_id']; ?>"><span class="material-icons">zoom_in</span> Ver</button>
 												</td>
 											</tr>
 
@@ -427,14 +477,14 @@ else // Continuamos a la página
 							</div>
 							<div class="tab-pane fade" id="nav-musica-orden" role="tabpanel" aria-labelledby="nav-musica-tab">
 								<div class="buscador">
-									<input type="text" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
+									<input type="search" class="search form-control" placeholder="Puedes buscar por ID, usuario, monto pagado o estado"/>
 								</div>
                                 <table id="tabla-musica-orden" class="table" cellspacing="0">
                                     <thead>
 										<tr class="bg-azul">
                                             <th class="sort" data-sort="id">Orden ID</th>
                                             <th class="sort" data-sort="creado">Creado por</th>
-                                            <th class="sort" data-sort="pagado">Precio</th>
+                                            <th class="sort" data-sort="pagado">Pagado</th>
 											<th class="sort" data-sort="estado">Estado</th>
                                             <th>Última actualización</th>
                                             <th>Opciones</th>
@@ -450,8 +500,7 @@ else // Continuamos a la página
 												<td class="estado"><?php echo $row['estado_orden']; ?></td>
                                                 <td><?php echo $row['fecha_actualizacion']; ?></td>
 												<td>
-												<a href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver</button></a>
-												<a href="/editareditar?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">edit</span> Modificar</button></a>
+												<button class="btn btn-info tabla" data-toggle="modal" data-target="#verorden<?php echo $row['ordencompra_id']; ?>"><span class="material-icons">zoom_in</span> Ver</button>
 												</td>
 											</tr>
 
@@ -468,14 +517,14 @@ else // Continuamos a la página
 							</div>
 							<div class="tab-pane fade" id="nav-artesvisuales-orden" role="tabpanel" aria-labelledby="nav-artesvisuales-tab">
 								<div class="buscador">
-									<input type="text" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
+									<input type="search" class="search form-control" placeholder="Puedes buscar por ID, usuario, monto pagado o estado"/>
 								</div>
                                 <table id="tabla-artesvisuales-orden" class="table" cellspacing="0">
                                     <thead>
 										<tr class="bg-azul">
                                             <th class="sort" data-sort="id">Orden ID</th>
                                             <th class="sort" data-sort="creado">Creado por</th>
-                                            <th class="sort" data-sort="pagado">Precio</th>
+                                            <th class="sort" data-sort="pagado">Pagado</th>
 											<th class="sort" data-sort="estado">Estado</th>
                                             <th>Última actualización</th>
                                             <th>Opciones</th>
@@ -491,8 +540,7 @@ else // Continuamos a la página
 												<td class="estado"><?php echo $row['estado_orden']; ?></td>
                                                 <td><?php echo $row['fecha_actualizacion']; ?></td>
 												<td>
-												<a href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver</button></a>
-												<a href="/editarorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">edit</span> Modificar</button></a>
+												<button class="btn btn-info tabla" data-toggle="modal" data-target="#verorden<?php echo $row['ordencompra_id']; ?>"><span class="material-icons">zoom_in</span> Ver</button>
 												</td>
 											</tr>
 
@@ -525,7 +573,7 @@ else // Continuamos a la página
 
 	<SCRIPT type="text/javascript">
 		var options = {
-    valueNames: [ 'tema', 'curso', 'unidad', 'pagado', 'estado'],
+    valueNames: [ 'id', 'creado', 'pagado', 'estado'],
     page: 10,
     pagination: true
 	};

@@ -185,7 +185,7 @@ else //Continue to current page
 						echo'<p><b>Tipo de cuenta:</b> Banco Estado</p>';
 						echo'<p><b>Nº de cuenta:</b> Banco Estado</p>';
 						echo'<p><b>Correo electrónico:</b> &#118;&#101;&#110;&#116;&#097;&#115;&#064;&#103;&#101;&#115;&#116;&#105;&#111;&#110;&#112;&#101;&#100;&#097;&#103;&#111;&#103;&#105;&#099;&#097;&#046;&#099;&#108;</p>';
-						echo'<p><b>Comentario:</b> Pago Orden #ID</p>';
+						echo'<p><b>Comentario:</b> Pago Orden '.$url_id.'</p>';
 						echo'</div>';
 					echo'</li>';
 					echo'</ul>';

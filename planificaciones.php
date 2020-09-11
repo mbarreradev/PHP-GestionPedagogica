@@ -98,7 +98,7 @@ $rs_result_planificaciones = mysqli_query($conn, $sql_planificaciones);
                     </script>	
 				
 					<div class="container-separado">
-						<input type="text" class="search form-control" placeholder="Puedes buscar por temática, curso, asignatura o unidad"/>
+						<input type="search" class="search form-control" placeholder="Puedes buscar por temática, curso, asignatura o unidad"/>
 					</div>
 
 					<div class="card-deck mb-3 text-center justify-content-center">

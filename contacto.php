@@ -46,21 +46,24 @@ $row_cnt = $rs_result1->num_rows;
             <img class="logo" src="/images/Logo.png" width="32" height="32"><h5 class="my-0 mr-md-auto font-weight-normal">Gestión Pedagógica</h5>
             <nav class="my-2 my-md-0 mr-md-3">
             <a href="http://repositorio.gestionpedagogica.cl"><button class="btn btn-secondary" type="button">Inicio</button></a>
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hola <?php echo $row_profile_general["nombres"]; ?></button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                <?php
-                if (!isset($_SESSION["fb_access_token"]))
-                {
-                    echo '<a href="/login"><button class="dropdown-item" type="button">Ingresar con Facebook</button></a>';
-                }
-                else
-                {
-                    echo '<a href="/perfil"><button class="dropdown-item" type="button">Perfil</button></a>';
-                    echo '<a href="/misordenes"><button class="dropdown-item" type="button">Mis ordenes</button></a>';
-                    echo '<a href="/logout"><button class="dropdown-item" type="button">Desconectar</button></a>';
-                }
-                ?> 
-            </div>
+            <?php
+				if (!isset($_SESSION["fb_access_token"]))
+				{
+					echo '<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Panel de usuario</button>';
+					echo '<div class="dropdown-menu" aria-labelledby="dropdownMenu2">';
+					echo '<a href="/login"><button class="dropdown-item" type="button">Ingresar con Facebook</button></a>';
+					echo '</div>';
+				}
+				else
+				{
+					echo '<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hola '.$row_profile_general["nombres"].'</button>';
+					echo '<div class="dropdown-menu" aria-labelledby="dropdownMenu2">';
+					echo '<a href="/perfil"><button class="dropdown-item" type="button">Perfil</button></a>';
+					echo '<a href="/misordenes"><button class="dropdown-item" type="button">Mis ordenes</button></a>';
+					echo '<a href="/logout"><button class="dropdown-item" type="button">Desconectar</button></a>';
+					echo '</div>';
+				}
+			?>
             <?php 
                 if (isset($_SESSION["rango"]) == '2')
                 { 
@@ -83,13 +86,13 @@ $row_cnt = $rs_result1->num_rows;
                <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <input type="text" name="txtName" class="form-control" placeholder="Tu nombre" value="" />
+                            <input type="text" name="txtName" class="form-control" placeholder="Tu nombre" required/>
                         </div>
                         <div class="form-group">
-                            <input type="email" name="txtEmail" class="form-control" placeholder="Tu correo electrónico" value="" />
+                            <input type="email" name="txtEmail" class="form-control" placeholder="Tu correo electrónico" required/>
                         </div>
                         <div class="form-group">
-                            <input type="number" name="txtPhone" class="form-control" placeholder="Tu número de teléfono" value="" />
+                            <input type="number" name="txtPhone" class="form-control" placeholder="Tu número de teléfono" required/>
                         </div>
                         <div class="alert alert-warning alert-dismissible fade show" role="alert">
 							<strong>Recuerda</strong> verificar los datos antes de enviar el formulario
@@ -97,7 +100,7 @@ $row_cnt = $rs_result1->num_rows;
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <textarea name="txtMsg" class="form-control" placeholder="Tu mensaje" style="width: 100%; height: 150px;"></textarea>
+                            <textarea name="txtMsg" class="form-control" placeholder="Tu mensaje" style="width: 100%; height: 150px;" required></textarea>
                         </div>
                         <button type="submit" name="enviar-submit" class="btn btn-primary btn-lg float-center">Enviar mensaje</button>
                     </div>

@@ -39,18 +39,23 @@ Rango
 
 FALTA POR HACER
 
-Index:
+INDEX:
 
-perfil:
+
+
+PERFIL:
 opciones
+Agregar rut a la db
+
 descargararchivo -funcion
 verarchivo -funcion
 
-administración:
+ADMINISTRACIÓN:
 usuarios
 verperfil
-editarorden
+nuevousuario
+
+verorden y editarorden - haciendo
+
 editararchivo
 eliminararchivo -funcion
-nuevousuario
-ordenes

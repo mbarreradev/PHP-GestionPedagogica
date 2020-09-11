@@ -143,6 +143,44 @@ else // Continuamos a la página
             <span class="titulo">Última actividad</span>
         	</h4>	
 
+
+			<div class="rounded border border-azul-claro p-3">
+				<div class="container">
+					<div class="row">
+						<div class="col">
+							<h4 class="titulo">Actividad de ordenes</h4>
+							<ul class="timeline">
+								<li>
+									<a target="_blank" href="#">New Web Design</a>
+									<a href="#" class="float-right">21 March, 2014</a>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi semper, et elementum lorem ornare. Maecenas placerat facilisis mollis. Duis sagittis ligula in sodales vehicula....</p>
+								</li>
+								<li>
+									<a href="#">21 000 Job Seekers</a>
+									<a href="#" class="float-right">4 March, 2014</a>
+									<p>Curabitur purus sem, malesuada eu luctus eget, suscipit sed turpis. Nam pellentesque felis vitae justo accumsan, sed semper nisi sollicitudin...</p>
+								</li>
+							</ul>
+						</div>
+						<div class="col">
+							<h4 class="titulo">Actividad de usuarios</h4>
+							<ul class="timeline">
+								<li>
+									<a target="_blank" href="#">New Web Design</a>
+									<a href="#" class="float-right">21 March, 2014</a>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi semper, et elementum lorem ornare. Maecenas placerat facilisis mollis. Duis sagittis ligula in sodales vehicula....</p>
+								</li>
+								<li>
+									<a href="#">21 000 Job Seekers</a>
+									<a href="#" class="float-right">4 March, 2014</a>
+									<p>Curabitur purus sem, malesuada eu luctus eget, suscipit sed turpis. Nam pellentesque felis vitae justo accumsan, sed semper nisi sollicitudin...</p>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+
 	</div>
     </div>
 

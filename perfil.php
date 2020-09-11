@@ -371,7 +371,7 @@ $(function(){
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="nav-matematica-planificacion" role="tabpanel" aria-labelledby="nav-matematica-tab">
 								<div class="buscador">
-									<input type="text" class="search form-control" placeholder="Puedes buscar por temática, curso o unidad"/>
+									<input type="search" class="search form-control" placeholder="Puedes buscar por temática, curso o unidad"/>
 								</div>
                                 <table id="tabla-matematica-planificacion" class="table" cellspacing="0">
                                     <thead>
@@ -411,7 +411,7 @@ $(function(){
                             </div>
                             <div class="tab-pane fade" id="nav-lenguaje-planificacion" role="tabpanel" aria-labelledby="nav-lenguaje-tab">
 								<div class="buscador">
-									<input type="text" class="search form-control" placeholder="Puedes buscar por temática, curso o unidad"/>
+									<input type="search" class="search form-control" placeholder="Puedes buscar por temática, curso o unidad"/>
 								</div>
                                 <table id="tabla-lenguaje-planificacion" class="table" cellspacing="0">
                                     <thead>
@@ -451,7 +451,7 @@ $(function(){
 							</div>
 							<div class="tab-pane fade" id="nav-tecnologia-planificacion" role="tabpanel" aria-labelledby="nav-tecnologia-tab">
 								<div class="buscador">
-									<input type="text" class="search form-control" placeholder="Puedes buscar por temática, curso o unidad"/>
+									<input type="search" class="search form-control" placeholder="Puedes buscar por temática, curso o unidad"/>
 								</div>
                                 <table id="tabla-tecnologia-planificacion" class="table" cellspacing="0">
                                     <thead>
@@ -491,7 +491,7 @@ $(function(){
 							</div>
 							<div class="tab-pane fade" id="nav-musica-planificacion" role="tabpanel" aria-labelledby="nav-musica-tab">
 								<div class="buscador">
-									<input type="text" class="search form-control" placeholder="Puedes buscar por temática, curso o unidad"/>
+									<input type="search" class="search form-control" placeholder="Puedes buscar por temática, curso o unidad"/>
 								</div>
                                 <table id="tabla-musica-planificacion" class="table" cellspacing="0">
                                     <thead>
@@ -524,7 +524,7 @@ $(function(){
 							</div>
 							<div class="tab-pane fade" id="nav-artesvisuales-planificacion" role="tabpanel" aria-labelledby="nav-artesvisuales-tab">
 								<div class="buscador">
-									<input type="text" class="search form-control" placeholder="Puedes buscar por temática, curso o unidad"/>
+									<input type="search" class="search form-control" placeholder="Puedes buscar por temática, curso o unidad"/>
 								</div>
                                 <table id="tabla-artesvisuales-planificacion" class="table" cellspacing="0">
                                     <thead>

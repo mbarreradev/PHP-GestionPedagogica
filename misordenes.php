@@ -177,7 +177,7 @@ else // Continuamos a la página
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="nav-matematica-orden" role="tabpanel" aria-labelledby="nav-matematica-tab">
 								<div class="buscador">
-									<input type="text" class="search form-control" placeholder="Puedes buscar por temática, curso, tipo, pagado y estado"/>
+									<input type="search" class="search form-control" placeholder="Puedes buscar por temática, curso, tipo, pagado y estado"/>
 								</div>
                                 <table id="tabla-matematica-ordenes" class="table" cellspacing="0">
                                     <thead>
@@ -230,7 +230,7 @@ else // Continuamos a la página
                             </div>
                             <div class="tab-pane fade" id="nav-lenguaje-orden" role="tabpanel" aria-labelledby="nav-lenguaje-tab">
 								<div class="buscador">
-									<input type="text" class="search form-control" placeholder="Puedes buscar por temática, curso, tipo, pagado y estado"/>
+									<input type="search" class="search form-control" placeholder="Puedes buscar por temática, curso, tipo, pagado y estado"/>
 								</div>
                                 <table id="tabla-lenguaje-ordenes" class="table" cellspacing="0">
                                     <thead>
@@ -283,7 +283,7 @@ else // Continuamos a la página
 							</div>
 							<div class="tab-pane fade" id="nav-tecnologia-orden" role="tabpanel" aria-labelledby="nav-tecnologia-tab">
 								<div class="buscador">
-									<input type="text" class="search form-control" placeholder="Puedes buscar por temática, curso, tipo, pagado y estado"/>
+									<input type="search" class="search form-control" placeholder="Puedes buscar por temática, curso, tipo, pagado y estado"/>
 								</div>
                                 <table id="tabla-tecnologia-ordenes" class="table" cellspacing="0">
                                     <thead>
@@ -336,7 +336,7 @@ else // Continuamos a la página
 							</div>
 							<div class="tab-pane fade" id="nav-musica-orden" role="tabpanel" aria-labelledby="nav-musica-tab">
 								<div class="buscador">
-									<input type="text" class="search form-control" placeholder="Puedes buscar por temática, curso, tipo, pagado y estado"/>
+									<input type="search" class="search form-control" placeholder="Puedes buscar por temática, curso, tipo, pagado y estado"/>
 								</div>
                                 <table id="tabla-musica-ordenes" class="table" cellspacing="0">
                                     <thead>
@@ -389,7 +389,7 @@ else // Continuamos a la página
 							</div>
 							<div class="tab-pane fade" id="nav-artesvisuales-orden" role="tabpanel" aria-labelledby="nav-artesvisuales-tab">
 								<div class="buscador">
-									<input type="text" class="search form-control" placeholder="Puedes buscar por temática, curso, tipo, pagado y estado"/>
+									<input type="search" class="search form-control" placeholder="Puedes buscar por temática, curso, tipo, pagado y estado"/>
 								</div>
                                 <table id="tabla-artesvisuales-ordenes" class="table" cellspacing="0">
                                     <thead>

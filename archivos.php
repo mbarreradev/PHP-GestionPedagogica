@@ -261,7 +261,7 @@ else // Continuamos a la página
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="nav-matematica-planificacion" role="tabpanel" aria-labelledby="nav-matematica-tab">
 								<div class="buscador">
-									<input type="text" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
+									<input type="search" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
 								</div>
                                 <table id="tabla-matematica-planificacion" class="table" cellspacing="0">
                                     <thead>
@@ -313,7 +313,7 @@ else // Continuamos a la página
                             </div>
                             <div class="tab-pane fade" id="nav-lenguaje-planificacion" role="tabpanel" aria-labelledby="nav-lenguaje-tab">
 								<div class="buscador">
-									<input type="text" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
+									<input type="search" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
 								</div>
                                 <table id="tabla-lenguaje-planificacion" class="table" cellspacing="0">
                                     <thead>
@@ -365,7 +365,7 @@ else // Continuamos a la página
 							</div>
 							<div class="tab-pane fade" id="nav-tecnologia-planificacion" role="tabpanel" aria-labelledby="nav-tecnologia-tab">
 								<div class="buscador">
-									<input type="text" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
+									<input type="search" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
 								</div>
                                 <table id="tabla-tecnologia-planificacion" class="table" cellspacing="0">
                                     <thead>
@@ -417,7 +417,7 @@ else // Continuamos a la página
 							</div>
 							<div class="tab-pane fade" id="nav-musica-planificacion" role="tabpanel" aria-labelledby="nav-musica-tab">
 								<div class="buscador">
-									<input type="text" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
+									<input type="search" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
 								</div>
                                 <table id="tabla-musica-planificacion" class="table" cellspacing="0">
                                     <thead>
@@ -469,7 +469,7 @@ else // Continuamos a la página
 							</div>
 							<div class="tab-pane fade" id="nav-artesvisuales-planificacion" role="tabpanel" aria-labelledby="nav-artesvisuales-tab">
 								<div class="buscador">
-									<input type="text" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
+									<input type="search" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
 								</div>
                                 <table id="tabla-artesvisuales-planificacion" class="table" cellspacing="0">
                                     <thead>
@@ -548,7 +548,7 @@ else // Continuamos a la página
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="nav-matematica-guia" role="tabpanel" aria-labelledby="nav-matematica-tab">
 								<div class="buscador">
-									<input type="text" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
+									<input type="search" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
 								</div>
                                 <table id="tabla-matematica-guia" class="table" cellspacing="0">
                                     <thead>
@@ -600,7 +600,7 @@ else // Continuamos a la página
                             </div>
                             <div class="tab-pane fade" id="nav-lenguaje-guia" role="tabpanel" aria-labelledby="nav-lenguaje-tab">
 								<div class="buscador">
-									<input type="text" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
+									<input type="search" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
 								</div>
                                 <table id="tabla-lenguaje-guia" class="table" cellspacing="0">
                                     <thead>
@@ -652,7 +652,7 @@ else // Continuamos a la página
 							</div>
 							<div class="tab-pane fade" id="nav-tecnologia-guia" role="tabpanel" aria-labelledby="nav-tecnologia-tab">
 								<div class="buscador">
-									<input type="text" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
+									<input type="search" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
 								</div>
                                 <table id="tabla-tecnologia-guia" class="table" cellspacing="0">
                                     <thead>
@@ -704,7 +704,7 @@ else // Continuamos a la página
 							</div>
 							<div class="tab-pane fade" id="nav-musica-guia" role="tabpanel" aria-labelledby="nav-musica-tab">
 								<div class="buscador">
-									<input type="text" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
+									<input type="search" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
 								</div>
                                 <table id="tabla-musica-guia" class="table" cellspacing="0">
                                     <thead>
@@ -756,7 +756,7 @@ else // Continuamos a la página
 							</div>
 							<div class="tab-pane fade" id="nav-artesvisuales-guia" role="tabpanel" aria-labelledby="nav-artesvisuales-tab">
 								<div class="buscador">
-									<input type="text" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
+									<input type="search" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
 								</div>
                                 <table id="tabla-artesvisuales-guia" class="table" cellspacing="0">
                                     <thead>
