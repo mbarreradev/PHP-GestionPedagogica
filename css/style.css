@@ -104,6 +104,7 @@ a.terminosycondiciones {
 }
 
 /* Custom default button */
+
 .btn-secondary,
 .btn-secondary:hover,
 .btn-secondary:focus {
@@ -113,6 +114,11 @@ a.terminosycondiciones {
   border: .05rem solid #fff;
 }
 
+/* Settings page */
+
+input.btn.btn-danger.full-width {
+  width: 100%;
+}
 
 /*
  * Base structure
@@ -150,11 +156,11 @@ body {
   color: white;
 }
 
-span.titulo {
+.titulo {
     color: #0167b7;
 }
 
-p.titulo {
+.titulo-negro {
   font-weight: 600;
   color: black;
 }
@@ -553,6 +559,7 @@ h4.d-flex.justify-content-between.align-items-center.mb-3.margin-bottom {
 ul.timeline {
   list-style-type: none;
   position: relative;
+  text-align: left;
 }
 ul.timeline:before {
   content: ' ';

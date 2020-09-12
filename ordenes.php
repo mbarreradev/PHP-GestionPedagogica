@@ -16,7 +16,7 @@ else // Continuamos a la página
 	header( 'Content-Type: text/html; charset=utf-8' );
 	
 	// Consulta para traer los datos de usuario generales
-	$sql_datosusuariosgeneral = "SELECT nombres
+	$sql_datosusuariosgeneral = "SELECT nombres, apellidos
 	FROM 
 		usuario
 	WHERE 
@@ -26,7 +26,7 @@ else // Continuamos a la página
 
 	// BOX: Ordenes pendientes de confirmación
 	// Primero entramos a la tabla ordencompra y luego archivo para sacar los datos requeridos
-	$sql_pendientes_confirmacion = "SELECT ordencompra.ordencompra_id, ordencompra.usuario_id, ordencompra.fecha_compra, ordencompra.fecha_actualizacion, ordencompra.estado_orden, ordencompra.pagado, usuario.nombres, usuario.apellidos, archivo.nombre, archivo.asignatura, archivo.curso, archivo.unidad, archivo.tipo, archivo.precio
+	$sql_pendientes_confirmacion = "SELECT ordencompra.ordencompra_id, ordencompra.usuario_id, ordencompra.fecha_compra, ordencompra.fecha_actualizacion, ordencompra.estado_orden, ordencompra.pagado, usuario.nombres, usuario.apellidos, usuario.rut, usuario.dv, archivo.nombre, archivo.asignatura, archivo.curso, archivo.unidad, archivo.tipo, archivo.precio
 	FROM 
 		ordencompra
     INNER JOIN 
@@ -146,6 +146,42 @@ else // Continuamos a la página
     $sql_ordenes_pagadas = "SELECT * FROM ordencompra WHERE estado_orden = 'Pagado'";  
 	$rs_result_ordenes_pagadas = mysqli_query($conn, $sql_ordenes_pagadas);  
 	$cnt_ordenes_pagadas = $rs_result_ordenes_pagadas->num_rows;
+
+	// Funcion que aprueba la orden
+	// FALTA: VER COMO OBTENER NUMERO DE ORDEN PARA ACTUALIZAR
+	if(isset($_POST['aprobarorden-submit']))
+	{
+		$usuario = $row_profile_general['nombres']." ".$row_profile_general['apellidos'];
+		$fecha_actualizacion = date("Y-m-d H:i:s");
+		$ordencompraid = '0';
+
+		// Consulta que actualiza el valor del estado de la orden
+		$sql_update_ordencompra = "UPDATE ordencompra SET estado_orden = 'Pagado', fecha_actualizacion = '".$fecha_actualizacion."' WHERE ordencompra_id = '".$ordencompraid."' "; 
+
+		if ($conn->query($sql_update_ordencompra) === TRUE) 
+		{
+			// Consulta que crea el historial de la orden
+			$sql_create_ordencompra_historial= "INSERT INTO ordencompra_historial (historial_id, ordencompra_id, fecha_creacion, accion) VALUES (DEFAULT, '$archivo_id', '$fecha_actualizacion', '".$usuario." modificó la orden a Pagado')"; 
+			
+			if ($conn->query($sql_create_ordencompra_historial) === TRUE) 
+			{
+				// Refrescamos la página
+				header("Refresh:0");
+			}
+			else
+			{
+				//echo "Error updating record: " . $conn->error;
+				echo "Error sql update.";
+			}
+		} 
+		else 
+		{
+			//echo "Error updating record: " . $conn->error;
+			echo "Error sql update.";
+		}
+
+		$conn->close();
+	}
 
 ?>
 <!doctype html>
@@ -282,7 +318,7 @@ else // Continuamos a la página
 													<p><strong>Valor del archivo:</strong> $<?php echo $row['precio']; ?></p>
 													<hr class="bg-azul"/>
 													<p><strong>DETALLES DE LA TRANSFERENCIA</strong></p>
-													<p><strong>Rut:</strong> </p>
+													<p><strong>Rut:</strong> <?php echo $row['rut']."-".$row['dv']; ?></p>
 													<p><strong>Pagado:</strong> $<?php echo $row['pagado']; ?></p>
 													<p><strong>Comentario de la transferencia:</strong> Pago Orden <?php echo $row['ordencompra_id']; ?></p>
 													<hr class="bg-azul"/>
@@ -305,7 +341,7 @@ else // Continuamos a la página
 												</div>
 												<div class="modal-footer">
 													<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-													<button type="button" class="btn btn-primary">Aprobar orden</button>
+													<button class="btn btn-primary" name="aprobarorden-submit" type="submit">Aprobar orden</button>
 												</div>
 												</div>
 											</div>

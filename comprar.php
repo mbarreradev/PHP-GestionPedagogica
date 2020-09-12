@@ -47,28 +47,44 @@ else //Continue to current page
 
     $pagado = $rs_valoraachivo[0]; // guardamos el valor del archivo en pagado
 					
-		$sql1 = "INSERT INTO ordencompra (ordencompra_id, usuario_id, archivo_id, fecha_compra, fecha_actualizacion, estado_orden, pagado) VALUES (DEFAULT, '$usuario_id', '$url_id', '$fecha_compra', '$fecha_actualizacion', 'Pendiente de pago', '$pagado')";
+		$sql_create_ordencompra = "INSERT INTO ordencompra (ordencompra_id, usuario_id, archivo_id, fecha_compra, fecha_actualizacion, estado_orden, pagado) VALUES (DEFAULT, '$usuario_id', '$url_id', '$fecha_compra', '$fecha_actualizacion', 'Pendiente de pago', '$pagado')";
 
-		if ($conn->query($sql1) === TRUE) 
+		if ($conn->query($sql_create_ordencompra) === TRUE) 
 		{
-			// Seleccionamos el orden de la compra que acabamos de hacer
-			$sql_selectordencompraid = "SELECT ordencompra_id from ordencompra WHERE usuario_id = '".$_SESSION['usuario_id']."' ORDER BY ordencompra_id DESC"; 
-			
-			$rs_ordencompra_id = mysqli_query($conn, $sql_selectordencompraid) or die ("(1) Problemas al seleccionar ".mysqli_error($conn));
 
-			// Se guarda en un variable el usuario_id
-			$row = mysqli_fetch_assoc($rs_ordencompra_id);
-			// Guardamos el ordencompra_id del usuario en una variable
-			$ultimaordencompra_id = $row['ordencompra_id'];
-			
-			// Enviamos al usuario a la siguiente pantalla
-			header("Location: https://repositorio.gestionpedagogica.cl/verorden?id=$ultimaordencompra_id");
+      // Seleccionamos el orden de la compra que acabamos de hacer
+      $sql_selectordencompraid = "SELECT ordencompra_id from ordencompra WHERE usuario_id = '".$_SESSION['usuario_id']."' ORDER BY ordencompra_id DESC"; 
+      $rs_ordencompra_id = mysqli_query($conn, $sql_selectordencompraid) or die ("(1) Problemas al seleccionar ".mysqli_error($conn));
+
+      // Se guarda en un variable el usuario_id
+      $row = mysqli_fetch_assoc($rs_ordencompra_id);
+      // Guardamos el ordencompra_id del usuario en una variable
+      $ultimaordencompra_id = $row['ordencompra_id'];
+
+      // Variables para el historial de orden
+      $usuario = $row_profile_general['nombres']." ".$row_profile_general['apellidos'];
+
+      // Consulta que crea el historial de la orden
+      $sql_create_ordencompra_historial= "INSERT INTO ordencompra_historial (historial_id, ordencompra_id, fecha_creacion, accion) VALUES (DEFAULT, '$ultimaordencompra_id', '$fecha_actualizacion', '".$usuario." ha creado una orden nueva')"; 
+        
+      if ($conn->query($sql_create_ordencompra_historial) === TRUE) 
+      {
+          // Enviamos al usuario a la siguiente pantalla
+          header("Location: https://repositorio.gestionpedagogica.cl/verorden?id=$ultimaordencompra_id");
+      }
+      else
+      {
+        //echo "Error sql log." . $sql_create_ordencompra_historial . "<br>" . $conn->error;
+        echo "Error sql update.";
+      }
 		}
 		else
 		{
-			echo "Error sql log.";
-			echo "Error sql log." . $sql1 . "<br>" . $conn->error;
-		}
+      //echo "Error sql log." . $sql_create_ordencompra . "<br>" . $conn->error;
+      echo "Error sql log.";
+    }
+    
+    $conn->close();
 	}
 
 ?> 

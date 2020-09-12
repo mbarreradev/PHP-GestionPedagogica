@@ -40,21 +40,35 @@ else //Continue to current page
 			usuario_id = '".$_SESSION['usuario_id']."' "; 
 		$rs_resultdatosgeneral = mysqli_query($conn, $sql_datosusuariosgeneral);
 		$row_profile_general = mysqli_fetch_assoc($rs_resultdatosgeneral);
+
+		$fecha_actualizacion = date("Y-m-d H:i:s");
+		$usuario = $row_profile_general['nombres']." ".$row_profile_general['apellidos'];
 		
 		
 		// Función para cambiar estado a "Pendiente de confirmación"
 		if(isset($_POST['cambiarestado-submit']))
 		{
-
 			// Consulta que actualiza el valor del estado de la orden
-			$sql1 = "UPDATE ordencompra SET estado_orden = 'Pendiente de confirmación' WHERE ordencompra_id = '".$url_id."' "; 
+			$sql_update_ordencompra = "UPDATE ordencompra SET estado_orden = 'Pendiente de confirmación', fecha_actualizacion = '".$fecha_actualizacion."' WHERE ordencompra_id = '".$url_id."' "; 
 
-			if ($conn->query($sql1) === TRUE) 
+			if ($conn->query($sql_update_ordencompra) === TRUE) 
 			{
-				// Refrescamos la página
-				header("Refresh:0");
-
-			} else {
+				// Consulta que crea el historial de la orden
+				$sql_create_ordencompra_historial= "INSERT INTO ordencompra_historial (historial_id, ordencompra_id, fecha_creacion, accion) VALUES (DEFAULT, '$url_id', '$fecha_actualizacion', '".$usuario." modificó la orden a Pendiente de confirmación')"; 
+				
+				if ($conn->query($sql_create_ordencompra_historial) === TRUE) 
+				{
+					// Refrescamos la página
+					header("Refresh:0");
+				}
+				else
+				{
+					//echo "Error updating record: " . $conn->error;
+					echo "Error sql update.";
+				}
+			} 
+			else 
+			{
 				//echo "Error updating record: " . $conn->error;
 				echo "Error sql update.";
 			}

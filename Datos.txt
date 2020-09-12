@@ -44,8 +44,7 @@ INDEX:
 
 
 PERFIL:
-opciones
-Agregar rut a la db
+opciones - HACIENDO
 
 descargararchivo -funcion
 verarchivo -funcion
@@ -55,7 +54,13 @@ usuarios
 verperfil
 nuevousuario
 
-verorden y editarorden - haciendo
+verorden y editarorden - HACIENDO
 
 editararchivo
 eliminararchivo -funcion
+
+LOGS ORDENES
+Falta terminar log de actualizar orden a pagado
+
+LOGS USUARIOS
+Falta todo el historial de usuarios

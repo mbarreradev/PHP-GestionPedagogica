@@ -124,7 +124,7 @@ $cnt_guias = $rs_result_guias_totales->num_rows;
 								<div class="item">
 									<div class="pad15">
 										<p class="lead"><?php echo $row['asignatura']; ?></p>
-										<p class="titulo"><?php echo $row['nombre']; ?></p>
+										<p class="titulo-negro"><?php echo $row['nombre']; ?></p>
 										<p><?php echo $row['curso']; ?></p>
 										<?php
 									if($row["estado"] === '1' AND isset($_SESSION["fb_access_token"])) // 1 disponible 0 no disponible

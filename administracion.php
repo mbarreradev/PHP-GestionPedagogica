@@ -23,6 +23,23 @@ else // Continuamos a la página
 		usuario_id = '".$_SESSION['usuario_id']."' "; 
 	$rs_resultdatosgeneral = mysqli_query($conn, $sql_datosusuariosgeneral);
 	$row_profile_general = mysqli_fetch_assoc($rs_resultdatosgeneral);
+
+	// Box actividad de ordenes
+	$sql_actividad_ordenes = "SELECT ordencompra_historial.historial_id, ordencompra_historial.ordencompra_id, ordencompra_historial.accion, ordencompra_historial.fecha_creacion, archivo.nombre
+	FROM 
+		ordencompra_historial 
+	INNER JOIN 
+		ordencompra
+	ON
+		ordencompra_historial.ordencompra_id=ordencompra.ordencompra_id
+	INNER JOIN 
+		archivo
+	ON
+		ordencompra.archivo_id=archivo.archivo_id
+	ORDER BY 
+		historial_id DESC 
+	LIMIT 10";  
+	$rs_result_actividad_ordenes = mysqli_query($conn, $sql_actividad_ordenes);  
 	
 
 	// Contador ordenes pendientes de revisión - confirmación
@@ -150,16 +167,21 @@ else // Continuamos a la página
 						<div class="col">
 							<h4 class="titulo">Actividad de ordenes</h4>
 							<ul class="timeline">
+
+								<?php  
+									while ($row = mysqli_fetch_assoc($rs_result_actividad_ordenes)) {
+								?>
+
 								<li>
-									<a target="_blank" href="#">New Web Design</a>
-									<a href="#" class="float-right">21 March, 2014</a>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi semper, et elementum lorem ornare. Maecenas placerat facilisis mollis. Duis sagittis ligula in sodales vehicula....</p>
+									<a href="/ordenes"><strong>Orden:</strong> <?php echo $row['ordencompra_id']; ?> <strong>Archivo:</strong></strong> <?php echo $row['nombre']; ?></a>
+									<a href="#" class="float-right"><?php echo $row['fecha_creacion']; ?></a>
+									<p><?php echo $row['accion']; ?></p>
 								</li>
-								<li>
-									<a href="#">21 000 Job Seekers</a>
-									<a href="#" class="float-right">4 March, 2014</a>
-									<p>Curabitur purus sem, malesuada eu luctus eget, suscipit sed turpis. Nam pellentesque felis vitae justo accumsan, sed semper nisi sollicitudin...</p>
-								</li>
+
+								<?php  
+									};  
+								?>
+
 							</ul>
 						</div>
 						<div class="col">
