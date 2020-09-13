@@ -51,7 +51,7 @@ $cnt_guias = $rs_result_guias_totales->num_rows;
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
-		<script src="https://code.jquery.com/jquery-3.5.0.slim.min.js" integrity="sha256-MlusDLJIP1GRgLrOflUQtshyP0TwT/RHXsI1wWGnQhs=" crossorigin="anonymous"></script>
+		<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     	<script src="js/bootstrap.bundle.min.js"></script>
 		<script src="js/carousel.js"></script>
 		<script data-ad-client="ca-pub-2522486668045838" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -96,6 +96,8 @@ $cnt_guias = $rs_result_guias_totales->num_rows;
         	<div class="container">
 				<h1 class="display-4">Bienvenido a Gestión Pedagógica</h1>
 				<p class="index-description">En esta página encontrarás más de <?php echo $cnt_planificaciones; ?> planificaciones y <?php echo $cnt_guias; ?> guías para casi todos los cursos de enseñanza básica.</p>
+
+				<a href="/perfil"><button type="button" class="btn btn-primary btn-outline btn-lg"><span class="material-icons">person</span> Ingresar a mi cuenta</button></a>
 
 				<!-- GestionPedagogica Index -->
 				<ins class="adsbygoogle"

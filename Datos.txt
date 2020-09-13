@@ -34,7 +34,30 @@ Rango
 
 
 
+    // Process download
+    if(file_exists($file_path)) 
+    {
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment; filename="'.basename($filepath).'"');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate');
+        header('HTTP/1.0 200 OK', true, 200);
+        header('Content-Length: ' . filesize($file_path));
+        flush(); // Flush system output buffer
+        readfile($file_path);
+        echo "bien";
+        die();
+    } 
+    else 
+    {
+        http_response_code(404);
+        echo "error";
+        die();
+    }
 
+
+https://demos.devexpress.com/bootstrap/cardview/
 
 
 FALTA POR HACER
@@ -44,23 +67,20 @@ INDEX:
 
 
 PERFIL:
-opciones - HACIENDO
 
-descargararchivo -funcion
-verarchivo -funcion
 
 ADMINISTRACIÓN:
 usuarios
 verperfil
-nuevousuario
+eliminarperfil
 
 verorden y editarorden - HACIENDO
 
 editararchivo
-eliminararchivo -funcion
+eliminararchivo -terminar en archivo archivos.php
 
 LOGS ORDENES
-Falta terminar log de actualizar orden a pagado
+Falta terminar log y funcion de actualizar orden a pagado en ordenes.php
 
 LOGS USUARIOS
 Falta todo el historial de usuarios

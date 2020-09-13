@@ -197,7 +197,7 @@ else // Continuamos a la página
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
-		<script src="https://code.jquery.com/jquery-3.5.0.slim.min.js" integrity="sha256-MlusDLJIP1GRgLrOflUQtshyP0TwT/RHXsI1wWGnQhs=" crossorigin="anonymous"></script>
+		<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 		<script src="js/list.min.js"></script>
 	</head>
 <body class="text-center">
@@ -238,40 +238,61 @@ else // Continuamos a la página
 				
         </h4>
 		
-			<div class="card mb-3">
-			  <div class="row no-gutters">
-
+		<div class="card mb-3">
+			<div class="row no-gutters">
 				<div class="col">
-				  <div class="card-body bg-azul-claro">
-
-
-            <div class="row">
-				<div class="col-sm text-center">
-					<div class="row counter-profile">
-						<div class="col-sm">
-							<h2><strong><?php echo $cnt_ordenes_pendientes_confirmacion; ?></strong></h2>                    
-							<p><small>ordenes pendientes de confirmación</small></p>
-							<hr class="mb-4">
-						</div>
-						<div class="col-sm">
-							<h2><strong><?php echo $cnt_ordenes_creadas; ?></strong></h2>                    
-							<p><small>ordenes creadas</small></p>
-							<hr class="mb-4">
-						</div>
-						<div class="col-sm">
-							<h2><strong><?php echo $cnt_ordenes_pagadas; ?></strong></h2>                    
-							<p><small>ordenes pagadas</small></p>
-							<hr class="mb-4">
+				  	<div class="card-body bg-azul-claro">
+						<div class="row">
+							<div class="col-sm">
+								<div class="card border-plomo">
+									<div class="card-body bg-azul-especial text-white">
+										<div class="row">
+											<div class="col-3">
+												<span class="material-icons stats">sticky_note_2</span>
+											</div>
+											<div class="col-9 text-right">
+												<div class="Count"><?php echo $cnt_ordenes_pendientes_confirmacion; ?></div>
+												<h4>ordenes pendientes</h4>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm">
+								<div class="card border-plomo">
+									<div class="card-body bg-naranjo-especial text-white">
+										<div class="row">
+											<div class="col-3">
+												<span class="material-icons stats">people</span>
+											</div>
+											<div class="col-9 text-right">
+												<div class="Count"><?php echo $cnt_ordenes_creadas; ?></div>
+												<h4>ordenes creadas</h4>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm">
+								<div class="card border-plomo">
+									<div class="card-body bg-rosado-especial text-white">
+										<div class="row">
+											<div class="col-3">
+												<span class="material-icons stats">library_books</span>
+											</div>
+											<div class="col-9 text-right">
+												<div class="Count"><?php echo $cnt_ordenes_pagadas; ?></div>
+												<h4>ordenes pagadas</h4>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
-                </div>            
-            </div>
-				  
-				  
-				  </div>
 				</div>
-			  </div>
 			</div>
+		</div>
 
 		<h4 class="d-flex justify-content-between align-items-center mb-3">
             <span class="titulo">Ordenes pendientes de confirmación</span>
@@ -356,7 +377,7 @@ else // Continuamos a la página
 												<td class="estado"><?php echo $row['estado_orden']; ?></td>
                                                 <td><?php echo $row['fecha_actualizacion']; ?></td>
 												<td>
-												<button class="btn btn-info tabla" data-toggle="modal" data-target="#verorden<?php echo $row['ordencompra_id']; ?>"><span class="material-icons">zoom_in</span> Ver</button>
+												<button class="btn btn-info tabla" data-toggle="modal" data-target="#verorden<?php echo $row['ordencompra_id']; ?>"><span class="material-icons">library_books</span> Ver orden</button>
 												</td>
 											</tr>
 
@@ -416,7 +437,7 @@ else // Continuamos a la página
 												<td class="estado"><?php echo $row['estado_orden']; ?></td>
                                                 <td><?php echo $row['fecha_actualizacion']; ?></td>
 												<td>
-												<button class="btn btn-info tabla" data-toggle="modal" data-target="#verorden<?php echo $row['ordencompra_id']; ?>"><span class="material-icons">zoom_in</span> Ver</button>
+												<button class="btn btn-info tabla" data-toggle="modal" data-target="#verorden<?php echo $row['ordencompra_id']; ?>"><span class="material-icons">library_books</span> Ver orden</button>
 												</td>
 											</tr>
 
@@ -456,7 +477,7 @@ else // Continuamos a la página
 												<td class="estado"><?php echo $row['estado_orden']; ?></td>
                                                 <td><?php echo $row['fecha_actualizacion']; ?></td>
 												<td>
-												<button class="btn btn-info tabla" data-toggle="modal" data-target="#verorden<?php echo $row['ordencompra_id']; ?>"><span class="material-icons">zoom_in</span> Ver</button>
+												<button class="btn btn-info tabla" data-toggle="modal" data-target="#verorden<?php echo $row['ordencompra_id']; ?>"><span class="material-icons">library_books</span> Ver orden</button>
 												</td>
 											</tr>
 
@@ -496,7 +517,7 @@ else // Continuamos a la página
 												<td class="estado"><?php echo $row['estado_orden']; ?></td>
                                                 <td><?php echo $row['fecha_actualizacion']; ?></td>
 												<td>
-												<button class="btn btn-info tabla" data-toggle="modal" data-target="#verorden<?php echo $row['ordencompra_id']; ?>"><span class="material-icons">zoom_in</span> Ver</button>
+												<button class="btn btn-info tabla" data-toggle="modal" data-target="#verorden<?php echo $row['ordencompra_id']; ?>"><span class="material-icons">library_books</span> Ver orden</button>
 												</td>
 											</tr>
 
@@ -536,7 +557,7 @@ else // Continuamos a la página
 												<td class="estado"><?php echo $row['estado_orden']; ?></td>
                                                 <td><?php echo $row['fecha_actualizacion']; ?></td>
 												<td>
-												<button class="btn btn-info tabla" data-toggle="modal" data-target="#verorden<?php echo $row['ordencompra_id']; ?>"><span class="material-icons">zoom_in</span> Ver</button>
+												<button class="btn btn-info tabla" data-toggle="modal" data-target="#verorden<?php echo $row['ordencompra_id']; ?>"><span class="material-icons">library_books</span> Ver orden</button>
 												</td>
 											</tr>
 
@@ -576,7 +597,7 @@ else // Continuamos a la página
 												<td class="estado"><?php echo $row['estado_orden']; ?></td>
                                                 <td><?php echo $row['fecha_actualizacion']; ?></td>
 												<td>
-												<button class="btn btn-info tabla" data-toggle="modal" data-target="#verorden<?php echo $row['ordencompra_id']; ?>"><span class="material-icons">zoom_in</span> Ver</button>
+												<button class="btn btn-info tabla" data-toggle="modal" data-target="#verorden<?php echo $row['ordencompra_id']; ?>"><span class="material-icons">library_books</span> Ver orden</button>
 												</td>
 											</tr>
 
@@ -607,7 +628,7 @@ else // Continuamos a la página
       </footer>
     </div>
 
-	<SCRIPT type="text/javascript">
+	<script type="text/javascript">
 		var options = {
     valueNames: [ 'id', 'creado', 'pagado', 'estado'],
     page: 10,
@@ -621,6 +642,19 @@ else // Continuamos a la página
 	var tablaTecnologiaOrden = new List('nav-tecnologia-orden', options);
 	var tablaMusicaOrden = new List('nav-musica-orden', options);
 	var tablaArtesVisualesOrden = new List('nav-artesvisuales-orden', options);
+
+	$('.Count').each(function () {
+		$(this).prop('Counter',0).animate({
+			Counter: $(this).text()
+		}, {
+			duration: 3000,
+			easing: 'swing',
+			step: function (now) {
+				$(this).text(Math.ceil(now));
+			}
+		});
+	});
+
 	</script>
     
     <script src="js/bootstrap.bundle.min.js"></script>

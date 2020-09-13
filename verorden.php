@@ -6,7 +6,7 @@ if (!isset($_SESSION["fb_access_token"])) // Si no encuentra el access token de 
 {
 	header("location: login.php");
 }
-else //Continue to current page
+else // Continuamos a la página
 	header( 'Content-Type: text/html; charset=utf-8' );
 	
 	// Consulta que muestra todos los datos del archivo de la orden
@@ -93,9 +93,8 @@ else //Continue to current page
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
-		<script src="https://code.jquery.com/jquery-3.5.0.slim.min.js" integrity="sha256-MlusDLJIP1GRgLrOflUQtshyP0TwT/RHXsI1wWGnQhs=" crossorigin="anonymous"></script>
+		<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 		<script src="js/moment.min.js"></script>
-		<script data-ad-client="ca-pub-2522486668045838" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 	</head>
 <body class="text-center">
 

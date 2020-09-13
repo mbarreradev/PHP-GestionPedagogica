@@ -232,8 +232,7 @@ else // Continuamos a la página
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
-		<script src="https://code.jquery.com/jquery-3.5.0.slim.min.js" integrity="sha256-MlusDLJIP1GRgLrOflUQtshyP0TwT/RHXsI1wWGnQhs=" crossorigin="anonymous"></script>
-		<script data-ad-client="ca-pub-2522486668045838" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+		<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 		<script src="js/moment.min.js"></script>
 		<script src="js/list.min.js"></script>
 	</head>
@@ -321,7 +320,7 @@ $(function(){
 
             <div class="row">
                 <div class="col-sm">
-                    <h4><?php echo $row_profile_general["nombres"]; ?> <?php echo $row_profile_general["apellidos"]; ?></h4>
+                    <h4 class="titulo"><?php echo $row_profile_general["nombres"]; ?> <?php echo $row_profile_general["apellidos"]; ?></h4>
 					Registrado: <span id="registrado"><?php echo $row_profile_general["registrado_el"]; ?></span></br>
 					Correo electrónico: <span><?php echo $row_profile_general["correo"]; ?></span></br>
 					<hr class="bg-azul"/>
@@ -330,16 +329,16 @@ $(function(){
                 <div class="col-sm text-center">
 				<div class="row counter-profile">
 				<div class="col-sm">
-                    <h2><strong><?php echo $cnt_documentos_disponible_total; ?></strong></h2>                    
-                    <p><small>documentos disponibles</small></p>
+                    <h2><strong class="titulo"><?php echo $cnt_documentos_disponible_total; ?></strong></h2>                    
+                    <p>documentos disponibles</p>
                 </div>
                 <div class="col-sm">
-                    <h2><strong><?php echo $cnt_compras_realizadas; ?></strong></h2>                    
-                    <p><small>compras realizadas</small></p>
+                    <h2><strong class="titulo"><?php echo $cnt_compras_realizadas; ?></strong></h2>                    
+                    <p>compras realizadas</p>
                 </div>
                 <div class="col-sm">
-                    <h2><strong><?php echo $cnt_ordenes_pendientes; ?></strong></h2>                    
-                    <p><small>ordenes pendientes</small></p>
+                    <h2><strong class="titulo"><?php echo $cnt_ordenes_pendientes; ?></strong></h2>                    
+                    <p>ordenes pendientes</p>
                 </div>
 
 				</div>
@@ -392,9 +391,8 @@ $(function(){
 												<td class="unidad"><?php echo $row['archivo_unidad']; ?></td>
 												<td><?php echo $row['fecha_compra']; ?></td>
 												<td>
-												<a href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver orden</button></a>
-												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">folder_open</span> Ver archivo</button></a>
-												<a href="/descargararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar archivo</button></a>
+												<a href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
+												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar archivo</button></a>
 												</td>
 											</tr>
 
@@ -432,9 +430,8 @@ $(function(){
 												<td class="unidad"><?php echo $row['archivo_unidad']; ?></td>
 												<td><?php echo $row['fecha_compra']; ?></td>
 												<td>
-												<a href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver orden</button></a>
-												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">folder_open</span> Ver archivo</button></a>
-												<a href="/descargararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar archivo</button></a>
+												<a href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
+												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar archivo</button></a>
 												</td>
 											</tr>
 
@@ -472,9 +469,8 @@ $(function(){
 												<td class="unidad"><?php echo $row['archivo_unidad']; ?></td>
 												<td><?php echo $row['fecha_compra']; ?></td>
 												<td>
-												<a href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver orden</button></a>
-												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">folder_open</span> Ver archivo</button></a>
-												<a href="/descargararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar archivo</button></a>
+												<a href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
+												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar archivo</button></a>
 												</td>
 											</tr>
 
@@ -512,9 +508,8 @@ $(function(){
 												<td class="unidad"><?php echo $row['archivo_unidad']; ?></td>
 												<td><?php echo $row['fecha_compra']; ?></td>
 												<td>
-												<a href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver orden</button></a>
-												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">folder_open</span> Ver archivo</button></a>
-												<a href="/descargararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar archivo</button></a>
+												<a href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
+												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar archivo</button></a>
 												</td>
 											</tr>
 
@@ -545,9 +540,8 @@ $(function(){
 												<td class="unidad"><?php echo $row['archivo_unidad']; ?></td>
 												<td><?php echo $row['fecha_compra']; ?></td>
 												<td>
-												<a href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver orden</button></a>
-												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">folder_open</span> Ver archivo</button></a>
-												<a href="/descargararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar archivo</button></a>
+												<a href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
+												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar archivo</button></a>
 												</td>
 											</tr>
 
@@ -607,9 +601,8 @@ $(function(){
 												<td class="unidad"><?php echo $row['archivo_unidad']; ?></td>
 												<td><?php echo $row['fecha_compra']; ?></td>
 												<td>
-												<a href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver orden</button></a>
-												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">folder_open</span> Ver archivo</button></a>
-												<a href="/descargararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar archivo</button></a>
+												<a href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
+												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar archivo</button></a>
 												</td>
 											</tr>
 
@@ -647,9 +640,8 @@ $(function(){
 												<td class="unidad"><?php echo $row['archivo_unidad']; ?></td>
 												<td><?php echo $row['fecha_compra']; ?></td>
 												<td>
-												<a href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver orden</button></a>
-												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">folder_open</span> Ver archivo</button></a>
-												<a href="/descargararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar archivo</button></a>
+												<a href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
+												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar archivo</button></a>
 												</td>
 											</tr>
 
@@ -680,9 +672,8 @@ $(function(){
 												<td class="unidad"><?php echo $row['archivo_unidad']; ?></td>
 												<td><?php echo $row['fecha_compra']; ?></td>
 												<td>
-												<a href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver orden</button></a>
-												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">folder_open</span> Ver archivo</button></a>
-												<a href="/descargararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar archivo</button></a>
+												<a href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
+												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar archivo</button></a>
 												</td>
 											</tr>
 
@@ -720,9 +711,8 @@ $(function(){
 												<td class="unidad"><?php echo $row['archivo_unidad']; ?></td>
 												<td><?php echo $row['fecha_compra']; ?></td>
 												<td>
-												<a href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver orden</button></a>
-												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">folder_open</span> Ver archivo</button></a>
-												<a href="/descargararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar archivo</button></a>
+												<a href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
+												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar archivo</button></a>
 												</td>
 											</tr>
 
@@ -760,9 +750,8 @@ $(function(){
 												<td class="unidad"><?php echo $row['archivo_unidad']; ?></td>
 												<td><?php echo $row['fecha_compra']; ?></td>
 												<td>
-												<a href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver orden</button></a>
-												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">folder_open</span> Ver archivo</button></a>
-												<a href="/descargararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar archivo</button></a>
+												<a href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
+												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar archivo</button></a>
 												</td>
 											</tr>
 
@@ -792,7 +781,7 @@ $(function(){
       </footer>
     </div>
 
-	<SCRIPT type="text/javascript">
+	<script type="text/javascript">
 		var options = {
     valueNames: [ 'tema', 'curso', 'unidad'],
     page: 10,

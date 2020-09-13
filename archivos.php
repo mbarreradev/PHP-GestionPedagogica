@@ -147,6 +147,26 @@ else // Continuamos a la página
 
 	$cnt_archivos_total = ($cnt_planificaciones_total + $cnt_guias_total);
 
+	// Funcion que elimina el archivo
+	if(isset($_POST['eliminararchivo-submit']))
+	{
+		$archiivo_id = $_POST['archivo_id'];
+
+		// Consulta que borra el archivo
+		$sql_delete_archivo= "DELETE FROM archivo WHERE archivo_id = '".$archiivo_id."' "; 
+        
+		if ($conn->query($sql_delete_archivo) === TRUE) 
+		{
+			// Refrescamos la página
+			header("Refresh:0");
+		}
+		else
+		{
+			echo "error sql";
+			//echo "Error sql log." . $sql_delete_archivo . "<br>" . $conn->error;
+		}
+	}
+
 ?>
 <!doctype html>
 <html lang="es">
@@ -161,7 +181,7 @@ else // Continuamos a la página
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
-		<script src="https://code.jquery.com/jquery-3.5.0.slim.min.js" integrity="sha256-MlusDLJIP1GRgLrOflUQtshyP0TwT/RHXsI1wWGnQhs=" crossorigin="anonymous"></script>
+		<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 		<script src="js/list.min.js"></script>
 	</head>
 <body class="text-center">
@@ -202,40 +222,61 @@ else // Continuamos a la página
 				
         </h4>
 		
-			<div class="card mb-3">
-			  <div class="row no-gutters">
-
+		<div class="card mb-3">
+			<div class="row no-gutters">
 				<div class="col">
-				  <div class="card-body bg-azul-claro">
-
-
-            <div class="row">
-				<div class="col-sm text-center">
-					<div class="row counter-profile">
-						<div class="col-sm">
-							<h2><strong><?php echo $cnt_planificaciones_total; ?></strong></h2>                    
-							<p><small>planificaciones</small></p>
-							<hr class="mb-4">
-						</div>
-						<div class="col-sm">
-							<h2><strong><?php echo $cnt_guias_total; ?></strong></h2>                    
-							<p><small>guías</small></p>
-							<hr class="mb-4">
-						</div>
-						<div class="col-sm">
-							<h2><strong><?php echo $cnt_archivos_total; ?></strong></h2>                    
-							<p><small>archivos subidos</small></p>
-							<hr class="mb-4">
+				  	<div class="card-body bg-azul-claro">
+						<div class="row">
+							<div class="col-sm">
+								<div class="card border-plomo">
+									<div class="card-body bg-azul-especial text-white">
+										<div class="row">
+											<div class="col-3">
+												<span class="material-icons stats">sticky_note_2</span>
+											</div>
+											<div class="col-9 text-right">
+												<div class="Count"><?php echo $cnt_planificaciones_total; ?></div>
+												<h4>planificaciones</h4>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm">
+								<div class="card border-plomo">
+									<div class="card-body bg-naranjo-especial text-white">
+										<div class="row">
+											<div class="col-3">
+												<span class="material-icons stats">people</span>
+											</div>
+											<div class="col-9 text-right">
+												<div class="Count"><?php echo $cnt_guias_total; ?></div>
+												<h4>guías</h4>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm">
+								<div class="card border-plomo">
+									<div class="card-body bg-rosado-especial text-white">
+										<div class="row">
+											<div class="col-3">
+												<span class="material-icons stats">library_books</span>
+											</div>
+											<div class="col-9 text-right">
+												<div class="Count"><?php echo $cnt_archivos_total; ?></div>
+												<h4>archivos subidos</h4>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
-                </div>            
-            </div>
-				  
-				  
-				  </div>
 				</div>
-			  </div>
 			</div>
+		</div>
 
 		<h4 class="d-flex justify-content-between align-items-center mb-3">
             <span class="titulo">Planificaciones</span>
@@ -294,9 +335,12 @@ else // Continuamos a la página
 
 												?></td>
 												<td>
-												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver</button></a>
+												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">sticky_note_2</span> Ver</button></a>
 												<a href="/editararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">edit</span> Modificar</button></a>
-												<a href="/eliminararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-danger tabla"><span class="material-icons">delete</span> Eliminar</button></a>
+												<form method="post" action="">
+												<input type="hidden" name="archivo_id" value="<?php echo $row['archivo_id']; ?>" />
+												<button name="eliminararchivo-submit" type="submit" class="btn btn-danger tabla"><span class="material-icons">delete</span> Eliminar</button>
+												</form>
 												</td>
 											</tr>
 
@@ -346,7 +390,7 @@ else // Continuamos a la página
 
 												?></td>
 												<td>
-												<a href="/archivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver</button></a>
+												<a href="/archivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">sticky_note_2</span> Ver</button></a>
 												<a href="/editararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">edit</span> Modificar</button></a>
 												<a href="/eliminararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-danger tabla"><span class="material-icons">delete</span> Eliminar</button></a>
 												</td>
@@ -398,7 +442,7 @@ else // Continuamos a la página
 
 												?></td>
 												<td>
-												<a href="/archivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver</button></a>
+												<a href="/archivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">sticky_note_2</span> Ver</button></a>
 												<a href="/editararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">edit</span> Modificar</button></a>
 												<a href="/eliminararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-danger tabla"><span class="material-icons">delete</span> Eliminar</button></a>
 												</td>
@@ -450,7 +494,7 @@ else // Continuamos a la página
 
 												?></td>
 												<td>
-												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver</button></a>
+												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">sticky_note_2</span> Ver</button></a>
 												<a href="/editararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">edit</span> Modificar</button></a>
 												<a href="/eliminararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-danger tabla"><span class="material-icons">delete</span> Eliminar</button></a>
 												</td>
@@ -502,7 +546,7 @@ else // Continuamos a la página
 
 												?></td>
 												<td>
-												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver</button></a>
+												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">sticky_note_2</span> Ver</button></a>
 												<a href="/editararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">edit</span> Modificar</button></a>
 												<a href="/eliminararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-danger tabla"><span class="material-icons">delete</span> Eliminar</button></a>
 												</td>
@@ -581,7 +625,7 @@ else // Continuamos a la página
 
 												?></td>
 												<td>
-												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver</button></a>
+												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">sticky_note_2</span> Ver</button></a>
 												<a href="/editararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">edit</span> Modificar</button></a>
 												<a href="/eliminararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-danger tabla"><span class="material-icons">delete</span> Eliminar</button></a>
 												</td>
@@ -633,7 +677,7 @@ else // Continuamos a la página
 
 												?></td>
 												<td>
-												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver</button></a>
+												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">sticky_note_2</span> Ver</button></a>
 												<a href="/editararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">edit</span> Modificar</button></a>
 												<a href="/eliminararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-danger tabla"><span class="material-icons">delete</span> Eliminar</button></a>
 												</td>
@@ -685,7 +729,7 @@ else // Continuamos a la página
 
 												?></td>
 												<td>
-												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver</button></a>
+												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">sticky_note_2</span> Ver</button></a>
 												<a href="/editararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">edit</span> Modificar</button></a>
 												<a href="/eliminararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-danger tabla"><span class="material-icons">delete</span> Eliminar</button></a>
 												</td>
@@ -737,7 +781,7 @@ else // Continuamos a la página
 
 												?></td>
 												<td>
-												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver</button></a>
+												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">sticky_note_2</span> Ver</button></a>
 												<a href="/editararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">edit</span> Modificar</button></a>
 												<a href="/eliminararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-danger tabla"><span class="material-icons">delete</span> Eliminar</button></a>
 												</td>
@@ -789,7 +833,7 @@ else // Continuamos a la página
 
 												?></td>
 												<td>
-												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver</button></a>
+												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">sticky_note_2</span> Ver</button></a>
 												<a href="/editararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">edit</span> Modificar</button></a>
 												<a href="/eliminararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-danger tabla"><span class="material-icons">delete</span> Eliminar</button></a>
 												</td>
@@ -840,6 +884,19 @@ else // Continuamos a la página
 	var tablaTecnologiaGuias = new List('nav-tecnologia-guia', options);
 	var tablaMusicaGuias = new List('nav-musica-guia', options);
 	var tablaArtesVisualesGuias = new List('nav-artesvisuales-guia', options);
+
+	$('.Count').each(function () {
+		$(this).prop('Counter',0).animate({
+			Counter: $(this).text()
+		}, {
+			duration: 3000,
+			easing: 'swing',
+			step: function (now) {
+				$(this).text(Math.ceil(now));
+			}
+		});
+	});
+
 	</script>
     
     <script src="js/bootstrap.bundle.min.js"></script>

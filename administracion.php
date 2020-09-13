@@ -38,7 +38,7 @@ else // Continuamos a la página
 		ordencompra.archivo_id=archivo.archivo_id
 	ORDER BY 
 		historial_id DESC 
-	LIMIT 10";  
+	LIMIT 5";  
 	$rs_result_actividad_ordenes = mysqli_query($conn, $sql_actividad_ordenes);  
 	
 
@@ -71,7 +71,7 @@ else // Continuamos a la página
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
-		<script src="https://code.jquery.com/jquery-3.5.0.slim.min.js" integrity="sha256-MlusDLJIP1GRgLrOflUQtshyP0TwT/RHXsI1wWGnQhs=" crossorigin="anonymous"></script>
+		<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 	</head>
 <body class="text-center">
 
@@ -111,49 +111,82 @@ else // Continuamos a la página
 				
         </h4>
 		
-			<div class="card mb-3">
-			  <div class="row no-gutters">
-
+		<div class="card mb-3">
+			<div class="row no-gutters">
 				<div class="col">
-				  <div class="card-body bg-azul-claro">
-
-
-            <div class="row">
-				<div class="col-sm text-center">
-					<div class="row counter-profile">
-						<div class="col-sm">
-							<h2><strong><?php echo $cnt_archivos_total; ?></strong></h2>                    
-							<p><small>archivos subidos</small></p>
-							<hr class="mb-4">
-							<a class="dropdown-item" href="/archivos"><button id="btnGroupDrop1" type="button" class="btn btn-secondary">Ver archivos</button></a>
-						</div>
-						<div class="col-sm">
-							<h2><strong><?php echo $cnt_usuarios_registrados; ?></strong></h2>                    
-							<p><small>usuarios registrados</small></p>
-							<hr class="mb-4">
-							<div class="btn-group" role="group">
-								<button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones</button>
-								<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-									<a class="dropdown-item" href="/usuarios">Ver usuarios</a>
-									<a class="dropdown-item" href="/nuevousuario">Crear nuevo</a>
+				  	<div class="card-body bg-azul-claro">
+						<div class="row">
+							<div class="col-sm">
+								<div class="card border-plomo">
+									<div class="card-body bg-azul-especial text-white">
+										<div class="row">
+											<div class="col-3">
+												<span class="material-icons stats">sticky_note_2</span>
+											</div>
+											<div class="col-9 text-right">
+												<div class="Count"><?php echo $cnt_archivos_total; ?></div>
+												<h4>archivos subidos</h4>
+											</div>
+										</div>
+									</div>
+									<a href="/archivos">
+									<div class="card-footer text-info">
+										<span class="float-center">Ver todos los archivos</span>
+										<span class="float-right"><i class="fa fa-arrow-circle-right"></i></span>
+										<div class="clearfix"></div>
+									</div>
+									</a>
 								</div>
-  							</div> 
-						</div>
-						<div class="col-sm">
-							<h2><strong><?php echo $cnt_ordenes_pendientes_confirmacion; ?></strong></h2>                    
-							<p><small>ordenes pendientes de revisión</small></p>
-							<hr class="mb-4">
-							<a class="dropdown-item" href="/ordenes"><button id="btnGroupDrop1" type="button" class="btn btn-secondary">Ver ordenes</button></a>
+							</div>
+							<div class="col-sm">
+								<div class="card border-plomo">
+									<div class="card-body bg-naranjo-especial text-white">
+										<div class="row">
+											<div class="col-3">
+												<span class="material-icons stats">people</span>
+											</div>
+											<div class="col-9 text-right">
+												<div class="Count"><?php echo $cnt_usuarios_registrados; ?></div>
+												<h4>usuarios registrados</h4>
+											</div>
+										</div>
+									</div>
+									<a href="/usuarios">
+										<div class="card-footer bg-light text-info">
+											<span class="float-center">Ver todos los usuarios</span>
+											<span class="float-right"><i class="fa fa-arrow-circle-right"></i></span>
+											<div class="clearfix"></div>
+										</div>
+									</a>
+								</div>
+							</div>
+							<div class="col-sm">
+								<div class="card border-plomo">
+									<div class="card-body bg-rosado-especial text-white">
+										<div class="row">
+											<div class="col-3">
+												<span class="material-icons stats">library_books</span>
+											</div>
+											<div class="col-9 text-right">
+												<div class="Count"><?php echo $cnt_ordenes_pendientes_confirmacion; ?></div>
+												<h4>ordenes pendientes</h4>
+											</div>
+										</div>
+									</div>
+									<a href="/ordenes">
+										<div class="card-footer bg-light text-info">
+											<span class="float-center">Ver todos las ordenes</span>
+											<span class="float-right"><i class="fa fa-arrow-circle-right"></i></span>
+											<div class="clearfix"></div>
+										</div>
+									</a>
+								</div>
+							</div>
 						</div>
 					</div>
-                </div>            
-			</div>
-			
-
-				  </div>
 				</div>
-			  </div>
 			</div>
+		</div>
 
 
 			<h4 class="d-flex justify-content-between align-items-center mb-3 margin-bottom">
@@ -173,7 +206,7 @@ else // Continuamos a la página
 								?>
 
 								<li>
-									<a href="/ordenes"><strong>Orden:</strong> <?php echo $row['ordencompra_id']; ?> <strong>Archivo:</strong></strong> <?php echo $row['nombre']; ?></a>
+									<a href="/ordenes"><strong class="titulo">Orden:</strong> <?php echo $row['ordencompra_id']; ?> <strong class="titulo">Archivo:</strong></strong> <?php echo $row['nombre']; ?></a>
 									<a href="#" class="float-right"><?php echo $row['fecha_creacion']; ?></a>
 									<p><?php echo $row['accion']; ?></p>
 								</li>
@@ -188,14 +221,9 @@ else // Continuamos a la página
 							<h4 class="titulo">Actividad de usuarios</h4>
 							<ul class="timeline">
 								<li>
-									<a target="_blank" href="#">New Web Design</a>
-									<a href="#" class="float-right">21 March, 2014</a>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi semper, et elementum lorem ornare. Maecenas placerat facilisis mollis. Duis sagittis ligula in sodales vehicula....</p>
-								</li>
-								<li>
-									<a href="#">21 000 Job Seekers</a>
-									<a href="#" class="float-right">4 March, 2014</a>
-									<p>Curabitur purus sem, malesuada eu luctus eget, suscipit sed turpis. Nam pellentesque felis vitae justo accumsan, sed semper nisi sollicitudin...</p>
+									<a href="#"><strong class="titulo">Usuario: </strong></a>
+									<a href="#" class="float-right">Fecha</a>
+									<p>Texto</p>
 								</li>
 							</ul>
 						</div>
@@ -216,5 +244,22 @@ else // Continuamos a la página
     
     <script src="js/bootstrap.bundle.min.js"></script>
 	
+	<script type="text/javascript">
+
+	$('.Count').each(function () {
+		$(this).prop('Counter',0).animate({
+			Counter: $(this).text()
+		}, {
+			duration: 3000,
+			easing: 'swing',
+			step: function (now) {
+				$(this).text(Math.ceil(now));
+			}
+		});
+	});
+
+	</script>
+
+
   </body>
 </html>

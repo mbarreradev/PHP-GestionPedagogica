@@ -16,7 +16,49 @@ else // Continuamos a la página
 	WHERE 
 		usuario_id = '".$_SESSION['usuario_id']."' "; 
 	$rs_resultdatosgeneral = mysqli_query($conn, $sql_datosusuariosgeneral);
-	$row_profile_general = mysqli_fetch_assoc($rs_resultdatosgeneral);
+    $row_profile_general = mysqli_fetch_assoc($rs_resultdatosgeneral);
+    
+    // Función para guardar los cambios
+	if(isset($_POST['guardarcambios-submit']))
+	{
+        $usuario = $_SESSION['usuario_id'];
+
+        // Campos
+        $nombres = $_POST['Nombres'];
+        $nombres_final = filter_var($nombres , FILTER_SANITIZE_STRING);
+
+        $apellidos = $_POST['Apellidos'];
+        $apellidos_final = filter_var($apellidos , FILTER_SANITIZE_STRING);
+
+        $email = $_POST['Email'];
+        $email_final = filter_var($email , FILTER_SANITIZE_EMAIL);
+
+        $rut = $_POST['Rut'];
+        $rut_final = filter_var($rut , FILTER_SANITIZE_NUMBER_INT);
+
+        $dv = $_POST['Dv'];
+        $dv_final = filter_var($dv , FILTER_SANITIZE_STRING);
+
+        $telefono = $_POST['Telefono'];
+        $telefono_final = filter_var($telefono , FILTER_SANITIZE_NUMBER_INT);
+
+
+        $sql_update_guardarcambios = "UPDATE usuario SET nombres = '$nombres_final', apellidos = '$apellidos_final', correo = '$email_final', rut = '$rut_final', dv = '$dv_final', telefono = '$telefono_final' WHERE usuario_id = '$usuario' ";
+
+        if ($conn->query($sql_update_guardarcambios) === TRUE)
+		{
+            // Refrescamos la página
+		    header("Refresh:0");
+        }
+        else
+        {
+            echo "Error sql log." . $sql_update_guardarcambios . "<br>" . $conn->error;
+            //echo "Error sql log.";
+        }
+        
+        $conn->close();
+
+    }
 
 ?>
 <!doctype html>
@@ -32,8 +74,7 @@ else // Continuamos a la página
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
-		<script src="https://code.jquery.com/jquery-3.5.0.slim.min.js" integrity="sha256-MlusDLJIP1GRgLrOflUQtshyP0TwT/RHXsI1wWGnQhs=" crossorigin="anonymous"></script>
-		<script data-ad-client="ca-pub-2522486668045838" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+		<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 		<script src="js/moment.min.js"></script>
 		<script src="js/list.min.js"></script>
 	</head>
@@ -74,12 +115,18 @@ else // Continuamos a la página
 			</div>
         </h4>
 		
-			<div class="card mb-3 profile border-plomo bg-azul-claro">
+			<div class="card mb-3 profile border-plomo">
 			  <div class="row no-gutters">
-				<div class="col-md-4">
+				<div class="col-md-4 margin-top">
+                    <div class="card mb-3">
+                        <div class="card-body bg-azul-claro">
 				  <img src="<?php echo $row_profile_general["avatar_url"]; ?>" class="card-img profile">
-                    <h4><?php echo $row_profile_general["nombres"]; ?> <?php echo $row_profile_general["apellidos"]; ?></h4>
-                    <span class="tags">Conectado desde Facebook</span>
+                    <h4 class="titulo"><?php echo $row_profile_general["nombres"]; ?> <?php echo $row_profile_general["apellidos"]; ?></h4>
+                    <p class="titulo"><strong>Registrado el:</strong> <?php echo $row_profile_general["registrado_el"]; ?></p>
+                    <p class="titulo"><strong>Último inicio de sesión:</strong> <?php echo $row_profile_general["ultimo_iniciosesion"]; ?></p>
+                    <p class="titulo"><strong>Última dirección IP:</strong> <?php echo $row_profile_general["ultima_ip"]; ?></p>
+                    </div>
+                    </div>
 				</div>
 				<div class="col-md-8">
 				  <div class="card-body">
@@ -87,7 +134,7 @@ else // Continuamos a la página
 
             <div class="row">
                 <div class="col-sm">
-                    
+                <h4 class="titulo">Datos del perfil</h4>
 
                 <div class="modal fade" id="desvincularModal" tabindex="-1" role="dialog" aria-labelledby="desvincularModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -108,48 +155,40 @@ else // Continuamos a la página
                     </div>
                 </div>
 
-
-                    <form role="form">
+                    <form method="post" action="">
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Nombre</label>
                             <div class="col-lg-9">
-                                <input class="form-control" type="text" value="<?php echo $row_profile_general["nombres"]; ?>" maxlength="50">
+                                <input class="form-control" type="text" name="Nombres" value="<?php echo $row_profile_general["nombres"]; ?>" maxlength="50" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Apellido</label>
                             <div class="col-lg-9">
-                                <input class="form-control" type="text" value="<?php echo $row_profile_general["apellidos"]; ?>" maxlength="50">
+                                <input class="form-control" type="text" name="Apellidos" value="<?php echo $row_profile_general["apellidos"]; ?>" maxlength="50" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Correo electrónico</label>
                             <div class="col-lg-9">
-                                <input class="form-control" type="email" value="<?php echo $row_profile_general["correo"]; ?>" maxlength="30">
+                                <input class="form-control" type="email" name="Email" value="<?php echo $row_profile_general["correo"]; ?>" maxlength="30" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">RUT</label>
                             <div class="col-lg-6">
-                                <input class="form-control" type="number" value="<?php echo $row_profile_general["rut"]; ?>" placeholder="RUT" maxlength="8">
+                                <input class="form-control" type="number" name="Rut" value="<?php echo $row_profile_general["rut"]; ?>" placeholder="RUT" maxlength="8" required>
                             </div>
                             <div class="col-lg-3">
-                                <input class="form-control" type="text" value="<?php echo $row_profile_general["dv"]; ?>" placeholder="Digito verificador" maxlength="1">
+                                <input class="form-control" type="text" name="Dv" value="<?php echo $row_profile_general["dv"]; ?>" placeholder="Digito verificador" maxlength="1" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Número de teléfono</label>
                             <div class="col-lg-9">
-                                <input class="form-control" type="number" value="<?php echo $row_profile_general["telefono"]; ?>" placeholder="Número de teléfono" maxlength="12">
+                                <input class="form-control" type="number" name="Telefono" value="<?php echo $row_profile_general["telefono"]; ?>" placeholder="Número de teléfono" maxlength="12" required>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Registrado el </label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="text" value="<?php echo $row_profile_general["registrado_el"]; ?>" disabled>
-                            </div>
-                        </div>
-                        
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Facebook ID vinculado</label>
                             <div class="col-lg-6">
@@ -160,22 +199,10 @@ else // Continuamos a la página
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Último inicio de sesión</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="text" value="<?php echo $row_profile_general["ultimo_iniciosesion"]; ?>" disabled>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Última dirección IP</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="text" value="<?php echo $row_profile_general["ultima_ip"]; ?>" disabled>
-                            </div>
-                        </div>
-                        <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label"></label>
                             <div class="col-lg-9">
-                                <input type="reset" class="btn btn-secondary" value="Cancelar">
-                                <input type="button" class="btn btn-primary" value="Guardar cambios">
+                                <a href="/perfil"><input type="button" class="btn btn-secondary" value="Volver"></a>
+                                <input class="btn btn-primary" type="submit" name="guardarcambios-submit" value="Guardar cambios">
                             </div>
                         </div>
                     </form>
