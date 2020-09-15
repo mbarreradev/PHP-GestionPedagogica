@@ -75,7 +75,6 @@ else // Continuamos a la página
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
 		<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-		<script src="js/moment.min.js"></script>
 		<script src="js/list.min.js"></script>
 	</head>
 <body class="text-center">
@@ -218,48 +217,6 @@ else // Continuamos a la página
 			  </div>
 			</div>
 			
-		<h4 class="d-flex justify-content-between align-items-center mb-3">
-			<span class="titulo">Historial del usuario</span>
-        </h4>	
-
-		<section id="tabs" class="project-tab">
-                <div class="row">
-                    <div class="col-md-12">
-
-                            <div id="ordenes-pendientes">
-                                <div class="buscador arriba">
-									<input type="search" class="search form-control" placeholder="Puedes buscar por ID, usuario, monto pagado o estado"/>
-								</div>
-                                <table id="tabla-matematica-planificacion" class="table" cellspacing="0">
-                                    <thead>
-										<tr class="bg-azul">
-											<th class="sort" data-sort="id">Historial ID</th>
-                                            <th class="sort" data-sort="fechacreacion">Fecha de creación</th>
-                                            <th class="sort" data-sort="accion">Acción</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="list limpio">
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result_pendientes_confirmacion)) {?>	
-
-											<tr>
-												<td class="id"><?php echo $row['ordencompra_id']; ?></td>
-												<td class="fechacreacion"><a href="/verperfil?id="><?php echo $row['nombres']." ".$row['apellidos']; ?></a></td>
-												<td class="accion">$<?php echo $row['pagado']; ?></td>
-											</tr>
-
-										<?php };  ?>
-                                    </tbody>
-                                </table>
-
-								<div class="container">
-									<div class="row text-center justify-content-center">
-										<ul class="pagination"></ul>
-									</div>
-								</div>
-                            </div>
-                    </div>
-                </div>
-        </section>
 
 	</div>
     </div>
@@ -270,16 +227,6 @@ else // Continuamos a la página
         </div>
       </footer>
     </div>
-
-	<SCRIPT type="text/javascript">
-		var options = {
-    valueNames: [ 'tema', 'curso', 'unidad'],
-    page: 10,
-    pagination: true
-	};
-
-	var tablaMatematicasPlanificaciones = new List('nav-matematica-planificacion', options);
-	</script>
 
     <script src="js/bootstrap.bundle.min.js"></script>
 	

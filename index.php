@@ -97,8 +97,17 @@ $cnt_guias = $rs_result_guias_totales->num_rows;
 				<h1 class="display-4">Bienvenido a Gestión Pedagógica</h1>
 				<p class="index-description">En esta página encontrarás más de <?php echo $cnt_planificaciones; ?> planificaciones y <?php echo $cnt_guias; ?> guías para casi todos los cursos de enseñanza básica.</p>
 
-				<a href="/perfil"><button type="button" class="btn btn-primary btn-outline btn-lg"><span class="material-icons">person</span> Ingresar a mi cuenta</button></a>
-
+				<?php
+						if (isset($_SESSION["fb_access_token"]))
+						{
+							echo '<a href="/perfil"><button type="button" class="btn btn-primary btn-outline btn-lg"><span class="material-icons">person</span> Ingresar a mi cuenta</button></a>';
+						}
+						else
+						{
+							echo '<a href="/login"><button type="button" class="btn btn-primary btn-outline btn-lg"><span class="material-icons">person</span> Registrar una cuenta ahora</button></a>';
+						}
+				?>
+				
 				<!-- GestionPedagogica Index -->
 				<ins class="adsbygoogle"
 					style="display:block"

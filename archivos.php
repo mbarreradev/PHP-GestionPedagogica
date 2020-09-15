@@ -247,7 +247,7 @@ else // Continuamos a la página
 									<div class="card-body bg-naranjo-especial text-white">
 										<div class="row">
 											<div class="col-3">
-												<span class="material-icons stats">people</span>
+												<span class="material-icons stats">sticky_note_2</span>
 											</div>
 											<div class="col-9 text-right">
 												<div class="Count"><?php echo $cnt_guias_total; ?></div>
@@ -262,7 +262,7 @@ else // Continuamos a la página
 									<div class="card-body bg-rosado-especial text-white">
 										<div class="row">
 											<div class="col-3">
-												<span class="material-icons stats">library_books</span>
+												<span class="material-icons stats">source</span>
 											</div>
 											<div class="col-9 text-right">
 												<div class="Count"><?php echo $cnt_archivos_total; ?></div>

@@ -7,10 +7,10 @@
 
 # Extras
 - Bootstrap v4.4.1
-- Moment.js 2.24.0
-- Material Icons
 - JQuery 3.5.1
+- Moment.js 2.27.0
 - List.js v1.5.0
+- Material Icons
 
 # Características
 - Ingreso de usuarios con Facebook API, luego de esto registra una cuenta en la base de datos.

@@ -64,19 +64,11 @@ else // Continuamos a la página
       // Variables para el historial de orden
       $usuario = $row_profile_general['nombres']." ".$row_profile_general['apellidos'];
 
-      // Consulta que crea el historial de la orden
-      $sql_create_ordencompra_historial= "INSERT INTO ordencompra_historial (historial_id, ordencompra_id, fecha_creacion, accion) VALUES (DEFAULT, '$ultimaordencompra_id', '$fecha_actualizacion', '".$usuario." ha creado una orden nueva')"; 
-        
-      if ($conn->query($sql_create_ordencompra_historial) === TRUE) 
-      {
-          // Enviamos al usuario a la siguiente pantalla
-          header("Location: https://repositorio.gestionpedagogica.cl/verorden?id=$ultimaordencompra_id");
-      }
-      else
-      {
-        //echo "Error sql log." . $sql_create_ordencompra_historial . "<br>" . $conn->error;
-        echo "Error sql update.";
-      }
+      // Creamos log de orden
+      $url_id = $ultimaordencompra_id;
+      $accion = $usuario." ha creado una orden nueva";
+      $redirect = "verorden?id=".$ultimaordencompra_id;
+      crearlog_ordencompra($url_id, $accion, $redirect);
 		}
 		else
 		{
@@ -101,7 +93,6 @@ else // Continuamos a la página
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
-		<script data-ad-client="ca-pub-2522486668045838" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 	</head>
 <body class="text-center">
 

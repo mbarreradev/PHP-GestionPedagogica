@@ -95,37 +95,56 @@ if(mysqli_num_rows($rs_check) > 0)
   // Guardamos usuario_id y rango en la sesión
   $_SESSION['usuario_id'] = $usuario_id;
   $_SESSION['rango'] = '0';
+  $ultimo_iniciosesion1 = date("Y-m-d H:i:s");
 
   // ACTUALIZAMOS ULTIMA IP E INICIO DE SESION
-	
-	// Enviamos al usuario devuelta a la página de usuario
+  if (getenv('HTTP_X_FORWARDED_FOR')) { 
+    $pipaddress = getenv('HTTP_X_FORWARDED_FOR');
+    $ipaddress = getenv('REMOTE_ADDR'); 
+    $ultima_ip1 = $ipaddress;
+  } 
+  else 
+  { 
+    $ipaddress = getenv('REMOTE_ADDR'); 
+    $ultima_ip1 = $ipaddress; 
+  }
+
+  // Consulta que actualiza el valor del estado de la orden
+  $sql_update_lastiniciosesionyip = "UPDATE usuario SET ultimo_iniciosesion = '".$ultimo_iniciosesion1."', ultima_ip = '".$ultima_ip1."' WHERE usuario_id = '".$usuario_id."' "; 
+
+  if ($conn->query($sql_update_lastiniciosesionyip) === TRUE) 
+  {
+    // Enviamos al usuario devuelta a la página de usuario
 	header('Location: https://repositorio.gestionpedagogica.cl/perfil');
+  }
+	
+	
 }
-else
+else // si no encuentra el usuario, entonces creamos cuenta nueva
 {
-	// Creamos cuenta nueva
+	// Valores
 	$registrado_el = date("Y-m-d H:i:s");
 	$nombres = $userNode->getFirstname();
 	$apellidos = $userNode->getLastname();
 	$correo = $userNode->getEmail();
 	$usuario_imagen = $userNode->getPicture();
-  $avatar_url = $usuario_imagen['url'];
-  $rango = '0';
-  $ultimo_iniciosesion = date("Y-m-d H:i:s");
+    $avatar_url = $usuario_imagen['url'];
+    $rango = '0';
+    $ultimo_iniciosesion2 = date("Y-m-d H:i:s");
 
-  // Capturamos la IP del usuario
+
   if (getenv('HTTP_X_FORWARDED_FOR')) { 
     $pipaddress = getenv('HTTP_X_FORWARDED_FOR');
     $ipaddress = getenv('REMOTE_ADDR'); 
-    $ultima_ip = $ipaddress;
+    $ultima_ip2 = $ipaddress;
   } 
   else 
   { 
     $ipaddress = getenv('REMOTE_ADDR'); 
-    $ultima_ip = $ipaddress; 
+    $ultima_ip2 = $ipaddress; 
   }
 				
-	$sql1 = "INSERT INTO usuario (usuario_id, registrado_el, nombres, apellidos, correo, avatar_url, facebook_id, rango, ultimo_iniciosesion, ultima_ip) VALUES (DEFAULT, '$registrado_el', '$nombres', '$apellidos', '$correo', '$avatar_url', '$facebook_id', '$rango', '$ultimo_iniciosesion', '$ultima_ip')";
+	$sql1 = "INSERT INTO usuario (usuario_id, registrado_el, nombres, apellidos, correo, avatar_url, facebook_id, rango, ultimo_iniciosesion, ultima_ip) VALUES (DEFAULT, '$registrado_el', '$nombres', '$apellidos', '$correo', '$avatar_url', '$facebook_id', '$rango', '$ultimo_iniciosesion2', '$ultima_ip2')";
 
 	if ($conn->query($sql1) === TRUE) 
 	{

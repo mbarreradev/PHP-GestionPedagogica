@@ -2,6 +2,10 @@
 session_start();
 require 'inc/conexion.php';
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 if (!isset($_SESSION["fb_access_token"])) // Si no encuentra el access token de la sesión, se enviará a login
 {
 	header("location: login.php");
@@ -53,19 +57,10 @@ else // Continuamos a la página
 
 			if ($conn->query($sql_update_ordencompra) === TRUE) 
 			{
-				// Consulta que crea el historial de la orden
-				$sql_create_ordencompra_historial= "INSERT INTO ordencompra_historial (historial_id, ordencompra_id, fecha_creacion, accion) VALUES (DEFAULT, '$url_id', '$fecha_actualizacion', '".$usuario." modificó la orden a Pendiente de confirmación')"; 
-				
-				if ($conn->query($sql_create_ordencompra_historial) === TRUE) 
-				{
-					// Refrescamos la página
-					header("Refresh:0");
-				}
-				else
-				{
-					//echo "Error updating record: " . $conn->error;
-					echo "Error sql update.";
-				}
+				// Creamos log de orden
+				$redirect = NULL;
+				$accion = $usuario." modificó la orden a Pendiente de confirmación";
+				crearlog_ordencompra($url_id, $accion, $redirect);
 			} 
 			else 
 			{
@@ -94,7 +89,7 @@ else // Continuamos a la página
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
 		<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-		<script src="js/moment.min.js"></script>
+		<script src="js/moment-with-locales.js"></script>
 	</head>
 <body class="text-center">
 

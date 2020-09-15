@@ -175,7 +175,7 @@ else // Continuamos a la página
 									</div>
 									<a href="/ordenes">
 										<div class="card-footer bg-light text-info">
-											<span class="float-center">Ver todos las ordenes</span>
+											<span class="float-center">Ver todas las ordenes</span>
 											<span class="float-right"><i class="fa fa-arrow-circle-right"></i></span>
 											<div class="clearfix"></div>
 										</div>

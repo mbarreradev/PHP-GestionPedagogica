@@ -248,7 +248,7 @@ else // Continuamos a la página
 									<div class="card-body bg-azul-especial text-white">
 										<div class="row">
 											<div class="col-3">
-												<span class="material-icons stats">sticky_note_2</span>
+												<span class="material-icons stats">queue</span>
 											</div>
 											<div class="col-9 text-right">
 												<div class="Count"><?php echo $cnt_ordenes_pendientes_confirmacion; ?></div>
@@ -263,7 +263,7 @@ else // Continuamos a la página
 									<div class="card-body bg-naranjo-especial text-white">
 										<div class="row">
 											<div class="col-3">
-												<span class="material-icons stats">people</span>
+												<span class="material-icons stats">library_books</span>
 											</div>
 											<div class="col-9 text-right">
 												<div class="Count"><?php echo $cnt_ordenes_creadas; ?></div>
@@ -278,7 +278,7 @@ else // Continuamos a la página
 									<div class="card-body bg-rosado-especial text-white">
 										<div class="row">
 											<div class="col-3">
-												<span class="material-icons stats">library_books</span>
+												<span class="material-icons stats">library_add_check</span>
 											</div>
 											<div class="col-9 text-right">
 												<div class="Count"><?php echo $cnt_ordenes_pagadas; ?></div>

@@ -24,7 +24,7 @@ require 'inc/conexion.php';
 		<div class="container p-3">
 			<div class="container rounded border border-azul-claro p-3">
 				<div class="col-md-12 text-center">
-					<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4"><img class="logo" src="/images/Logo.png" width="32" height="32"><h5 class="my-0 mr-md-auto font-weight-normal">Gestión Pedagógica</h5></div>
+					<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3"><img class="logo" src="/images/Logo.png" width="32" height="32"><h5 class="my-0 mr-md-auto font-weight-normal">Gestión Pedagógica</h5></div>
 					<span class="display-1 d-block">404</span>
 					<div class="mb-4 lead">La página que estas buscando no existe</div>
 					<a href="https://repositorio.gestionpedagogica.cl" class="btn btn-link">Volver a la página principal</a>

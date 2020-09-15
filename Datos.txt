@@ -32,6 +32,11 @@ Rango
 0 => Usuario
 2 => Administrador
 
+Estado
+
+0 => Desactivado (baneado)
+1 => Activado
+
 
 
     // Process download
@@ -70,7 +75,6 @@ PERFIL:
 
 
 ADMINISTRACIÓN:
-usuarios
 verperfil
 eliminarperfil
 

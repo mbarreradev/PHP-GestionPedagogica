@@ -233,7 +233,7 @@ else // Continuamos a la página
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
 		<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-		<script src="js/moment.min.js"></script>
+		<script src="js/moment-with-locales.js"></script>
 		<script src="js/list.min.js"></script>
 	</head>
 <body class="text-center">
@@ -315,40 +315,35 @@ $(function(){
 				  <img src="<?php echo $row_profile_general["avatar_url"]; ?>" class="card-img profile">
 				</div>
 				<div class="col-md-8">
-				  <div class="card-body">
-				  
-
-            <div class="row">
-                <div class="col-sm">
-                    <h4 class="titulo"><?php echo $row_profile_general["nombres"]; ?> <?php echo $row_profile_general["apellidos"]; ?></h4>
-					Registrado: <span id="registrado"><?php echo $row_profile_general["registrado_el"]; ?></span></br>
-					Correo electrónico: <span><?php echo $row_profile_general["correo"]; ?></span></br>
-					<hr class="bg-azul"/>
-                    <span class="tags">Conectado desde Facebook</span>
-                </div>             
-                <div class="col-sm text-center">
-				<div class="row counter-profile">
-				<div class="col-sm">
-                    <h2><strong class="titulo"><?php echo $cnt_documentos_disponible_total; ?></strong></h2>                    
-                    <p>documentos disponibles</p>
-                </div>
-                <div class="col-sm">
-                    <h2><strong class="titulo"><?php echo $cnt_compras_realizadas; ?></strong></h2>                    
-                    <p>compras realizadas</p>
-                </div>
-                <div class="col-sm">
-                    <h2><strong class="titulo"><?php echo $cnt_ordenes_pendientes; ?></strong></h2>                    
-                    <p>ordenes pendientes</p>
-                </div>
-
-				</div>
-                </div>
-            </div>
-				  
-				  
-				  </div>
-				</div>
-			  </div>
+				  	<div class="card-body">
+						<div class="row">
+							<div class="col-sm">
+								<h4 class="titulo"><?php echo $row_profile_general["nombres"]; ?> <?php echo $row_profile_general["apellidos"]; ?></h4>
+								Registrado: <span id="registrado"><?php echo $row_profile_general["registrado_el"]; ?></span></br>
+								Correo electrónico: <span><?php echo $row_profile_general["correo"]; ?></span></br>
+								<hr class="bg-azul"/>
+								<span class="tags">Conectado desde Facebook</span>
+							</div>             
+							<div class="col-sm text-center">
+								<div class="row counter-profile">
+									<div class="col-sm">
+										<div class="Count"><?php echo $cnt_documentos_disponible_total; ?></div>                    
+											<p>documentos disponibles</p>
+										</div>
+										<div class="col-sm">
+											<div class="Count"><?php echo $cnt_compras_realizadas; ?></div>                    
+											<p>compras realizadas</p>
+										</div>
+										<div class="col-sm">
+											<div class="Count"><?php echo $cnt_ordenes_pendientes; ?></div>                    
+											<p>ordenes pendientes</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+			  	</div>
 			</div>
 			
 		<h4 class="d-flex justify-content-between align-items-center mb-3">
@@ -799,6 +794,18 @@ $(function(){
 	var tablaTecnologiaGuias = new List('nav-tecnologia-guia', options);
 	var tablaMusicaGuias = new List('nav-musica-guia', options);
 	var tablaArtesVisualesGuias = new List('nav-artesvisuales-guia', options);
+
+	$('.Count').each(function () {
+		$(this).prop('Counter',0).animate({
+			Counter: $(this).text()
+		}, {
+			duration: 3000,
+			easing: 'swing',
+			step: function (now) {
+				$(this).text(Math.ceil(now));
+			}
+		});
+	});
 	</script>
 
     <script src="js/bootstrap.bundle.min.js"></script>
