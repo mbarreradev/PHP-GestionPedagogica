@@ -7,7 +7,7 @@
 
 # Extras
 - Bootstrap v4.4.1
-- JQuery 3.5.1
+- jQuery 3.5.1
 - Moment.js 2.27.0
 - List.js v1.5.0
 - Material Icons

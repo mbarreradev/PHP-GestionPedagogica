@@ -66,6 +66,7 @@ https://demos.devexpress.com/bootstrap/cardview/
 
 
 FALTA POR HACER
+Arreglar fechas "hace unos segundos" de administracion
 
 INDEX:
 

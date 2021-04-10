@@ -72,6 +72,7 @@ else // Continuamos a la página
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
 		<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+		<script src="js/moment-with-locales.js"></script>
 	</head>
 <body class="text-center">
 
@@ -202,12 +203,14 @@ else // Continuamos a la página
 							<ul class="timeline">
 
 								<?php  
+									$counter = 0;
 									while ($row = mysqli_fetch_assoc($rs_result_actividad_ordenes)) {
+									$counter++;
 								?>
 
 								<li>
 									<a href="/ordenes"><strong class="titulo">Orden:</strong> <?php echo $row['ordencompra_id']; ?> <strong class="titulo">Archivo:</strong></strong> <?php echo $row['nombre']; ?></a>
-									<a href="#" class="float-right"><?php echo $row['fecha_creacion']; ?></a>
+									<a href="#" class="float-right" rel="tooltip" title="<?php echo $row['fecha_creacion']; ?>" id="fecha<?php echo $counter; ?>"><?php echo $row['fecha_creacion']; ?></a>
 									<p><?php echo $row['accion']; ?></p>
 								</li>
 
@@ -258,8 +261,21 @@ else // Continuamos a la página
 		});
 	});
 
-	</script>
+	var dateFormat = 'YYYY-DD-MM HH:mm:ss';
 
+	for (var i = 1; i < 6; i+=1) 
+	{
+		var fecha = "fecha" + i;
+		var documento = document.getElementById(fecha).value;
+		var registrado_utctime = moment.utc(documento);
+		var registrado_localdate = registrado_utctime.local();
+		var registrado_localdate_locale = registrado_localdate.locale('es')
+
+		var modificardivregistrado = document.getElementById("fecha" + i);
+		modificardivregistrado.innerHTML =  moment(registrado_localdate_locale, "YYYY-MM-DD hh:mm:ss").fromNow();
+	}
+
+	</script>
 
   </body>
 </html>

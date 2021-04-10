@@ -238,26 +238,18 @@ else // Continuamos a la página
 	</head>
 <body class="text-center">
 
-<?php
-// values
-$registradotime = $row_profile_general["registrado_el"];
-?>
-
 <script>
 $(function(){
   setInterval(function(){
-	  
 	var dateFormat = 'YYYY-DD-MM HH:mm:ss';
-	var registrado_utctime = moment.utc('<?php echo $registradotime; ?>');
+	var registrado_utctime = moment.utc('<?php echo $row_profile_general["registrado_el"]; ?>');
 	var registrado_localdate = registrado_utctime.local();
 	var registrado_localdate2 = registrado_localdate.locale('es')
 	
 	var modificardivregistrado = document.getElementById('registrado');
-	modificardivregistrado.innerHTML =  moment(registrado_localdate, "YYYY-MM-DD hh:mm:ss").fromNow();
-	
-  },1000);
+	modificardivregistrado.innerHTML =  moment(registrado_localdate2, "YYYY-MM-DD hh:mm:ss").fromNow();
+	},1000);
 });
-
 </script>
 
     <div class="container d-flex p-3 mx-auto flex-column">
@@ -776,6 +768,8 @@ $(function(){
       </footer>
     </div>
 
+	<script src="js/bootstrap.bundle.min.js"></script>
+
 	<script type="text/javascript">
 		var options = {
     valueNames: [ 'tema', 'curso', 'unidad'],
@@ -807,8 +801,6 @@ $(function(){
 		});
 	});
 	</script>
-
-    <script src="js/bootstrap.bundle.min.js"></script>
 	
   </body>
 </html>
