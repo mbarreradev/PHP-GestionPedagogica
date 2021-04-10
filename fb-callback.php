@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require 'inc/conexion.php';
+require 'inc/database.php';
 require_once "inc/Facebook/autoload.php";
 
 $fb = new Facebook\Facebook([

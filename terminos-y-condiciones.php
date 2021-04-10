@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require 'inc/conexion.php';
+require 'inc/database.php';
 ?> 
 <!doctype html>
 <html lang="es">
@@ -76,7 +76,7 @@ require 'inc/conexion.php';
 		</div>
 	</div>
 
-    <script src="https://code.jquery.com/jquery-3.5.0.slim.min.js" integrity="sha256-MlusDLJIP1GRgLrOflUQtshyP0TwT/RHXsI1wWGnQhs=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

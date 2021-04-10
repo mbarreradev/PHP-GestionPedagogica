@@ -6,10 +6,10 @@
 - Facebook SDK for PHP 5.7.0
 
 # Extras
-- Bootstrap v4.4.1
-- jQuery 3.5.1
-- Moment.js 2.27.0
-- List.js v1.5.0
+- Bootstrap v4.6.0
+- jQuery 3.6.0
+- Moment.js 2.29.1
+- List.js v2.3.1
 - Material Icons
 
 # Características

@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require 'inc/conexion.php';
+require 'inc/database.php';
 ?> 
 <!doctype html>
 <html lang="es">
