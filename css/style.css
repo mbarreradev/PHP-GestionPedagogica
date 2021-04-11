@@ -540,7 +540,7 @@ table.dataTable thead th, table.dataTable tfoot th {
     color: white;
 }
 
-/* Others fixes */
+/* Anothers fixes */
 
 .btn-outline-secondary.disabled, .btn-outline-secondary:disabled {
   color: #6c757d;
@@ -614,6 +614,7 @@ ul.timeline {
   position: relative;
   text-align: left;
 }
+
 ul.timeline:before {
   content: ' ';
   background: #6f8392;
@@ -624,10 +625,12 @@ ul.timeline:before {
   height: 100%;
   z-index: 400;
 }
+
 ul.timeline > li {
   margin: 20px 0;
   padding-left: 20px;
 }
+
 ul.timeline > li:before {
   content: ' ';
   background: white;
@@ -639,4 +642,11 @@ ul.timeline > li:before {
   width: 20px;
   height: 20px;
   z-index: 400;
+}
+
+/* FIN */
+
+#chart-container {
+  width: 100%;
+  height: auto;
 }

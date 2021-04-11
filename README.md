@@ -11,6 +11,7 @@
 - Moment.js 2.29.1
 - List.js v2.3.1
 - Material Icons
+- Chart.js v3.0.2
 
 # Características
 - Ingreso de usuarios con Facebook API, luego de esto registra una cuenta en la base de datos.

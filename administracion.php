@@ -73,6 +73,7 @@ else // Continuamos a la página
 		<link href="css/style.css" rel="stylesheet">
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 		<script src="js/moment-with-locales.js"></script>
+		<script src="js/chart.js"></script>
 	</head>
 <body class="text-center">
 
@@ -189,6 +190,184 @@ else // Continuamos a la página
 			</div>
 		</div>
 
+
+		<div class="card mb-3">
+			<div class="row no-gutters">
+				<div class="col">
+				  	<div class="card-body bg-azul-claro">
+						<div class="row">
+							<div class="col">
+						
+								<div id="chart-container">
+									<canvas id="graphCanvas"></canvas>
+								</div>
+
+								<script>
+								$(document).ready(function () {
+									showGraph1();
+								});
+
+
+								function showGraph1()
+								{
+									{
+										$.post("inc/json_admin.php",
+										function (data)
+										{
+											console.log(data);
+											var cantidad_guias = [];
+											var cantidad_planificaciones = [];
+											
+											const meses = [
+											  'Enero',
+											  'Febrero',
+											  'Marzo',
+											  'Abril',
+											  'Mayo',
+											  'Junio',
+											  'Julio',
+											  'Agosto',
+											  'Septiembre',
+											  'Octubre',
+											  'Noviembre',
+											  'Diciembre',
+											];
+											const num_random = [
+											  '2',
+											  '5',
+											  '11',
+											  '30',
+											  '1',
+											  '18',
+											];
+
+											for (var i in data) {
+												cantidad_planificaciones.push(data[i].ordencompra_id);
+											}
+
+											var chartdata = {
+												labels: meses,
+												datasets: [
+													{
+														label: 'Planificaciones',
+														data: cantidad_planificaciones,
+														borderColor: '#36a2eb',
+														backgroundColor: '#9ad0f5',
+													},
+													{
+														label: 'Guías',
+														data: num_random,
+														borderColor: '#ff6c8b',
+														backgroundColor: '#ffb1c1',
+													}
+												]
+											};
+
+											var graphTarget1 = $("#graphCanvas");
+
+											var barGraph1 = new Chart(graphTarget1, {
+												type: 'line',
+												data: chartdata,
+												options: {
+													responsive: true,
+													plugins: {
+													  legend: {
+														position: 'top',
+													  },
+													  title: {
+														display: true,
+														text: 'Ventas por tipo de archivo'
+													  }
+													}
+												  },
+											});
+										});
+									}
+								}
+								</script>
+								xd1
+							</div>
+							<div class="col">
+							
+								<div id="chart-container">
+									<canvas id="graphCanvas2"></canvas>
+								</div>
+
+								<script>
+								$(document).ready(function () {
+									showGraph2();
+								});
+
+
+								function showGraph2()
+								{
+									{
+										$.post("inc/json_admin.php",
+										function (data)
+										{
+											console.log(data);
+											var num_registros_por_mes = [];
+											
+											const meses = [
+											  'Enero',
+											  'Febrero',
+											  'Marzo',
+											  'Abril',
+											  'Mayo',
+											  'Junio',
+											  'Julio',
+											  'Agosto',
+											  'Septiembre',
+											  'Octubre',
+											  'Noviembre',
+											  'Diciembre',
+											];
+
+											for (var i in data) {
+												num_registros_por_mes.push(data[i].ordencompra_id);
+											}
+
+											var chartdata2 = {
+												labels: meses,
+												datasets: [
+													{
+														label: 'Número de registros',
+														data: num_registros_por_mes,
+														borderColor: '#36a2eb',
+														backgroundColor: '#9ad0f5',
+													}
+												]
+											};
+
+											var graphTarget2 = $("#graphCanvas2");
+
+											var barGraph2 = new Chart(graphTarget2, {
+												type: 'bar',
+												data: chartdata2,
+												options: {
+													responsive: true,
+													plugins: {
+													  legend: {
+														position: 'top',
+													  },
+													  title: {
+														display: true,
+														text: 'Registros de usuarios'
+													  }
+													}
+												  },
+											});
+										});
+									}
+								}
+								</script>
+								xd2
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
 			<h4 class="d-flex justify-content-between align-items-center mb-3 margin-bottom">
             <span class="titulo">Última actividad</span>
