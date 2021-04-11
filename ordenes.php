@@ -318,7 +318,10 @@ else // Continuamos a la página
                                         </tr>
                                     </thead>
                                     <tbody class="list limpio">
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result_pendientes_confirmacion)) {?>	
+                                        <?php while ($row = mysqli_fetch_assoc($rs_result_pendientes_confirmacion)) {
+										$precio_archivo = number_format($row['precio'],0, '', '.');
+										$valor_pagado = number_format($row['pagado'],0, '', '.');
+										?>	
 
 
 											<!-- Modal orden <?php echo $row['ordencompra_id']; ?> -->
@@ -336,11 +339,11 @@ else // Continuamos a la página
 													<p><strong>Fecha de creación de compra:</strong> <?php echo $row['fecha_compra']; ?></p>
 													<p><strong>Archivo:</strong> <?php echo $row['nombre']; ?></p>
 													<p><strong>Asignatura:</strong> <?php echo $row['asignatura']." ".$row['curso']; ?></p>
-													<p><strong>Valor del archivo:</strong> $<?php echo $row['precio']; ?></p>
+													<p><strong>Valor del archivo:</strong> $<?php echo $precio_archivo; ?></p>
 													<hr class="bg-azul"/>
 													<p><strong>DETALLES DE LA TRANSFERENCIA</strong></p>
 													<p><strong>Rut:</strong> <?php echo $row['rut']."-".$row['dv']; ?></p>
-													<p><strong>Pagado:</strong> $<?php echo $row['pagado']; ?></p>
+													<p><strong>Pagado:</strong> $<?php echo $valor_pagado; ?></p>
 													<p><strong>Comentario de la transferencia:</strong> Pago Orden <?php echo $row['ordencompra_id']; ?></p>
 													<hr class="bg-azul"/>
 													<p><strong>Última actualización:</strong> <?php echo $row['fecha_actualizacion']; ?></p>
@@ -373,7 +376,7 @@ else // Continuamos a la página
 											<tr>
 												<td class="id"><?php echo $row['ordencompra_id']; ?></td>
 												<td class="creado"><a href="/verperfil?id="><?php echo $row['nombres']." ".$row['apellidos']; ?></a></td>
-												<td class="pagado">$<?php echo $row['pagado']; ?></td>
+												<td class="pagado">$<?php echo $valor_pagado; ?></td>
 												<td class="estado"><?php echo $row['estado_orden']; ?></td>
                                                 <td><?php echo $row['fecha_actualizacion']; ?></td>
 												<td>
@@ -428,12 +431,14 @@ else // Continuamos a la página
                                         </tr>
                                     </thead>
                                     <tbody class="list limpio">
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result_matematica_orden)) {?>	
+                                        <?php while ($row = mysqli_fetch_assoc($rs_result_matematica_orden)) {
+										$pagado_final = number_format($row['pagado'],0, '', '.');	
+										?>	
 
 											<tr>
                                                 <td class="id"><?php echo $row['ordencompra_id']; ?></td>
 												<td class="creado"><a href="/verperfil?id="><?php echo $row['nombres']." ".$row['apellidos']; ?></a></td>
-												<td class="pagado">$<?php echo $row['pagado']; ?></td>
+												<td class="pagado">$<?php echo $pagado_final; ?></td>
 												<td class="estado"><?php echo $row['estado_orden']; ?></td>
                                                 <td><?php echo $row['fecha_actualizacion']; ?></td>
 												<td>
@@ -468,12 +473,14 @@ else // Continuamos a la página
                                         </tr>
                                     </thead>
                                     <tbody class="list limpio">
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result_lenguaje_orden)) {?>	
+                                        <?php while ($row = mysqli_fetch_assoc($rs_result_lenguaje_orden)) {
+										$pagado_final = number_format($row['pagado'],0, '', '.');	
+										?>	
 
 											<tr>
                                                 <td class="id"><?php echo $row['ordencompra_id']; ?></td>
 												<td class="creado"><a href="/verperfil?id="><?php echo $row['nombres']." ".$row['apellidos']; ?></a></td>
-												<td class="pagado">$<?php echo $row['pagado']; ?></td>
+												<td class="pagado">$<?php echo $pagado_final; ?></td>
 												<td class="estado"><?php echo $row['estado_orden']; ?></td>
                                                 <td><?php echo $row['fecha_actualizacion']; ?></td>
 												<td>
@@ -508,12 +515,14 @@ else // Continuamos a la página
                                         </tr>
                                     </thead>
                                     <tbody class="list limpio">
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result_tecnologia_orden)) {?>	
+                                        <?php while ($row = mysqli_fetch_assoc($rs_result_tecnologia_orden)) {
+										$pagado_final = number_format($row['pagado'],0, '', '.');	
+										?>	
 
 											<tr>
                                                 <td class="id"><?php echo $row['ordencompra_id']; ?></td>
 												<td class="creado"><a href="/verperfil?id="><?php echo $row['nombres']." ".$row['apellidos']; ?></a></td>
-												<td class="pagado">$<?php echo $row['pagado']; ?></td>
+												<td class="pagado">$<?php echo $pagado_final; ?></td>
 												<td class="estado"><?php echo $row['estado_orden']; ?></td>
                                                 <td><?php echo $row['fecha_actualizacion']; ?></td>
 												<td>
@@ -548,12 +557,14 @@ else // Continuamos a la página
                                         </tr>
                                     </thead>
                                     <tbody class="list limpio">
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result_musica_orden)) {?>	
+                                        <?php while ($row = mysqli_fetch_assoc($rs_result_musica_orden)) {
+										$pagado_final = number_format($row['pagado'],0, '', '.');
+										?>	
 
 											<tr>
                                                 <td class="id"><?php echo $row['ordencompra_id']; ?></td>
 												<td class="creado"><a href="/verperfil?id="><?php echo $row['nombres']." ".$row['apellidos']; ?></a></td>
-												<td class="pagado">$<?php echo $row['pagado']; ?></td>
+												<td class="pagado">$<?php echo $pagado_final; ?></td>
 												<td class="estado"><?php echo $row['estado_orden']; ?></td>
                                                 <td><?php echo $row['fecha_actualizacion']; ?></td>
 												<td>
@@ -588,12 +599,14 @@ else // Continuamos a la página
                                         </tr>
                                     </thead>
                                     <tbody class="list limpio">
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result_artesvisuales_orden)) {?>	
+                                        <?php while ($row = mysqli_fetch_assoc($rs_result_artesvisuales_orden)) {
+										$pagado_final = number_format($row['pagado'],0, '', '.');
+										?>	
 
 											<tr>
                                                 <td class="id"><?php echo $row['ordencompra_id']; ?></td>
 												<td class="creado"><a href="/verperfil?id="><?php echo $row['nombres']." ".$row['apellidos']; ?></a></td>
-												<td class="pagado">$<?php echo $row['pagado']; ?></td>
+												<td class="pagado">$<?php echo $pagado_final; ?></td>
 												<td class="estado"><?php echo $row['estado_orden']; ?></td>
                                                 <td><?php echo $row['fecha_actualizacion']; ?></td>
 												<td>

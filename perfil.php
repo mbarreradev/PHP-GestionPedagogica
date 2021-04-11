@@ -284,18 +284,22 @@ $(function(){
             <?php 
 			if (!isset($_SESSION["rango"]) == '2')
 			{ 
-				echo '<div class="btn-group dropup btn-block options">';
-				echo '<a href="/misordenes"><button type="button" class="btn btn-primary margin"><span class="material-icons">library_books</span> Mis ordenes</button></a>';
-				echo '<a href="/opciones"><button type="button" class="btn btn-primary"><span class="material-icons">settings</span> Opciones</button></a>';
-				echo '</div>';
+			?>
+				<div class="btn-group dropup btn-block options">
+				<a href="/misordenes"><button type="button" class="btn btn-primary margin"><span class="material-icons">library_books</span> Mis ordenes</button></a>
+				<a href="/opciones"><button type="button" class="btn btn-primary"><span class="material-icons">settings</span> Opciones</button></a>
+				</div>
+			<?php
 			}
 			else
 			{
-				echo '<div class="btn-group dropup btn-block options">';
-				echo '<a href="/administracion"><button type="button" class="btn btn-primary margin"><span class="material-icons">build</span> Administración</button></a>';
-				echo '<a href="/misordenes"><button type="button" class="btn btn-primary margin"><span class="material-icons">library_books</span> Mis ordenes</button></a>';
-				echo '<a href="/opciones"><button type="button" class="btn btn-primary"><span class="material-icons">settings</span> Opciones</button></a>';
-				echo '</div>';
+			?>
+				<div class="btn-group dropup btn-block options">
+				<a href="/administracion"><button type="button" class="btn btn-primary margin"><span class="material-icons">build</span> Administración</button></a>
+				<a href="/misordenes"><button type="button" class="btn btn-primary margin"><span class="material-icons">library_books</span> Mis ordenes</button></a>
+				<a href="/opciones"><button type="button" class="btn btn-primary"><span class="material-icons">settings</span> Opciones</button></a>
+				</div>
+			<?php
 			}
 			?>
 				

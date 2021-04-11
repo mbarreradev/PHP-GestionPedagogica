@@ -29,6 +29,8 @@ else // Continuamos a la página
 	$rs_result1 = mysqli_query($conn, $sql1);
 	$consulta_planificacion = mysqli_fetch_assoc($rs_result1);
 
+	$precio_final = number_format($consulta_planificacion["pagado"],0, '', '.');
+
 	// Se hace comprobación de si el ID en la url existe, si no existe se retorna a 404.php
 	if(mysqli_num_rows($rs_result1)==0) 
 	{
@@ -126,21 +128,24 @@ else // Continuamos a la página
 
                 if($consulta_planificacion["estado_orden"] == 'Pagado')
                 {
-                    echo '<ul class="progressbar">';
-                    echo '<li class="active">Creación de orden</li>';
-                    echo '<li class="active">Pago</li>';
-                    echo '<li class="active"><p class="compraactiva">Confirmación de pago</p></li>';
-                    echo '</ul>';
-                }
+				?>
+                    <ul class="progressbar">
+                    <li class="active">Creación de orden</li>
+                    <li class="active">Pago</li>
+                    <li class="active"><p class="compraactiva">Confirmación de pago</p></li>
+                    </ul>
+				<?php
+				}
                 else
                 {
-                    echo '<ul class="progressbar">';
-                    echo '<li class="active">Creación de orden</li>';
-                    echo '<li class="active"><p class="compraactiva">Pago</p></li>';
-                    echo '<li>Confirmación de pago</li>';
-                    echo '</ul>';
-                }
-
+				?>
+                    <ul class="progressbar">
+                    <li class="active">Creación de orden</li>
+                    <li class="active"><p class="compraactiva">Pago</p></li>
+                    <li>Confirmación de pago</li>
+                    </ul>
+				<?php
+				}
                 ?>
                 </div>
 		    </div>
@@ -156,11 +161,11 @@ else // Continuamos a la página
 					<h6 class="my-0"><?php echo $consulta_planificacion["nombre"]; ?></h6>
 					<small class="text-muted"><?php echo $consulta_planificacion["descripcion_corta"]; ?></small>
 				</div>
-				<span class="text-muted">$<?php echo $consulta_planificacion["pagado"]; ?></span>
+				<span class="text-muted">$<?php echo $precio_final; ?></span>
 				</li>
 				<li class="list-group-item d-flex justify-content-between bg-azul-claro">
 				<span>Total a pagar</span>
-				<strong>$<?php echo $consulta_planificacion["pagado"]; ?></strong>
+				<strong>$<?php echo $precio_final; ?></strong>
 				</li>
 			</ul>
 			
@@ -180,91 +185,95 @@ else // Continuamos a la página
 			
 			if($consulta_planificacion["estado_orden"] == 'Pendiente de pago')
 			{
-				echo '<div class="col-md-8 order-md-1 text-left">';
-					echo'<h4 class="mb-3">Detalles de la transacción</h4>';
-					echo'<ul class="list-group mb-3">';
-					echo'<li class="list-group-item d-flex lh-condensed">';
-						echo'<div class="col-sm">';
-							echo'<div class="alert alert-warning alert-dismissible fade show" role="alert">';
-								echo'<strong>Recuerda</strong> verificar los datos antes de realizar la transferencia, para evitar perdidas de dinero';
-							echo'</div>';
-						echo'<p><b>Banco:</b> Banco Estado</p>';
-						echo'<p><b>Rut:</b> Banco Estado</p>';
-						echo'<p><b>Tipo de cuenta:</b> Banco Estado</p>';
-						echo'<p><b>Nº de cuenta:</b> Banco Estado</p>';
-						echo'<p><b>Correo electrónico:</b> &#118;&#101;&#110;&#116;&#097;&#115;&#064;&#103;&#101;&#115;&#116;&#105;&#111;&#110;&#112;&#101;&#100;&#097;&#103;&#111;&#103;&#105;&#099;&#097;&#046;&#099;&#108;</p>';
-						echo'<p><b>Comentario:</b> Pago Orden '.$url_id.'</p>';
-						echo'</div>';
-					echo'</li>';
-					echo'</ul>';
-				echo'</div>';
-				echo'<div class="col order-md-3">';
-					echo'<div class="row nomargin-left">';
-							echo '<div class="alert alert-info">';
-								echo'<span class="material-icons">announcement</span> La verificación de confirmación de pago puede demorar entre 5 a 24 horas';
-							echo'</div>';
-							echo'<div class="col text-right">';
-								echo'<form method="post" action=""><button type="submit" name="cambiarestado-submit" class="btn btn-primary btn-lg">Notificar orden pagada</button></form>';
-							echo'</div>';
-					echo'</div>';
-				echo'</div>';
+			?>
+				<div class="col-md-8 order-md-1 text-left">
+					<h4 class="mb-3">Detalles de la transacción</h4>
+					<ul class="list-group mb-3">
+					<li class="list-group-item d-flex lh-condensed">
+						<div class="col-sm">
+							<div class="alert alert-warning alert-dismissible fade show" role="alert">
+								<strong>Recuerda</strong> verificar los datos antes de realizar la transferencia, para evitar perdidas de dinero
+							</div>
+						<p><b>Banco:</b> Banco Estado</p>
+						<p><b>Rut:</b> Banco Estado</p>
+						<p><b>Tipo de cuenta:</b> Banco Estado</p>
+						<p><b>Nº de cuenta:</b> Banco Estado</p>
+						<p><b>Correo electrónico:</b> &#118;&#101;&#110;&#116;&#097;&#115;&#064;&#103;&#101;&#115;&#116;&#105;&#111;&#110;&#112;&#101;&#100;&#097;&#103;&#111;&#103;&#105;&#099;&#097;&#046;&#099;&#108;</p>
+						<p><b>Comentario:</b> Pago Orden <?php echo $url_id; ?></p>
+						</div>
+					</li>
+					</ul>
+				</div>
+				<div class="col order-md-3">
+					<div class="row nomargin-left">
+						<div class="alert alert-info">
+							<span class="material-icons">announcement</span> La verificación de confirmación de pago puede demorar entre 5 a 24 horas
+						</div>
+						<div class="col text-right">
+							<form method="post" action=""><button type="submit" name="cambiarestado-submit" class="btn btn-primary btn-lg">Notificar orden pagada</button></form>
+						</div>
+					</div>
+				</div>
+			<?php
 			}
 			elseif($consulta_planificacion["estado_orden"] == 'Pendiente de confirmación')
 			{
 				// Si no, mostramos ventana que muestra que la orden esta pendiente de aprobación
-				
-				echo '<div class="col-md-8 order-md-1 text-left">';
-					echo'<h4 class="mb-3">Detalles de la orden</h4>';
-					echo'<ul class="list-group mb-3">';
-					echo'<li class="list-group-item d-flex lh-condensed">';
-						echo'<div class="col-sm">';
-						echo'<p><b>Orden ID: </b> '.$url_id.'</p>';
-						echo'<p><b>Creado el:</b> '.$consulta_planificacion["fecha_compra"].'</p>';
-						echo'<p><b>Última actualización:</b> '.$consulta_planificacion["fecha_actualizacion"].'</p>';
-						echo'<hr class="message-inner-separator">';
-						echo'<strong>Tu pago está en espera de confirmación</strong>';
-						echo'<p>La verificación del pago demora entre 5 a 24 horas. Una vez que tu pago sea aprobado, el documento será liberado y estará disponible en tu perfil</p>';
-						echo'</div>';
-					echo '</li>';
-					echo '</ul>';
-				echo'</div>';
-				echo'<div class="col order-md-3">';
-					echo'<div class="row nomargin-left">';
-						echo '<div class="alert alert-info">';
-							echo '<span class="material-icons">announcement</span> Recibirás un aviso cuando tu pago sea aprobado';
-						echo '</div>';
-					echo '</div>';
-				echo '</div>';
+			?>
+				<div class="col-md-8 order-md-1 text-left">
+					<h4 class="mb-3">Detalles de la orden</h4>
+					<ul class="list-group mb-3">
+					<li class="list-group-item d-flex lh-condensed">
+						<div class="col-sm">
+						<p><b>Orden ID: </b> <?php echo $url_id; ?></p>
+						<p><b>Creado el:</b> <?php echo $consulta_planificacion["fecha_compra"]; ?></p>
+						<p><b>Última actualización:</b> <?php echo $consulta_planificacion["fecha_actualizacion"]; ?></p>
+						<hr class="message-inner-separator">
+						<strong>Tu pago está en espera de confirmación</strong>
+						<p>La verificación del pago demora entre 5 a 24 horas. Una vez que tu pago sea aprobado, el documento será liberado y estará disponible en tu perfil</p>
+						</div>
+					</li>
+					</ul>
+				</div>
+				<div class="col order-md-3">
+					<div class="row nomargin-left">
+						<div class="alert alert-info">
+							<span class="material-icons">announcement</span> Recibirás un aviso cuando tu pago sea aprobado
+						</div>
+					</div>
+				</div>
+			<?php
 			}
 			else
 			{
 				// Entonces mostramos que el pago esta ok y lo enviamos al perfil para que vea su nuevo archivo comprado
-				
-				echo '<div class="col-md-8 order-md-1 text-left">';
-					echo'<h4 class="mb-3">Detalles de la orden</h4>';
-					echo'<ul class="list-group mb-3">';
-					echo'<li class="list-group-item d-flex lh-condensed">';
-						echo'<div class="col-sm">';
-						echo'<p><b>Orden ID: </b> '.$url_id.'</p>';
-						echo'<p><b>Creado hace:</b> '.$consulta_planificacion["fecha_compra"].'</p>';
-						echo'<p><b>Última actualización:</b> '.$consulta_planificacion["fecha_actualizacion"].'</p>';
-						echo'<hr class="message-inner-separator">';
-						echo'<strong>Buenas noticias '.$row_profile_general["nombres"].'</strong>';
-						echo'<p>Tu orden fue confirmada y el archivo fue agregado a tu cuenta.</p>';
-						echo'</div>';
-					echo'</li>';
-					echo'</ul>';
-				echo'</div>';
-				echo'<div class="col order-md-3">';
-					echo'<div class="row nomargin-left">';
-						echo'<div class="alert alert-success">';
-							echo'<span class="material-icons">check_circle_outline</span> Ya puedes acceder al archivo '.$consulta_planificacion["nombre"].' ';
-						echo'</div>';
-						echo'<div class="col text-right">';
-							echo'<a href="verarchivo?id='.$consulta_planificacion["archivo_id"].'"><button type="submit" class="btn btn-primary btn-lg">Ver archivo</button></a>';
-						echo'</div>';
-					echo'</div>';
-				echo'</div>';
+			?>
+				<div class="col-md-8 order-md-1 text-left">
+					<h4 class="mb-3">Detalles de la orden</h4>
+					<ul class="list-group mb-3">
+					<li class="list-group-item d-flex lh-condensed">
+						<div class="col-sm">
+						<p><b>Orden ID: </b> <?php echo $url_id; ?></p>
+						<p><b>Creado hace:</b> <?php echo $consulta_planificacion["fecha_compra"]; ?></p>
+						<p><b>Última actualización:</b> <?php echo $consulta_planificacion["fecha_actualizacion"]; ?></p>
+						<hr class="message-inner-separator">
+						<strong>Buenas noticias <?php echo $row_profile_general["nombres"]; ?></strong>
+						<p>Tu orden fue confirmada y el archivo fue agregado a tu cuenta.</p>
+						</div>
+					</li>
+					</ul>
+				</div>
+				<div class="col order-md-3">
+					<div class="row nomargin-left">
+						<div class="alert alert-success">
+							<span class="material-icons">check_circle_outline</span> Ya puedes acceder al archivo <?php echo $consulta_planificacion["nombre"]; ?>
+						</div>
+						<div class="col text-right">
+							<a href="verarchivo?id=<?php echo $consulta_planificacion["archivo_id"]; ?>"><button type="submit" class="btn btn-primary btn-lg">Ver archivo</button></a>
+						</div>
+					</div>
+				</div>
+			<?php
 			}
 			?>
       	</div>

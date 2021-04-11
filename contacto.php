@@ -45,28 +45,32 @@ $row_cnt = $rs_result1->num_rows;
             <nav class="my-2 my-md-0 mr-md-3">
             <a href="http://repositorio.gestionpedagogica.cl"><button class="btn btn-secondary" type="button">Inicio</button></a>
             <?php
-				if (!isset($_SESSION["fb_access_token"]))
+			if (!isset($_SESSION["fb_access_token"]))
 				{
-					echo '<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Panel de usuario</button>';
-					echo '<div class="dropdown-menu" aria-labelledby="dropdownMenu2">';
-					echo '<a href="/login"><button class="dropdown-item" type="button">Ingresar con Facebook</button></a>';
-					echo '</div>';
-				}
+                ?>
+					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Panel de usuario</button>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+					<a href="/login"><button class="dropdown-item" type="button">Ingresar con Facebook</button></a>
+					</div>
+                <?php
+                }
 				else
 				{
-					echo '<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hola '.$row_profile_general["nombres"].'</button>';
-					echo '<div class="dropdown-menu" aria-labelledby="dropdownMenu2">';
-					echo '<a href="/perfil"><button class="dropdown-item" type="button">Perfil</button></a>';
-					echo '<a href="/misordenes"><button class="dropdown-item" type="button">Mis ordenes</button></a>';
-					echo '<a href="/logout"><button class="dropdown-item" type="button">Desconectar</button></a>';
-					echo '</div>';
-				}
+                ?>
+					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hola <?php echo $row_profile_general["nombres"] ?></button>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+					<a href="/perfil"><button class="dropdown-item" type="button">Perfil</button></a>
+					<a href="/misordenes"><button class="dropdown-item" type="button">Mis ordenes</button></a>
+					<a href="/logout"><button class="dropdown-item" type="button">Desconectar</button></a>
+					</div>
+                <?php
+                }
 			?>
             <?php 
-                if (isset($_SESSION["rango"]) == '2')
-                { 
-                    echo '<a href="/administracion"><button class="btn btn-secondary" type="button">Administración</button></a>';
-                }
+            if (isset($_SESSION["rango"]) == '2')
+            { 
+                echo '<a href="/administracion"><button class="btn btn-secondary" type="button">Administración</button></a>';
+            }
 		    ?>
             <a href="/contacto"><button class="btn btn-secondary" type="button">Contacto</button></a>
             </nav>

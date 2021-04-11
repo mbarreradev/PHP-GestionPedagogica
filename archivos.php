@@ -316,13 +316,15 @@ else // Continuamos a la página
                                         </tr>
                                     </thead>
                                     <tbody class="list limpio">
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result_matematica_planificacion)) {?>	
+                                        <?php while ($row = mysqli_fetch_assoc($rs_result_matematica_planificacion)) { 
+										$precio_final = number_format($row['precio'],0, '', '.');
+											?>	
 
 											<tr>
 												<td class="tema"><?php echo $row['nombre']; ?></td>
 												<td class="curso"><?php echo $row['curso']; ?></td>
 												<td class="unidad"><?php echo $row['unidad']; ?></td>
-												<td class="precio">$<?php echo $row['precio']; ?></td>
+												<td class="precio">$<?php echo $precio_final; ?></td>
 												<td class="estado"><?php 
 												if($row['estado'] == '0') // desactivado
 												{
@@ -371,13 +373,15 @@ else // Continuamos a la página
                                         </tr>
                                     </thead>
                                     <tbody class="list limpio">
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result_lenguaje_planificacion)) {?>	
+                                        <?php while ($row = mysqli_fetch_assoc($rs_result_lenguaje_planificacion)) {
+										$precio_final = number_format($row['precio'],0, '', '.');
+										?>	
 
 											<tr>
 												<td class="tema"><?php echo $row['nombre']; ?></td>
 												<td class="curso"><?php echo $row['curso']; ?></td>
 												<td class="unidad"><?php echo $row['unidad']; ?></td>
-												<td class="precio">$<?php echo $row['precio']; ?></td>
+												<td class="precio">$<?php echo $precio_final; ?></td>
 												<td class="estado"><?php 
 												if($row['estado'] == '0') // desactivado
 												{
@@ -423,13 +427,15 @@ else // Continuamos a la página
                                         </tr>
                                     </thead>
                                     <tbody class="list limpio">
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result_tecnologia_planificacion)) {?>	
+                                        <?php while ($row = mysqli_fetch_assoc($rs_result_tecnologia_planificacion)) {
+										$precio_final = number_format($row['precio'],0, '', '.');	
+										?>	
 
 											<tr>
 												<td class="tema"><?php echo $row['nombre']; ?></td>
 												<td class="curso"><?php echo $row['curso']; ?></td>
 												<td class="unidad"><?php echo $row['unidad']; ?></td>
-												<td class="precio">$<?php echo $row['precio']; ?></td>
+												<td class="precio">$<?php echo $precio_final; ?></td>
 												<td class="estado"><?php 
 												if($row['estado'] == '0') // desactivado
 												{
@@ -475,13 +481,15 @@ else // Continuamos a la página
                                         </tr>
                                     </thead>
                                     <tbody class="list limpio">
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result_musica_planificacion)) {?>	
+                                        <?php while ($row = mysqli_fetch_assoc($rs_result_musica_planificacion)) {
+										$precio_final = number_format($row['precio'],0, '', '.');	
+										?>	
 
 											<tr>
 												<td class="tema"><?php echo $row['nombre']; ?></td>
 												<td class="curso"><?php echo $row['curso']; ?></td>
 												<td class="unidad"><?php echo $row['unidad']; ?></td>
-												<td class="precio">$<?php echo $row['precio']; ?></td>
+												<td class="precio">$<?php echo $precio_final; ?></td>
 												<td class="estado"><?php 
 												if($row['estado'] == '0') // desactivado
 												{
@@ -527,13 +535,15 @@ else // Continuamos a la página
                                         </tr>
                                     </thead>
                                     <tbody class="list limpio">
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result_artesvisuales_planificacion)) {?>	
+                                        <?php while ($row = mysqli_fetch_assoc($rs_result_artesvisuales_planificacion)) {
+										$precio_final = number_format($row['precio'],0, '', '.');	
+										?>	
 
 											<tr>
 												<td class="tema"><?php echo $row['nombre']; ?></td>
 												<td class="curso"><?php echo $row['curso']; ?></td>
 												<td class="unidad"><?php echo $row['unidad']; ?></td>
-												<td class="precio">$<?php echo $row['precio']; ?></td>
+												<td class="precio">$<?php echo $precio_final; ?></td>
 												<td class="estado"><?php 
 												if($row['estado'] == '0') // desactivado
 												{
@@ -606,13 +616,15 @@ else // Continuamos a la página
                                         </tr>
                                     </thead>
                                     <tbody class="list limpio">
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result_matematica_guia)) {?>	
+                                        <?php while ($row = mysqli_fetch_assoc($rs_result_matematica_guia)) {
+										$precio_final = number_format($row['precio'],0, '', '.');	
+										?>	
 
 											<tr>
 												<td class="tema"><?php echo $row['nombre']; ?></td>
 												<td class="curso"><?php echo $row['curso']; ?></td>
 												<td class="unidad"><?php echo $row['unidad']; ?></td>
-												<td class="precio">$<?php echo $row['precio']; ?></td>
+												<td class="precio">$<?php echo $precio_final; ?></td>
 												<td class="estado"><?php 
 												if($row['estado'] == '0') // desactivado
 												{
@@ -658,13 +670,15 @@ else // Continuamos a la página
                                         </tr>
                                     </thead>
                                     <tbody class="list limpio">
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result_lenguaje_guia)) {?>	
+                                        <?php while ($row = mysqli_fetch_assoc($rs_result_lenguaje_guia)) {
+										$precio_final = number_format($row['precio'],0, '', '.');	
+										?>	
 
 											<tr>
 												<td class="tema"><?php echo $row['nombre']; ?></td>
 												<td class="curso"><?php echo $row['curso']; ?></td>
 												<td class="unidad"><?php echo $row['unidad']; ?></td>
-												<td class="precio">$<?php echo $row['precio']; ?></td>
+												<td class="precio">$<?php echo $precio_final; ?></td>
 												<td class="estado"><?php 
 												if($row['estado'] == '0') // desactivado
 												{
@@ -710,13 +724,15 @@ else // Continuamos a la página
                                         </tr>
                                     </thead>
                                     <tbody class="list limpio">
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result_tecnologia_guia)) {?>	
+                                        <?php while ($row = mysqli_fetch_assoc($rs_result_tecnologia_guia)) {
+										$precio_final = number_format($row['precio'],0, '', '.');	
+										?>	
 
 											<tr>
 												<td class="tema"><?php echo $row['nombre']; ?></td>
 												<td class="curso"><?php echo $row['curso']; ?></td>
 												<td class="unidad"><?php echo $row['unidad']; ?></td>
-												<td class="precio">$<?php echo $row['precio']; ?></td>
+												<td class="precio">$<?php echo $precio_final; ?></td>
 												<td class="estado"><?php 
 												if($row['estado'] == '0') // desactivado
 												{
@@ -762,13 +778,15 @@ else // Continuamos a la página
                                         </tr>
                                     </thead>
                                     <tbody class="list limpio">
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result_musica_guia)) {?>	
+                                        <?php while ($row = mysqli_fetch_assoc($rs_result_musica_guia)) {
+										$precio_final = number_format($row['precio'],0, '', '.');	
+										?>	
 
 											<tr>
 												<td class="tema"><?php echo $row['nombre']; ?></td>
 												<td class="curso"><?php echo $row['curso']; ?></td>
 												<td class="unidad"><?php echo $row['unidad']; ?></td>
-												<td class="precio">$<?php echo $row['precio']; ?></td>
+												<td class="precio">$<?php echo $precio_final; ?></td>
 												<td class="estado"><?php 
 												if($row['estado'] == '0') // desactivado
 												{
@@ -814,13 +832,15 @@ else // Continuamos a la página
                                         </tr>
                                     </thead>
                                     <tbody class="list limpio">
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result_artesvisuales_guia)) {?>	
+                                        <?php while ($row = mysqli_fetch_assoc($rs_result_artesvisuales_guia)) {
+										$precio_final = number_format($row['precio'],0, '', '.');	
+										?>	
 
 											<tr>
 												<td class="tema"><?php echo $row['nombre']; ?></td>
 												<td class="curso"><?php echo $row['curso']; ?></td>
 												<td class="unidad"><?php echo $row['unidad']; ?></td>
-												<td class="precio">$<?php echo $row['precio']; ?></td>
+												<td class="precio">$<?php echo $precio_final; ?></td>
 												<td class="estado"><?php 
 												if($row['estado'] == '0') // desactivado
 												{

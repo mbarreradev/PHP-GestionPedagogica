@@ -26,67 +26,72 @@ else // Continuamos a la página
 	// MIS ORDENES
 	// BOX: Tabla Matematica
 	// Primero entramos a la tabla ordencompra y luego archivo para sacar los datos requeridos
-	$sql_matematicas_orden = "SELECT ordencompra.estado_orden AS ordencompra_estadoorden, ordencompra.fecha_compra AS ordencompra_fechacompra, ordencompra.ordencompra_id AS ordencompra_id, archivo.archivo_id AS archivo_id, archivo.nombre AS archivo_nombre, archivo.curso AS archivo_curso, archivo.unidad AS archivo_unidad, ordencompra.pagado AS ordencompra_pagado, archivo.estado AS archivo_estado, archivo.tipo AS archivo_tipo FROM 
+	$sql_matematicas_orden = "SELECT ordencompra.estado_orden AS ordencompra_estadoorden, ordencompra.fecha_compra AS ordencompra_fechacompra, ordencompra.ordencompra_id AS ordencompra_id, archivo.archivo_id AS archivo_id, archivo.nombre AS archivo_nombre, archivo.curso AS archivo_curso, archivo.unidad AS archivo_unidad, ordencompra.pagado AS ordencompra_pagado, archivo.estado AS archivo_estado, archivo.tipo AS archivo_tipo 
+	FROM 
 		ordencompra
 	INNER JOIN 
-		usuario ON ordencompra.usuario_id=usuario.usuario_id 
+		archivo ON ordencompra.archivo_id=archivo.archivo_id
 	INNER JOIN 
-		archivo ON ordencompra.archivo_id=archivo.archivo_id 
+		usuario ON ordencompra.usuario_id=usuario.usuario_id
 	WHERE 
-		ordencompra.usuario_id = '".$_SESSION['usuario_id']."' AND archivo.asignatura = 'Matematicas'
-	ORDER BY estado DESC";
+		ordencompra.usuario_id = '".$_SESSION['usuario_id']."' AND archivo.asignatura = 'Matemáticas'
+	ORDER BY archivo_estado DESC";
 	$rs_result_matematica_orden = mysqli_query($conn, $sql_matematicas_orden);
 		
 	// BOX: Tabla Lenguaje
 	// Primero entramos a la tabla ordencompra y luego archivo para sacar los datos requeridos
-	$sql_lenguaje_orden = "SELECT ordencompra.estado_orden AS ordencompra_estadoorden, ordencompra.fecha_compra AS ordencompra_fechacompra, ordencompra.ordencompra_id AS ordencompra_id, archivo.archivo_id AS archivo_id, archivo.nombre AS archivo_nombre, archivo.curso AS archivo_curso, archivo.unidad AS archivo_unidad, ordencompra.pagado AS ordencompra_pagado, archivo.estado AS archivo_estado, archivo.tipo AS archivo_tipo FROM 
+	$sql_lenguaje_orden = "SELECT ordencompra.estado_orden AS ordencompra_estadoorden, ordencompra.fecha_compra AS ordencompra_fechacompra, ordencompra.ordencompra_id AS ordencompra_id, archivo.archivo_id AS archivo_id, archivo.nombre AS archivo_nombre, archivo.curso AS archivo_curso, archivo.unidad AS archivo_unidad, ordencompra.pagado AS ordencompra_pagado, archivo.estado AS archivo_estado, archivo.tipo AS archivo_tipo 
+	FROM 
 		ordencompra
 	INNER JOIN 
-		usuario ON ordencompra.usuario_id=usuario.usuario_id 
+		archivo ON ordencompra.archivo_id=archivo.archivo_id
 	INNER JOIN 
-		archivo ON ordencompra.archivo_id=archivo.archivo_id 
+		usuario ON ordencompra.usuario_id=usuario.usuario_id
 	WHERE 
 		ordencompra.usuario_id = '".$_SESSION['usuario_id']."' AND archivo.asignatura = 'Lenguaje'
-	ORDER BY estado DESC";
+	ORDER BY archivo_estado DESC";
 	$rs_result_lenguaje_orden = mysqli_query($conn, $sql_lenguaje_orden);
 
 	// BOX: Tabla Tecnología
 	// Primero entramos a la tabla ordencompra y luego archivo para sacar los datos requeridos
-	$sql_tecnologia_orden = "SELECT ordencompra.estado_orden AS ordencompra_estadoorden, ordencompra.fecha_compra AS ordencompra_fechacompra, ordencompra.ordencompra_id AS ordencompra_id, archivo.archivo_id AS archivo_id, archivo.nombre AS archivo_nombre, archivo.curso AS archivo_curso, archivo.unidad AS archivo_unidad, ordencompra.pagado AS ordencompra_pagado, archivo.estado AS archivo_estado, archivo.tipo AS archivo_tipo FROM 
+	$sql_tecnologia_orden = "SELECT ordencompra.estado_orden AS ordencompra_estadoorden, ordencompra.fecha_compra AS ordencompra_fechacompra, ordencompra.ordencompra_id AS ordencompra_id, archivo.archivo_id AS archivo_id, archivo.nombre AS archivo_nombre, archivo.curso AS archivo_curso, archivo.unidad AS archivo_unidad, ordencompra.pagado AS ordencompra_pagado, archivo.estado AS archivo_estado, archivo.tipo AS archivo_tipo 
+	FROM 
 		ordencompra
 	INNER JOIN 
-		usuario ON ordencompra.usuario_id=usuario.usuario_id 
+		archivo ON ordencompra.archivo_id=archivo.archivo_id
 	INNER JOIN 
-		archivo ON ordencompra.archivo_id=archivo.archivo_id 
+		usuario ON ordencompra.usuario_id=usuario.usuario_id
 	WHERE 
 		ordencompra.usuario_id = '".$_SESSION['usuario_id']."' AND archivo.asignatura = 'Tecnología'
-	ORDER BY estado DESC";
+	ORDER BY archivo_estado DESC";
 	$rs_result_tecnologia_orden = mysqli_query($conn, $sql_tecnologia_orden);
 
 	// BOX: Tabla Música
 	// Primero entramos a la tabla ordencompra y luego archivo para sacar los datos requeridos
-	$sql_musica_orden = "SELECT ordencompra.estado_orden AS ordencompra_estadoorden, ordencompra.fecha_compra AS ordencompra_fechacompra, ordencompra.ordencompra_id AS ordencompra_id, archivo.archivo_id AS archivo_id, archivo.nombre AS archivo_nombre, archivo.curso AS archivo_curso, archivo.unidad AS archivo_unidad, ordencompra.pagado AS ordencompra_pagado, archivo.estado AS archivo_estado, archivo.tipo AS archivo_tipo FROM 
+	$sql_musica_orden = "SELECT ordencompra.estado_orden AS ordencompra_estadoorden, ordencompra.fecha_compra AS ordencompra_fechacompra, ordencompra.ordencompra_id AS ordencompra_id, archivo.archivo_id AS archivo_id, archivo.nombre AS archivo_nombre, archivo.curso AS archivo_curso, archivo.unidad AS archivo_unidad, ordencompra.pagado AS ordencompra_pagado, archivo.estado AS archivo_estado, archivo.tipo AS archivo_tipo 
+	FROM 
 		ordencompra
 	INNER JOIN 
-		usuario ON ordencompra.usuario_id=usuario.usuario_id 
+		archivo ON ordencompra.archivo_id=archivo.archivo_id
 	INNER JOIN 
-		archivo ON ordencompra.archivo_id=archivo.archivo_id 
+		usuario ON ordencompra.usuario_id=usuario.usuario_id
 	WHERE 
 		ordencompra.usuario_id = '".$_SESSION['usuario_id']."' AND archivo.asignatura = 'Música'
-	ORDER BY estado DESC";
+	ORDER BY archivo_estado DESC";
 	$rs_result_musica_orden = mysqli_query($conn, $sql_musica_orden);
 
 	// BOX: Tabla Artes Visuales
 	// Primero entramos a la tabla ordencompra y luego archivo para sacar los datos requeridos
-	$sql_artesvisuales_orden = "SELECT ordencompra.estado_orden AS ordencompra_estadoorden, ordencompra.fecha_compra AS ordencompra_fechacompra, ordencompra.ordencompra_id AS ordencompra_id, archivo.archivo_id AS archivo_id, archivo.nombre AS archivo_nombre, archivo.curso AS archivo_curso, archivo.unidad AS archivo_unidad, ordencompra.pagado AS ordencompra_pagado, archivo.estado AS archivo_estado, archivo.tipo AS archivo_tipo FROM 
+	$sql_artesvisuales_orden = "SELECT ordencompra.estado_orden AS ordencompra_estadoorden, ordencompra.fecha_compra AS ordencompra_fechacompra, ordencompra.ordencompra_id AS ordencompra_id, archivo.archivo_id AS archivo_id, archivo.nombre AS archivo_nombre, archivo.curso AS archivo_curso, archivo.unidad AS archivo_unidad, ordencompra.pagado AS ordencompra_pagado, archivo.estado AS archivo_estado, archivo.tipo AS archivo_tipo 
+	FROM 
 		ordencompra
 	INNER JOIN 
-		usuario ON ordencompra.usuario_id=usuario.usuario_id 
+		archivo ON ordencompra.archivo_id=archivo.archivo_id
 	INNER JOIN 
-		archivo ON ordencompra.archivo_id=archivo.archivo_id 
+		usuario ON ordencompra.usuario_id=usuario.usuario_id
 	WHERE 
 		ordencompra.usuario_id = '".$_SESSION['usuario_id']."' AND archivo.asignatura = 'Artes Visuales'
-	ORDER BY estado DESC";
+	ORDER BY archivo_estado DESC";
 	$rs_result_artesvisuales_orden = mysqli_query($conn, $sql_artesvisuales_orden);
 
 	// Contador de ordenes con pendiente de confirmación
@@ -152,14 +157,15 @@ else // Continuamos a la página
 
 		if($cnt_pendientesconfirmacion > 0)
 		{
-			echo '<div class="alert alert-warning" role="alert">';
-			echo '<h4 class="alert-heading">Importante</h4>';
-			echo '<p>Actualmente tienes una o más ordenes <strong>pendiente de confirmación</strong>, mientras un miembro de nuestro equipo verifica la información, el archivo no estará disponible en tu perfil.</p>';
-			echo '<hr>';
-			echo '<p class="mb-0">En el momento que el pago sea confirmado y validado, se te notificará por correo electrónico y estará disponible en tu perfil.</p>';
-			echo '</div>';
+		?>
+			<div class="alert alert-warning" role="alert">
+			<h4 class="alert-heading">Importante</h4>
+			<p>Actualmente tienes una o más ordenes <strong>pendiente de confirmación</strong>, mientras un miembro de nuestro equipo verifica la información, el archivo no estará disponible en tu perfil.</p>
+			<hr>
+			<p class="mb-0">En el momento que el pago sea confirmado y validado, se te notificará por correo electrónico y estará disponible en tu perfil.</p>
+			</div>
+		<?php
 		}
-		
 		?>
 
 		<section id="tabs" class="project-tab">
@@ -192,7 +198,9 @@ else // Continuamos a la página
                                         </tr>
                                     </thead>
                                     <tbody class="list limpio">
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result_matematica_orden)) {?>	
+                                        <?php while ($row = mysqli_fetch_assoc($rs_result_matematica_orden)) {
+										$pagado_final = number_format($row['ordencompra_pagado'],0, '', '.');	
+										?>	
 
 											<tr>
 												<td class="tema"><?php echo $row['archivo_nombre']; ?></td>
@@ -208,7 +216,7 @@ else // Continuamos a la página
 												}
 												
 												?></td>
-												<td class="pagado">$<?php echo $row['ordencompra_pagado']; ?></td>
+												<td class="pagado">$<?php echo $pagado_final; ?></td>
 												<td><?php echo $row['ordencompra_fechacompra']; ?></td>
 												<td class="estado"><?php echo $row['ordencompra_estadoorden']; ?></td>
 												<td>
@@ -245,7 +253,9 @@ else // Continuamos a la página
                                         </tr>
                                     </thead>
                                     <tbody class="list limpio">
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result_lenguaje_orden)) {?>	
+                                        <?php while ($row = mysqli_fetch_assoc($rs_result_lenguaje_orden)) {
+										$pagado_final = number_format($row['ordencompra_pagado'],0, '', '.');		
+										?>	
 
 											<tr>
 												<td class="tema"><?php echo $row['archivo_nombre']; ?></td>
@@ -261,7 +271,7 @@ else // Continuamos a la página
 												}
 												
 												?></td>
-												<td class="pagado">$<?php echo $row['ordencompra_pagado']; ?></td>
+												<td class="pagado">$<?php echo $pagado_final; ?></td>
 												<td><?php echo $row['ordencompra_fechacompra']; ?></td>
 												<td class="estado"><?php echo $row['ordencompra_estadoorden']; ?></td>
 												<td>
@@ -298,7 +308,9 @@ else // Continuamos a la página
                                         </tr>
                                     </thead>
                                     <tbody class="list limpio">
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result_tecnologia_orden)) {?>	
+                                        <?php while ($row = mysqli_fetch_assoc($rs_result_tecnologia_orden)) {
+										$pagado_final = number_format($row['ordencompra_pagado'],0, '', '.');		
+										?>	
 
 											<tr>
 												<td class="tema"><?php echo $row['archivo_nombre']; ?></td>
@@ -314,7 +326,7 @@ else // Continuamos a la página
 												}
 												
 												?></td>
-												<td class="pagado">$<?php echo $row['ordencompra_pagado']; ?></td>
+												<td class="pagado">$<?php echo $pagado_final; ?></td>
 												<td><?php echo $row['ordencompra_fechacompra']; ?></td>
 												<td class="estado"><?php echo $row['ordencompra_estadoorden']; ?></td>
 												<td>
@@ -351,7 +363,9 @@ else // Continuamos a la página
                                         </tr>
                                     </thead>
                                     <tbody class="list limpio">
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result_musica_orden)) {?>	
+                                        <?php while ($row = mysqli_fetch_assoc($rs_result_musica_orden)) {
+										$pagado_final = number_format($row['ordencompra_pagado'],0, '', '.');	
+										?>	
 
 											<tr>
 												<td class="tema"><?php echo $row['archivo_nombre']; ?></td>
@@ -367,7 +381,7 @@ else // Continuamos a la página
 												}
 												
 												?></td>
-												<td class="pagado">$<?php echo $row['ordencompra_pagado']; ?></td>
+												<td class="pagado">$<?php echo $pagado_final; ?></td>
 												<td><?php echo $row['ordencompra_fechacompra']; ?></td>
 												<td class="estado"><?php echo $row['ordencompra_estadoorden']; ?></td>
 												<td>
@@ -404,7 +418,9 @@ else // Continuamos a la página
                                         </tr>
                                     </thead>
                                     <tbody class="list limpio">
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result_artesvisuales_orden)) {?>	
+                                        <?php while ($row = mysqli_fetch_assoc($rs_result_artesvisuales_orden)) {
+										$pagado_final = number_format($row['ordencompra_pagado'],0, '', '.');		
+										?>	
 
 											<tr>
 												<td class="tema"><?php echo $row['archivo_nombre']; ?></td>
@@ -420,7 +436,7 @@ else // Continuamos a la página
 												}
 												
 												?></td>
-												<td class="pagado">$<?php echo $row['ordencompra_pagado']; ?></td>
+												<td class="pagado">$<?php echo $pagado_final; ?></td>
 												<td><?php echo $row['ordencompra_fechacompra']; ?></td>
 												<td class="estado"><?php echo $row['ordencompra_estadoorden']; ?></td>
 												<td>

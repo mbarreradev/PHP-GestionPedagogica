@@ -78,6 +78,8 @@ else // Continuamos a la página
     
     $conn->close();
 	}
+	
+	$precio_final = number_format($consulta_planificacion["precio"],0, '', '.');
 
 ?> 
 <!doctype html>
@@ -145,11 +147,11 @@ else // Continuamos a la página
                 <h6 class="my-0"><?php echo $consulta_planificacion["nombre"]; ?></h6>
                 <small class="text-muted"><?php echo $consulta_planificacion["descripcion_corta"]; ?></small>
               </div>
-              <span class="text-muted">$<?php echo $consulta_planificacion["precio"]; ?></span>
+              <span class="text-muted">$<?php echo $precio_final; ?></span>
             </li>
             <li class="list-group-item d-flex justify-content-between bg-azul-claro">
               <span>Total a pagar</span>
-              <strong>$<?php echo $consulta_planificacion["precio"]; ?></strong>
+              <strong>$<?php echo $precio_final; ?></strong>
             </li>
           </ul>
 		  

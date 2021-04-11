@@ -62,31 +62,35 @@ $cnt_guias = $rs_result_guias_totales->num_rows;
 			<img class="logo" src="/images/Logo.png" width="32" height="32"><h5 class="my-0 mr-md-auto font-weight-normal">Gestión Pedagógica</h5>
 			<nav class="my-2 my-md-0 mr-md-3">
 				<a href="http://repositorio.gestionpedagogica.cl"><button class="btn btn-secondary" type="button">Inicio</button></a>
-					<?php
-						if (!isset($_SESSION["fb_access_token"]))
-						{
-							echo '<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Panel de usuario</button>';
-							echo '<div class="dropdown-menu" aria-labelledby="dropdownMenu2">';
-							echo '<a href="/login"><button class="dropdown-item" type="button">Ingresar con Facebook</button></a>';
-							echo '</div>';
-						}
-						else
-						{
-							echo '<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hola '.$row_profile_general["nombres"].'</button>';
-							echo '<div class="dropdown-menu" aria-labelledby="dropdownMenu2">';
-							echo '<a href="/perfil"><button class="dropdown-item" type="button">Perfil</button></a>';
-							echo '<a href="/misordenes"><button class="dropdown-item" type="button">Mis ordenes</button></a>';
-							echo '<a href="/logout"><button class="dropdown-item" type="button">Desconectar</button></a>';
-							echo '</div>';
-						}
+				<?php
+				if (!isset($_SESSION["fb_access_token"]))
+					{
 					?>
+						<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Panel de usuario</button>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+						<a href="/login"><button class="dropdown-item" type="button">Ingresar con Facebook</button></a>
+						</div>
+					<?php
+					}
+					else
+					{
+					?>
+						<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hola <?php echo $row_profile_general["nombres"] ?></button>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+						<a href="/perfil"><button class="dropdown-item" type="button">Perfil</button></a>
+						<a href="/misordenes"><button class="dropdown-item" type="button">Mis ordenes</button></a>
+						<a href="/logout"><button class="dropdown-item" type="button">Desconectar</button></a>
+						</div>
+					<?php
+					}
+				?>
 
-					<?php
-						if (isset($_SESSION["rango"]) == '2')
-						{ 
-							echo '<a href="/administracion"><button class="btn btn-secondary" type="button">Administración</button></a>';
-						}
-					?>
+				<?php
+				if (isset($_SESSION["rango"]) == '2')
+				{ 
+					echo '<a href="/administracion"><button class="btn btn-secondary" type="button">Administración</button></a>';
+				}
+				?>
 				<a href="/contacto"><button class="btn btn-secondary" type="button">Contacto</button></a>
 			</nav>
 			<a class="btn btn-outline-success" href="https://api.whatsapp.com/send?phone=56912345678">Contactar por WhatsApp</a>
@@ -100,7 +104,7 @@ $cnt_guias = $rs_result_guias_totales->num_rows;
 				<?php
 						if (isset($_SESSION["fb_access_token"]))
 						{
-							echo '<a href="/perfil"><button type="button" class="btn btn-primary btn-outline btn-lg"><span class="material-icons">person</span> Ingresar a mi cuenta</button></a>';
+							echo '<a href="/perfil"><button type="button" class="btn btn-primary btn-outline btn-lg"><span class="material-icons">person</span> Ver mi cuenta</button></a>';
 						}
 						else
 						{
@@ -177,6 +181,7 @@ $cnt_guias = $rs_result_guias_totales->num_rows;
                                 
                                 <?php  
                                     while ($row = mysqli_fetch_assoc($rs_result_planificaciones)) {
+									$precio_final = number_format($row['precio'],0, '', '.');
                                 ?>
 
                                 <div class="card mb-4 box-shadow">
@@ -190,7 +195,7 @@ $cnt_guias = $rs_result_guias_totales->num_rows;
                                             <li class="unidad"><?php echo $row['curso']; ?></li>
                                             <li class="unidad"><?php echo $row['unidad']; ?></li>
                                         </ul>
-                                        <h1 class="card-title pricing-card-title price">Precio $<?php echo $row['precio']; ?></h1>
+                                        <h1 class="card-title pricing-card-title price">Precio $<?php echo $precio_final; ?></h1>
                                         <?php
                                             if($row["estado"] === '1' AND isset($_SESSION["fb_access_token"])) // 1 disponible 0 no disponible
                                             {
@@ -229,6 +234,7 @@ $cnt_guias = $rs_result_guias_totales->num_rows;
                                 
                                 <?php  
                                     while ($row = mysqli_fetch_assoc($rs_result_guias)) {
+									$precio_final = number_format($row['precio'],0, '', '.');
                                 ?>
 
                                 <div class="card mb-4 box-shadow">
@@ -242,7 +248,7 @@ $cnt_guias = $rs_result_guias_totales->num_rows;
                                             <li class="unidad"><?php echo $row['curso']; ?></li>
                                             <li class="unidad"><?php echo $row['unidad']; ?></li>
                                         </ul>
-                                        <h1 class="card-title pricing-card-title price">Precio $<?php echo $row['precio']; ?></h1>
+                                        <h1 class="card-title pricing-card-title price">Precio $<?php echo $precio_final; ?></h1>
                                         <?php
                                             if($row["estado"] === '1' AND isset($_SESSION["fb_access_token"])) // 1 disponible 0 no disponible
                                             {
