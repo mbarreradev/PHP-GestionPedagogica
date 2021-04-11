@@ -238,10 +238,9 @@ else // Continuamos a la página
 				
         </h4>
 		
-		<div class="card mb-3">
+		<div class="mb-4">
 			<div class="row no-gutters">
 				<div class="col">
-				  	<div class="card-body bg-azul-claro">
 						<div class="row">
 							<div class="col-sm">
 								<div class="card border-plomo">
@@ -289,7 +288,6 @@ else // Continuamos a la página
 								</div>
 							</div>
 						</div>
-					</div>
 				</div>
 			</div>
 		</div>

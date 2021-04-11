@@ -2,10 +2,6 @@
 session_start();
 require 'inc/database.php';
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 if (!isset($_SESSION["fb_access_token"])) // Si no encuentra el access token de la sesión, se enviará a login
 {
 	header("location: login.php");

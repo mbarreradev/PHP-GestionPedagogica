@@ -113,10 +113,9 @@ else // Continuamos a la página
 				
         </h4>
 		
-		<div class="card mb-3">
+		<div class="mb-4">
 			<div class="row no-gutters">
 				<div class="col">
-				  	<div class="card-body bg-azul-claro">
 						<div class="row">
 							<div class="col-sm">
 								<div class="card border-plomo">
@@ -185,7 +184,6 @@ else // Continuamos a la página
 								</div>
 							</div>
 						</div>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -211,52 +209,32 @@ else // Continuamos a la página
 								function showGraph1()
 								{
 									{
-										$.post("inc/json_admin.php",
+										$.post("inc/json_ventas_por_tipo.php",
 										function (data)
 										{
 											console.log(data);
-											var cantidad_guias = [];
-											var cantidad_planificaciones = [];
-											
-											const meses = [
-											  'Enero',
-											  'Febrero',
-											  'Marzo',
-											  'Abril',
-											  'Mayo',
-											  'Junio',
-											  'Julio',
-											  'Agosto',
-											  'Septiembre',
-											  'Octubre',
-											  'Noviembre',
-											  'Diciembre',
-											];
-											const num_random = [
-											  '2',
-											  '5',
-											  '11',
-											  '30',
-											  '1',
-											  '18',
-											];
+											var num_guias = [];
+											var num_planificaciones = [];
+                                            var mes = [];
 
 											for (var i in data) {
-												cantidad_planificaciones.push(data[i].ordencompra_id);
+												num_guias.push(data[i].num_registros_guias);
+                                                num_planificaciones.push(data[i].num_registros_planificaciones);
+                                                mes.push(data[i].mes);
 											}
 
 											var chartdata = {
-												labels: meses,
+												labels: mes,
 												datasets: [
 													{
 														label: 'Planificaciones',
-														data: cantidad_planificaciones,
+														data: num_planificaciones,
 														borderColor: '#36a2eb',
 														backgroundColor: '#9ad0f5',
 													},
 													{
 														label: 'Guías',
-														data: num_random,
+														data: num_guias,
 														borderColor: '#ff6c8b',
 														backgroundColor: '#ffb1c1',
 													}
@@ -285,7 +263,6 @@ else // Continuamos a la página
 									}
 								}
 								</script>
-								xd1
 							</div>
 							<div class="col">
 							
@@ -302,37 +279,24 @@ else // Continuamos a la página
 								function showGraph2()
 								{
 									{
-										$.post("inc/json_admin.php",
+										$.post("inc/json_usuarios_registrados.php",
 										function (data)
 										{
 											console.log(data);
-											var num_registros_por_mes = [];
-											
-											const meses = [
-											  'Enero',
-											  'Febrero',
-											  'Marzo',
-											  'Abril',
-											  'Mayo',
-											  'Junio',
-											  'Julio',
-											  'Agosto',
-											  'Septiembre',
-											  'Octubre',
-											  'Noviembre',
-											  'Diciembre',
-											];
+											var num_registros = [];
+                                            var mes = [];
 
 											for (var i in data) {
-												num_registros_por_mes.push(data[i].ordencompra_id);
+												num_registros.push(data[i].num_registros);
+                                                mes.push(data[i].mes);
 											}
 
 											var chartdata2 = {
-												labels: meses,
+												labels: mes,
 												datasets: [
 													{
 														label: 'Número de registros',
-														data: num_registros_por_mes,
+														data: num_registros,
 														borderColor: '#36a2eb',
 														backgroundColor: '#9ad0f5',
 													}
@@ -361,7 +325,6 @@ else // Continuamos a la página
 									}
 								}
 								</script>
-								xd2
 							</div>
 						</div>
 					</div>

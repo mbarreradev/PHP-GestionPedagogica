@@ -135,10 +135,9 @@ else // Continuamos a la página
 				
         </h4>
 		
-		<div class="card mb-3">
+		<div class="mb-4">
 			<div class="row no-gutters">
 				<div class="col">
-				  	<div class="card-body bg-azul-claro">
 						<div class="row">
 							<div class="col-sm">
 								<div class="card border-plomo">
@@ -186,7 +185,6 @@ else // Continuamos a la página
 								</div>
 							</div>
 						</div>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -201,7 +199,7 @@ else // Continuamos a la página
 
                             <div id="ordenes-pendientes">
                                 <div class="buscador arriba">
-									<input type="search" class="search form-control" placeholder="Puedes buscar por ID, nombre, apellido, rango o correo electrónico"/>
+									<input type="search" class="search form-control" placeholder="Puedes buscar por ID, nombre, apellido, rango o email"/>
 								</div>
                                 <table id="tabla-matematica-planificacion" class="table" cellspacing="0">
                                     <thead>
