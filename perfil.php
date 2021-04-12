@@ -239,17 +239,17 @@ else // Continuamos a la página
 <body class="text-center">
 
 <script>
-$(function(){
-  setInterval(function(){
-	var dateFormat = 'YYYY-DD-MM HH:mm:ss';
+window.addEventListener("load", pageFullyLoaded, false);
+
+function pageFullyLoaded(e) {
+    var dateFormat = 'YYYY-DD-MM HH:mm:ss';
 	var registrado_utctime = moment.utc('<?php echo $row_profile_general["registrado_el"]; ?>');
 	var registrado_localdate = registrado_utctime.local();
 	var registrado_localdate2 = registrado_localdate.locale('es')
 	
 	var modificardivregistrado = document.getElementById('registrado');
 	modificardivregistrado.innerHTML =  moment(registrado_localdate2, "YYYY-MM-DD hh:mm:ss").fromNow();
-	},1000);
-});
+}
 </script>
 
     <div class="container d-flex p-3 mx-auto flex-column">

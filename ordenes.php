@@ -2,6 +2,10 @@
 session_start();
 require 'inc/database.php';
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 if (!isset($_SESSION["fb_access_token"])) // Si no encuentra el access token de la sesión, se enviará a login
 {
 	header("location: login.php");
@@ -148,12 +152,11 @@ else // Continuamos a la página
 	$cnt_ordenes_pagadas = $rs_result_ordenes_pagadas->num_rows;
 
 	// Funcion que aprueba la orden
-	// FALTA: VER COMO OBTENER NUMERO DE ORDEN PARA ACTUALIZAR
 	if(isset($_POST['aprobarorden-submit']))
 	{
 		$usuario = $row_profile_general['nombres']." ".$row_profile_general['apellidos'];
 		$fecha_actualizacion = date("Y-m-d H:i:s");
-		$ordencompraid = '0';
+		$ordencompraid =  $_POST["ordenvalue"];
 
 		// Consulta que actualiza el valor del estado de la orden
 		$sql_update_ordencompra = "UPDATE ordencompra SET estado_orden = 'Pagado', fecha_actualizacion = '".$fecha_actualizacion."' WHERE ordencompra_id = '".$ordencompraid."' "; 
@@ -161,7 +164,7 @@ else // Continuamos a la página
 		if ($conn->query($sql_update_ordencompra) === TRUE) 
 		{
 			// Consulta que crea el historial de la orden
-			$sql_create_ordencompra_historial= "INSERT INTO ordencompra_historial (historial_id, ordencompra_id, fecha_creacion, accion) VALUES (DEFAULT, '$archivo_id', '$fecha_actualizacion', '".$usuario." modificó la orden a Pagado')"; 
+			$sql_create_ordencompra_historial= "INSERT INTO ordencompra_historial (historial_id, ordencompra_id, fecha_creacion, accion) VALUES (DEFAULT, '$ordencompraid', '$fecha_actualizacion', '".$usuario." modificó la orden a Pagado')"; 
 			
 			if ($conn->query($sql_create_ordencompra_historial) === TRUE) 
 			{
@@ -171,13 +174,13 @@ else // Continuamos a la página
 			else
 			{
 				//echo "Error updating record: " . $conn->error;
-				echo "Error sql update.";
+				echo "Error sql update 2.";
 			}
 		} 
 		else 
 		{
 			//echo "Error updating record: " . $conn->error;
-			echo "Error sql update.";
+			echo "Error sql update 1.";
 		}
 
 		$conn->close();
@@ -363,7 +366,10 @@ else // Continuamos a la página
 												</div>
 												<div class="modal-footer">
 													<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+													<form method="post">
+													<input type="hidden" name="ordenvalue" value="<?php echo $row['ordencompra_id']; ?>" />
 													<button class="btn btn-primary" name="aprobarorden-submit" type="submit">Aprobar orden</button>
+													</form>
 												</div>
 												</div>
 											</div>

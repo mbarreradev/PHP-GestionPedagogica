@@ -77,6 +77,29 @@ else // Continuamos a la página
 	</head>
 <body class="text-center">
 
+<script>
+window.addEventListener("load", pageFullyLoaded, false);
+
+function pageFullyLoaded(e) {
+    var dateFormat = 'YYYY-DD-MM HH:mm:ss';
+
+	for (var i = 1; i < 6; i+=1) 
+	{
+		var fecha = "fecha" + i;
+		console.log(fecha);
+		var documento = document.getElementById(fecha).textContent;
+		console.log(documento);
+		var registrado_utctime = moment.utc(documento);
+		var registrado_localdate = registrado_utctime.local();
+		var registrado_localdate_locale = registrado_localdate.locale('es')
+
+		var modificardivregistrado = document.getElementById(fecha);
+		console.log(modificardivregistrado);
+		modificardivregistrado.innerHTML =  moment(registrado_localdate_locale, "YYYY-MM-DD hh:mm:ss").fromNow();
+	}
+}
+</script>
+
     <div class="container d-flex p-3 mx-auto flex-column">
 
 	<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-color border-azul-claro">
@@ -200,6 +223,14 @@ else // Continuamos a la página
 									<canvas id="graphCanvas"></canvas>
 								</div>
 
+								<?PHP
+
+										$json = file_get_contents("inc/json_ventas_guias.php");
+											// Converts it into a PHP object
+											$data2 = json_decode($json);
+
+								?>
+
 								<script>
 								$(document).ready(function () {
 									showGraph1();
@@ -209,19 +240,20 @@ else // Continuamos a la página
 								function showGraph1()
 								{
 									{
-										$.post("inc/json_ventas_por_tipo.php",
+										$.post("inc/json_ventas_guias.php",
 										function (data)
 										{
-											console.log(data);
 											var num_guias = [];
 											var num_planificaciones = [];
                                             var mes = [];
 
-											for (var i in data) {
-												num_guias.push(data[i].num_registros_guias);
-                                                num_planificaciones.push(data[i].num_registros_planificaciones);
-                                                mes.push(data[i].mes);
-											}
+											
+
+												for (var i in data) {
+													num_guias.push(data[i].num_registros_guias);
+													num_planificaciones.push(<?php Print($data2); ?>[i].num_registros_planificaciones);
+													mes.push(data[i].mes);
+												}
 
 											var chartdata = {
 												labels: mes,
@@ -316,7 +348,7 @@ else // Continuamos a la página
 													  },
 													  title: {
 														display: true,
-														text: 'Registros de usuarios'
+														text: 'Registros de usuarios de este año'
 													  }
 													}
 												  },
@@ -402,21 +434,6 @@ else // Continuamos a la página
 			}
 		});
 	});
-
-	var dateFormat = 'YYYY-DD-MM HH:mm:ss';
-
-	for (var i = 1; i < 6; i+=1) 
-	{
-		var fecha = "fecha" + i;
-		var documento = document.getElementById(fecha).value;
-		var registrado_utctime = moment.utc(documento);
-		var registrado_localdate = registrado_utctime.local();
-		var registrado_localdate_locale = registrado_localdate.locale('es')
-
-		var modificardivregistrado = document.getElementById("fecha" + i);
-		modificardivregistrado.innerHTML =  moment(registrado_localdate_locale, "YYYY-MM-DD hh:mm:ss").fromNow();
-	}
-
 	</script>
 
   </body>

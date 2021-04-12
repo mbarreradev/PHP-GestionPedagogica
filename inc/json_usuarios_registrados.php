@@ -1,18 +1,27 @@
 <?php
 header('Content-Type: application/json');
-
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 require 'database.php';
 
-  $sqlQuery = "SELECT COUNT(usuario_id) AS num_registros,
-  MONTH(registrado_el) AS mes,
-  YEAR(registrado_el) AS agno FROM usuario
-  WHERE registrado_el > DATE_SUB(now(), INTERVAL 12 MONTH)
-GROUP BY MONTH(registrado_el), YEAR(registrado_el)
-ORDER BY mes, agno";
+$sqlQuery = "SELECT  Months.m AS mes, COUNT(usuario.registrado_el) AS num_registros FROM 
+(
+    SELECT 1 as m 
+    UNION SELECT 2 as m 
+    UNION SELECT 3 as m 
+    UNION SELECT 4 as m 
+    UNION SELECT 5 as m 
+    UNION SELECT 6 as m 
+    UNION SELECT 7 as m 
+    UNION SELECT 8 as m 
+    UNION SELECT 9 as m 
+    UNION SELECT 10 as m 
+    UNION SELECT 11 as m 
+    UNION SELECT 12 as m
+) as Months
+LEFT JOIN usuario on Months.m = MONTH(usuario.registrado_el)
+AND YEAR(usuario.registrado_el) = YEAR(CURDATE())
+GROUP BY Months.m";
+
+// ultimos 12 meses WHERE registrado_el > DATE_SUB(now(), INTERVAL 12 MONTH)
 
 $result = mysqli_query($conn,$sqlQuery);
 
@@ -21,7 +30,7 @@ foreach ($result as $row) {
 	$data[] = $row;
 }
 
-// Reemplazamos los numeros de meses a nombres de meses
+mysqli_close($conn);
 
 foreach($data as &$a){
     if($a['mes'] == 1){
@@ -61,8 +70,6 @@ foreach($data as &$a){
         $a['mes'] = 'Diciembre';
     }
 }
-
-mysqli_close($conn);
 
 echo json_encode($data);
 ?>

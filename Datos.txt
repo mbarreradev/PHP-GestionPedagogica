@@ -85,7 +85,7 @@ editararchivo
 eliminararchivo -terminar en archivo archivos.php
 
 LOGS ORDENES
-Falta terminar log y funcion de actualizar orden a pagado en ordenes.php
+Falta terminar log
 
 LOGS USUARIOS
 Falta todo el historial de usuarios
