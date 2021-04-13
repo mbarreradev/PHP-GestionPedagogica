@@ -42,19 +42,11 @@ else // Continuamos a la página
 	$rs_result_actividad_ordenes = mysqli_query($conn, $sql_actividad_ordenes);
 	
 	// Box Últimos usuarios registrados
-	$sql_actividad_usuarios = "SELECT ordencompra_historial.historial_id, ordencompra_historial.ordencompra_id, ordencompra_historial.accion, ordencompra_historial.fecha_creacion, usuario.nombres, usuario.apellidos
+	$sql_actividad_usuarios = "SELECT usuario_id, nombres, apellidos, registrado_el
 	FROM 
-		ordencompra_historial 
-	INNER JOIN 
-		ordencompra
-	ON
-		ordencompra_historial.ordencompra_id=ordencompra.ordencompra_id
-	INNER JOIN 
-		usuario
-	ON
-		ordencompra.usuario_id=usuario.usuario_id
+		usuario 
 	ORDER BY 
-		historial_id DESC 
+		usuario_id DESC 
 	LIMIT 10";  
 	$rs_result_actividad_usuarios = mysqli_query($conn, $sql_actividad_usuarios);
 
@@ -406,7 +398,7 @@ function pageFullyLoaded(e) {
 
 								<li>
 									<a href="/ordenes"><strong class="titulo">Orden:</strong> <?php echo $row['ordencompra_id']; ?> <strong class="titulo">Comprador:</strong></strong> <?php echo $row['nombres']." ". $row['apellidos'] ; ?></a>
-									<a href="#" class="float-right" rel="tooltip" title="<?php echo $row['fecha_creacion']; ?>" id="fecha<?php echo $counter; ?>"><?php echo $row['fecha_creacion']; ?></a>
+									<a class="float-right" rel="tooltip" title="<?php echo $row['fecha_creacion']; ?>" id="fecha<?php echo $counter; ?>"><?php echo $row['fecha_creacion']; ?></a>
 									<p><?php echo $row['accion']; ?></p>
 								</li>
 
@@ -419,11 +411,23 @@ function pageFullyLoaded(e) {
 						<div class="col">
 							<h4 class="titulo">Últimos usuarios registrados</h4>
 							<ul class="timeline">
+
+								<?php  
+									$counter = 0;
+									while ($row = mysqli_fetch_assoc($rs_result_actividad_usuarios)) {
+									$counter++;
+								?>
+
 								<li>
-									<a href="#"><strong class="titulo">Usuario: </strong></a>
-									<a href="#" class="float-right">Fecha</a>
+									<a href="<?php echo $row['nombres']; ?>"><strong class="titulo">Usuario: <?php echo $row['nombres']." ". $row['apellidos'] ; ?> </strong></a>
+									<a class="float-right" rel="tooltip" title="<?php echo $row['registrado_el']; ?>" id="fechausuario<?php echo $counter; ?>"><?php echo $row['registrado_el']; ?></a>
 									<p>Texto</p>
 								</li>
+
+								<?php  
+									};  
+								?>
+
 							</ul>
 						</div>
 					</div>

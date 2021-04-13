@@ -93,5 +93,5 @@ editararchivo
 verachivo
 
 USUARIOS:
-terminar ficha de perfil => eliminarperfil, modificarperfil
+terminar botón ficha de perfil => eliminarperfil, modificarperfil
 Agregar filtro para estado de cuenta
