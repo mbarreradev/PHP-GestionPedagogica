@@ -147,26 +147,6 @@ else // Continuamos a la página
 
 	$cnt_archivos_total = ($cnt_planificaciones_total + $cnt_guias_total);
 
-	// Funcion que elimina el archivo
-	if(isset($_POST['eliminararchivo-submit']))
-	{
-		$archiivo_id = $_POST['archivo_id'];
-
-		// Consulta que borra el archivo
-		$sql_delete_archivo= "DELETE FROM archivo WHERE archivo_id = '".$archiivo_id."' "; 
-        
-		if ($conn->query($sql_delete_archivo) === TRUE) 
-		{
-			// Refrescamos la página
-			header("Refresh:0");
-		}
-		else
-		{
-			echo "error sql";
-			//echo "Error sql log." . $sql_delete_archivo . "<br>" . $conn->error;
-		}
-	}
-
 ?>
 <!doctype html>
 <html lang="es">
@@ -280,7 +260,7 @@ else // Continuamos a la página
             <span class="titulo">Planificaciones</span>
 
 			<div class="btn-group dropup btn-block options">
-			<a href="/nuevoarchivo"><button type="button" class="btn btn-primary"><span class="material-icons">add</span> Agregar nuevo</button></a>
+			<a href="/nuevoarchivo"><button type="button" class="btn btn-success"><span class="material-icons">add</span> Agregar nuevo</button></a>
 			</div>
 
         </h4>	
@@ -335,12 +315,16 @@ else // Continuamos a la página
 
 												?></td>
 												<td>
-												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">sticky_note_2</span> Ver</button></a>
-												<a href="/editararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">edit</span> Modificar</button></a>
-												<form method="post" action="">
-												<input type="hidden" name="archivo_id" value="<?php echo $row['archivo_id']; ?>" />
-												<button name="eliminararchivo-submit" type="submit" class="btn btn-danger tabla"><span class="material-icons">delete</span> Eliminar</button>
-												</form>
+												<div class="btn-group" role="group">
+													<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle tabla" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													Opciones
+													</button>
+													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+													<a class="dropdown-item" href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla width100"><span class="material-icons">sticky_note_2</span> Ver</button></a>
+													<a class="dropdown-item" href="/estadisticas?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons"><span class="material-icons-outlined">trending_up</span></span> Estadísticas</button></a>
+													<a class="dropdown-item" href="/editararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla width100"><span class="material-icons">edit</span> Modificar</button></a>
+													</div>
+												</div>
 												</td>
 											</tr>
 
@@ -392,9 +376,16 @@ else // Continuamos a la página
 
 												?></td>
 												<td>
-												<a href="/archivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">sticky_note_2</span> Ver</button></a>
-												<a href="/editararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">edit</span> Modificar</button></a>
-												<a href="/eliminararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-danger tabla"><span class="material-icons">delete</span> Eliminar</button></a>
+												<div class="btn-group" role="group">
+													<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle tabla" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													Opciones
+													</button>
+													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+													<a class="dropdown-item" href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla width100"><span class="material-icons">sticky_note_2</span> Ver</button></a>
+													<a class="dropdown-item" href="/estadisticas?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons"><span class="material-icons-outlined">trending_up</span></span> Estadísticas</button></a>
+													<a class="dropdown-item" href="/editararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla width100"><span class="material-icons">edit</span> Modificar</button></a>
+													</div>
+												</div>
 												</td>
 											</tr>
 
@@ -446,9 +437,16 @@ else // Continuamos a la página
 
 												?></td>
 												<td>
-												<a href="/archivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">sticky_note_2</span> Ver</button></a>
-												<a href="/editararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">edit</span> Modificar</button></a>
-												<a href="/eliminararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-danger tabla"><span class="material-icons">delete</span> Eliminar</button></a>
+												<div class="btn-group" role="group">
+													<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle tabla" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													Opciones
+													</button>
+													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+													<a class="dropdown-item" href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla width100"><span class="material-icons">sticky_note_2</span> Ver</button></a>
+													<a class="dropdown-item" href="/estadisticas?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons"><span class="material-icons-outlined">trending_up</span></span> Estadísticas</button></a>
+													<a class="dropdown-item" href="/editararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla width100"><span class="material-icons">edit</span> Modificar</button></a>
+													</div>
+												</div>
 												</td>
 											</tr>
 
@@ -500,9 +498,16 @@ else // Continuamos a la página
 
 												?></td>
 												<td>
-												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">sticky_note_2</span> Ver</button></a>
-												<a href="/editararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">edit</span> Modificar</button></a>
-												<a href="/eliminararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-danger tabla"><span class="material-icons">delete</span> Eliminar</button></a>
+												<div class="btn-group" role="group">
+													<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle tabla" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													Opciones
+													</button>
+													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+													<a class="dropdown-item" href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla width100"><span class="material-icons">sticky_note_2</span> Ver</button></a>
+													<a class="dropdown-item" href="/estadisticas?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons"><span class="material-icons-outlined">trending_up</span></span> Estadísticas</button></a>
+													<a class="dropdown-item" href="/editararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla width100"><span class="material-icons">edit</span> Modificar</button></a>
+													</div>
+												</div>
 												</td>
 											</tr>
 
@@ -554,9 +559,16 @@ else // Continuamos a la página
 
 												?></td>
 												<td>
-												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">sticky_note_2</span> Ver</button></a>
-												<a href="/editararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">edit</span> Modificar</button></a>
-												<a href="/eliminararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-danger tabla"><span class="material-icons">delete</span> Eliminar</button></a>
+												<div class="btn-group" role="group">
+													<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle tabla" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													Opciones
+													</button>
+													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+													<a class="dropdown-item" href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla width100"><span class="material-icons">sticky_note_2</span> Ver</button></a>
+													<a class="dropdown-item" href="/estadisticas?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons"><span class="material-icons-outlined">trending_up</span></span> Estadísticas</button></a>
+													<a class="dropdown-item" href="/editararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla width100"><span class="material-icons">edit</span> Modificar</button></a>
+													</div>
+												</div>
 												</td>
 											</tr>
 
@@ -635,9 +647,16 @@ else // Continuamos a la página
 
 												?></td>
 												<td>
-												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">sticky_note_2</span> Ver</button></a>
-												<a href="/editararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">edit</span> Modificar</button></a>
-												<a href="/eliminararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-danger tabla"><span class="material-icons">delete</span> Eliminar</button></a>
+												<div class="btn-group" role="group">
+													<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle tabla" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													Opciones
+													</button>
+													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+													<a class="dropdown-item" href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla width100"><span class="material-icons">sticky_note_2</span> Ver</button></a>
+													<a class="dropdown-item" href="/estadisticas?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons"><span class="material-icons-outlined">trending_up</span></span> Estadísticas</button></a>
+													<a class="dropdown-item" href="/editararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla width100"><span class="material-icons">edit</span> Modificar</button></a>
+													</div>
+												</div>
 												</td>
 											</tr>
 
@@ -689,9 +708,16 @@ else // Continuamos a la página
 
 												?></td>
 												<td>
-												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">sticky_note_2</span> Ver</button></a>
-												<a href="/editararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">edit</span> Modificar</button></a>
-												<a href="/eliminararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-danger tabla"><span class="material-icons">delete</span> Eliminar</button></a>
+												<div class="btn-group" role="group">
+													<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle tabla" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													Opciones
+													</button>
+													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+													<a class="dropdown-item" href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla width100"><span class="material-icons">sticky_note_2</span> Ver</button></a>
+													<a class="dropdown-item" href="/estadisticas?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons"><span class="material-icons-outlined">trending_up</span></span> Estadísticas</button></a>
+													<a class="dropdown-item" href="/editararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla width100"><span class="material-icons">edit</span> Modificar</button></a>
+													</div>
+												</div>
 												</td>
 											</tr>
 
@@ -743,9 +769,16 @@ else // Continuamos a la página
 
 												?></td>
 												<td>
-												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">sticky_note_2</span> Ver</button></a>
-												<a href="/editararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">edit</span> Modificar</button></a>
-												<a href="/eliminararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-danger tabla"><span class="material-icons">delete</span> Eliminar</button></a>
+												<div class="btn-group" role="group">
+													<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle tabla" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													Opciones
+													</button>
+													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+													<a class="dropdown-item" href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla width100"><span class="material-icons">sticky_note_2</span> Ver</button></a>
+													<a class="dropdown-item" href="/estadisticas?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons"><span class="material-icons-outlined">trending_up</span></span> Estadísticas</button></a>
+													<a class="dropdown-item" href="/editararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla width100"><span class="material-icons">edit</span> Modificar</button></a>
+													</div>
+												</div>
 												</td>
 											</tr>
 
@@ -797,9 +830,16 @@ else // Continuamos a la página
 
 												?></td>
 												<td>
-												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">sticky_note_2</span> Ver</button></a>
-												<a href="/editararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">edit</span> Modificar</button></a>
-												<a href="/eliminararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-danger tabla"><span class="material-icons">delete</span> Eliminar</button></a>
+												<div class="btn-group" role="group">
+													<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle tabla" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													Opciones
+													</button>
+													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+													<a class="dropdown-item" href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla width100"><span class="material-icons">sticky_note_2</span> Ver</button></a>
+													<a class="dropdown-item" href="/estadisticas?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons"><span class="material-icons-outlined">trending_up</span></span> Estadísticas</button></a>
+													<a class="dropdown-item" href="/editararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla width100"><span class="material-icons">edit</span> Modificar</button></a>
+													</div>
+												</div>
 												</td>
 											</tr>
 
@@ -851,9 +891,16 @@ else // Continuamos a la página
 
 												?></td>
 												<td>
-												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">sticky_note_2</span> Ver</button></a>
-												<a href="/editararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">edit</span> Modificar</button></a>
-												<a href="/eliminararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-danger tabla"><span class="material-icons">delete</span> Eliminar</button></a>
+												<div class="btn-group" role="group">
+													<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle tabla" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													Opciones
+													</button>
+													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+													<a class="dropdown-item" href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla width100"><span class="material-icons">sticky_note_2</span> Ver</button></a>
+													<a class="dropdown-item" href="/estadisticas?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons"><span class="material-icons-outlined">trending_up</span></span> Estadísticas</button></a>
+													<a class="dropdown-item" href="/editararchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla width100"><span class="material-icons">edit</span> Modificar</button></a>
+													</div>
+												</div>
 												</td>
 											</tr>
 

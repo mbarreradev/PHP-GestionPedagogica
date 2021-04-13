@@ -382,8 +382,15 @@ function pageFullyLoaded(e) {
 												<td class="unidad"><?php echo $row['archivo_unidad']; ?></td>
 												<td><?php echo $row['fecha_compra']; ?></td>
 												<td>
-												<a href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
-												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar archivo</button></a>
+												<div class="btn-group" role="group">
+													<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle tabla" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													Opciones
+													</button>
+													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+														<a class="dropdown-item" href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
+														<a class="dropdown-item" href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar</button></a>
+													</div>
+												</div>
 												</td>
 											</tr>
 
@@ -421,8 +428,15 @@ function pageFullyLoaded(e) {
 												<td class="unidad"><?php echo $row['archivo_unidad']; ?></td>
 												<td><?php echo $row['fecha_compra']; ?></td>
 												<td>
-												<a href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
-												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar archivo</button></a>
+												<div class="btn-group" role="group">
+													<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle tabla" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													Opciones
+													</button>
+													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+														<a class="dropdown-item" href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
+														<a class="dropdown-item" href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar</button></a>
+													</div>
+												</div>
 												</td>
 											</tr>
 
@@ -460,8 +474,15 @@ function pageFullyLoaded(e) {
 												<td class="unidad"><?php echo $row['archivo_unidad']; ?></td>
 												<td><?php echo $row['fecha_compra']; ?></td>
 												<td>
-												<a href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
-												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar archivo</button></a>
+												<div class="btn-group" role="group">
+													<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle tabla" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													Opciones
+													</button>
+													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+														<a class="dropdown-item" href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
+														<a class="dropdown-item" href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar</button></a>
+													</div>
+												</div>
 												</td>
 											</tr>
 
@@ -499,8 +520,15 @@ function pageFullyLoaded(e) {
 												<td class="unidad"><?php echo $row['archivo_unidad']; ?></td>
 												<td><?php echo $row['fecha_compra']; ?></td>
 												<td>
-												<a href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
-												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar archivo</button></a>
+												<div class="btn-group" role="group">
+													<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle tabla" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													Opciones
+													</button>
+													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+														<a class="dropdown-item" href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
+														<a class="dropdown-item" href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar</button></a>
+													</div>
+												</div>
 												</td>
 											</tr>
 
@@ -531,8 +559,15 @@ function pageFullyLoaded(e) {
 												<td class="unidad"><?php echo $row['archivo_unidad']; ?></td>
 												<td><?php echo $row['fecha_compra']; ?></td>
 												<td>
-												<a href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
-												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar archivo</button></a>
+												<div class="btn-group" role="group">
+													<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle tabla" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													Opciones
+													</button>
+													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+														<a class="dropdown-item" href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
+														<a class="dropdown-item" href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar</button></a>
+													</div>
+												</div>
 												</td>
 											</tr>
 
@@ -592,8 +627,15 @@ function pageFullyLoaded(e) {
 												<td class="unidad"><?php echo $row['archivo_unidad']; ?></td>
 												<td><?php echo $row['fecha_compra']; ?></td>
 												<td>
-												<a href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
-												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar archivo</button></a>
+												<div class="btn-group" role="group">
+													<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle tabla" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													Opciones
+													</button>
+													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+														<a class="dropdown-item" href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
+														<a class="dropdown-item" href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar</button></a>
+													</div>
+												</div>
 												</td>
 											</tr>
 
@@ -631,8 +673,15 @@ function pageFullyLoaded(e) {
 												<td class="unidad"><?php echo $row['archivo_unidad']; ?></td>
 												<td><?php echo $row['fecha_compra']; ?></td>
 												<td>
-												<a href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
-												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar archivo</button></a>
+												<div class="btn-group" role="group">
+													<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle tabla" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													Opciones
+													</button>
+													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+														<a class="dropdown-item" href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
+														<a class="dropdown-item" href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar</button></a>
+													</div>
+												</div>
 												</td>
 											</tr>
 
@@ -663,8 +712,15 @@ function pageFullyLoaded(e) {
 												<td class="unidad"><?php echo $row['archivo_unidad']; ?></td>
 												<td><?php echo $row['fecha_compra']; ?></td>
 												<td>
-												<a href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
-												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar archivo</button></a>
+												<div class="btn-group" role="group">
+													<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle tabla" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													Opciones
+													</button>
+													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+														<a class="dropdown-item" href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
+														<a class="dropdown-item" href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar</button></a>
+													</div>
+												</div>
 												</td>
 											</tr>
 
@@ -702,8 +758,15 @@ function pageFullyLoaded(e) {
 												<td class="unidad"><?php echo $row['archivo_unidad']; ?></td>
 												<td><?php echo $row['fecha_compra']; ?></td>
 												<td>
-												<a href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
-												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar archivo</button></a>
+												<div class="btn-group" role="group">
+													<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle tabla" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													Opciones
+													</button>
+													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+														<a class="dropdown-item" href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
+														<a class="dropdown-item" href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar</button></a>
+													</div>
+												</div>
 												</td>
 											</tr>
 
@@ -741,8 +804,15 @@ function pageFullyLoaded(e) {
 												<td class="unidad"><?php echo $row['archivo_unidad']; ?></td>
 												<td><?php echo $row['fecha_compra']; ?></td>
 												<td>
-												<a href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
-												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar archivo</button></a>
+												<div class="btn-group" role="group">
+													<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle tabla" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													Opciones
+													</button>
+													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+														<a class="dropdown-item" href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
+														<a class="dropdown-item" href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar</button></a>
+													</div>
+												</div>
 												</td>
 											</tr>
 

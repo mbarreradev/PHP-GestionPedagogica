@@ -215,6 +215,57 @@ else // Continuamos a la página
                                     </thead>
                                     <tbody class="list limpio">
                                         <?php while ($row = mysqli_fetch_assoc($rs_result_usuarios)) {?>	
+											
+											<!-- Modal perfil <?php echo $row['usuario_id']; ?> -->
+											<div class="modal fade" id="verperfil<?php echo $row['usuario_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="verorden<?php echo $row['ordencompra_id']; ?>Label" aria-hidden="true">
+												<div class="modal-dialog" role="document">
+													<div class="modal-content">
+														<div class="modal-header bg-azul">
+															<h5 class="modal-title" id="verorden<?php echo $row['ordencompra_id']; ?>Label">Viendo perfil <?php echo $row['usuario_id']; ?></h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+															<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<p><strong>Creado por:</strong> <?php echo $row['nombres']." ".$row['apellidos']; ?> - <a href="/verperfil?id=<?php echo $row['usuario_id']; ?>">Ver perfil</a></p>
+															<p><strong>Fecha de creación de compra:</strong> <?php echo $row['fecha_compra']; ?></p>
+															<p><strong>Archivo:</strong> <?php echo $row['nombre']; ?></p>
+															<p><strong>Asignatura:</strong> <?php echo $row['asignatura']." ".$row['curso']; ?></p>
+															<p><strong>Valor del archivo:</strong> $<?php echo $precio_archivo; ?></p>
+															<hr class="bg-azul"/>
+															<p><strong>DETALLES DE LA TRANSFERENCIA</strong></p>
+															<p><strong>Rut:</strong> <?php echo $row['rut']."-".$row['dv']; ?></p>
+															<p><strong>Pagado:</strong> $<?php echo $valor_pagado; ?></p>
+															<p><strong>Comentario de la transferencia:</strong> Pago Orden <?php echo $row['ordencompra_id']; ?></p>
+															<hr class="bg-azul"/>
+															<p><strong>Última actualización:</strong> <?php echo $row['fecha_actualizacion']; ?></p>
+															<p><strong>Estado de la orden:</strong> <?php echo $row['estado_orden']; ?></p>
+															
+															<?php
+
+															if($row['estado_orden'] === 'Pendiente de confirmación')
+															{
+																echo '<div class="alert alert-warning alert-dismissible fade show" role="alert"><strong>Recuerda</strong> verificar el RUT y el número de orden en el comentario de la transferencia antes de aprobar una orden.</div>';
+															}
+															else
+															{
+																echo 'Aprobado';
+															}
+
+															?>
+														
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+															<form method="post">
+															<input type="hidden" name="perfilvalue" value="<?php echo $row['usuario_id']; ?>" />
+															<button class="btn btn-primary" name="modificarperfil-submit" type="submit">Modificar perfil</button>
+															</form>
+														</div>
+													</div>
+												</div>
+											</div>
+
 											<tr>
 												<td class="id"><?php echo $row['usuario_id']; ?></td>
 												<td class="usuario"><?php echo $row['nombres']." ".$row['apellidos']; ?></td>
@@ -238,7 +289,7 @@ else // Continuamos a la página
 												<td><?php echo $row['registrado_el']; ?></td>
                                                 <td><?php echo $row['ultimo_iniciosesion']; ?></td>
 												<td>
-												<button class="btn btn-info tabla"><span class="material-icons">person</span> Ver ficha de perfil</button>
+												<button class="btn btn-info tabla" data-toggle="modal" data-target="#verperfil<?php echo $row['usuario_id']; ?>"><span class="material-icons">person</span> Ver ficha de perfil</button>
 												</td>
 											</tr>
 

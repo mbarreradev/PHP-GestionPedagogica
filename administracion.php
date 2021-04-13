@@ -24,8 +24,8 @@ else // Continuamos a la página
 	$rs_resultdatosgeneral = mysqli_query($conn, $sql_datosusuariosgeneral);
 	$row_profile_general = mysqli_fetch_assoc($rs_resultdatosgeneral);
 
-	// Box actividad de ordenes
-	$sql_actividad_ordenes = "SELECT ordencompra_historial.historial_id, ordencompra_historial.ordencompra_id, ordencompra_historial.accion, ordencompra_historial.fecha_creacion, archivo.nombre
+	// Box Actividad de ordenes
+	$sql_actividad_ordenes = "SELECT ordencompra_historial.historial_id, ordencompra_historial.ordencompra_id, ordencompra_historial.accion, ordencompra_historial.fecha_creacion, usuario.nombres, usuario.apellidos
 	FROM 
 		ordencompra_historial 
 	INNER JOIN 
@@ -33,14 +33,30 @@ else // Continuamos a la página
 	ON
 		ordencompra_historial.ordencompra_id=ordencompra.ordencompra_id
 	INNER JOIN 
-		archivo
+		usuario
 	ON
-		ordencompra.archivo_id=archivo.archivo_id
+		ordencompra.usuario_id=usuario.usuario_id
 	ORDER BY 
 		historial_id DESC 
 	LIMIT 5";  
-	$rs_result_actividad_ordenes = mysqli_query($conn, $sql_actividad_ordenes);  
+	$rs_result_actividad_ordenes = mysqli_query($conn, $sql_actividad_ordenes);
 	
+	// Box Últimos usuarios registrados
+	$sql_actividad_usuarios = "SELECT ordencompra_historial.historial_id, ordencompra_historial.ordencompra_id, ordencompra_historial.accion, ordencompra_historial.fecha_creacion, usuario.nombres, usuario.apellidos
+	FROM 
+		ordencompra_historial 
+	INNER JOIN 
+		ordencompra
+	ON
+		ordencompra_historial.ordencompra_id=ordencompra.ordencompra_id
+	INNER JOIN 
+		usuario
+	ON
+		ordencompra.usuario_id=usuario.usuario_id
+	ORDER BY 
+		historial_id DESC 
+	LIMIT 10";  
+	$rs_result_actividad_usuarios = mysqli_query($conn, $sql_actividad_usuarios);
 
 	// Contador ordenes pendientes de revisión - confirmación
 	$sql_ordenes_pendientes_confirmacion = "SELECT * FROM ordencompra WHERE estado_orden = 'Pendiente de confirmación'";  
@@ -341,6 +357,12 @@ function pageFullyLoaded(e) {
 												type: 'bar',
 												data: chartdata2,
 												options: {
+													scales: {
+														y: {
+															display: true,
+															suggestedMin: 1
+														}
+													},
 													responsive: true,
 													plugins: {
 													  legend: {
@@ -383,7 +405,7 @@ function pageFullyLoaded(e) {
 								?>
 
 								<li>
-									<a href="/ordenes"><strong class="titulo">Orden:</strong> <?php echo $row['ordencompra_id']; ?> <strong class="titulo">Archivo:</strong></strong> <?php echo $row['nombre']; ?></a>
+									<a href="/ordenes"><strong class="titulo">Orden:</strong> <?php echo $row['ordencompra_id']; ?> <strong class="titulo">Comprador:</strong></strong> <?php echo $row['nombres']." ". $row['apellidos'] ; ?></a>
 									<a href="#" class="float-right" rel="tooltip" title="<?php echo $row['fecha_creacion']; ?>" id="fecha<?php echo $counter; ?>"><?php echo $row['fecha_creacion']; ?></a>
 									<p><?php echo $row['accion']; ?></p>
 								</li>
@@ -395,7 +417,7 @@ function pageFullyLoaded(e) {
 							</ul>
 						</div>
 						<div class="col">
-							<h4 class="titulo">Actividad de usuarios</h4>
+							<h4 class="titulo">Últimos usuarios registrados</h4>
 							<ul class="timeline">
 								<li>
 									<a href="#"><strong class="titulo">Usuario: </strong></a>

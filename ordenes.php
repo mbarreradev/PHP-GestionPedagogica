@@ -2,10 +2,6 @@
 session_start();
 require 'inc/database.php';
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 if (!isset($_SESSION["fb_access_token"])) // Si no encuentra el access token de la sesión, se enviará a login
 {
 	header("location: login.php");
@@ -327,52 +323,52 @@ else // Continuamos a la página
 
 											<!-- Modal orden <?php echo $row['ordencompra_id']; ?> -->
 											<div class="modal fade" id="verorden<?php echo $row['ordencompra_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="verorden<?php echo $row['ordencompra_id']; ?>Label" aria-hidden="true">
-											<div class="modal-dialog" role="document">
-												<div class="modal-content">
-												<div class="modal-header bg-azul">
-													<h5 class="modal-title" id="verorden<?php echo $row['ordencompra_id']; ?>Label">Viendo orden <?php echo $row['ordencompra_id']; ?></h5>
-													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-													<span aria-hidden="true">&times;</span>
-													</button>
-												</div>
-												<div class="modal-body">
-													<p><strong>Creado por:</strong> <?php echo $row['nombres']." ".$row['apellidos']; ?> - <a href="/verperfil?id=<?php echo $row['usuario_id']; ?>">Ver perfil</a></p>
-													<p><strong>Fecha de creación de compra:</strong> <?php echo $row['fecha_compra']; ?></p>
-													<p><strong>Archivo:</strong> <?php echo $row['nombre']; ?></p>
-													<p><strong>Asignatura:</strong> <?php echo $row['asignatura']." ".$row['curso']; ?></p>
-													<p><strong>Valor del archivo:</strong> $<?php echo $precio_archivo; ?></p>
-													<hr class="bg-azul"/>
-													<p><strong>DETALLES DE LA TRANSFERENCIA</strong></p>
-													<p><strong>Rut:</strong> <?php echo $row['rut']."-".$row['dv']; ?></p>
-													<p><strong>Pagado:</strong> $<?php echo $valor_pagado; ?></p>
-													<p><strong>Comentario de la transferencia:</strong> Pago Orden <?php echo $row['ordencompra_id']; ?></p>
-													<hr class="bg-azul"/>
-													<p><strong>Última actualización:</strong> <?php echo $row['fecha_actualizacion']; ?></p>
-													<p><strong>Estado de la orden:</strong> <?php echo $row['estado_orden']; ?></p>
-													
-													<?php
+												<div class="modal-dialog" role="document">
+													<div class="modal-content">
+														<div class="modal-header bg-azul">
+															<h5 class="modal-title" id="verorden<?php echo $row['ordencompra_id']; ?>Label">Viendo orden <?php echo $row['ordencompra_id']; ?></h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+															<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<p><strong>Creado por:</strong> <?php echo $row['nombres']." ".$row['apellidos']; ?> - <a href="/verperfil?id=<?php echo $row['usuario_id']; ?>">Ver perfil</a></p>
+															<p><strong>Fecha de creación de compra:</strong> <?php echo $row['fecha_compra']; ?></p>
+															<p><strong>Archivo:</strong> <?php echo $row['nombre']; ?></p>
+															<p><strong>Asignatura:</strong> <?php echo $row['asignatura']." ".$row['curso']; ?></p>
+															<p><strong>Valor del archivo:</strong> $<?php echo $precio_archivo; ?></p>
+															<hr class="bg-azul"/>
+															<p><strong>DETALLES DE LA TRANSFERENCIA</strong></p>
+															<p><strong>Rut:</strong> <?php echo $row['rut']."-".$row['dv']; ?></p>
+															<p><strong>Pagado:</strong> $<?php echo $valor_pagado; ?></p>
+															<p><strong>Comentario de la transferencia:</strong> Pago Orden <?php echo $row['ordencompra_id']; ?></p>
+															<hr class="bg-azul"/>
+															<p><strong>Última actualización:</strong> <?php echo $row['fecha_actualizacion']; ?></p>
+															<p><strong>Estado de la orden:</strong> <?php echo $row['estado_orden']; ?></p>
+															
+															<?php
 
-													if($row['estado_orden'] === 'Pendiente de confirmación')
-													{
-														echo '<div class="alert alert-warning alert-dismissible fade show" role="alert"><strong>Recuerda</strong> verificar el RUT y el número de orden en el comentario de la transferencia antes de aprobar una orden.</div>';
-													}
-													else
-													{
-														echo 'Aprobado';
-													}
+															if($row['estado_orden'] === 'Pendiente de confirmación')
+															{
+																echo '<div class="alert alert-warning alert-dismissible fade show" role="alert"><strong>Recuerda</strong> verificar el RUT y el número de orden en el comentario de la transferencia antes de aprobar una orden.</div>';
+															}
+															else
+															{
+																echo 'Aprobado';
+															}
 
-													?>
-												
+															?>
+														
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+															<form method="post">
+															<input type="hidden" name="ordenvalue" value="<?php echo $row['ordencompra_id']; ?>" />
+															<button class="btn btn-primary" name="aprobarorden-submit" type="submit">Aprobar orden</button>
+															</form>
+														</div>
+													</div>
 												</div>
-												<div class="modal-footer">
-													<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-													<form method="post">
-													<input type="hidden" name="ordenvalue" value="<?php echo $row['ordencompra_id']; ?>" />
-													<button class="btn btn-primary" name="aprobarorden-submit" type="submit">Aprobar orden</button>
-													</form>
-												</div>
-												</div>
-											</div>
 											</div>
 
 

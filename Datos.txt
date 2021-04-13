@@ -76,16 +76,22 @@ PERFIL:
 
 
 ADMINISTRACIÓN:
-verperfil
-eliminarperfil
+Terminar ultimos usuarios registrados
 
-verorden y editarorden - HACIENDO
+ORDEN:
+verorden - HACIENDO
+editarorden - HACIENDO
 
+ORDENES:
+Falta terminar log (cual?)
+Agregar botón cerrar orden (en caso de que el usuario nunca pagó)
+
+ARCHIVOS:
+Estadisticas de cada archivo
+Agregar nuevo archivo (archivo.php)
 editararchivo
-eliminararchivo -terminar en archivo archivos.php
+verachivo
 
-LOGS ORDENES
-Falta terminar log
-
-LOGS USUARIOS
-Falta todo el historial de usuarios
+USUARIOS:
+terminar ficha de perfil => eliminarperfil, modificarperfil
+Agregar filtro para estado de cuenta

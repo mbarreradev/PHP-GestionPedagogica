@@ -56,23 +56,24 @@ img.logo {
   margin-right: 15px;
 }
 
-button#btnGroupDrop1 {
-  background: #6c757d2e;
-  border-color: #6c757d;
-}
-
-button#btnGroupDrop1:focus {
-  background-color: #6c757d2e;
-  border-color: #6c757d !important;
-  color: black;
-}
-
 input#fileArchivo {
   padding-bottom: 36px;
 }
 
 span.material-icons.stats {
   font-size: 92px;
+}
+
+.dropdown-item {
+    text-align: center;
+}
+
+.width100 {
+    width: 100%;
+}
+
+.dropdown-menu.show {
+    text-align: center;
 }
 
 /* Pagination */

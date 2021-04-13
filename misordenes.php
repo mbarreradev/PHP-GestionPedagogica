@@ -216,9 +216,16 @@ else // Continuamos a la página
 												<td><?php echo $row['ordencompra_fechacompra']; ?></td>
 												<td class="estado"><?php echo $row['ordencompra_estadoorden']; ?></td>
 												<td>
-												<a href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver orden</button></a>
-												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver archivo</button></a>
-												</td>
+												<div class="btn-group" role="group">
+													<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle tabla" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													Opciones
+													</button>
+													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+														<a class="dropdown-item" href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
+														<a class="dropdown-item" href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar</button></a>
+													</div>
+												</div>
+                                                </td>
 											</tr>
 
 										<?php };  ?>
@@ -271,9 +278,16 @@ else // Continuamos a la página
 												<td><?php echo $row['ordencompra_fechacompra']; ?></td>
 												<td class="estado"><?php echo $row['ordencompra_estadoorden']; ?></td>
 												<td>
-												<a href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver orden</button></a>
-												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver archivo</button></a>
-												</td>
+												<div class="btn-group" role="group">
+													<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle tabla" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													Opciones
+													</button>
+													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+														<a class="dropdown-item" href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
+														<a class="dropdown-item" href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar</button></a>
+													</div>
+												</div>
+                                                </td>
 											</tr>
 
 										<?php };  ?>
@@ -326,9 +340,16 @@ else // Continuamos a la página
 												<td><?php echo $row['ordencompra_fechacompra']; ?></td>
 												<td class="estado"><?php echo $row['ordencompra_estadoorden']; ?></td>
 												<td>
-												<a href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver orden</button></a>
-												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver archivo</button></a>
-												</td>
+												<div class="btn-group" role="group">
+													<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle tabla" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													Opciones
+													</button>
+													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+														<a class="dropdown-item" href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
+														<a class="dropdown-item" href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar</button></a>
+													</div>
+												</div>
+                                                </td>
 											</tr>
 
 										<?php };  ?>
@@ -381,9 +402,16 @@ else // Continuamos a la página
 												<td><?php echo $row['ordencompra_fechacompra']; ?></td>
 												<td class="estado"><?php echo $row['ordencompra_estadoorden']; ?></td>
 												<td>
-												<a href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver orden</button></a>
-												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver archivo</button></a>
-												</td>
+												<div class="btn-group" role="group">
+													<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle tabla" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													Opciones
+													</button>
+													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+														<a class="dropdown-item" href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
+														<a class="dropdown-item" href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar</button></a>
+													</div>
+												</div>
+                                                </td>
 											</tr>
 
 										<?php };  ?>
@@ -436,9 +464,16 @@ else // Continuamos a la página
 												<td><?php echo $row['ordencompra_fechacompra']; ?></td>
 												<td class="estado"><?php echo $row['ordencompra_estadoorden']; ?></td>
 												<td>
-												<a href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver orden</button></a>
-												<a href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">zoom_in</span> Ver archivo</button></a>
-												</td>
+												<div class="btn-group" role="group">
+													<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle tabla" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													Opciones
+													</button>
+													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+														<a class="dropdown-item" href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
+														<a class="dropdown-item" href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar</button></a>
+													</div>
+												</div>
+                                                </td>
 											</tr>
 
 										<?php };  ?>
