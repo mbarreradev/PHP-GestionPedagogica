@@ -4,6 +4,7 @@
 - PHP 7.2.19
 - Mysqli
 - Facebook SDK for PHP 5.7.0
+- PHPMailer 6.4.0
 
 # Extras
 - Bootstrap v4.6.0

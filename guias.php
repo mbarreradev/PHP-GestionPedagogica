@@ -1,11 +1,11 @@
 <?php
 session_start();
-require 'inc/database.php';
+require_once 'inc/database.php';
 
 if (isset($_SESSION["fb_access_token"]))
 {
     // Consulta para traer los datos de usuario generales
-    $sql_datosusuariosgeneral = "SELECT nombres
+    $sql_datosusuariosgeneral = "SELECT nombres, apellidos, rango, avatar_url
     FROM 
         usuario
     WHERE 
@@ -18,7 +18,7 @@ if (isset($_SESSION["fb_access_token"]))
 $sql_guias = "SELECT * FROM archivo WHERE tipo = '1' ORDER BY RAND() LIMIT 6";  
 $rs_result_guias = mysqli_query($conn, $sql_guias); 
 
-?> 
+?>
 <!doctype html>
 <html lang="es">
 	<head>
@@ -26,73 +26,40 @@ $rs_result_guias = mysqli_query($conn, $sql_guias);
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<meta name="description" content="">
 		<link rel="icon" href="favicon.ico">
-
-		<title>Gestión Pedagógica</title>
-
+		<title>Guías - Gestión Pedagógica</title>
 		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+        <link href="css/sidebar.css" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     	<script src="js/bootstrap.bundle.min.js"></script>
+        <script src="js/sidebar.js"></script>
 		<script src="js/list.min.js"></script>
 	</head>
-<body class="text-center">
-    <div class="container shadow d-flex p-3 mx-auto flex-column">
-		<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-color border-azul-claro">
-			<img class="logo" src="/images/Logo.png" width="32" height="32"><h5 class="my-0 mr-md-auto font-weight-normal">Gestión Pedagógica</h5>
-			<nav class="my-2 my-md-0 mr-md-3">
-				<a href="http://repositorio.gestionpedagogica.cl"><button class="btn btn-secondary" type="button">Inicio</button></a>
-				<?php
-				if (!isset($_SESSION["fb_access_token"]))
-					{
-					?>
-						<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Panel de usuario</button>
-						<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-						<a href="/login"><button class="dropdown-item" type="button">Ingresar con Facebook</button></a>
-						</div>
-					<?php
-					}
-					else
-					{
-					?>
-						<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hola <?php echo $row_profile_general["nombres"] ?></button>
-						<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-						<a href="/perfil"><button class="dropdown-item" type="button">Perfil</button></a>
-						<a href="/misordenes"><button class="dropdown-item" type="button">Mis ordenes</button></a>
-						<a href="/logout"><button class="dropdown-item" type="button">Desconectar</button></a>
-						</div>
-					<?php
-					}
-				?>
+<body>
+<div class="page-wrapper chiller-theme toggled">
+  <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+    <i class="fas fa-bars"></i>
+  </a>
+  
+  <?php require 'inc/sidebar.php'; ?>
 
-				<?php
-				if (isset($_SESSION["rango"]) == '2')
-				{ 
-					echo '<a href="/administracion"><button class="btn btn-secondary" type="button">Administración</button></a>';
-				}
-				?>
-				<a href="/contacto"><button class="btn btn-secondary" type="button">Contacto</button></a>
-			</nav>
-			<a class="btn btn-outline-success" href="https://api.whatsapp.com/send?phone=56912345678">Contactar por WhatsApp</a>
-		</div>
+  <main class="page-content">
+    <div class="container-fluid">
+    <div id="tabla-lista-guias">
+      <div class="d-flex justify-content-between">
+        <h4 class="titulo">Guías disponibles</h4>
+        <div class="btn-group dropup btn-block options">
+            <a href="https://repositorio.gestionpedagogica.cl/"><button type="button" class="btn btn-primary"><i class="fa fa-home"></i> Volver al menú principal</button></a>
+        </div>
+      </div>
+      <hr>
 
-    	<div class="rounded border border-azul-claro p-3">
-        	<div class="container">
-		
-				<div id="tabla-lista-guias">
+    <div class="container-separado">
+		<input type="search" class="search form-control" placeholder="Puedes buscar por temática, curso, asignatura o unidad"/>
+	</div>
 
-					<h4 class="d-flex justify-content-between align-items-center mb-3">
-						<span class="titulo">Lista de guías</span>
-						<div class="btn-group dropup btn-block options">
-							<a href="/guias"><button type="button" class="btn btn-primary"><span class="material-icons">home</span> Volver al menú principal</button></a>
-						</div>
-					</h4>
-
-					<div class="container-separado">
-						<input type="search" class="search form-control" placeholder="Puedes buscar por temática, curso, asignatura o unidad"/>
-					</div>
-				
-					<div class="card-deck mb-3 text-center justify-content-center">
+    <div class="card-deck mb-3 text-center justify-content-center">
 						<ul class="list">
 						
 						<?php  
@@ -114,7 +81,7 @@ $rs_result_guias = mysqli_query($conn, $sql_guias);
 								<?php
 									if($row["estado"] === '1' AND isset($_SESSION["fb_access_token"])) // 1 disponible 0 no disponible
 									{
-										echo '<a href="/comprar?id='.$row["archivo_id"].'"><button type="button" class="btn btn-xs btn-outline-primary">Seleccionar</button></a>';
+										echo '<a href="/comprar?id='.$row["archivo_id"].'"><button type="button" class="btn btn-xs btn-outline-primary">Ver documento</button></a>';
 									}
 									else
 									{
@@ -126,7 +93,8 @@ $rs_result_guias = mysqli_query($conn, $sql_guias);
 						
 						<?php  
 							};  
-						?>
+                        ?>
+
                         </ul>
                         <div class="container">
                             <div class="row text-center justify-content-center">
@@ -134,30 +102,40 @@ $rs_result_guias = mysqli_query($conn, $sql_guias);
                             </div>
                         </div>
 					</div>
-				</div>
-			</div>
 
-			</div>
+      <hr>
 
-            <footer class="mastfoot margin-top">
-				<div class="inner">
-					<p class="footer">Copyright © 2020 Gestión Pedagógica</p>
-				</div>
-			</footer>
-
-		</div>
-	</div>
-
-    
-	
-	<SCRIPT type="text/javascript">
-		var options = {
+      <footer class="text-center">
+        <div class="mb-2">
+          <small>
+            © 2021 Gestión Pedagógica
+            </a>
+          </small>
+        </div>
+        <div>
+          <a href="#" target="_blank">
+            <i class="fa fa-heart" style="color:red"></i>
+          </a>
+          <a href="#" target="_blank">
+            <i class="fa fa-heart" style="color:red"></i>
+          </a>
+        </div>
+      </footer>
+    </div>
+    </div>
+  </main>
+  <!-- page-content" -->
+</div>
+<!-- page-wrapper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+	var options = {
     valueNames: [ 'nombre', 'asignatura', 'unidad', 'curso' ],
     page: 12,
     pagination: true
-};
+    };
 
-var tablaGuias = new List('tabla-lista-guias', options);
+    var tablaGuias = new List('tabla-lista-guias', options);
 	</script>
-  </body>
+</body>
 </html>
