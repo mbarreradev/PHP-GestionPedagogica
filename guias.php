@@ -29,11 +29,11 @@ $rs_result_guias = mysqli_query($conn, $sql_guias);
 		<title>Guías - Gestión Pedagógica</title>
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
-        <link href="css/sidebar.css" rel="stylesheet">
+    <link href="css/sidebar.css" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    	<script src="js/bootstrap.bundle.min.js"></script>
-        <script src="js/sidebar.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/sidebar.js"></script>
 		<script src="js/list.min.js"></script>
 	</head>
 <body>
@@ -81,11 +81,7 @@ $rs_result_guias = mysqli_query($conn, $sql_guias);
 								<?php
 									if($row["estado"] === '1' AND isset($_SESSION["fb_access_token"])) // 1 disponible 0 no disponible
 									{
-										echo '<a href="/comprar?id='.$row["archivo_id"].'"><button type="button" class="btn btn-xs btn-outline-primary">Ver documento</button></a>';
-									}
-									else
-									{
-										echo '<button type="button" class="btn btn-xs btn-outline-secondary" disabled>No disponible</button>';
+										echo '<a href="#"><button type="button" data-name="'.$row["nombre"].'" data-price="'.$row["precio"].'" class="add-to-cart btn btn-xs btn-outline-primary">Agregar al carrito</button></a>';
 									}
 								?>
 							</div>

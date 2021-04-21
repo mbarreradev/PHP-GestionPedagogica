@@ -1,30 +1,24 @@
 <?php
 session_start();
-require 'inc/database.php';
+require_once 'inc/database.php';
 
 if (!isset($_SESSION["fb_access_token"])) // Si no encuentra el access token de la sesión, se enviará a login
 {
 	header("location: login.php");
 }
 else // Continuamos a la página
-
-	if (!isset($_SESSION["rango"]) == '2') // Si no es administrador, se enviará a la página de usuario
-	{
-		header("location: perfil.php");
-	}
-	else // continuamos a la página
 	header( 'Content-Type: text/html; charset=utf-8' );
-	
-	// Consulta para traer los datos de usuario generales
-	$sql_datosusuariosgeneral = "SELECT nombres, apellidos
-	FROM 
-		usuario
-	WHERE 
-		usuario_id = '".$_SESSION['usuario_id']."' "; 
-	$rs_resultdatosgeneral = mysqli_query($conn, $sql_datosusuariosgeneral);
-	$row_profile_general = mysqli_fetch_assoc($rs_resultdatosgeneral);
 
-	// BOX: Tabla usuarios
+    // Consulta para traer los datos de usuario generales
+    $sql_datosusuariosgeneral = "SELECT nombres, apellidos, rango, avatar_url
+    FROM 
+        usuario
+    WHERE 
+        usuario_id = '".$_SESSION['usuario_id']."' "; 
+    $rs_resultdatosgeneral = mysqli_query($conn, $sql_datosusuariosgeneral);
+    $row_profile_general = mysqli_fetch_assoc($rs_resultdatosgeneral);
+
+    // BOX: Tabla usuarios
 	$sql_usuarios = "SELECT usuario_id, registrado_el, nombres, apellidos, correo, facebook_id, rut, dv, rango, ultimo_iniciosesion, ultima_ip, telefono, estado, avatar_url
     FROM 
 		usuario
@@ -44,7 +38,7 @@ else // Continuamos a la página
 	$rs_result_usuarios_bloqueados = mysqli_query($conn, $sql_usuarios_bloqueados);  
 	$cnt_usuarios_bloqueados = $rs_result_usuarios_bloqueados->num_rows;
 
-	// Funcion que aprueba la orden
+    // Funcion que aprueba la orden
 	// FALTA: VER COMO OBTENER NUMERO DE ORDEN PARA ACTUALIZAR
 	if(isset($_POST['aprobarorden-submit']))
 	{
@@ -88,112 +82,91 @@ else // Continuamos a la página
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<meta name="description" content="">
 		<link rel="icon" href="favicon.ico">
-
-		<title>Administración - Gestión Pedagógica</title>
-
+		<title>Documentos - Gestión Pedagógica</title>
 		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+        <link href="css/sidebar.css" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-		<script src="js/list.min.js"></script>
+    	<script src="js/bootstrap.bundle.min.js"></script>
+        <script src="js/sidebar.js"></script>
+        <script src="js/list.min.js"></script>
+        <script src="js/moment-with-locales.js"></script>
 	</head>
-<body class="text-center">
+<body>
+<div class="page-wrapper chiller-theme toggled">
+  <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+    <i class="fas fa-bars"></i>
+  </a>
+  
+  <?php require 'inc/sidebar.php'; ?>
 
-    <div class="container d-flex p-3 mx-auto flex-column">
+  <main class="page-content">
+    <div class="container-fluid">
+      
+        <div class="d-flex justify-content-between">
+            <h4 class="titulo">Estadísticas</h4>
+            <div class="btn-group dropup btn-block options">
+                <a href="/administracion"><button type="button" class="btn btn-primary"><i class="fa fa-tachometer-alt"></i> Volver a la administración</button></a>
+            </div>
+        </div>
+        <hr>
 
-	<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-color border-azul-claro">
-		<img class="logo" src="/images/Logo.png" width="32" height="32"><h5 class="my-0 mr-md-auto font-weight-normal">Gestión Pedagógica</h5>
-      	<nav class="my-2 my-md-0 mr-md-3">
-		<a href="http://repositorio.gestionpedagogica.cl"><button class="btn btn-secondary" type="button">Inicio</button></a>
-		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hola <?php echo $row_profile_general["nombres"]; ?></button>
-		<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-			<a href="/perfil"><button class="dropdown-item" type="button">Perfil</button></a>
-			<a href="/misordenes"><button class="dropdown-item" type="button">Mis ordenes</button></a>
-			<a href="/logout"><button class="dropdown-item" type="button">Desconectar</button></a>
-		</div>
-		<?php 
-			if (isset($_SESSION["rango"]) == '2')
-			{ 
-				echo '<a href="/administracion"><button class="btn btn-secondary" type="button">Administración</button></a>';
-			}
-		?>
-        <a href="/contacto"><button class="btn btn-secondary" type="button">Contacto</button></a>
-      </nav>
-      <a class="btn btn-outline-success" href="#">Contactar por Whatsapp</a>
-    </div>
-
-      <div class="rounded border border-azul-claro p-3">
-        <div class="container">
-		
-		
-		<h4 class="d-flex justify-content-between align-items-center mb-3">
-            <span class="titulo">Estadísticas</span>
-
-			<div class="btn-group dropup btn-block options">
-			<a href="/administracion"><button type="button" class="btn btn-primary"><span class="material-icons">build</span> Volver a la administración</button></a>
-			</div>
-				
-        </h4>
-		
-		<div class="mb-4">
-			<div class="row no-gutters">
-				<div class="col">
-						<div class="row">
-							<div class="col-sm">
-								<div class="card border-plomo">
-									<div class="card-body bg-azul-especial text-white">
-										<div class="row">
-											<div class="col-3">
-												<span class="material-icons stats">how_to_reg</span>
-											</div>
-											<div class="col-9 text-right">
-												<div class="Count"><?php echo $cnt_usuarios_activos; ?></div>
-												<h4>usuarios activados</h4>
-											</div>
-										</div>
-									</div>
+		<div class="container mb-4">
+			<div class="row">
+				<div class="col-sm-4 nopadding-left">
+                    <div class="card border-plomo">
+						<div class="card-body bg-rosado-especial text-white">
+							<div class="row">
+								<div class="col-3">
+									<span class="material-icons stats">fas fa-user-check</span>
 								</div>
-							</div>
-							<div class="col-sm">
-								<div class="card border-plomo">
-									<div class="card-body bg-naranjo-especial text-white">
-										<div class="row">
-											<div class="col-3">
-												<span class="material-icons stats">block</span>
-											</div>
-											<div class="col-9 text-right">
-												<div class="Count"><?php echo $cnt_usuarios_bloqueados; ?></div>
-												<h4>usuarios bloqueados</h4>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-sm">
-								<div class="card border-plomo">
-									<div class="card-body bg-rosado-especial text-white">
-										<div class="row">
-											<div class="col-3">
-												<span class="material-icons stats">people</span>
-											</div>
-											<div class="col-9 text-right">
-												<div class="Count"><?php echo $cnt_usuarios_totales; ?></div>
-												<h4>usuarios totales</h4>
-											</div>
-										</div>
-									</div>
+								<div class="col-9 text-right">
+									<div class="Count"><?php echo $cnt_usuarios_activos; ?></div>
+									<h4>usuarios activados</h4>
 								</div>
 							</div>
 						</div>
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="card border-plomo">
+						<div class="card-body bg-naranjo-especial text-white">
+							<div class="row">
+								<div class="col-3">
+									<span class="material-icons stats">block</span>
+								</div>
+								<div class="col-9 text-right">
+									<div class="Count"><?php echo $cnt_usuarios_bloqueados; ?></div>
+									<h4>usuarios bloqueados</h4>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-4 nopadding-right">
+                    <div class="card border-plomo">
+						<div class="card-body bg-azul-especial text-white">
+							<div class="row">
+								<div class="col-3">
+									<span class="material-icons stats">people</span>
+								</div>
+								<div class="col-9 text-right">
+									<div class="Count"><?php echo $cnt_usuarios_totales; ?></div>
+									<h4>usuarios registrados</h4>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 
-		<h4 class="d-flex justify-content-between align-items-center mb-3">
-            <span class="titulo">Usuarios</span>
-        </h4>	
+        <div class="d-flex justify-content-between mb-3">
+        <h4 class="titulo">Usuarios</h4>
+		</div>
 
-		<section id="tabs" class="project-tab">
+        <section id="tabs" class="project-tab">
                 <div class="row">
                     <div class="col-md-12">
 
@@ -204,70 +177,18 @@ else // Continuamos a la página
                                 <table id="tabla-matematica-planificacion" class="table" cellspacing="0">
                                     <thead>
 										<tr class="bg-azul">
-											<th class="sort" data-sort="id">ID</th>
                                             <th class="sort" data-sort="usuario">Usuario</th>
                                             <th>Rango</th>
                                             <th class="sort" data-sort="correo">Correo</th>
                                             <th>Registrado el</th>
-                                            <th>Última inicio de sesión</th>
-                                            <th>Opciones</th>
+                                            <th>Último inicio de sesión</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody class="list limpio">
                                         <?php while ($row = mysqli_fetch_assoc($rs_result_usuarios)) {?>	
 											
-											<!-- Modal perfil <?php echo $row['usuario_id']; ?> -->
-											<div class="modal fade" id="verperfil<?php echo $row['usuario_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="verorden<?php echo $row['ordencompra_id']; ?>Label" aria-hidden="true">
-												<div class="modal-dialog" role="document">
-													<div class="modal-content">
-														<div class="modal-header bg-azul">
-															<h5 class="modal-title" id="verorden<?php echo $row['ordencompra_id']; ?>Label">Viendo perfil <?php echo $row['usuario_id']; ?></h5>
-															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-															<span aria-hidden="true">&times;</span>
-															</button>
-														</div>
-														<div class="modal-body">
-															<p><strong>Creado por:</strong> <?php echo $row['nombres']." ".$row['apellidos']; ?> - <a href="/verperfil?id=<?php echo $row['usuario_id']; ?>">Ver perfil</a></p>
-															<p><strong>Fecha de creación de compra:</strong> <?php echo $row['fecha_compra']; ?></p>
-															<p><strong>Archivo:</strong> <?php echo $row['nombre']; ?></p>
-															<p><strong>Asignatura:</strong> <?php echo $row['asignatura']." ".$row['curso']; ?></p>
-															<p><strong>Valor del archivo:</strong> $<?php echo $precio_archivo; ?></p>
-															<hr class="bg-azul"/>
-															<p><strong>DETALLES DE LA TRANSFERENCIA</strong></p>
-															<p><strong>Rut:</strong> <?php echo $row['rut']."-".$row['dv']; ?></p>
-															<p><strong>Pagado:</strong> $<?php echo $valor_pagado; ?></p>
-															<p><strong>Comentario de la transferencia:</strong> Pago Orden <?php echo $row['ordencompra_id']; ?></p>
-															<hr class="bg-azul"/>
-															<p><strong>Última actualización:</strong> <?php echo $row['fecha_actualizacion']; ?></p>
-															<p><strong>Estado de la orden:</strong> <?php echo $row['estado_orden']; ?></p>
-															
-															<?php
-
-															if($row['estado_orden'] === 'Pendiente de confirmación')
-															{
-																echo '<div class="alert alert-warning alert-dismissible fade show" role="alert"><strong>Recuerda</strong> verificar el RUT y el número de orden en el comentario de la transferencia antes de aprobar una orden.</div>';
-															}
-															else
-															{
-																echo 'Aprobado';
-															}
-
-															?>
-														
-														</div>
-														<div class="modal-footer">
-															<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-															<form method="post">
-															<input type="hidden" name="perfilvalue" value="<?php echo $row['usuario_id']; ?>" />
-															<button class="btn btn-primary" name="modificarperfil-submit" type="submit">Modificar perfil</button>
-															</form>
-														</div>
-													</div>
-												</div>
-											</div>
-
 											<tr>
-												<td class="id"><?php echo $row['usuario_id']; ?></td>
 												<td class="usuario"><?php echo $row['nombres']." ".$row['apellidos']; ?></td>
                                                 <td class="usuario">
 
@@ -289,7 +210,7 @@ else // Continuamos a la página
 												<td><?php echo $row['registrado_el']; ?></td>
                                                 <td><?php echo $row['ultimo_iniciosesion']; ?></td>
 												<td>
-												<button class="btn btn-info tabla" data-toggle="modal" data-target="#verperfil<?php echo $row['usuario_id']; ?>"><span class="material-icons">person</span> Ver ficha de perfil</button>
+                                                    <a href="/verperfil?id=<?php echo $row['usuario_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">person</span> Ver perfil</button></a>
 												</td>
 											</tr>
 
@@ -307,18 +228,31 @@ else // Continuamos a la página
                 </div>
         </section>
 
+        <hr>
 
-	</div>
-    </div>
-
-      <footer class="mastfoot margin-top">
-        <div class="inner">
-          <p class="footer">Copyright © 2020 Gestión Pedagógica</p>
+      <footer class="text-center">
+        <div class="mb-2">
+          <small>
+            © 2021 Gestión Pedagógica
+            </a>
+          </small>
+        </div>
+        <div>
+          <a href="#" target="_blank">
+            <i class="fa fa-heart" style="color:red"></i>
+          </a>
+          <a href="#" target="_blank">
+            <i class="fa fa-heart" style="color:red"></i>
+          </a>
         </div>
       </footer>
     </div>
-
-	<script type="text/javascript">
+  </main>
+  <!-- page-content" -->
+</div>
+<!-- page-wrapper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script type="text/javascript">
 		var options = {
     valueNames: [ 'id', 'usuario', 'correo', 'rango'],
     page: 10,
@@ -346,8 +280,5 @@ else // Continuamos a la página
 	});
 
 	</script>
-    
-    <script src="js/bootstrap.bundle.min.js"></script>
-	
-  </body>
+</body>
 </html>

@@ -302,10 +302,9 @@ function pageFullyLoaded(e) {
 			  	</div>
 			</div>
 
-		<div class="d-flex justify-content-between mt-3">
+		<div class="d-flex justify-content-between mt-3 mb-3">
 			<h4 class="titulo">Mis planificaciones</h4>
 		</div>
-		<hr>
 
 		<section id="tabs" class="project-tab">
                 <div class="row">
@@ -331,7 +330,7 @@ function pageFullyLoaded(e) {
 											<th class="sort" data-sort="curso">Curso</th>
 											<th class="sort" data-sort="unidad">Unidad</th>
                                             <th>Fecha de compra</th>
-											<th>Opciones</th>
+											<th></th>
                                         </tr>
                                     </thead>
                                     <tbody class="list limpio">
@@ -349,7 +348,7 @@ function pageFullyLoaded(e) {
 													</button>
 													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
 														<a class="dropdown-item" href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
-														<a class="dropdown-item" href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar</button></a>
+														<a class="dropdown-item" href="/verdocumento?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar</button></a>
 													</div>
 												</div>
 												</td>
@@ -377,7 +376,7 @@ function pageFullyLoaded(e) {
 											<th class="sort" data-sort="curso">Curso</th>
 											<th class="sort" data-sort="unidad">Unidad</th>
                                             <th>Fecha de compra</th>
-											<th>Opciones</th>
+											<th></th>
                                         </tr>
                                     </thead>
                                     <tbody class="list limpio">
@@ -395,7 +394,7 @@ function pageFullyLoaded(e) {
 													</button>
 													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
 														<a class="dropdown-item" href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
-														<a class="dropdown-item" href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar</button></a>
+														<a class="dropdown-item" href="/verdocumento?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar</button></a>
 													</div>
 												</div>
 												</td>
@@ -423,7 +422,7 @@ function pageFullyLoaded(e) {
 											<th class="sort" data-sort="curso">Curso</th>
 											<th class="sort" data-sort="unidad">Unidad</th>
                                             <th>Fecha de compra</th>
-											<th>Opciones</th>
+											<th></th>
                                         </tr>
                                     </thead>
                                     <tbody class="list limpio">
@@ -441,7 +440,7 @@ function pageFullyLoaded(e) {
 													</button>
 													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
 														<a class="dropdown-item" href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
-														<a class="dropdown-item" href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar</button></a>
+														<a class="dropdown-item" href="/verdocumento?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar</button></a>
 													</div>
 												</div>
 												</td>
@@ -487,7 +486,7 @@ function pageFullyLoaded(e) {
 													</button>
 													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
 														<a class="dropdown-item" href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
-														<a class="dropdown-item" href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar</button></a>
+														<a class="dropdown-item" href="/verdocumento?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar</button></a>
 													</div>
 												</div>
 												</td>
@@ -508,7 +507,7 @@ function pageFullyLoaded(e) {
 											<th class="sort" data-sort="curso">Curso</th>
 											<th class="sort" data-sort="unidad">Unidad</th>
                                             <th>Fecha de compra</th>
-											<th>Opciones</th>
+											<th></th>
                                         </tr>
                                     </thead>
                                     <tbody class="list limpio">
@@ -526,7 +525,7 @@ function pageFullyLoaded(e) {
 													</button>
 													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
 														<a class="dropdown-item" href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
-														<a class="dropdown-item" href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar</button></a>
+														<a class="dropdown-item" href="/verdocumento?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar</button></a>
 													</div>
 												</div>
 												</td>
@@ -548,10 +547,9 @@ function pageFullyLoaded(e) {
                 </div>
         </section>
 
-		<div class="d-flex justify-content-between mt-3">
+		<div class="d-flex justify-content-between mt-3 mb-3">
 			<h4 class="titulo">Mis guías</h4>
 		</div>
-		<hr>
 
 		<section id="tabs" class="project-tab">
                 <div class="row">
@@ -577,7 +575,7 @@ function pageFullyLoaded(e) {
 											<th class="sort" data-sort="curso">Curso</th>
 											<th class="sort" data-sort="unidad">Unidad</th>
                                             <th>Fecha de compra</th>
-											<th>Opciones</th>
+											<th></th>
                                         </tr>
                                     </thead>
                                     <tbody class="list limpio">
@@ -595,7 +593,7 @@ function pageFullyLoaded(e) {
 													</button>
 													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
 														<a class="dropdown-item" href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
-														<a class="dropdown-item" href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar</button></a>
+														<a class="dropdown-item" href="/verdocumento?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar</button></a>
 													</div>
 												</div>
 												</td>
@@ -623,7 +621,7 @@ function pageFullyLoaded(e) {
 											<th class="sort" data-sort="curso">Curso</th>
 											<th class="sort" data-sort="unidad">Unidad</th>
                                             <th>Fecha de compra</th>
-											<th>Opciones</th>
+											<th></th>
                                         </tr>
                                     </thead>
                                     <tbody class="list limpio">
@@ -641,7 +639,7 @@ function pageFullyLoaded(e) {
 													</button>
 													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
 														<a class="dropdown-item" href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
-														<a class="dropdown-item" href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar</button></a>
+														<a class="dropdown-item" href="/verdocumento?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar</button></a>
 													</div>
 												</div>
 												</td>
@@ -662,7 +660,7 @@ function pageFullyLoaded(e) {
 											<th class="sort" data-sort="curso">Curso</th>
 											<th class="sort" data-sort="unidad">Unidad</th>
                                             <th>Fecha de compra</th>
-											<th>Opciones</th>
+											<th></th>
                                         </tr>
                                     </thead>
                                     <tbody class="list limpio">
@@ -680,7 +678,7 @@ function pageFullyLoaded(e) {
 													</button>
 													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
 														<a class="dropdown-item" href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
-														<a class="dropdown-item" href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar</button></a>
+														<a class="dropdown-item" href="/verdocumento?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar</button></a>
 													</div>
 												</div>
 												</td>
@@ -708,7 +706,7 @@ function pageFullyLoaded(e) {
 											<th class="sort" data-sort="curso">Curso</th>
 											<th class="sort" data-sort="unidad">Unidad</th>
                                             <th>Fecha de compra</th>
-											<th>Opciones</th>
+											<th></th>
                                         </tr>
                                     </thead>
                                     <tbody class="list limpio">
@@ -726,7 +724,7 @@ function pageFullyLoaded(e) {
 													</button>
 													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
 														<a class="dropdown-item" href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
-														<a class="dropdown-item" href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar</button></a>
+														<a class="dropdown-item" href="/verdocumento?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar</button></a>
 													</div>
 												</div>
 												</td>
@@ -754,7 +752,7 @@ function pageFullyLoaded(e) {
 											<th class="sort" data-sort="curso">Curso</th>
 											<th class="sort" data-sort="unidad">Unidad</th>
                                             <th>Fecha de compra</th>
-											<th>Opciones</th>
+											<th></th>
                                         </tr>
                                     </thead>
                                     <tbody class="list limpio">
@@ -772,7 +770,7 @@ function pageFullyLoaded(e) {
 													</button>
 													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
 														<a class="dropdown-item" href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
-														<a class="dropdown-item" href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar</button></a>
+														<a class="dropdown-item" href="/verdocumento?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar</button></a>
 													</div>
 												</div>
 												</td>

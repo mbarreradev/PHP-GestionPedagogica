@@ -73,26 +73,36 @@ INDEX:
 
 
 PERFIL:
-
+Actualizar comprar
 
 ADMINISTRACIÓN:
-Terminar ultimos usuarios registrados
+
 
 ORDEN:
 Verorden - HACIENDO
 Editarorden - HACIENDO
 
 ORDENES:
+Actualizar ordenes
 Falta terminar log (cual?)
 Agregar botón cerrar orden (en caso de que el usuario nunca pagó)
 
-ARCHIVOS:
-Estadisticas de cada archivo
-Agregar nuevo archivo (archivo.php)
-Editararchivo
-Verachivo
+DOCUMENTOS:
+Estadisticas
+Nuevodocumento => HACIENDO
+Editardocumento
+Verdocumento => HACIENDO
 
 USUARIOS:
 terminar botón ficha de perfil => eliminarperfil, modificarperfil
 Agregar filtro para estado de cuenta
 Verperfil
+
+
+
+
+
+
+
+
+https://repositorio.gestionpedagogica.cl/comprar?id=3

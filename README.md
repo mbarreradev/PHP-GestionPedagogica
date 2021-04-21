@@ -11,7 +11,7 @@
 - jQuery 3.6.0
 - Moment.js 2.29.1
 - List.js v2.3.1
-- Material Icons
+- Font Awesome v5.0.6
 - Chart.js v3.0.2
 
 # Características

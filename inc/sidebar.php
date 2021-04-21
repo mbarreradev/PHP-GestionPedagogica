@@ -1,7 +1,15 @@
 
 <?php
 require_once 'database.php';
+
+// Contador ordenes pendientes de revisión - confirmación
+$sql_ordenes_pendientes_confirmacion = "SELECT * FROM ordencompra WHERE estado_orden = 'Pendiente de confirmación'";  
+$rs_result_ordenes_pendientes_confirmacion = mysqli_query($conn, $sql_ordenes_pendientes_confirmacion);  
+$cnt_ordenes_pendientes_confirmacion = $rs_result_ordenes_pendientes_confirmacion->num_rows;
+
 ?>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="js/carrito.js"></script>
 <nav id="sidebar" class="sidebar-wrapper">
     <div class="sidebar-content">
       <div class="sidebar-brand">
@@ -48,7 +56,7 @@ require_once 'database.php';
           ?>
           <li class="sidebar-dropdown">
             <a href="#">
-              <i class="far fa-gem"></i>
+              <i class="fas fa-sign-in-alt"></i>
               <span>Iniciar sesión</span>
             </a>
             <div class="sidebar-submenu">
@@ -93,7 +101,7 @@ require_once 'database.php';
           </li>
           <li>
             <a href="/misordenes">
-              <i class="fa fa-calendar"></i>
+              <i class="fas fa-tasks"></i>
               <span>Mis ordenes</span>
             </a>
           </li>
@@ -134,9 +142,9 @@ require_once 'database.php';
           </li>
           <li class="sidebar-dropdown">
             <a href="#">
-              <i class="fas fa-user"></i>
+              <i class="fas fa-tasks"></i>
               <span>Ordenes</span>
-              <span class="badge badge-pill badge-danger">3</span>
+              <span class="badge badge-pill badge-danger"><?php echo $cnt_ordenes_pendientes_confirmacion; ?></span>
             </a>
             <div class="sidebar-submenu">
               <ul>
@@ -144,7 +152,7 @@ require_once 'database.php';
                   <a href="/ordenes">Dashboard</a>
                 </li>
                 <li>
-                  <a href="#">Ver todos</a>
+                  <a href="#">Ordenes pagadas</a>
                 </li>
               </ul>
             </div>
@@ -160,7 +168,7 @@ require_once 'database.php';
                   <a href="/usuarios">Dashboard</a>
                 </li>
                 <li>
-                  <a href="#">Ver todos</a>
+                  <a href="#">Usuarios bloqueados</a>
                 </li>
               </ul>
             </div>
@@ -173,13 +181,10 @@ require_once 'database.php';
             <div class="sidebar-submenu">
               <ul>
                 <li>
-                  <a href="/archivos">Dashboard</a>
+                  <a href="/documentos">Dashboard</a>
                 </li>
                 <li>
-                  <a href="#">Crear nuevo</a>
-                </li>
-                <li>
-                  <a href="#">Todos</a>
+                  <a href="/nuevodocumento">Crear nuevo</a>
                 </li>
               </ul>
             </div>
@@ -224,15 +229,42 @@ require_once 'database.php';
     ?>
     <!-- sidebar-content  -->
     <div class="sidebar-footer">
+      <a href="#cart" data-toggle="modal">
+        <i class="fas fa-cart-plus" alt="Carrito"><span class="total-count badge badge-pill badge-info ml-1"></span></i>
+      </a>
       <a href="/opciones">
-        <i class="fa fa-cog"></i>
+        <i class="fa fa-cog" alt="Opciones"></i>
       </a>
       <a href="/logout">
-        <i class="fa fa-power-off"></i>
+        <i class="fa fa-power-off" alt="Desconectar"></i>
       </a>
     </div>
     <?php
     }
     ?>
   </nav>
+
+   <!-- Modal -->
+<div class="modal fade" id="cart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Carrito</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="show-cart table">
+          
+        </table>
+        <div>Precio total: $<span class="total-cart"></span></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary">Crear orden</button>
+      </div>
+    </div>
+  </div>
+</div>
   <!-- sidebar-wrapper  -->

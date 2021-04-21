@@ -49,11 +49,11 @@ $cnt_guias = $rs_result_guias_totales->num_rows;
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
 		<link href="css/sidebar.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     	<script src="js/bootstrap.bundle.min.js"></script>
 		<script src="js/carousel.js"></script>
-    <script src="js/sidebar.js"></script>
+        <script src="js/sidebar.js"></script>
 		<script data-ad-client="ca-pub-2522486668045838" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 	</head>
 <body>
@@ -87,35 +87,31 @@ $cnt_guias = $rs_result_guias_totales->num_rows;
       <div class="row">
         
         <?php  
-					while ($row = mysqli_fetch_assoc($rs_result_recomendados)) {
-				?>
+			while ($row = mysqli_fetch_assoc($rs_result_recomendados)) {
+		?>
         
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 form-group">
           <div class="card rounded-0 p-0 shadow-sm">
             <div class="card-body text-center">
                 <div class="item">
-									<div class="pad15">
-										<p class="lead"><?php echo $row['asignatura']; ?></p>
-										<p class="titulo-negro"><?php echo $row['nombre']; ?></p>
-										<p><?php echo $row['curso']; ?></p>
-										<?php
-                    if($row["estado"] === '1' AND isset($_SESSION["fb_access_token"])) // 1 disponible 0 no disponible
-                    {
-                      echo '<a href="/comprar?id='.$row["archivo_id"].'"><button type="button" class="btn btn-sm btn-block btn-outline-primary">Ver documento</button></a>';
-                    }
-                    else
-                    {
-                      echo '<button type="button" class="btn btn-sm btn-block btn-outline-secondary" disabled>No disponible</button>';
-                    }
-                    ?>
-									</div>
-								</div>
+					<div class="pad15">
+						<p class="lead"><?php echo $row['asignatura']; ?></p>
+						<p class="titulo-negro"><?php echo $row['nombre']; ?></p>
+						<p><?php echo $row['curso']; ?></p>
+						<?php
+                        if($row["estado"] === '1' AND isset($_SESSION["fb_access_token"])) // 1 disponible 0 no disponible
+                        {
+                            echo '<a href=""><button type="button" data-name="'.$row["nombre"].'" data-price="'.$row["precio"].'" class="add-to-cart btn btn-sm btn-block btn-outline-primary">Agregar al carrito</button></a>';
+                        }
+                        ?>
+					</div>
+				</div>
             </div>
           </div>
         </div>
         <?php  
-					};  
-				?>
+			};  
+		?>
       </div>
 
       <div class="d-flex justify-content-between mt-3">
@@ -151,11 +147,7 @@ $cnt_guias = $rs_result_guias_totales->num_rows;
             <?php
               if($row["estado"] === '1' AND isset($_SESSION["fb_access_token"])) // 1 disponible 0 no disponible
               {
-                echo '<a href="/comprar?id='.$row["archivo_id"].'"><button type="button" class="btn btn-xs btn-outline-primary">Ver documento</button></a>';
-              }
-              else
-              {
-                echo '<button type="button" class="btn btn-xs btn-outline-secondary" disabled>No disponible</button>';
+                echo '<a href=""><button type="button" data-name="'.$row["nombre"].'" data-price="'.$row["precio"].'" class="add-to-cart btn btn-xs btn-outline-primary">Agregar al carrito</button></a>';
               }
               ?>
           </div>
@@ -198,11 +190,7 @@ $cnt_guias = $rs_result_guias_totales->num_rows;
             <?php
               if($row["estado"] === '1' AND isset($_SESSION["fb_access_token"])) // 1 disponible 0 no disponible
               {
-                echo '<a href="/comprar?id='.$row["archivo_id"].'"><button type="button" class="btn btn-xs btn-outline-primary">Seleccionar</button></a>';
-              }
-              else
-              {
-                echo '<button type="button" class="btn btn-xs btn-outline-secondary" disabled>No disponible</button>';
+                echo '<a href="#"><button type="button" data-name="'.$row["nombre"].'" data-price="'.$row["precio"].'" class="add-to-cart btn btn-xs btn-outline-primary">Agregar al carrito</button></a>';
               }
             ?>
           </div>

@@ -19,7 +19,7 @@ else // Continuamos a la página
     $row_profile_general = mysqli_fetch_assoc($rs_resultdatosgeneral);
 
     // Box Actividad de ordenes
-	$sql_actividad_ordenes = "SELECT ordencompra_historial.historial_id, ordencompra_historial.ordencompra_id, ordencompra_historial.accion, ordencompra_historial.fecha_creacion, usuario.nombres, usuario.apellidos
+	$sql_actividad_ordenes = "SELECT ordencompra_historial.historial_id, ordencompra_historial.ordencompra_id, ordencompra_historial.accion, ordencompra_historial.fecha_creacion, usuario.nombres, usuario.apellidos, usuario.usuario_id
 	FROM 
 		ordencompra_historial 
 	INNER JOIN 
@@ -173,13 +173,13 @@ function pageFullyLoaded(e) {
 											</div>
 											<div class="col-9 text-right">
 												<div class="Count"><?php echo $cnt_archivos_total; ?></div>
-												<h4>archivos subidos</h4>
+												<h4>documentos subidos</h4>
 											</div>
 										</div>
 									</div>
-									<a href="/archivos">
+									<a href="/documentos">
 									<div class="card-footer text-info">
-										<span class="float-center">Ver todos los archivos</span>
+										<span class="float-center">Ver todos los documentos</span>
 										<span class="float-right"><i class="fa fa-arrow-circle-right"></i></span>
 										<div class="clearfix"></div>
 									</div>
@@ -361,7 +361,7 @@ function pageFullyLoaded(e) {
 								?>
 
 								<li>
-									<a href="/ordenes"><strong class="subtitulo">Orden:</strong> <?php echo $row['ordencompra_id']; ?> <strong class="subtitulo">Comprador:</strong></strong> <?php echo $row['nombres']." ". $row['apellidos'] ; ?></a>
+									<a href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><strong class="subtitulo">Orden:</strong> <?php echo $row['ordencompra_id']; ?></a> <a href="/verperfil?id=<?php echo $row['usuario_id']; ?>"><strong class="subtitulo">Comprador:</strong></strong> <?php echo $row['nombres']." ". $row['apellidos'] ; ?></a>
 									<a class="float-right" rel="tooltip" title="<?php echo $row['fecha_creacion']; ?>" id="fecha<?php echo $counter; ?>"><?php echo $row['fecha_creacion']; ?></a>
 									<p><?php echo $row['accion']; ?></p>
 								</li>
@@ -383,9 +383,8 @@ function pageFullyLoaded(e) {
 								?>
 
 								<li>
-									<a href="<?php echo $row['nombres']; ?>"><strong class="subtitulo">Usuario: <?php echo $row['nombres']." ". $row['apellidos'] ; ?> </strong></a>
+									<a href="/verperfil?id=<?php echo $row['usuario_id']; ?>"><strong class="subtitulo">Usuario: <?php echo $row['nombres']." ". $row['apellidos'] ; ?> </strong></a>
 									<a class="float-right" rel="tooltip" title="<?php echo $row['registrado_el']; ?>" id="fechausuario<?php echo $counter; ?>"><?php echo $row['registrado_el']; ?></a>
-									<p>Texto</p>
 								</li>
 
 								<?php  

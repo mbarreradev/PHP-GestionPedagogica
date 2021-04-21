@@ -6,10 +6,6 @@ require_once 'inc/functions.php';
 require_once 'inc/PHPMailer/PHPMailer.php';
 require_once 'inc/PHPMailer/SMTP.php';
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 if (isset($_SESSION["fb_access_token"]))
 {
     // Consulta para traer los datos de usuario generales
@@ -73,8 +69,8 @@ if(isset($_POST['enviar-submit']))
     // Si todos los campos son validos, entonces se hace la secuencia SQL
     if ($nombreEstado == TRUE && $emailEstado == TRUE && $telefonoEstado == TRUE && $mensajeEstado == TRUE)
     {
-      $asunto = "Mensaje de ".$emailValido;
-      $body = "Nuevo mensaje de la página de contacto: <br><br><b>Nombre:</b> ".$nombreValido." <br><b>Correo electrónico:</b> ".$emailValido." <br><b>Teléfono:</b> ".$telefonoValido." <br><b>Mensaje:</b> ".$mensajeValido;
+      $asunto = "Nuevo mensaje de la página de Contacto";
+      $body = '<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8="></head><body style=" margin: 0; padding: 0; font-family: Helvetica;"> <table width="50%" cellpadding="0" cellspacing="0" style="border-collapse: collapse; margin-left:auto;margin-right:auto; margin-top: 38px;"><tr><td width="600" valign="top"><tr><td align="center"><span style="font-size: 22px; line-height: 27px;">Nuevo mensaje de </span><br><span style="color: #0167b7 !important; font-size: 18px; font-weight: bold; line-height: 27px;"><b>Nombre:</b> '.$nombreValido.' <br><b>Correo electrónico:</b> '.$emailValido.' <br><b>Teléfono:</b> '.$telefonoValido.'</span></td></tr><tr><td><table width="100%" cellpadding="0" cellspacing="0" style="background: #F7F8FC; border-collapse: collapse; height: 150px; margin-top: 38px;  padding-left: 10px; padding-right: 10px;"><tr><td valign="middle" align="center"><span style="font-size: 18px; line-height: 21px;"><b>Mensaje:</b><br><br>'.$mensajeValido.'</span></td></tr></table></td></tr></td></tr></table> <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse: collapse;"> <tr><table width="50%" cellpadding="0" cellspacing="0" style="background: #F7F8FC; border-collapse: collapse; height: 48px; margin-left:auto;margin-right:auto; margin-top:38px;"><tr><td valign="middle" width="50%"><img src="https://repositorio.gestionpedagogica.cl/images/Logo-completo.png" width="230" height="48" style="display: block; padding-left: 10px;"></td></tr></table></tr></table></body></html>';
       $email_destino = "contacto@gestionpedagogica.cl";
 
       // Función para enviar correo
@@ -82,11 +78,11 @@ if(isset($_POST['enviar-submit']))
 
       if($return == 0)
       {
-        $resultMsg = "\n <div class='alert alert-danger' role='alert'>Ocurrió un error al enviar el formulario.</div>";
+        $resultMsg = '<div class="alert alert-danger" role="alert">Ocurrió un error al enviar el formulario.</div>';
       }
       else
       {
-        $resultMsg = "\n <div class='alert alert-success' role='alert'>Formulario enviado con éxito. Nos pondremos en contacto contigo en los próximos días.</div>";
+        $resultMsg = '<div class="alert alert-success" role="alert">Formulario enviado con éxito. Nos pondremos en contacto contigo en los próximos días.</div>';
       }
     }
 }
