@@ -20,9 +20,8 @@ else // Continuamos a la página
 
 		
 	// MIS ORDENES
-	// BOX: Tabla Matematica
 	// Primero entramos a la tabla ordencompra y luego archivo para sacar los datos requeridos
-	$sql_matematicas_orden = "SELECT ordencompra.estado_orden AS ordencompra_estadoorden, ordencompra.fecha_compra AS ordencompra_fechacompra, ordencompra.ordencompra_id AS ordencompra_id, archivo.archivo_id AS archivo_id, archivo.nombre AS archivo_nombre, archivo.curso AS archivo_curso, archivo.unidad AS archivo_unidad, ordencompra.pagado AS ordencompra_pagado, archivo.estado AS archivo_estado, archivo.tipo AS archivo_tipo 
+	$sql_ordenes = "SELECT ordencompra.estado_orden AS ordencompra_estadoorden, ordencompra.fecha_compra AS ordencompra_fechacompra, ordencompra.ordencompra_id AS ordencompra_id, archivo.archivo_id AS archivo_id, archivo.nombre AS archivo_nombre, archivo.curso AS archivo_curso, archivo.unidad AS archivo_unidad, ordencompra.pagado AS ordencompra_pagado, archivo.estado AS archivo_estado, archivo.tipo AS archivo_tipo, archivo.asignatura AS archivo_asignatura 
 	FROM 
 		ordencompra
 	INNER JOIN 
@@ -30,65 +29,9 @@ else // Continuamos a la página
 	INNER JOIN 
 		usuario ON ordencompra.usuario_id=usuario.usuario_id
 	WHERE 
-		ordencompra.usuario_id = '".$_SESSION['usuario_id']."' AND archivo.asignatura = 'Matemáticas'
+		ordencompra.usuario_id = '".$_SESSION['usuario_id']."'
 	ORDER BY archivo_estado DESC";
-	$rs_result_matematica_orden = mysqli_query($conn, $sql_matematicas_orden);
-		
-	// BOX: Tabla Lenguaje
-	// Primero entramos a la tabla ordencompra y luego archivo para sacar los datos requeridos
-	$sql_lenguaje_orden = "SELECT ordencompra.estado_orden AS ordencompra_estadoorden, ordencompra.fecha_compra AS ordencompra_fechacompra, ordencompra.ordencompra_id AS ordencompra_id, archivo.archivo_id AS archivo_id, archivo.nombre AS archivo_nombre, archivo.curso AS archivo_curso, archivo.unidad AS archivo_unidad, ordencompra.pagado AS ordencompra_pagado, archivo.estado AS archivo_estado, archivo.tipo AS archivo_tipo 
-	FROM 
-		ordencompra
-	INNER JOIN 
-		archivo ON ordencompra.archivo_id=archivo.archivo_id
-	INNER JOIN 
-		usuario ON ordencompra.usuario_id=usuario.usuario_id
-	WHERE 
-		ordencompra.usuario_id = '".$_SESSION['usuario_id']."' AND archivo.asignatura = 'Lenguaje'
-	ORDER BY archivo_estado DESC";
-	$rs_result_lenguaje_orden = mysqli_query($conn, $sql_lenguaje_orden);
-
-	// BOX: Tabla Tecnología
-	// Primero entramos a la tabla ordencompra y luego archivo para sacar los datos requeridos
-	$sql_tecnologia_orden = "SELECT ordencompra.estado_orden AS ordencompra_estadoorden, ordencompra.fecha_compra AS ordencompra_fechacompra, ordencompra.ordencompra_id AS ordencompra_id, archivo.archivo_id AS archivo_id, archivo.nombre AS archivo_nombre, archivo.curso AS archivo_curso, archivo.unidad AS archivo_unidad, ordencompra.pagado AS ordencompra_pagado, archivo.estado AS archivo_estado, archivo.tipo AS archivo_tipo 
-	FROM 
-		ordencompra
-	INNER JOIN 
-		archivo ON ordencompra.archivo_id=archivo.archivo_id
-	INNER JOIN 
-		usuario ON ordencompra.usuario_id=usuario.usuario_id
-	WHERE 
-		ordencompra.usuario_id = '".$_SESSION['usuario_id']."' AND archivo.asignatura = 'Tecnología'
-	ORDER BY archivo_estado DESC";
-	$rs_result_tecnologia_orden = mysqli_query($conn, $sql_tecnologia_orden);
-
-	// BOX: Tabla Música
-	// Primero entramos a la tabla ordencompra y luego archivo para sacar los datos requeridos
-	$sql_musica_orden = "SELECT ordencompra.estado_orden AS ordencompra_estadoorden, ordencompra.fecha_compra AS ordencompra_fechacompra, ordencompra.ordencompra_id AS ordencompra_id, archivo.archivo_id AS archivo_id, archivo.nombre AS archivo_nombre, archivo.curso AS archivo_curso, archivo.unidad AS archivo_unidad, ordencompra.pagado AS ordencompra_pagado, archivo.estado AS archivo_estado, archivo.tipo AS archivo_tipo 
-	FROM 
-		ordencompra
-	INNER JOIN 
-		archivo ON ordencompra.archivo_id=archivo.archivo_id
-	INNER JOIN 
-		usuario ON ordencompra.usuario_id=usuario.usuario_id
-	WHERE 
-		ordencompra.usuario_id = '".$_SESSION['usuario_id']."' AND archivo.asignatura = 'Música'
-	ORDER BY archivo_estado DESC";
-	$rs_result_musica_orden = mysqli_query($conn, $sql_musica_orden);
-
-	// BOX: Tabla Artes Visuales
-	// Primero entramos a la tabla ordencompra y luego archivo para sacar los datos requeridos
-	$sql_artesvisuales_orden = "SELECT ordencompra.estado_orden AS ordencompra_estadoorden, ordencompra.fecha_compra AS ordencompra_fechacompra, ordencompra.ordencompra_id AS ordencompra_id, archivo.archivo_id AS archivo_id, archivo.nombre AS archivo_nombre, archivo.curso AS archivo_curso, archivo.unidad AS archivo_unidad, ordencompra.pagado AS ordencompra_pagado, archivo.estado AS archivo_estado, archivo.tipo AS archivo_tipo 
-	FROM 
-		ordencompra
-	INNER JOIN 
-		archivo ON ordencompra.archivo_id=archivo.archivo_id
-	INNER JOIN 
-		usuario ON ordencompra.usuario_id=usuario.usuario_id
-	WHERE 
-		ordencompra.usuario_id = '".$_SESSION['usuario_id']."' AND archivo.asignatura = 'Artes Visuales'
-	ORDER BY archivo_estado DESC";
-	$rs_result_artesvisuales_orden = mysqli_query($conn, $sql_artesvisuales_orden);
+	$rs_result_ordenes = mysqli_query($conn, $sql_ordenes);
 
 	// Contador de ordenes con pendiente de confirmación
 	$sql_pendientes_confirmacion = "SELECT * FROM ordencompra WHERE ordencompra.usuario_id = '".$_SESSION['usuario_id']."' AND estado_orden ='Pendiente de Confirmación' ";  
@@ -148,35 +91,33 @@ else // Continuamos a la página
 
         <section id="tabs" class="project-tab">
                 <div class="row">
-                    <div class="col-md-12">
-                        <nav>
-                            <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                                <a class="nav-item nav-link active" id="nav-matematica-tab" data-toggle="tab" href="#nav-matematica-orden" role="tab" aria-controls="nav-matematica" aria-selected="true">Matemáticas</a>
-								<a class="nav-item nav-link" id="nav-lenguaje-tab" data-toggle="tab" href="#nav-lenguaje-orden" role="tab" aria-controls="nav-lenguaje" aria-selected="false">Lenguaje</a>
-								<a class="nav-item nav-link" id="nav-tecnologia-tab" data-toggle="tab" href="#nav-tecnologia-orden" role="tab" aria-controls="nav-tecnologia" aria-selected="false">Tecnología</a>
-								<a class="nav-item nav-link" id="nav-musica-tab" data-toggle="tab" href="#nav-musica-orden" role="tab" aria-controls="nav-musica" aria-selected="false">Música</a>
-								<a class="nav-item nav-link" id="nav-artesvisuales-tab" data-toggle="tab" href="#nav-artesvisuales-orden" role="tab" aria-controls="nav-artesvisuales" aria-selected="false">Artes Visuales</a>
-                            </div>
-                        </nav>
-                        <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane fade show active" id="nav-matematica-orden" role="tabpanel" aria-labelledby="nav-matematica-tab">
+                    <div class="col-md-12" id="nav-ordenes">
 								<div class="buscador">
 									<input type="search" class="search form-control" placeholder="Puedes buscar por temática, curso, tipo, pagado y estado"/>
 								</div>
-                                <table id="tabla-matematica-ordenes" class="table" cellspacing="0">
+								<div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-light" id="filter-none">Ver todos</button>
+                                    <button type="button" class="btn btn-light" id="filter-matematicas">Matemáticas</button>
+                                    <button type="button" class="btn btn-light" id="filter-lenguaje">Lenguaje</button>
+                                    <button type="button" class="btn btn-light" id="filter-tecnologia">Tecnología</button>
+                                    <button type="button" class="btn btn-light" id="filter-musica">Música</button>
+                                    <button type="button" class="btn btn-light" id="filter-artesvisuales">Artes Visuales</button>
+                                </div>
+                                <table id="tabla-ordenes" class="table" cellspacing="0">
                                     <thead>
 										<tr class="bg-azul">
 											<th class="sort" data-sort="tema">Tema</th>
 											<th class="sort" data-sort="curso">Curso</th>
                                             <th class="sort" data-sort="tipo">Tipo</th>
-											<th class="sort" data-sort="pagado">Pagado</th>
+											<th class="sort" data-sort="asignatura">Asignatura</th>
+											<th class="sort" data-sort="pagado">Monto</th>
 											<th>Fecha</th>
 											<th class="sort" data-sort="estado">Estado</th>
-                                            <th>Opciones</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody class="list limpio">
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result_matematica_orden)) {
+                                        <?php while ($row = mysqli_fetch_assoc($rs_result_ordenes)) {
 										$pagado_final = number_format($row['ordencompra_pagado'],0, '', '.');	
 										?>	
 
@@ -194,6 +135,7 @@ else // Continuamos a la página
 												}
 												
 												?></td>
+												<td class="asignatura"><?php echo $row['archivo_asignatura']; ?></td>
 												<td class="pagado">$<?php echo $pagado_final; ?></td>
 												<td><?php echo $row['ordencompra_fechacompra']; ?></td>
 												<td class="estado"><?php echo $row['ordencompra_estadoorden']; ?></td>
@@ -219,257 +161,6 @@ else // Continuamos a la página
 										<ul class="pagination"></ul>
 									</div>
 								</div>
-
-                            </div>
-                            <div class="tab-pane fade" id="nav-lenguaje-orden" role="tabpanel" aria-labelledby="nav-lenguaje-tab">
-								<div class="buscador">
-									<input type="search" class="search form-control" placeholder="Puedes buscar por temática, curso, tipo, pagado y estado"/>
-								</div>
-                                <table id="tabla-lenguaje-ordenes" class="table" cellspacing="0">
-                                    <thead>
-										<tr class="bg-azul">
-											<th class="sort" data-sort="tema">Tema</th>
-											<th class="sort" data-sort="curso">Curso</th>
-                                            <th class="sort" data-sort="tipo">Tipo</th>
-											<th class="sort" data-sort="pagado">Pagado</th>
-											<th>Fecha</th>
-											<th class="sort" data-sort="estado">Estado</th>
-                                            <th>Opciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="list limpio">
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result_lenguaje_orden)) {
-										$pagado_final = number_format($row['ordencompra_pagado'],0, '', '.');		
-										?>	
-
-											<tr>
-												<td class="tema"><?php echo $row['archivo_nombre']; ?></td>
-												<td class="curso"><?php echo $row['archivo_curso']; ?></td>
-												<td class="tipo"><?php 
-												if($row['archivo_tipo'] == '0')
-												{
-													echo 'Planificación';
-												}
-												else
-												{
-													echo 'Guía';
-												}
-												
-												?></td>
-												<td class="pagado">$<?php echo $pagado_final; ?></td>
-												<td><?php echo $row['ordencompra_fechacompra']; ?></td>
-												<td class="estado"><?php echo $row['ordencompra_estadoorden']; ?></td>
-												<td>
-												<div class="btn-group" role="group">
-													<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle tabla" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-													Opciones
-													</button>
-													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-														<a class="dropdown-item" href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
-														<a class="dropdown-item" href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar</button></a>
-													</div>
-												</div>
-                                                </td>
-											</tr>
-
-										<?php };  ?>
-                                    </tbody>
-                                </table>
-
-								<div class="container">
-									<div class="row text-center justify-content-center">
-										<ul class="pagination"></ul>
-									</div>
-								</div>
-
-							</div>
-							<div class="tab-pane fade" id="nav-tecnologia-orden" role="tabpanel" aria-labelledby="nav-tecnologia-tab">
-								<div class="buscador">
-									<input type="search" class="search form-control" placeholder="Puedes buscar por temática, curso, tipo, pagado y estado"/>
-								</div>
-                                <table id="tabla-tecnologia-ordenes" class="table" cellspacing="0">
-                                    <thead>
-										<tr class="bg-azul">
-											<th class="sort" data-sort="tema">Tema</th>
-											<th class="sort" data-sort="curso">Curso</th>
-                                            <th class="sort" data-sort="tipo">Tipo</th>
-											<th class="sort" data-sort="pagado">Pagado</th>
-											<th>Fecha</th>
-											<th class="sort" data-sort="estado">Estado</th>
-                                            <th>Opciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="list limpio">
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result_tecnologia_orden)) {
-										$pagado_final = number_format($row['ordencompra_pagado'],0, '', '.');		
-										?>	
-
-											<tr>
-												<td class="tema"><?php echo $row['archivo_nombre']; ?></td>
-												<td class="curso"><?php echo $row['archivo_curso']; ?></td>
-												<td class="tipo"><?php 
-												if($row['archivo_tipo'] == '0')
-												{
-													echo 'Planificación';
-												}
-												else
-												{
-													echo 'Guía';
-												}
-												
-												?></td>
-												<td class="pagado">$<?php echo $pagado_final; ?></td>
-												<td><?php echo $row['ordencompra_fechacompra']; ?></td>
-												<td class="estado"><?php echo $row['ordencompra_estadoorden']; ?></td>
-												<td>
-												<div class="btn-group" role="group">
-													<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle tabla" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-													Opciones
-													</button>
-													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-														<a class="dropdown-item" href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
-														<a class="dropdown-item" href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar</button></a>
-													</div>
-												</div>
-                                                </td>
-											</tr>
-
-										<?php };  ?>
-                                    </tbody>
-                                </table>
-
-								<div class="container">
-									<div class="row text-center justify-content-center">
-										<ul class="pagination"></ul>
-									</div>
-								</div>
-
-							</div>
-							<div class="tab-pane fade" id="nav-musica-orden" role="tabpanel" aria-labelledby="nav-musica-tab">
-								<div class="buscador">
-									<input type="search" class="search form-control" placeholder="Puedes buscar por temática, curso, tipo, pagado y estado"/>
-								</div>
-                                <table id="tabla-musica-ordenes" class="table" cellspacing="0">
-                                    <thead>
-										<tr class="bg-azul">
-											<th class="sort" data-sort="tema">Tema</th>
-											<th class="sort" data-sort="curso">Curso</th>
-                                            <th class="sort" data-sort="tipo">Tipo</th>
-											<th class="sort" data-sort="pagado">Pagado</th>
-											<th>Fecha</th>
-											<th class="sort" data-sort="estado">Estado</th>
-                                            <th>Opciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="list limpio">
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result_musica_orden)) {
-										$pagado_final = number_format($row['ordencompra_pagado'],0, '', '.');	
-										?>	
-
-											<tr>
-												<td class="tema"><?php echo $row['archivo_nombre']; ?></td>
-												<td class="curso"><?php echo $row['archivo_curso']; ?></td>
-												<td class="tipo"><?php 
-												if($row['archivo_tipo'] == '0')
-												{
-													echo 'Planificación';
-												}
-												else
-												{
-													echo 'Guía';
-												}
-												
-												?></td>
-												<td class="pagado">$<?php echo $pagado_final; ?></td>
-												<td><?php echo $row['ordencompra_fechacompra']; ?></td>
-												<td class="estado"><?php echo $row['ordencompra_estadoorden']; ?></td>
-												<td>
-												<div class="btn-group" role="group">
-													<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle tabla" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-													Opciones
-													</button>
-													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-														<a class="dropdown-item" href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
-														<a class="dropdown-item" href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar</button></a>
-													</div>
-												</div>
-                                                </td>
-											</tr>
-
-										<?php };  ?>
-                                    </tbody>
-                                </table>
-
-								<div class="container">
-									<div class="row text-center justify-content-center">
-										<ul class="pagination"></ul>
-									</div>
-								</div>
-
-							</div>
-							<div class="tab-pane fade" id="nav-artesvisuales-orden" role="tabpanel" aria-labelledby="nav-artesvisuales-tab">
-								<div class="buscador">
-									<input type="search" class="search form-control" placeholder="Puedes buscar por temática, curso, tipo, pagado y estado"/>
-								</div>
-                                <table id="tabla-artesvisuales-ordenes" class="table" cellspacing="0">
-                                    <thead>
-										<tr class="bg-azul">
-											<th class="sort" data-sort="tema">Tema</th>
-											<th class="sort" data-sort="curso">Curso</th>
-                                            <th class="sort" data-sort="tipo">Tipo</th>
-											<th class="sort" data-sort="pagado">Pagado</th>
-											<th>Fecha</th>
-											<th class="sort" data-sort="estado">Estado</th>
-                                            <th>Opciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="list limpio">
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result_artesvisuales_orden)) {
-										$pagado_final = number_format($row['ordencompra_pagado'],0, '', '.');		
-										?>	
-
-											<tr>
-												<td class="tema"><?php echo $row['archivo_nombre']; ?></td>
-												<td class="curso"><?php echo $row['archivo_curso']; ?></td>
-												<td class="tipo"><?php 
-												if($row['archivo_tipo'] == '0')
-												{
-													echo 'Planificación';
-												}
-												else
-												{
-													echo 'Guía';
-												}
-												
-												?></td>
-												<td class="pagado">$<?php echo $pagado_final; ?></td>
-												<td><?php echo $row['ordencompra_fechacompra']; ?></td>
-												<td class="estado"><?php echo $row['ordencompra_estadoorden']; ?></td>
-												<td>
-												<div class="btn-group" role="group">
-													<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle tabla" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-													Opciones
-													</button>
-													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-														<a class="dropdown-item" href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver orden</button></a>
-														<a class="dropdown-item" href="/verarchivo?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><span class="material-icons">cloud_download</span> Descargar</button></a>
-													</div>
-												</div>
-                                                </td>
-											</tr>
-
-										<?php };  ?>
-                                    </tbody>
-                                </table>
-
-								<div class="container">
-									<div class="row text-center justify-content-center">
-										<ul class="pagination"></ul>
-									</div>
-								</div>
-
-                            </div>
-                        </div>
                     </div>
                 </div>
         </section>
@@ -500,16 +191,72 @@ else // Continuamos a la página
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script type="text/javascript">
 		var options = {
-    valueNames: [ 'tema', 'curso', 'tipo', 'pagado', 'estado'],
+    valueNames: [ 'tema', 'curso', 'tipo', 'pagado', 'estado', 'asignatura'],
     page: 10,
     pagination: true
 	};
 
-	var tablaMatematicas = new List('nav-matematica-orden', options);
-	var tablaLenguaje = new List('nav-lenguaje-orden', options);
-	var tablaTecnologia = new List('nav-tecnologia-orden', options);
-	var tablaMusica = new List('nav-musica-orden', options);
-	var tablaArtesVisuales = new List('nav-artesvisuales-orden', options);
+	var tablaOrdenes = new List('nav-ordenes', options);
+
+	$('#filter-matematicas').click(function() {
+	tablaOrdenes.filter(function(item) {
+        if (item.values().asignatura == "Matemáticas") {
+        return true;
+        } else {
+        return false;
+        }
+    });
+    return false;
+    });
+
+    $('#filter-lenguaje').click(function() {
+	tablaOrdenes.filter(function(item) {
+        if (item.values().asignatura == "Lenguaje") {
+        return true;
+        } else {
+        return false;
+        }
+    });
+    return false;
+    });
+
+    $('#filter-tecnologia').click(function() {
+	tablaOrdenes.filter(function(item) {
+        if (item.values().asignatura == "Tecnología") {
+        return true;
+        } else {
+        return false;
+        }
+    });
+    return false;
+    });
+
+    $('#filter-musica').click(function() {
+	tablaOrdenes.filter(function(item) {
+        if (item.values().asignatura == "Música") {
+        return true;
+        } else {
+        return false;
+        }
+    });
+    return false;
+    });
+
+    $('#filter-artesvisuales').click(function() {
+	tablaOrdenes.filter(function(item) {
+        if (item.values().asignatura == "Artes Visuales") {
+        return true;
+        } else {
+        return false;
+        }
+    });
+    return false;
+    });
+
+    $('#filter-none').click(function() {
+	tablaOrdenes.filter();
+    return false;
+    });
 	</script>
 </body>
 </html>

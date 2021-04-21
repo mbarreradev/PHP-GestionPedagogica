@@ -308,10 +308,10 @@ else // Continuamos a la página
 										<tr class="bg-azul">
 											<th class="sort" data-sort="id">Orden ID</th>
                                             <th class="sort" data-sort="creado">Creado por</th>
-                                            <th class="sort" data-sort="pagado">Pagado</th>
+                                            <th class="sort" data-sort="pagado">Monto</th>
 											<th class="sort" data-sort="estado">Estado</th>
                                             <th>Última actualización</th>
-                                            <th>Opciones</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody class="list limpio">
@@ -375,7 +375,7 @@ else // Continuamos a la página
 
 											<tr>
 												<td class="id"><?php echo $row['ordencompra_id']; ?></td>
-												<td class="creado"><a href="/verperfil?id="><?php echo $row['nombres']." ".$row['apellidos']; ?></a></td>
+												<td class="creado"><a href="/verperfil?id=<?php echo $row['usuario_id']; ?>"><?php echo $row['nombres']." ".$row['apellidos']; ?></a></td>
 												<td class="pagado">$<?php echo $valor_pagado; ?></td>
 												<td class="estado"><?php echo $row['estado_orden']; ?></td>
                                                 <td><?php echo $row['fecha_actualizacion']; ?></td>
@@ -424,10 +424,10 @@ else // Continuamos a la página
 										<tr class="bg-azul">
                                             <th class="sort" data-sort="id">Orden ID</th>
                                             <th class="sort" data-sort="creado">Creado por</th>
-                                            <th class="sort" data-sort="pagado">Pagado</th>
+                                            <th class="sort" data-sort="pagado">Monto</th>
 											<th class="sort" data-sort="estado">Estado</th>
                                             <th>Última actualización</th>
-                                            <th>Opciones</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody class="list limpio">
@@ -437,7 +437,7 @@ else // Continuamos a la página
 
 											<tr>
                                                 <td class="id"><?php echo $row['ordencompra_id']; ?></td>
-												<td class="creado"><a href="/verperfil?id="><?php echo $row['nombres']." ".$row['apellidos']; ?></a></td>
+												<td class="creado"><a href="/verperfil?id=<?php echo $row['usuario_id']; ?>"><?php echo $row['nombres']." ".$row['apellidos']; ?></a></td>
 												<td class="pagado">$<?php echo $pagado_final; ?></td>
 												<td class="estado"><?php echo $row['estado_orden']; ?></td>
                                                 <td><?php echo $row['fecha_actualizacion']; ?></td>
@@ -466,10 +466,10 @@ else // Continuamos a la página
 										<tr class="bg-azul">
                                             <th class="sort" data-sort="id">Orden ID</th>
                                             <th class="sort" data-sort="creado">Creado por</th>
-                                            <th class="sort" data-sort="pagado">Pagado</th>
+                                            <th class="sort" data-sort="pagado">Monto</th>
 											<th class="sort" data-sort="estado">Estado</th>
                                             <th>Última actualización</th>
-                                            <th>Opciones</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody class="list limpio">
@@ -479,7 +479,7 @@ else // Continuamos a la página
 
 											<tr>
                                                 <td class="id"><?php echo $row['ordencompra_id']; ?></td>
-												<td class="creado"><a href="/verperfil?id="><?php echo $row['nombres']." ".$row['apellidos']; ?></a></td>
+												<td class="creado"><a href="/verperfil?id=<?php echo $row['usuario_id']; ?>"><?php echo $row['nombres']." ".$row['apellidos']; ?></a></td>
 												<td class="pagado">$<?php echo $pagado_final; ?></td>
 												<td class="estado"><?php echo $row['estado_orden']; ?></td>
                                                 <td><?php echo $row['fecha_actualizacion']; ?></td>
@@ -508,10 +508,10 @@ else // Continuamos a la página
 										<tr class="bg-azul">
                                             <th class="sort" data-sort="id">Orden ID</th>
                                             <th class="sort" data-sort="creado">Creado por</th>
-                                            <th class="sort" data-sort="pagado">Pagado</th>
+                                            <th class="sort" data-sort="pagado">Monto</th>
 											<th class="sort" data-sort="estado">Estado</th>
                                             <th>Última actualización</th>
-                                            <th>Opciones</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody class="list limpio">
@@ -521,7 +521,7 @@ else // Continuamos a la página
 
 											<tr>
                                                 <td class="id"><?php echo $row['ordencompra_id']; ?></td>
-												<td class="creado"><a href="/verperfil?id="><?php echo $row['nombres']." ".$row['apellidos']; ?></a></td>
+												<td class="creado"><a href="/verperfil?id=<?php echo $row['usuario_id']; ?>"><?php echo $row['nombres']." ".$row['apellidos']; ?></a></td>
 												<td class="pagado">$<?php echo $pagado_final; ?></td>
 												<td class="estado"><?php echo $row['estado_orden']; ?></td>
                                                 <td><?php echo $row['fecha_actualizacion']; ?></td>
@@ -550,10 +550,10 @@ else // Continuamos a la página
 										<tr class="bg-azul">
                                             <th class="sort" data-sort="id">Orden ID</th>
                                             <th class="sort" data-sort="creado">Creado por</th>
-                                            <th class="sort" data-sort="pagado">Pagado</th>
+                                            <th class="sort" data-sort="pagado">Monto</th>
 											<th class="sort" data-sort="estado">Estado</th>
                                             <th>Última actualización</th>
-                                            <th>Opciones</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody class="list limpio">
@@ -563,7 +563,7 @@ else // Continuamos a la página
 
 											<tr>
                                                 <td class="id"><?php echo $row['ordencompra_id']; ?></td>
-												<td class="creado"><a href="/verperfil?id="><?php echo $row['nombres']." ".$row['apellidos']; ?></a></td>
+												<td class="creado"><a href="/verperfil?id=<?php echo $row['usuario_id']; ?>"><?php echo $row['nombres']." ".$row['apellidos']; ?></a></td>
 												<td class="pagado">$<?php echo $pagado_final; ?></td>
 												<td class="estado"><?php echo $row['estado_orden']; ?></td>
                                                 <td><?php echo $row['fecha_actualizacion']; ?></td>
@@ -592,10 +592,10 @@ else // Continuamos a la página
 										<tr class="bg-azul">
                                             <th class="sort" data-sort="id">Orden ID</th>
                                             <th class="sort" data-sort="creado">Creado por</th>
-                                            <th class="sort" data-sort="pagado">Pagado</th>
+                                            <th class="sort" data-sort="pagado">Monto</th>
 											<th class="sort" data-sort="estado">Estado</th>
                                             <th>Última actualización</th>
-                                            <th>Opciones</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody class="list limpio">
@@ -605,7 +605,7 @@ else // Continuamos a la página
 
 											<tr>
                                                 <td class="id"><?php echo $row['ordencompra_id']; ?></td>
-												<td class="creado"><a href="/verperfil?id="><?php echo $row['nombres']." ".$row['apellidos']; ?></a></td>
+												<td class="creado"><a href="/verperfil?id=<?php echo $row['usuario_id']; ?>"><?php echo $row['nombres']." ".$row['apellidos']; ?></a></td>
 												<td class="pagado">$<?php echo $pagado_final; ?></td>
 												<td class="estado"><?php echo $row['estado_orden']; ?></td>
                                                 <td><?php echo $row['fecha_actualizacion']; ?></td>

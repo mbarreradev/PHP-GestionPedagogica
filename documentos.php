@@ -19,126 +19,30 @@ else // Continuamos a la página
     $row_profile_general = mysqli_fetch_assoc($rs_resultdatosgeneral);
 
     // PLANIFICACIONES
-	// BOX: Tabla Matematica
 	// Primero entramos a la tabla ordencompra y luego archivo para sacar los datos requeridos
-	$sql_matematicas_planificacion = "SELECT archivo_id, nombre, curso, unidad, precio, estado
+	$sql_planificacion = "SELECT archivo_id, nombre, curso, unidad, precio, estado, asignatura
 	FROM 
 		archivo
 	WHERE 
-		asignatura = 'Matemáticas' AND tipo = '0'
+		tipo = '0'
 	ORDER BY estado DESC"; 
-	$rs_result_matematica_planificacion = mysqli_query($conn, $sql_matematicas_planificacion);
-		
-	// BOX: Tabla Lenguaje
-	// Primero entramos a la tabla ordencompra y luego archivo para sacar los datos requeridos
-	$sql_lenguaje_planificacion = "SELECT archivo_id, nombre, curso, unidad, precio, estado
-	FROM
-		archivo
-	WHERE 
-		asignatura = 'Lenguaje' AND tipo = '0'
-	ORDER BY estado DESC"; 
-	$rs_result_lenguaje_planificacion = mysqli_query($conn, $sql_lenguaje_planificacion);
-
-	// BOX: Tabla Tecnología
-	// Primero entramos a la tabla ordencompra y luego archivo para sacar los datos requeridos
-	$sql_tecnologia_planificacion = "SELECT archivo_id, nombre, curso, unidad, precio, estado
-	FROM
-		archivo
-	WHERE 
-		asignatura = 'Tecnología' AND tipo = '0'
-	ORDER BY estado DESC"; 
-	$rs_result_tecnologia_planificacion = mysqli_query($conn, $sql_tecnologia_planificacion);
-
-	// BOX: Tabla Música
-	// Primero entramos a la tabla ordencompra y luego archivo para sacar los datos requeridos
-	$sql_musica_planificacion = "SELECT archivo_id, nombre, curso, unidad, precio, estado
-	FROM
-		archivo
-	WHERE 
-		asignatura = 'Música' AND tipo = '0'
-	ORDER BY estado DESC"; 
-	$rs_result_musica_planificacion = mysqli_query($conn, $sql_musica_planificacion);
-
-	// BOX: Tabla Artes Visuales
-	// Primero entramos a la tabla ordencompra y luego archivo para sacar los datos requeridos
-	$sql_artesvisuales_planificacion = "SELECT archivo_id, nombre, curso, unidad, precio, estado
-	FROM
-		archivo
-	WHERE 
-		asignatura = 'Artes Visuales' AND tipo = '0'
-	ORDER BY estado DESC"; 
-	$rs_result_artesvisuales_planificacion = mysqli_query($conn, $sql_artesvisuales_planificacion);
-
-
+	$rs_result_planificacion = mysqli_query($conn, $sql_planificacion);
 
 	// GUIAS
-	// BOX: Tabla Matematica
 	// Primero entramos a la tabla ordencompra y luego archivo para sacar los datos requeridos
-	$sql_matematicas_guia = "SELECT archivo_id, nombre, curso, unidad, precio, estado
+	$sql_guia = "SELECT archivo_id, nombre, curso, unidad, precio, estado, asignatura
 	FROM 
 		archivo
 	WHERE 
-		asignatura = 'Matemáticas' AND tipo = '1'
+		tipo = '1'
 	ORDER BY estado DESC"; 
-	$rs_result_matematica_guia = mysqli_query($conn, $sql_matematicas_guia);
-		
-	// BOX: Tabla Lenguaje
-	// Primero entramos a la tabla ordencompra y luego archivo para sacar los datos requeridos
-	$sql_lenguaje_guia = "SELECT archivo_id, nombre, curso, unidad, precio, estado
-	FROM
-		archivo
-	WHERE 
-		asignatura = 'Lenguaje' AND tipo = '1'
-	ORDER BY estado DESC"; 
-	$rs_result_lenguaje_guia = mysqli_query($conn, $sql_lenguaje_guia);
+	$rs_result_guia = mysqli_query($conn, $sql_guia);
 
-	// BOX: Tabla Tecnología
-	// Primero entramos a la tabla ordencompra y luego archivo para sacar los datos requeridos
-	$sql_tecnologia_guia = "SELECT archivo_id, nombre, curso, unidad, precio, estado
-	FROM
-		archivo
-	WHERE 
-		asignatura = 'Tecnología' AND tipo = '1'
-	ORDER BY estado DESC"; 
-	$rs_result_tecnologia_guia = mysqli_query($conn, $sql_tecnologia_guia);
+	// Contadores
+	$cnt_planificaciones = $rs_result_planificacion->num_rows;
+	$cnt_guias = $rs_result_guia->num_rows;
 
-	// BOX: Tabla Música
-	// Primero entramos a la tabla ordencompra y luego archivo para sacar los datos requeridos
-	$sql_musica_guia = "SELECT archivo_id, nombre, curso, unidad, precio, estado
-	FROM
-		archivo
-	WHERE 
-		asignatura = 'Música' AND tipo = '1'
-	ORDER BY estado DESC"; 
-	$rs_result_musica_guia = mysqli_query($conn, $sql_musica_guia);
-
-	// BOX: Tabla Artes Visuales
-	// Primero entramos a la tabla ordencompra y luego archivo para sacar los datos requeridos
-	$sql_artesvisuales_guia = "SELECT archivo_id, nombre, curso, unidad, precio, estado
-	FROM
-		archivo
-	WHERE 
-		asignatura = 'Artes Visuales' AND tipo = '1'
-	ORDER BY estado DESC"; 
-	$rs_result_artesvisuales_guia = mysqli_query($conn, $sql_artesvisuales_guia);
-
-	// Contador planificaciones
-	$cnt_planificaciones1 = $rs_result_matematica_planificacion->num_rows;
-	$cnt_planificaciones2 = $rs_result_lenguaje_planificacion->num_rows;
-	$cnt_planificaciones3 = $rs_result_tecnologia_planificacion->num_rows;
-	$cnt_planificaciones4 = $rs_result_musica_planificacion->num_rows;
-	$cnt_planificaciones5 = $rs_result_artesvisuales_planificacion->num_rows;
-	$cnt_planificaciones_total = ($cnt_planificaciones1 + $cnt_planificaciones2 + $cnt_planificaciones3 + $cnt_planificaciones4 + $cnt_planificaciones5);
-
-	// Contador guias
-	$cnt_guias1 = $rs_result_matematica_guia->num_rows;
-	$cnt_guias2 = $rs_result_lenguaje_guia->num_rows;
-	$cnt_guias3 = $rs_result_tecnologia_guia->num_rows;
-	$cnt_guias4 = $rs_result_musica_guia->num_rows;
-	$cnt_guias5 = $rs_result_artesvisuales_guia->num_rows;
-	$cnt_guias_total = ($cnt_guias1 + $cnt_guias2 + $cnt_guias3 + $cnt_guias4 + $cnt_guias5);
-
-	$cnt_archivos_total = ($cnt_planificaciones_total + $cnt_guias_total);
+	$cnt_archivos_total = ($cnt_planificaciones + $cnt_guias);
 
 ?>
 <!doctype html>
@@ -188,7 +92,7 @@ else // Continuamos a la página
 									<span class="material-icons stats">sticky_note_2</span>
 								</div>
 								<div class="col-9 text-right">
-									<div class="Count"><?php echo $cnt_guias_total; ?></div>
+									<div class="Count"><?php echo $cnt_guias; ?></div>
 									<h4>guías</h4>
 								</div>
 							</div>
@@ -203,7 +107,7 @@ else // Continuamos a la página
 									<span class="material-icons stats">sticky_note_2</span>
 								</div>
 								<div class="col-9 text-right">
-									<div class="Count"><?php echo $cnt_planificaciones_total; ?></div>
+									<div class="Count"><?php echo $cnt_planificaciones; ?></div>
 									<h4>planificaciones</h4>
 								</div>
 							</div>
@@ -234,34 +138,32 @@ else // Continuamos a la página
 
         <section id="tabs" class="project-tab">
                 <div class="row">
-                    <div class="col-md-12">
-                        <nav>
-                            <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                                <a class="nav-item nav-link active" id="nav-matematica-tab" data-toggle="tab" href="#nav-matematica-planificacion" role="tab" aria-controls="nav-matematica" aria-selected="true">Matemáticas</a>
-								<a class="nav-item nav-link" id="nav-lenguaje-tab" data-toggle="tab" href="#nav-lenguaje-planificacion" role="tab" aria-controls="nav-lenguaje" aria-selected="false">Lenguaje</a>
-								<a class="nav-item nav-link" id="nav-tecnologia-tab" data-toggle="tab" href="#nav-tecnologia-planificacion" role="tab" aria-controls="nav-tecnologia" aria-selected="false">Tecnología</a>
-								<a class="nav-item nav-link" id="nav-musica-tab" data-toggle="tab" href="#nav-musica-planificacion" role="tab" aria-controls="nav-musica" aria-selected="false">Música</a>
-								<a class="nav-item nav-link" id="nav-artesvisuales-tab" data-toggle="tab" href="#nav-artesvisuales-planificacion" role="tab" aria-controls="nav-artesvisuales" aria-selected="false">Artes Visuales</a>
-                            </div>
-                        </nav>
-                        <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane fade show active" id="nav-matematica-planificacion" role="tabpanel" aria-labelledby="nav-matematica-tab">
+                    <div class="col-md-12" id="nav-planificacion">
 								<div class="buscador">
 									<input type="search" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
 								</div>
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-light" id="filter-none-planificacion">Ver todos</button>
+                                    <button type="button" class="btn btn-light" id="filter-matematicas-planificacion">Matemáticas</button>
+                                    <button type="button" class="btn btn-light" id="filter-lenguaje-planificacion">Lenguaje</button>
+                                    <button type="button" class="btn btn-light" id="filter-tecnologia-planificacion">Tecnología</button>
+                                    <button type="button" class="btn btn-light" id="filter-musica-planificacion">Música</button>
+                                    <button type="button" class="btn btn-light" id="filter-artesvisuales-planificacion">Artes Visuales</button>
+                                </div>
                                 <table id="tabla-matematica-planificacion" class="table" cellspacing="0">
                                     <thead>
 										<tr class="bg-azul">
 											<th class="sort" data-sort="tema">Tema</th>
 											<th class="sort" data-sort="curso">Curso</th>
 											<th class="sort" data-sort="unidad">Unidad</th>
-                                            <th class="sort" data-sort="precio">Precio</th>
+                                            <th class="sort" data-sort="asignatura">Asignatura</th>
+                                            <th class="sort" data-sort="precio">Monto</th>
 											<th class="sort" data-sort="estado">Estado</th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody class="list limpio">
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result_matematica_planificacion)) { 
+                                        <?php while ($row = mysqli_fetch_assoc($rs_result_planificacion)) { 
 										$precio_final = number_format($row['precio'],0, '', '.');
 											?>	
 
@@ -269,6 +171,7 @@ else // Continuamos a la página
 												<td class="tema"><?php echo $row['nombre']; ?></td>
 												<td class="curso"><?php echo $row['curso']; ?></td>
 												<td class="unidad"><?php echo $row['unidad']; ?></td>
+                                                <td class="asignatura"><?php echo $row['asignatura']; ?></td>
 												<td class="precio">$<?php echo $precio_final; ?></td>
 												<td class="estado"><?php 
 												if($row['estado'] == '0') // desactivado
@@ -304,253 +207,7 @@ else // Continuamos a la página
 										<ul class="pagination"></ul>
 									</div>
 								</div>
-
-                            </div>
-                            <div class="tab-pane fade" id="nav-lenguaje-planificacion" role="tabpanel" aria-labelledby="nav-lenguaje-tab">
-								<div class="buscador">
-									<input type="search" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
-								</div>
-                                <table id="tabla-lenguaje-planificacion" class="table" cellspacing="0">
-                                    <thead>
-										<tr class="bg-azul">
-											<th class="sort" data-sort="tema">Tema</th>
-											<th class="sort" data-sort="curso">Curso</th>
-											<th class="sort" data-sort="unidad">Unidad</th>
-                                            <th class="sort" data-sort="precio">Precio</th>
-											<th class="sort" data-sort="estado">Estado</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="list limpio">
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result_lenguaje_planificacion)) {
-										$precio_final = number_format($row['precio'],0, '', '.');
-										?>	
-
-											<tr>
-												<td class="tema"><?php echo $row['nombre']; ?></td>
-												<td class="curso"><?php echo $row['curso']; ?></td>
-												<td class="unidad"><?php echo $row['unidad']; ?></td>
-												<td class="precio">$<?php echo $precio_final; ?></td>
-												<td class="estado"><?php 
-												if($row['estado'] == '0') // desactivado
-												{
-													echo 'Activado';
-												}
-												else // será 1 - activado
-												{
-													echo 'Desactivado';
-												}
-
-												?></td>
-												<td>
-												<div class="btn-group" role="group">
-													<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle tabla" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-													Opciones
-													</button>
-													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-													<a class="dropdown-item" href="/verdocumento?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver</button></a>
-													<a class="dropdown-item" href="/estadisticas?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons"><span class="material-icons-outlined">trending_up</span></span> Estadísticas</button></a>
-													<a class="dropdown-item" href="/editardocumento?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla width100"><span class="material-icons">edit</span> Modificar</button></a>
-													</div>
-												</div>
-												</td>
-											</tr>
-
-										<?php };  ?>
-                                    </tbody>
-                                </table>
-
-								<div class="container">
-									<div class="row text-center justify-content-center">
-										<ul class="pagination"></ul>
-									</div>
-								</div>
-
-							</div>
-							<div class="tab-pane fade" id="nav-tecnologia-planificacion" role="tabpanel" aria-labelledby="nav-tecnologia-tab">
-								<div class="buscador">
-									<input type="search" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
-								</div>
-                                <table id="tabla-tecnologia-planificacion" class="table" cellspacing="0">
-                                    <thead>
-										<tr class="bg-azul">
-											<th class="sort" data-sort="tema">Tema</th>
-											<th class="sort" data-sort="curso">Curso</th>
-											<th class="sort" data-sort="unidad">Unidad</th>
-                                            <th class="sort" data-sort="precio">Precio</th>
-											<th class="sort" data-sort="estado">Estado</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="list limpio">
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result_tecnologia_planificacion)) {
-										$precio_final = number_format($row['precio'],0, '', '.');	
-										?>	
-
-											<tr>
-												<td class="tema"><?php echo $row['nombre']; ?></td>
-												<td class="curso"><?php echo $row['curso']; ?></td>
-												<td class="unidad"><?php echo $row['unidad']; ?></td>
-												<td class="precio">$<?php echo $precio_final; ?></td>
-												<td class="estado"><?php 
-												if($row['estado'] == '0') // desactivado
-												{
-													echo 'Activado';
-												}
-												else // será 1 - activado
-												{
-													echo 'Desactivado';
-												}
-
-												?></td>
-												<td>
-												<div class="btn-group" role="group">
-													<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle tabla" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-													Opciones
-													</button>
-													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-													<a class="dropdown-item" href="/verdocumento?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver</button></a>
-													<a class="dropdown-item" href="/estadisticas?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons"><span class="material-icons-outlined">trending_up</span></span> Estadísticas</button></a>
-													<a class="dropdown-item" href="/editardocumento?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla width100"><span class="material-icons">edit</span> Modificar</button></a>
-													</div>
-												</div>
-												</td>
-											</tr>
-
-										<?php };  ?>
-                                    </tbody>
-                                </table>
-
-								<div class="container">
-									<div class="row text-center justify-content-center">
-										<ul class="pagination"></ul>
-									</div>
-								</div>
-
-							</div>
-							<div class="tab-pane fade" id="nav-musica-planificacion" role="tabpanel" aria-labelledby="nav-musica-tab">
-								<div class="buscador">
-									<input type="search" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
-								</div>
-                                <table id="tabla-musica-planificacion" class="table" cellspacing="0">
-                                    <thead>
-										<tr class="bg-azul">
-											<th class="sort" data-sort="tema">Tema</th>
-											<th class="sort" data-sort="curso">Curso</th>
-											<th class="sort" data-sort="unidad">Unidad</th>
-                                            <th class="sort" data-sort="precio">Precio</th>
-											<th class="sort" data-sort="estado">Estado</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="list limpio">
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result_musica_planificacion)) {
-										$precio_final = number_format($row['precio'],0, '', '.');	
-										?>	
-
-											<tr>
-												<td class="tema"><?php echo $row['nombre']; ?></td>
-												<td class="curso"><?php echo $row['curso']; ?></td>
-												<td class="unidad"><?php echo $row['unidad']; ?></td>
-												<td class="precio">$<?php echo $precio_final; ?></td>
-												<td class="estado"><?php 
-												if($row['estado'] == '0') // desactivado
-												{
-													echo 'Activado';
-												}
-												else // será 1 - activado
-												{
-													echo 'Desactivado';
-												}
-
-												?></td>
-												<td>
-												<div class="btn-group" role="group">
-													<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle tabla" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-													Opciones
-													</button>
-													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-													<a class="dropdown-item" href="/verdocumento?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver</button></a>
-													<a class="dropdown-item" href="/estadisticas?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons"><span class="material-icons-outlined">trending_up</span></span> Estadísticas</button></a>
-													<a class="dropdown-item" href="/editardocumento?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla width100"><span class="material-icons">edit</span> Modificar</button></a>
-													</div>
-												</div>
-												</td>
-											</tr>
-
-										<?php };  ?>
-                                    </tbody>
-                                </table>
-
-								<div class="container">
-									<div class="row text-center justify-content-center">
-										<ul class="pagination"></ul>
-									</div>
-								</div>
-
-							</div>
-							<div class="tab-pane fade" id="nav-artesvisuales-planificacion" role="tabpanel" aria-labelledby="nav-artesvisuales-tab">
-								<div class="buscador">
-									<input type="search" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
-								</div>
-                                <table id="tabla-artesvisuales-planificacion" class="table" cellspacing="0">
-                                    <thead>
-										<tr class="bg-azul">
-											<th class="sort" data-sort="tema">Tema</th>
-											<th class="sort" data-sort="curso">Curso</th>
-											<th class="sort" data-sort="unidad">Unidad</th>
-                                            <th class="sort" data-sort="precio">Precio</th>
-											<th class="sort" data-sort="estado">Estado</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="list limpio">
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result_artesvisuales_planificacion)) {
-										$precio_final = number_format($row['precio'],0, '', '.');	
-										?>	
-
-											<tr>
-												<td class="tema"><?php echo $row['nombre']; ?></td>
-												<td class="curso"><?php echo $row['curso']; ?></td>
-												<td class="unidad"><?php echo $row['unidad']; ?></td>
-												<td class="precio">$<?php echo $precio_final; ?></td>
-												<td class="estado"><?php 
-												if($row['estado'] == '0') // desactivado
-												{
-													echo 'Activado';
-												}
-												else // será 1 - activado
-												{
-													echo 'Desactivado';
-												}
-
-												?></td>
-												<td>
-												<div class="btn-group" role="group">
-													<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle tabla" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-													Opciones
-													</button>
-													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-													<a class="dropdown-item" href="/verdocumento?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver</button></a>
-													<a class="dropdown-item" href="/estadisticas?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons"><span class="material-icons-outlined">trending_up</span></span> Estadísticas</button></a>
-													<a class="dropdown-item" href="/editardocumento?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla width100"><span class="material-icons">edit</span> Modificar</button></a>
-													</div>
-												</div>
-												</td>
-											</tr>
-
-										<?php };  ?>
-                                    </tbody>
-                                </table>
-
-								<div class="container">
-									<div class="row text-center justify-content-center">
-										<ul class="pagination"></ul>
-									</div>
-								</div>
-
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
         </section>
@@ -561,34 +218,32 @@ else // Continuamos a la página
 
         <section id="tabs" class="project-tab">
                 <div class="row">
-                    <div class="col-md-12">
-                        <nav>
-                            <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                                <a class="nav-item nav-link active" id="nav-matematica-tab" data-toggle="tab" href="#nav-matematica-guia" role="tab" aria-controls="nav-matematica" aria-selected="true">Matemáticas</a>
-								<a class="nav-item nav-link" id="nav-lenguaje-tab" data-toggle="tab" href="#nav-lenguaje-guia" role="tab" aria-controls="nav-lenguaje" aria-selected="false">Lenguaje</a>
-								<a class="nav-item nav-link" id="nav-tecnologia-tab" data-toggle="tab" href="#nav-tecnologia-guia" role="tab" aria-controls="nav-tecnologia" aria-selected="false">Tecnología</a>
-								<a class="nav-item nav-link" id="nav-musica-tab" data-toggle="tab" href="#nav-musica-guia" role="tab" aria-controls="nav-musica" aria-selected="false">Música</a>
-								<a class="nav-item nav-link" id="nav-artesvisuales-tab" data-toggle="tab" href="#nav-artesvisuales-guia" role="tab" aria-controls="nav-artesvisuales" aria-selected="false">Artes Visuales</a>
-                            </div>
-                        </nav>
-                        <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane fade show active" id="nav-matematica-guia" role="tabpanel" aria-labelledby="nav-matematica-tab">
+                    <div class="col-md-12" id="nav-guia">
 								<div class="buscador">
 									<input type="search" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
 								</div>
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-light" id="filter-none-guia">Ver todos</button>
+                                    <button type="button" class="btn btn-light" id="filter-matematicas-guia">Matemáticas</button>
+                                    <button type="button" class="btn btn-light" id="filter-lenguaje-guia">Lenguaje</button>
+                                    <button type="button" class="btn btn-light" id="filter-tecnologia-guia">Tecnología</button>
+                                    <button type="button" class="btn btn-light" id="filter-musica-guia">Música</button>
+                                    <button type="button" class="btn btn-light" id="filter-artesvisuales-guia">Artes Visuales</button>
+                                </div>
                                 <table id="tabla-matematica-guia" class="table" cellspacing="0">
                                     <thead>
 										<tr class="bg-azul">
 											<th class="sort" data-sort="tema">Tema</th>
 											<th class="sort" data-sort="curso">Curso</th>
 											<th class="sort" data-sort="unidad">Unidad</th>
-                                            <th class="sort" data-sort="precio">Precio</th>
+                                            <th class="sort" data-sort="asignatura">Asignatura</th>
+                                            <th class="sort" data-sort="precio">Monto</th>
 											<th class="sort" data-sort="estado">Estado</th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody class="list limpio">
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result_matematica_guia)) {
+                                        <?php while ($row = mysqli_fetch_assoc($rs_result_guia)) {
 										$precio_final = number_format($row['precio'],0, '', '.');	
 										?>	
 
@@ -596,6 +251,7 @@ else // Continuamos a la página
 												<td class="tema"><?php echo $row['nombre']; ?></td>
 												<td class="curso"><?php echo $row['curso']; ?></td>
 												<td class="unidad"><?php echo $row['unidad']; ?></td>
+                                                <td class="asignatura"><?php echo $row['asignatura']; ?></td>
 												<td class="precio">$<?php echo $precio_final; ?></td>
 												<td class="estado"><?php 
 												if($row['estado'] == '0') // desactivado
@@ -631,253 +287,6 @@ else // Continuamos a la página
 										<ul class="pagination"></ul>
 									</div>
 								</div>
-
-                            </div>
-                            <div class="tab-pane fade" id="nav-lenguaje-guia" role="tabpanel" aria-labelledby="nav-lenguaje-tab">
-								<div class="buscador">
-									<input type="search" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
-								</div>
-                                <table id="tabla-lenguaje-guia" class="table" cellspacing="0">
-                                    <thead>
-										<tr class="bg-azul">
-											<th class="sort" data-sort="tema">Tema</th>
-											<th class="sort" data-sort="curso">Curso</th>
-											<th class="sort" data-sort="unidad">Unidad</th>
-                                            <th class="sort" data-sort="precio">Precio</th>
-											<th class="sort" data-sort="estado">Estado</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="list limpio">
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result_lenguaje_guia)) {
-										$precio_final = number_format($row['precio'],0, '', '.');	
-										?>	
-
-											<tr>
-												<td class="tema"><?php echo $row['nombre']; ?></td>
-												<td class="curso"><?php echo $row['curso']; ?></td>
-												<td class="unidad"><?php echo $row['unidad']; ?></td>
-												<td class="precio">$<?php echo $precio_final; ?></td>
-												<td class="estado"><?php 
-												if($row['estado'] == '0') // desactivado
-												{
-													echo 'Activado';
-												}
-												else // será 1 - activado
-												{
-													echo 'Desactivado';
-												}
-
-												?></td>
-												<td>
-												<div class="btn-group" role="group">
-													<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle tabla" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-													Opciones
-													</button>
-													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-													<a class="dropdown-item" href="/verdocumento?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver</button></a>
-													<a class="dropdown-item" href="/estadisticas?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons"><span class="material-icons-outlined">trending_up</span></span> Estadísticas</button></a>
-													<a class="dropdown-item" href="/editardocumento?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla width100"><span class="material-icons">edit</span> Modificar</button></a>
-													</div>
-												</div>
-												</td>
-											</tr>
-
-										<?php };  ?>
-                                    </tbody>
-                                </table>
-
-								<div class="container">
-									<div class="row text-center justify-content-center">
-										<ul class="pagination"></ul>
-									</div>
-								</div>
-
-							</div>
-							<div class="tab-pane fade" id="nav-tecnologia-guia" role="tabpanel" aria-labelledby="nav-tecnologia-tab">
-								<div class="buscador">
-									<input type="search" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
-								</div>
-                                <table id="tabla-tecnologia-guia" class="table" cellspacing="0">
-                                    <thead>
-										<tr class="bg-azul">
-											<th class="sort" data-sort="tema">Tema</th>
-											<th class="sort" data-sort="curso">Curso</th>
-											<th class="sort" data-sort="unidad">Unidad</th>
-                                            <th class="sort" data-sort="precio">Precio</th>
-											<th class="sort" data-sort="estado">Estado</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="list limpio">
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result_tecnologia_guia)) {
-										$precio_final = number_format($row['precio'],0, '', '.');	
-										?>	
-
-											<tr>
-												<td class="tema"><?php echo $row['nombre']; ?></td>
-												<td class="curso"><?php echo $row['curso']; ?></td>
-												<td class="unidad"><?php echo $row['unidad']; ?></td>
-												<td class="precio">$<?php echo $precio_final; ?></td>
-												<td class="estado"><?php 
-												if($row['estado'] == '0') // desactivado
-												{
-													echo 'Activado';
-												}
-												else // será 1 - activado
-												{
-													echo 'Desactivado';
-												}
-
-												?></td>
-												<td>
-												<div class="btn-group" role="group">
-													<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle tabla" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-													Opciones
-													</button>
-													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-													<a class="dropdown-item" href="/verdocumento?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver</button></a>
-													<a class="dropdown-item" href="/estadisticas?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons"><span class="material-icons-outlined">trending_up</span></span> Estadísticas</button></a>
-													<a class="dropdown-item" href="/editardocumento?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla width100"><span class="material-icons">edit</span> Modificar</button></a>
-													</div>
-												</div>
-												</td>
-											</tr>
-
-										<?php };  ?>
-                                    </tbody>
-                                </table>
-
-								<div class="container">
-									<div class="row text-center justify-content-center">
-										<ul class="pagination"></ul>
-									</div>
-								</div>
-
-							</div>
-							<div class="tab-pane fade" id="nav-musica-guia" role="tabpanel" aria-labelledby="nav-musica-tab">
-								<div class="buscador">
-									<input type="search" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
-								</div>
-                                <table id="tabla-musica-guia" class="table" cellspacing="0">
-                                    <thead>
-										<tr class="bg-azul">
-											<th class="sort" data-sort="tema">Tema</th>
-											<th class="sort" data-sort="curso">Curso</th>
-											<th class="sort" data-sort="unidad">Unidad</th>
-                                            <th class="sort" data-sort="precio">Precio</th>
-											<th class="sort" data-sort="estado">Estado</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="list limpio">
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result_musica_guia)) {
-										$precio_final = number_format($row['precio'],0, '', '.');	
-										?>	
-
-											<tr>
-												<td class="tema"><?php echo $row['nombre']; ?></td>
-												<td class="curso"><?php echo $row['curso']; ?></td>
-												<td class="unidad"><?php echo $row['unidad']; ?></td>
-												<td class="precio">$<?php echo $precio_final; ?></td>
-												<td class="estado"><?php 
-												if($row['estado'] == '0') // desactivado
-												{
-													echo 'Activado';
-												}
-												else // será 1 - activado
-												{
-													echo 'Desactivado';
-												}
-
-												?></td>
-												<td>
-												<div class="btn-group" role="group">
-													<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle tabla" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-													Opciones
-													</button>
-													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-													<a class="dropdown-item" href="/verdocumento?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver</button></a>
-													<a class="dropdown-item" href="/estadisticas?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons"><span class="material-icons-outlined">trending_up</span></span> Estadísticas</button></a>
-													<a class="dropdown-item" href="/editardocumento?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla width100"><span class="material-icons">edit</span> Modificar</button></a>
-													</div>
-												</div>
-												</td>
-											</tr>
-
-										<?php };  ?>
-                                    </tbody>
-                                </table>
-
-								<div class="container">
-									<div class="row text-center justify-content-center">
-										<ul class="pagination"></ul>
-									</div>
-								</div>
-
-							</div>
-							<div class="tab-pane fade" id="nav-artesvisuales-guia" role="tabpanel" aria-labelledby="nav-artesvisuales-tab">
-								<div class="buscador">
-									<input type="search" class="search form-control" placeholder="Puedes buscar por temática, curso, unidad, precio o estado"/>
-								</div>
-                                <table id="tabla-artesvisuales-guia" class="table" cellspacing="0">
-                                    <thead>
-										<tr class="bg-azul">
-											<th class="sort" data-sort="tema">Tema</th>
-											<th class="sort" data-sort="curso">Curso</th>
-											<th class="sort" data-sort="unidad">Unidad</th>
-                                            <th class="sort" data-sort="precio">Precio</th>
-											<th class="sort" data-sort="estado">Estado</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="list limpio">
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result_artesvisuales_guia)) {
-										$precio_final = number_format($row['precio'],0, '', '.');	
-										?>	
-
-											<tr>
-												<td class="tema"><?php echo $row['nombre']; ?></td>
-												<td class="curso"><?php echo $row['curso']; ?></td>
-												<td class="unidad"><?php echo $row['unidad']; ?></td>
-												<td class="precio">$<?php echo $precio_final; ?></td>
-												<td class="estado"><?php 
-												if($row['estado'] == '0') // desactivado
-												{
-													echo 'Activado';
-												}
-												else // será 1 - activado
-												{
-													echo 'Desactivado';
-												}
-
-												?></td>
-												<td>
-												<div class="btn-group" role="group">
-													<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle tabla" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-													Opciones
-													</button>
-													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-													<a class="dropdown-item" href="/verdocumento?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver archivo</button></a>
-													<a class="dropdown-item" href="/estadisticas?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons"><span class="material-icons-outlined">trending_up</span></span> Estadísticas</button></a>
-													<a class="dropdown-item" href="/editardocumento?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla width100"><span class="material-icons">edit</span> Modificar</button></a>
-													</div>
-												</div>
-												</td>
-											</tr>
-
-										<?php };  ?>
-                                    </tbody>
-                                </table>
-
-								<div class="container">
-									<div class="row text-center justify-content-center">
-										<ul class="pagination"></ul>
-									</div>
-								</div>
-
-                            </div>
-                        </div>
                     </div>
                 </div>
         </section>
@@ -908,22 +317,135 @@ else // Continuamos a la página
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script type="text/javascript">
 		var options = {
-    valueNames: [ 'tema', 'curso', 'unidad', 'precio', 'estado'],
+    valueNames: [ 'tema', 'curso', 'unidad', 'precio', 'estado', 'asignatura'],
     page: 10,
     pagination: true
 	};
 
-	var tablaMatematicasPlanificaciones = new List('nav-matematica-planificacion', options);
-	var tablaLenguajePlanificaciones = new List('nav-lenguaje-planificacion', options);
-	var tablaTecnologiaPlanificaciones = new List('nav-tecnologia-planificacion', options);
-	var tablaMusicaPlanificaciones = new List('nav-musica-planificacion', options);
-	var tablaArtesVisualesPlanificaciones = new List('nav-artesvisuales-planificacion', options);
+	var tablaPlanificaciones = new List('nav-planificacion', options);
+	var tablaGuias = new List('nav-guia', options);
 
-	var tablaMatematicasGuias = new List('nav-matematica-guia', options);
-	var tablaLenguajeGuias = new List('nav-lenguaje-guia', options);
-	var tablaTecnologiaGuias = new List('nav-tecnologia-guia', options);
-	var tablaMusicaGuias = new List('nav-musica-guia', options);
-	var tablaArtesVisualesGuias = new List('nav-artesvisuales-guia', options);
+    // Planificaciones
+    $('#filter-matematicas-planificacion').click(function() {
+    tablaPlanificaciones.filter(function(item) {
+        if (item.values().asignatura == "Matemáticas") {
+        return true;
+        } else {
+        return false;
+        }
+    });
+    return false;
+    });
+
+    $('#filter-lenguaje-planificacion').click(function() {
+    tablaPlanificaciones.filter(function(item) {
+        if (item.values().asignatura == "Lenguaje") {
+        return true;
+        } else {
+        return false;
+        }
+    });
+    return false;
+    });
+
+    $('#filter-tecnologia-planificacion').click(function() {
+    tablaPlanificaciones.filter(function(item) {
+        if (item.values().asignatura == "Tecnología") {
+        return true;
+        } else {
+        return false;
+        }
+    });
+    return false;
+    });
+
+    $('#filter-musica-planificacion').click(function() {
+    tablaPlanificaciones.filter(function(item) {
+        if (item.values().asignatura == "Música") {
+        return true;
+        } else {
+        return false;
+        }
+    });
+    return false;
+    });
+
+    $('#filter-artesvisuales-planificacion').click(function() {
+    tablaPlanificaciones.filter(function(item) {
+        if (item.values().asignatura == "Artes Visuales") {
+        return true;
+        } else {
+        return false;
+        }
+    });
+    return false;
+    });
+
+    $('#filter-none-planificacion').click(function() {
+    tablaPlanificaciones.filter();
+    return false;
+    });
+
+    // Guias
+    $('#filter-matematicas-guia').click(function() {
+    tablaGuias.filter(function(item) {
+        if (item.values().asignatura == "Matemáticas") {
+        return true;
+        } else {
+        return false;
+        }
+    });
+    return false;
+    });
+
+    $('#filter-lenguaje-guia').click(function() {
+    tablaGuias.filter(function(item) {
+        if (item.values().asignatura == "Lenguaje") {
+        return true;
+        } else {
+        return false;
+        }
+    });
+    return false;
+    });
+
+    $('#filter-tecnologia-guia').click(function() {
+    tablaGuias.filter(function(item) {
+        if (item.values().asignatura == "Tecnología") {
+        return true;
+        } else {
+        return false;
+        }
+    });
+    return false;
+    });
+
+    $('#filter-musica-guia').click(function() {
+    tablaGuias.filter(function(item) {
+        if (item.values().asignatura == "Música") {
+        return true;
+        } else {
+        return false;
+        }
+    });
+    return false;
+    });
+
+    $('#filter-artesvisuales-guia').click(function() {
+    tablaGuias.filter(function(item) {
+        if (item.values().asignatura == "Artes Visuales") {
+        return true;
+        } else {
+        return false;
+        }
+    });
+    return false;
+    });
+
+    $('#filter-none-guia').click(function() {
+    tablaGuias.filter();
+    return false;
+    });
 
 	$('.Count').each(function () {
 		$(this).prop('Counter',0).animate({

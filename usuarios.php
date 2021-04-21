@@ -7,6 +7,12 @@ if (!isset($_SESSION["fb_access_token"])) // Si no encuentra el access token de 
 	header("location: login.php");
 }
 else // Continuamos a la página
+
+	if (!isset($_SESSION["rango"]) == '2') // Si no es administrador, se enviará a la página de usuario
+	{
+		header("location: perfil.php");
+	}
+	else // continuamos a la página
 	header( 'Content-Type: text/html; charset=utf-8' );
 
     // Consulta para traer los datos de usuario generales
@@ -82,7 +88,7 @@ else // Continuamos a la página
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<meta name="description" content="">
 		<link rel="icon" href="favicon.ico">
-		<title>Documentos - Gestión Pedagógica</title>
+		<title>Usuarios - Gestión Pedagógica</title>
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
         <link href="css/sidebar.css" rel="stylesheet">
