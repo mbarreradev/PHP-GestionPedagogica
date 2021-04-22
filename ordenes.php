@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'inc/database.php';
+require_once 'inc/database.php';
 
 if (!isset($_SESSION["fb_access_token"])) // Si no encuentra el access token de la sesión, se enviará a login
 {
@@ -14,17 +14,17 @@ else // Continuamos a la página
 	}
 	else // continuamos a la página
 	header( 'Content-Type: text/html; charset=utf-8' );
-	
-	// Consulta para traer los datos de usuario generales
-	$sql_datosusuariosgeneral = "SELECT nombres, apellidos
-	FROM 
-		usuario
-	WHERE 
-		usuario_id = '".$_SESSION['usuario_id']."' "; 
-	$rs_resultdatosgeneral = mysqli_query($conn, $sql_datosusuariosgeneral);
-	$row_profile_general = mysqli_fetch_assoc($rs_resultdatosgeneral);
 
-	// BOX: Ordenes pendientes de confirmación
+    // Consulta para traer los datos de usuario generales
+    $sql_datosusuariosgeneral = "SELECT nombres, apellidos, rango, avatar_url
+    FROM 
+        usuario
+    WHERE 
+        usuario_id = '".$_SESSION['usuario_id']."' "; 
+    $rs_resultdatosgeneral = mysqli_query($conn, $sql_datosusuariosgeneral);
+    $row_profile_general = mysqli_fetch_assoc($rs_resultdatosgeneral);
+
+    // BOX: Ordenes pendientes de confirmación
 	// Primero entramos a la tabla ordencompra y luego archivo para sacar los datos requeridos
 	$sql_pendientes_confirmacion = "SELECT ordencompra.ordencompra_id, ordencompra.usuario_id, ordencompra.fecha_compra, ordencompra.fecha_actualizacion, ordencompra.estado_orden, ordencompra.pagado, usuario.nombres, usuario.apellidos, usuario.rut, usuario.dv, archivo.nombre, archivo.asignatura, archivo.curso, archivo.unidad, archivo.tipo, archivo.precio
 	FROM 
@@ -39,7 +39,7 @@ else // Continuamos a la página
 		ordencompra.archivo_id=archivo.archivo_id
 	WHERE 
         ordencompra.estado_orden = 'Pendiente de confirmación'
-	ORDER BY ordencompra_id DESC"; 
+	ORDER BY ordencompra_id ASC"; 
     $rs_result_pendientes_confirmacion = mysqli_query($conn, $sql_pendientes_confirmacion);
 
     // Contador de ordenes pendientes de confirmación
@@ -47,9 +47,8 @@ else // Continuamos a la página
     
 
     // ORDENES
-	// BOX: Tabla Matematica
 	// Primero entramos a la tabla ordencompra y luego archivo para sacar los datos requeridos
-	$sql_matematicas_orden = "SELECT ordencompra.ordencompra_id, ordencompra.usuario_id, ordencompra.fecha_actualizacion, ordencompra.estado_orden, ordencompra.pagado, usuario.nombres, usuario.apellidos
+	$sql_otras_ordenes = "SELECT ordencompra.ordencompra_id, ordencompra.usuario_id, ordencompra.fecha_actualizacion, ordencompra.estado_orden, ordencompra.pagado, usuario.nombres, usuario.apellidos
 	FROM 
         ordencompra
     INNER JOIN 
@@ -61,81 +60,9 @@ else // Continuamos a la página
 	ON
 		ordencompra.usuario_id=usuario.usuario_id
 	WHERE 
-		archivo.asignatura = 'Matemáticas' AND ordencompra.estado_orden != 'Pendiente de confirmación'
+		ordencompra.estado_orden != 'Pendiente de confirmación'
 	ORDER BY ordencompra.ordencompra_id DESC"; 
-	$rs_result_matematica_orden = mysqli_query($conn, $sql_matematicas_orden);
-		
-	// BOX: Tabla Lenguaje
-	// Primero entramos a la tabla ordencompra y luego archivo para sacar los datos requeridos
-	$sql_lenguaje_orden = "SELECT ordencompra.ordencompra_id, ordencompra.usuario_id, ordencompra.fecha_actualizacion, ordencompra.estado_orden, ordencompra.pagado, usuario.nombres, usuario.apellidos
-	FROM 
-        ordencompra
-    INNER JOIN 
-		archivo
-	ON
-		ordencompra.archivo_id=archivo.archivo_id
-    INNER JOIN 
-		usuario
-	ON
-		ordencompra.usuario_id=usuario.usuario_id
-	WHERE 
-		archivo.asignatura = 'Lenguaje' AND ordencompra.estado_orden != 'Pendiente de confirmación'
-	ORDER BY ordencompra.ordencompra_id DESC"; 
-	$rs_result_lenguaje_orden = mysqli_query($conn, $sql_lenguaje_orden);
-
-	// BOX: Tabla Tecnología
-	// Primero entramos a la tabla ordencompra y luego archivo para sacar los datos requeridos
-	$sql_tecnologia_orden = "SELECT ordencompra.ordencompra_id, ordencompra.usuario_id, ordencompra.fecha_actualizacion, ordencompra.estado_orden, ordencompra.pagado, usuario.nombres, usuario.apellidos
-	FROM 
-        ordencompra
-    INNER JOIN 
-		archivo
-	ON
-		ordencompra.archivo_id=archivo.archivo_id
-    INNER JOIN 
-		usuario
-	ON
-		ordencompra.usuario_id=usuario.usuario_id
-	WHERE 
-		archivo.asignatura = 'Tecnología' AND ordencompra.estado_orden != 'Pendiente de confirmación'
-	ORDER BY ordencompra.ordencompra_id DESC";  
-	$rs_result_tecnologia_orden = mysqli_query($conn, $sql_tecnologia_orden);
-
-	// BOX: Tabla Música
-	// Primero entramos a la tabla ordencompra y luego archivo para sacar los datos requeridos
-	$sql_musica_orden = "SELECT ordencompra.ordencompra_id, ordencompra.usuario_id, ordencompra.fecha_actualizacion, ordencompra.estado_orden, ordencompra.pagado, usuario.nombres, usuario.apellidos
-	FROM 
-        ordencompra
-    INNER JOIN 
-		archivo
-	ON
-		ordencompra.archivo_id=archivo.archivo_id
-    INNER JOIN 
-		usuario
-	ON
-		ordencompra.usuario_id=usuario.usuario_id
-	WHERE 
-		archivo.asignatura = 'Música' AND ordencompra.estado_orden != 'Pendiente de confirmación'
-	ORDER BY ordencompra.ordencompra_id DESC"; 
-	$rs_result_musica_orden = mysqli_query($conn, $sql_musica_orden);
-
-	// BOX: Tabla Artes Visuales
-	// Primero entramos a la tabla ordencompra y luego archivo para sacar los datos requeridos
-	$sql_artesvisuales_orden = "SELECT ordencompra.ordencompra_id, ordencompra.usuario_id, ordencompra.fecha_actualizacion, ordencompra.estado_orden, ordencompra.pagado, usuario.nombres, usuario.apellidos
-	FROM 
-        ordencompra
-    INNER JOIN 
-		archivo
-	ON
-		ordencompra.archivo_id=archivo.archivo_id
-    INNER JOIN 
-		usuario
-	ON
-		ordencompra.usuario_id=usuario.usuario_id
-	WHERE 
-		archivo.asignatura = 'Artes Visuales' AND ordencompra.estado_orden != 'Pendiente de confirmación'
-	ORDER BY ordencompra.ordencompra_id DESC"; 
-	$rs_result_artesvisuales_orden = mysqli_query($conn, $sql_artesvisuales_orden);
+	$rs_result_otras_ordenes = mysqli_query($conn, $sql_otras_ordenes);
 
     // Contador ordenes creadas
     $sql_ordenes_creadas = "SELECT * FROM ordencompra";  
@@ -147,7 +74,7 @@ else // Continuamos a la página
 	$rs_result_ordenes_pagadas = mysqli_query($conn, $sql_ordenes_pagadas);  
 	$cnt_ordenes_pagadas = $rs_result_ordenes_pagadas->num_rows;
 
-	// Funcion que aprueba la orden
+    // Funcion que aprueba la orden
 	if(isset($_POST['aprobarorden-submit']))
 	{
 		$usuario = $row_profile_general['nombres']." ".$row_profile_general['apellidos'];
@@ -190,120 +117,96 @@ else // Continuamos a la página
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<meta name="description" content="">
 		<link rel="icon" href="favicon.ico">
-
-		<title>Administración - Gestión Pedagógica</title>
-
+		<title>Ordenes - Gestión Pedagógica</title>
 		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" rel="stylesheet">
+        <link href="css/sidebar.css" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-		<script src="js/list.min.js"></script>
+    	<script src="js/bootstrap.bundle.min.js"></script>
+        <script src="js/sidebar.js"></script>
+        <script src="js/list.min.js"></script>
 	</head>
-<body class="text-center">
+<body>
+<div class="page-wrapper chiller-theme toggled">
+  <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+    <i class="fas fa-bars"></i>
+  </a>
+  
+  <?php require 'inc/sidebar.php'; ?>
 
-    <div class="container d-flex p-3 mx-auto flex-column">
+  <main class="page-content">
+    <div class="container-fluid">
+      
+        <div class="d-flex justify-content-between">
+            <h4 class="titulo">Estadísticas</h4>
+            <div class="btn-group dropup btn-block options">
+                <a href="/administracion"><button type="button" class="btn btn-primary"><i class="fa fa-tachometer-alt"></i> Volver a la administración</button></a>
+            </div>
+        </div>
+        <hr>
 
-	<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-color border-azul-claro">
-		<img class="logo" src="/images/Logo.png" width="32" height="32"><h5 class="my-0 mr-md-auto font-weight-normal">Gestión Pedagógica</h5>
-      	<nav class="my-2 my-md-0 mr-md-3">
-		<a href="http://repositorio.gestionpedagogica.cl"><button class="btn btn-secondary" type="button">Inicio</button></a>
-		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hola <?php echo $row_profile_general["nombres"]; ?></button>
-		<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-			<a href="/perfil"><button class="dropdown-item" type="button">Perfil</button></a>
-			<a href="/misordenes"><button class="dropdown-item" type="button">Mis ordenes</button></a>
-			<a href="/logout"><button class="dropdown-item" type="button">Desconectar</button></a>
-		</div>
-		<?php 
-			if (isset($_SESSION["rango"]) == '2')
-			{ 
-				echo '<a href="/administracion"><button class="btn btn-secondary" type="button">Administración</button></a>';
-			}
-		?>
-        <a href="/contacto"><button class="btn btn-secondary" type="button">Contacto</button></a>
-      </nav>
-      <a class="btn btn-outline-success" href="#">Contactar por Whatsapp</a>
-    </div>
-
-      <div class="rounded border border-azul-claro p-3">
-        <div class="container">
-		
-		
-		<h4 class="d-flex justify-content-between align-items-center mb-3">
-            <span class="titulo">Estadísticas</span>
-
-			<div class="btn-group dropup btn-block options">
-			<a href="/administracion"><button type="button" class="btn btn-primary"><span class="material-icons">build</span> Volver a la administración</button></a>
-			</div>
-				
-        </h4>
-		
-		<div class="mb-4">
-			<div class="row no-gutters">
-				<div class="col">
-						<div class="row">
-							<div class="col-sm">
-								<div class="card border-plomo">
-									<div class="card-body bg-azul-especial text-white">
-										<div class="row">
-											<div class="col-3">
-												<span class="material-icons stats">queue</span>
-											</div>
-											<div class="col-9 text-right">
-												<div class="Count"><?php echo $cnt_ordenes_pendientes_confirmacion; ?></div>
-												<h4>ordenes pendientes</h4>
-											</div>
-										</div>
-									</div>
+		<div class="container mb-4">
+			<div class="row">
+				<div class="col-sm-4 nopadding-left">
+                    <div class="card border-plomo">
+						<div class="card-body bg-rosado-especial text-white">
+							<div class="row">
+								<div class="col-3">
+									<span class="material-icons stats">queue</span>
 								</div>
-							</div>
-							<div class="col-sm">
-								<div class="card border-plomo">
-									<div class="card-body bg-naranjo-especial text-white">
-										<div class="row">
-											<div class="col-3">
-												<span class="material-icons stats">library_books</span>
-											</div>
-											<div class="col-9 text-right">
-												<div class="Count"><?php echo $cnt_ordenes_creadas; ?></div>
-												<h4>ordenes creadas</h4>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-sm">
-								<div class="card border-plomo">
-									<div class="card-body bg-rosado-especial text-white">
-										<div class="row">
-											<div class="col-3">
-												<span class="material-icons stats">library_add_check</span>
-											</div>
-											<div class="col-9 text-right">
-												<div class="Count"><?php echo $cnt_ordenes_pagadas; ?></div>
-												<h4>ordenes pagadas</h4>
-											</div>
-										</div>
-									</div>
+								<div class="col-9 text-right">
+									<div class="Count"><?php echo $cnt_ordenes_pendientes_confirmacion; ?></div>
+									<h4>ordenes pendientes</h4>
 								</div>
 							</div>
 						</div>
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="card border-plomo">
+						<div class="card-body bg-naranjo-especial text-white">
+							<div class="row">
+								<div class="col-3">
+									<span class="material-icons stats">library_books</span>
+								</div>
+								<div class="col-9 text-right">
+									<div class="Count"><?php echo $cnt_ordenes_creadas; ?></div>
+									<h4>ordenes creadas</h4>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-4 nopadding-right">
+                    <div class="card border-plomo">
+						<div class="card-body bg-azul-especial text-white">
+							<div class="row">
+								<div class="col-3">
+									<span class="material-icons stats">library_add_check</span>
+								</div>
+								<div class="col-9 text-right">
+									<div class="Count"><?php echo $cnt_ordenes_pagadas; ?></div>
+									<h4>ordenes pagadas</h4>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 
-		<h4 class="d-flex justify-content-between align-items-center mb-3">
-            <span class="titulo">Ordenes pendientes de confirmación</span>
-        </h4>	
+        <div class="d-flex justify-content-between mb-3">
+        <h4 class="titulo">Ordenes pendientes de confirmación</h4>
+		</div>
 
-		<section id="tabs" class="project-tab">
+        <section id="tabs" class="project-tab">
                 <div class="row">
-                    <div class="col-md-12">
-
-                            <div id="ordenes-pendientes">
+                    <div class="col-md-12" id="nav-ordenes-pendientes">
                                 <div class="buscador arriba">
 									<input type="search" class="search form-control" placeholder="Puedes buscar por ID, usuario, monto pagado o estado"/>
 								</div>
-                                <table id="tabla-matematica-planificacion" class="table" cellspacing="0">
+                                <table id="tabla-ordenes-pendientes" class="table" cellspacing="0">
                                     <thead>
 										<tr class="bg-azul">
 											<th class="sort" data-sort="id">Orden ID</th>
@@ -380,7 +283,7 @@ else // Continuamos a la página
 												<td class="estado"><?php echo $row['estado_orden']; ?></td>
                                                 <td><?php echo $row['fecha_actualizacion']; ?></td>
 												<td>
-												<button class="btn btn-info tabla" data-toggle="modal" data-target="#verorden<?php echo $row['ordencompra_id']; ?>"><span class="material-icons">library_books</span> Ver orden</button>
+												<button class="btn btn-info tabla" data-toggle="modal" data-target="#verorden<?php echo $row['ordencompra_id']; ?>"><i class="fas fa-folder"></i> Ver orden</button>
 												</td>
 											</tr>
 
@@ -393,33 +296,26 @@ else // Continuamos a la página
 										<ul class="pagination"></ul>
 									</div>
 								</div>
-                            </div>
                     </div>
                 </div>
         </section>
 
-		<h4 class="d-flex justify-content-between align-items-center mb-3 margin-bottom">
-            <span class="titulo">Otras ordenes</span>
-        </h4>	
+        <div class="d-flex justify-content-between mt-3 mb-3">
+			<h4 class="titulo">Otras ordenes</h4>
+		</div>
 
-		<section id="tabs" class="project-tab">
+        <section id="tabs" class="project-tab">
                 <div class="row">
-                    <div class="col-md-12">
-                        <nav>
-                            <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                                <a class="nav-item nav-link active" id="nav-matematica-tab" data-toggle="tab" href="#nav-matematica-orden" role="tab" aria-controls="nav-matematica" aria-selected="true">Matemáticas</a>
-								<a class="nav-item nav-link" id="nav-lenguaje-tab" data-toggle="tab" href="#nav-lenguaje-orden" role="tab" aria-controls="nav-lenguaje" aria-selected="false">Lenguaje</a>
-								<a class="nav-item nav-link" id="nav-tecnologia-tab" data-toggle="tab" href="#nav-tecnologia-orden" role="tab" aria-controls="nav-tecnologia" aria-selected="false">Tecnología</a>
-								<a class="nav-item nav-link" id="nav-musica-tab" data-toggle="tab" href="#nav-musica-orden" role="tab" aria-controls="nav-musica" aria-selected="false">Música</a>
-								<a class="nav-item nav-link" id="nav-artesvisuales-tab" data-toggle="tab" href="#nav-artesvisuales-orden" role="tab" aria-controls="nav-artesvisuales" aria-selected="false">Artes Visuales</a>
-                            </div>
-                        </nav>
-                        <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane fade show active" id="nav-matematica-orden" role="tabpanel" aria-labelledby="nav-matematica-tab">
+                    <div class="col-md-12" id="nav-otras-ordenes">
 								<div class="buscador">
 									<input type="search" class="search form-control" placeholder="Puedes buscar por ID, usuario, monto pagado o estado"/>
 								</div>
-                                <table id="tabla-matematica-orden" class="table" cellspacing="0">
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-light" id="filter-none-otras-ordenes">Ver todos</button>
+                                    <button type="button" class="btn btn-light" id="filter-pendiente-pago-otras-ordenes">Pendiente de Pago</button>
+                                    <button type="button" class="btn btn-light" id="filter-pagado-otras-ordenes">Pagado</button>
+                                </div>
+                                <table id="tabla-otras-ordenes" class="table" cellspacing="0">
                                     <thead>
 										<tr class="bg-azul">
                                             <th class="sort" data-sort="id">Orden ID</th>
@@ -431,7 +327,7 @@ else // Continuamos a la página
                                         </tr>
                                     </thead>
                                     <tbody class="list limpio">
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result_matematica_orden)) {
+                                        <?php while ($row = mysqli_fetch_assoc($rs_result_otras_ordenes)) {
 										$pagado_final = number_format($row['pagado'],0, '', '.');	
 										?>	
 
@@ -442,7 +338,7 @@ else // Continuamos a la página
 												<td class="estado"><?php echo $row['estado_orden']; ?></td>
                                                 <td><?php echo $row['fecha_actualizacion']; ?></td>
 												<td>
-												<button class="btn btn-info tabla" data-toggle="modal" data-target="#verorden<?php echo $row['ordencompra_id']; ?>"><span class="material-icons">library_books</span> Ver orden</button>
+												<button class="btn btn-info tabla" data-toggle="modal" data-target="#verorden<?php echo $row['ordencompra_id']; ?>"><i class="fas fa-folder"></i> Ver orden</button>
 												</td>
 											</tr>
 
@@ -456,205 +352,70 @@ else // Continuamos a la página
 									</div>
 								</div>
 
-                            </div>
-                            <div class="tab-pane fade" id="nav-lenguaje-orden" role="tabpanel" aria-labelledby="nav-lenguaje-tab">
-								<div class="buscador">
-									<input type="search" class="search form-control" placeholder="Puedes buscar por ID, usuario, monto pagado o estado"/>
-								</div>
-                                <table id="tabla-lenguaje-orden" class="table" cellspacing="0">
-                                    <thead>
-										<tr class="bg-azul">
-                                            <th class="sort" data-sort="id">Orden ID</th>
-                                            <th class="sort" data-sort="creado">Creado por</th>
-                                            <th class="sort" data-sort="pagado">Monto</th>
-											<th class="sort" data-sort="estado">Estado</th>
-                                            <th>Última actualización</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="list limpio">
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result_lenguaje_orden)) {
-										$pagado_final = number_format($row['pagado'],0, '', '.');	
-										?>	
-
-											<tr>
-                                                <td class="id"><?php echo $row['ordencompra_id']; ?></td>
-												<td class="creado"><a href="/verperfil?id=<?php echo $row['usuario_id']; ?>"><?php echo $row['nombres']." ".$row['apellidos']; ?></a></td>
-												<td class="pagado">$<?php echo $pagado_final; ?></td>
-												<td class="estado"><?php echo $row['estado_orden']; ?></td>
-                                                <td><?php echo $row['fecha_actualizacion']; ?></td>
-												<td>
-												<button class="btn btn-info tabla" data-toggle="modal" data-target="#verorden<?php echo $row['ordencompra_id']; ?>"><span class="material-icons">library_books</span> Ver orden</button>
-												</td>
-											</tr>
-
-										<?php };  ?>
-                                    </tbody>
-                                </table>
-
-								<div class="container">
-									<div class="row text-center justify-content-center">
-										<ul class="pagination"></ul>
-									</div>
-								</div>
-
-							</div>
-							<div class="tab-pane fade" id="nav-tecnologia-orden" role="tabpanel" aria-labelledby="nav-tecnologia-tab">
-								<div class="buscador">
-									<input type="search" class="search form-control" placeholder="Puedes buscar por ID, usuario, monto pagado o estado"/>
-								</div>
-                                <table id="tabla-tecnologia-orden" class="table" cellspacing="0">
-                                    <thead>
-										<tr class="bg-azul">
-                                            <th class="sort" data-sort="id">Orden ID</th>
-                                            <th class="sort" data-sort="creado">Creado por</th>
-                                            <th class="sort" data-sort="pagado">Monto</th>
-											<th class="sort" data-sort="estado">Estado</th>
-                                            <th>Última actualización</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="list limpio">
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result_tecnologia_orden)) {
-										$pagado_final = number_format($row['pagado'],0, '', '.');	
-										?>	
-
-											<tr>
-                                                <td class="id"><?php echo $row['ordencompra_id']; ?></td>
-												<td class="creado"><a href="/verperfil?id=<?php echo $row['usuario_id']; ?>"><?php echo $row['nombres']." ".$row['apellidos']; ?></a></td>
-												<td class="pagado">$<?php echo $pagado_final; ?></td>
-												<td class="estado"><?php echo $row['estado_orden']; ?></td>
-                                                <td><?php echo $row['fecha_actualizacion']; ?></td>
-												<td>
-												<button class="btn btn-info tabla" data-toggle="modal" data-target="#verorden<?php echo $row['ordencompra_id']; ?>"><span class="material-icons">library_books</span> Ver orden</button>
-												</td>
-											</tr>
-
-										<?php };  ?>
-                                    </tbody>
-                                </table>
-
-								<div class="container">
-									<div class="row text-center justify-content-center">
-										<ul class="pagination"></ul>
-									</div>
-								</div>
-
-							</div>
-							<div class="tab-pane fade" id="nav-musica-orden" role="tabpanel" aria-labelledby="nav-musica-tab">
-								<div class="buscador">
-									<input type="search" class="search form-control" placeholder="Puedes buscar por ID, usuario, monto pagado o estado"/>
-								</div>
-                                <table id="tabla-musica-orden" class="table" cellspacing="0">
-                                    <thead>
-										<tr class="bg-azul">
-                                            <th class="sort" data-sort="id">Orden ID</th>
-                                            <th class="sort" data-sort="creado">Creado por</th>
-                                            <th class="sort" data-sort="pagado">Monto</th>
-											<th class="sort" data-sort="estado">Estado</th>
-                                            <th>Última actualización</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="list limpio">
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result_musica_orden)) {
-										$pagado_final = number_format($row['pagado'],0, '', '.');
-										?>	
-
-											<tr>
-                                                <td class="id"><?php echo $row['ordencompra_id']; ?></td>
-												<td class="creado"><a href="/verperfil?id=<?php echo $row['usuario_id']; ?>"><?php echo $row['nombres']." ".$row['apellidos']; ?></a></td>
-												<td class="pagado">$<?php echo $pagado_final; ?></td>
-												<td class="estado"><?php echo $row['estado_orden']; ?></td>
-                                                <td><?php echo $row['fecha_actualizacion']; ?></td>
-												<td>
-												<button class="btn btn-info tabla" data-toggle="modal" data-target="#verorden<?php echo $row['ordencompra_id']; ?>"><span class="material-icons">library_books</span> Ver orden</button>
-												</td>
-											</tr>
-
-										<?php };  ?>
-                                    </tbody>
-                                </table>
-
-								<div class="container">
-									<div class="row text-center justify-content-center">
-										<ul class="pagination"></ul>
-									</div>
-								</div>
-
-							</div>
-							<div class="tab-pane fade" id="nav-artesvisuales-orden" role="tabpanel" aria-labelledby="nav-artesvisuales-tab">
-								<div class="buscador">
-									<input type="search" class="search form-control" placeholder="Puedes buscar por ID, usuario, monto pagado o estado"/>
-								</div>
-                                <table id="tabla-artesvisuales-orden" class="table" cellspacing="0">
-                                    <thead>
-										<tr class="bg-azul">
-                                            <th class="sort" data-sort="id">Orden ID</th>
-                                            <th class="sort" data-sort="creado">Creado por</th>
-                                            <th class="sort" data-sort="pagado">Monto</th>
-											<th class="sort" data-sort="estado">Estado</th>
-                                            <th>Última actualización</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="list limpio">
-                                        <?php while ($row = mysqli_fetch_assoc($rs_result_artesvisuales_orden)) {
-										$pagado_final = number_format($row['pagado'],0, '', '.');
-										?>	
-
-											<tr>
-                                                <td class="id"><?php echo $row['ordencompra_id']; ?></td>
-												<td class="creado"><a href="/verperfil?id=<?php echo $row['usuario_id']; ?>"><?php echo $row['nombres']." ".$row['apellidos']; ?></a></td>
-												<td class="pagado">$<?php echo $pagado_final; ?></td>
-												<td class="estado"><?php echo $row['estado_orden']; ?></td>
-                                                <td><?php echo $row['fecha_actualizacion']; ?></td>
-												<td>
-												<button class="btn btn-info tabla" data-toggle="modal" data-target="#verorden<?php echo $row['ordencompra_id']; ?>"><span class="material-icons">library_books</span> Ver orden</button>
-												</td>
-											</tr>
-
-										<?php };  ?>
-                                    </tbody>
-                                </table>
-
-								<div class="container">
-									<div class="row text-center justify-content-center">
-										<ul class="pagination"></ul>
-									</div>
-								</div>
-
-                            </div>
-                        </div>
                     </div>
                 </div>
         </section>
 
+        <hr>
 
-	</div>
-    </div>
-
-      <footer class="mastfoot margin-top">
-        <div class="inner">
-          <p class="footer">Copyright © 2020 Gestión Pedagógica</p>
+      <footer class="text-center">
+        <div class="mb-2">
+          <small>
+            © 2021 Gestión Pedagógica
+            </a>
+          </small>
+        </div>
+        <div>
+          <a href="#" target="_blank">
+            <i class="fa fa-heart" style="color:red"></i>
+          </a>
+          <a href="#" target="_blank">
+            <i class="fa fa-heart" style="color:red"></i>
+          </a>
         </div>
       </footer>
     </div>
-
-	<script type="text/javascript">
+  </main>
+  <!-- page-content" -->
+</div>
+<!-- page-wrapper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script type="text/javascript">
 		var options = {
-    valueNames: [ 'id', 'creado', 'pagado', 'estado'],
+    valueNames: [ 'id', 'usuario', 'correo', 'rango', 'estado'],
     page: 10,
     pagination: true
 	};
 
-	var tablaOrdenesPendientes = new List('ordenes-pendientes', options);
+	var tablaOrdenesPendientes = new List('nav-ordenes-pendientes', options);
+	var tablaOtrasOrdenes = new List('nav-otras-ordenes', options);
 
-	var tablaMatematicasOrden = new List('nav-matematica-orden', options);
-	var tablaLenguajeOrden = new List('nav-lenguaje-orden', options);
-	var tablaTecnologiaOrden = new List('nav-tecnologia-orden', options);
-	var tablaMusicaOrden = new List('nav-musica-orden', options);
-	var tablaArtesVisualesOrden = new List('nav-artesvisuales-orden', options);
+    $('#filter-pendiente-pago-otras-ordenes').click(function() {
+    tablaOtrasOrdenes.filter(function(item) {
+        if (item.values().estado == "Pendiente de pago") {
+        return true;
+        } else {
+        return false;
+        }
+    });
+    return false;
+    });
+
+    $('#filter-pagado-otras-ordenes').click(function() {
+    tablaOtrasOrdenes.filter(function(item) {
+        if (item.values().estado == "Pagado") {
+        return true;
+        } else {
+        return false;
+        }
+    });
+    return false;
+    });
+
+    $('#filter-none-otras-ordenes').click(function() {
+    tablaOtrasOrdenes.filter();
+    return false;
+    });
 
 	$('.Count').each(function () {
 		$(this).prop('Counter',0).animate({
@@ -669,8 +430,5 @@ else // Continuamos a la página
 	});
 
 	</script>
-    
-    <script src="js/bootstrap.bundle.min.js"></script>
-	
-  </body>
+</body>
 </html>

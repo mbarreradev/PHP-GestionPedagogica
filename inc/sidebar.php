@@ -101,19 +101,19 @@ $cnt_ordenes_pendientes_confirmacion = $rs_result_ordenes_pendientes_confirmacio
           </li>
           <li>
             <a href="/misordenes">
-              <i class="fas fa-tasks"></i>
+              <i class="fas fa-folder"></i>
               <span>Mis ordenes</span>
             </a>
           </li>
           <li>
             <a href="/planificaciones">
-              <i class="fa fa-folder"></i>
+              <i class="fas fa-file"></i>
               <span>Planificaciones</span>
             </a>
           </li>
           <li>
             <a href="/guias">
-              <i class="fa fa-folder"></i>
+              <i class="fas fa-file"></i>
               <span>Guías</span>
             </a>
           </li>
@@ -142,7 +142,7 @@ $cnt_ordenes_pendientes_confirmacion = $rs_result_ordenes_pendientes_confirmacio
           </li>
           <li class="sidebar-dropdown">
             <a href="#">
-              <i class="fas fa-tasks"></i>
+                <i class="fas fa-folder"></i>
               <span>Ordenes</span>
               <span class="badge badge-pill badge-danger"><?php echo $cnt_ordenes_pendientes_confirmacion; ?></span>
             </a>

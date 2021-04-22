@@ -44,42 +44,6 @@ else // Continuamos a la página
 	$rs_result_usuarios_bloqueados = mysqli_query($conn, $sql_usuarios_bloqueados);  
 	$cnt_usuarios_bloqueados = $rs_result_usuarios_bloqueados->num_rows;
 
-    // Funcion que aprueba la orden
-	// FALTA: VER COMO OBTENER NUMERO DE ORDEN PARA ACTUALIZAR
-	if(isset($_POST['aprobarorden-submit']))
-	{
-		$usuario = $row_profile_general['nombres']." ".$row_profile_general['apellidos'];
-		$fecha_actualizacion = date("Y-m-d H:i:s");
-		$ordencompraid = '0';
-
-		// Consulta que actualiza el valor del estado de la orden
-		$sql_update_ordencompra = "UPDATE ordencompra SET estado_orden = 'Pagado', fecha_actualizacion = '".$fecha_actualizacion."' WHERE ordencompra_id = '".$ordencompraid."' "; 
-
-		if ($conn->query($sql_update_ordencompra) === TRUE) 
-		{
-			// Consulta que crea el historial de la orden
-			$sql_create_ordencompra_historial= "INSERT INTO ordencompra_historial (historial_id, ordencompra_id, fecha_creacion, accion) VALUES (DEFAULT, '$archivo_id', '$fecha_actualizacion', '".$usuario." modificó la orden a Pagado')"; 
-			
-			if ($conn->query($sql_create_ordencompra_historial) === TRUE) 
-			{
-				// Refrescamos la página
-				header("Refresh:0");
-			}
-			else
-			{
-				//echo "Error updating record: " . $conn->error;
-				echo "Error sql update.";
-			}
-		} 
-		else 
-		{
-			//echo "Error updating record: " . $conn->error;
-			echo "Error sql update.";
-		}
-
-		$conn->close();
-	}
-
 ?>
 <!doctype html>
 <html lang="es">
@@ -90,7 +54,7 @@ else // Continuamos a la página
 		<link rel="icon" href="favicon.ico">
 		<title>Usuarios - Gestión Pedagógica</title>
 		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+		<link href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" rel="stylesheet">
         <link href="css/sidebar.css" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -125,7 +89,7 @@ else // Continuamos a la página
 						<div class="card-body bg-rosado-especial text-white">
 							<div class="row">
 								<div class="col-3">
-									<span class="material-icons stats">fas fa-user-check</span>
+                                    <i class="fas fa-user-check fa-5x"></i>
 								</div>
 								<div class="col-9 text-right">
 									<div class="Count"><?php echo $cnt_usuarios_activos; ?></div>
@@ -140,7 +104,7 @@ else // Continuamos a la página
 						<div class="card-body bg-naranjo-especial text-white">
 							<div class="row">
 								<div class="col-3">
-									<span class="material-icons stats">block</span>
+                                    <i class="fas fa-user-times fa-5x"></i>
 								</div>
 								<div class="col-9 text-right">
 									<div class="Count"><?php echo $cnt_usuarios_bloqueados; ?></div>
@@ -155,7 +119,7 @@ else // Continuamos a la página
 						<div class="card-body bg-azul-especial text-white">
 							<div class="row">
 								<div class="col-3">
-									<span class="material-icons stats">people</span>
+                                    <i class="fas fa-users fa-5x"></i>
 								</div>
 								<div class="col-9 text-right">
 									<div class="Count"><?php echo $cnt_usuarios_totales; ?></div>
@@ -216,7 +180,7 @@ else // Continuamos a la página
 												<td><?php echo $row['registrado_el']; ?></td>
                                                 <td><?php echo $row['ultimo_iniciosesion']; ?></td>
 												<td>
-                                                    <a href="/verperfil?id=<?php echo $row['usuario_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">person</span> Ver perfil</button></a>
+                                                    <a href="/verperfil?id=<?php echo $row['usuario_id']; ?>"><button class="btn btn-info tabla"><i class="fas fa-user"></i> Ver perfil</button></a>
 												</td>
 											</tr>
 

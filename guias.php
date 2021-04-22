@@ -28,13 +28,13 @@ $rs_result_guias = mysqli_query($conn, $sql_guias);
 		<link rel="icon" href="favicon.ico">
 		<title>Guías - Gestión Pedagógica</title>
 		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
-    <link href="css/sidebar.css" rel="stylesheet">
+		<link href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" rel="stylesheet">
+        <link href="css/sidebar.css" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/sidebar.js"></script>
-		<script src="js/list.min.js"></script>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="js/sidebar.js"></script>
+        <script src="js/list.min.js"></script>
 	</head>
 <body>
 <div class="page-wrapper chiller-theme toggled">

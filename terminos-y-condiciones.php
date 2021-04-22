@@ -10,13 +10,10 @@ require 'inc/database.php';
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<meta name="description" content="">
 		<link rel="icon" href="favicon.ico">
-
 		<title>Gestión Pedagógica</title>
-
 		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<link href="css/fontawesome.min.css" rel="stylesheet">
+		<link href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
-		<script src="js/list.min.js"></script>
 	</head>
 <body>
 

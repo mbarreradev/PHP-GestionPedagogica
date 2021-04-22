@@ -54,7 +54,7 @@ else // Continuamos a la página
 		<link rel="icon" href="favicon.ico">
 		<title>Documentos - Gestión Pedagógica</title>
 		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+		<link href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" rel="stylesheet">
         <link href="css/sidebar.css" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -190,9 +190,9 @@ else // Continuamos a la página
 													Opciones
 													</button>
 													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-													<a class="dropdown-item" href="/verdocumento?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver</button></a>
-													<a class="dropdown-item" href="/estadisticas?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons"><span class="material-icons-outlined">trending_up</span></span> Estadísticas</button></a>
-													<a class="dropdown-item" href="/editardocumento?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><span class="material-icons">edit</span> Modificar</button></a>
+													<a class="dropdown-item" href="/verdocumento?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><i class="fas fa-file"></i> Ver documento</button></a>
+													<a class="dropdown-item" href="/estadisticas?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><i class="fas fa-chart-line"></i> Estadísticas</button></a>
+													<a class="dropdown-item" href="/editardocumento?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla"><i class="fas fa-pencil-alt"></i> Modificar</button></a>
 													</div>
 												</div>
 												</td>
@@ -270,9 +270,9 @@ else // Continuamos a la página
 													Opciones
 													</button>
 													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-													<a class="dropdown-item" href="/verdocumento?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons">library_books</span> Ver</button></a>
-													<a class="dropdown-item" href="/estadisticas?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><span class="material-icons"><span class="material-icons-outlined">trending_up</span></span> Estadísticas</button></a>
-													<a class="dropdown-item" href="/editardocumento?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla width100"><span class="material-icons">edit</span> Modificar</button></a>
+													<a class="dropdown-item" href="/verdocumento?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><i class="fas fa-file"></i> Ver documento</button></a>
+													<a class="dropdown-item" href="/estadisticas?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-info tabla"><i class="fas fa-chart-line"></i> Estadísticas</button></a>
+													<a class="dropdown-item" href="/editardocumento?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-primary tabla width100"><i class="fas fa-pencil-alt"></i> Modificar</button></a>
 													</div>
 												</div>
 												</td>

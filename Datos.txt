@@ -83,7 +83,6 @@ Verorden - HACIENDO
 Editarorden - HACIENDO
 
 ORDENES:
-Actualizar ordenes
 Falta terminar log (cual?)
 Agregar botón cerrar orden (en caso de que el usuario nunca pagó)
 
