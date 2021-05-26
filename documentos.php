@@ -61,7 +61,6 @@ else // Continuamos a la página
     	<script src="js/bootstrap.bundle.min.js"></script>
         <script src="js/sidebar.js"></script>
 		<script src="js/list.min.js"></script>
-        <script src="js/moment-with-locales.js"></script>
 	</head>
 <body>
 <div class="page-wrapper chiller-theme toggled">
@@ -158,7 +157,7 @@ else // Continuamos a la página
 											<th class="sort" data-sort="unidad">Unidad</th>
                                             <th class="sort" data-sort="asignatura">Asignatura</th>
                                             <th class="sort" data-sort="precio">Monto</th>
-											<th class="sort" data-sort="estado">Estado</th>
+											<th class="sort" data-sort="estado">Estado <i class="fas fa-info-circle" title="Disponibilidad del acceso al archivo"></i></th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -238,7 +237,7 @@ else // Continuamos a la página
 											<th class="sort" data-sort="unidad">Unidad</th>
                                             <th class="sort" data-sort="asignatura">Asignatura</th>
                                             <th class="sort" data-sort="precio">Monto</th>
-											<th class="sort" data-sort="estado">Estado</th>
+											<th class="sort" data-sort="estado">Estado <i class="fas fa-info-circle" title="Disponibilidad del acceso al archivo"></i></th>
                                             <th></th>
                                         </tr>
                                     </thead>

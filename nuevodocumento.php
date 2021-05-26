@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'inc/conexion.php';
+require 'inc/database.php';
 
 if (!isset($_SESSION["fb_access_token"])) // Si no encuentra el access token de la sesión, se enviará a login
 {
@@ -55,7 +55,7 @@ else // Continuamos a la página
 
         $target_dir = "files/";
         $target_file = $target_dir . $nombreFinal;
-        $uploadOk = 1;
+        $uploadOk = 0;
         $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
         
         // Comprobar tamaño
@@ -65,14 +65,16 @@ else // Continuamos a la página
         }
         
         // Comprobar extensiones
-        if($imageFileType != "pdf" && $imageFileType != "xlsx" && $imageFileType != "docx") {
+        if(($imageFileType == "pdf") or ($imageFileType == "xlsx") or ($imageFileType == "xls") or ($imageFileType == "docx")) {
+            $uploadOk = 1;
+        } else {
             $uploadOk = 0;
             $link_archivo = "error de extensión";
         }
         
         // Comprobamos que $uploadOk es 0 para ver si tiene algun error
         if ($uploadOk == 0) {
-            //echo "</br>Ahora mismo el archivo no puede ser subido.";
+            echo "</br>Ahora mismo el archivo no puede ser subido.";
         // si uploadOk sigue en 1, subimos el archivo
         } else {
             if (move_uploaded_file($_FILES["fileArchivo"]["tmp_name"], $target_file)) 
@@ -93,7 +95,7 @@ else // Continuamos a la página
 		}
 		else
 		{
-			echo "Error sql log.";
+			//echo "Error sql log.";
 			echo "Error sql log." . $sql1 . "<br>" . $conn->error;
 		}
     }
@@ -202,8 +204,8 @@ else // Continuamos a la página
                                             <label for="estado">Estado</label>
                                             <select class="custom-select d-block w-100" name="selectEstado" id="estado" required>
                                                 <option selected>Escoge una opción</option>
-                                                <option value="1">Activado</option>
-                                                <option value="0">Desactivado</option>
+                                                <option value="0">Disponible</option>
+                                                <option value="1">No disponible</option>
                                             </select>
                                         </div>
                                         <div class="col-md-4 mb-3">

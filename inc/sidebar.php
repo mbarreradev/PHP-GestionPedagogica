@@ -215,10 +215,7 @@ $cnt_ordenes_pendientes_confirmacion = $rs_result_ordenes_pendientes_confirmacio
       <!-- sidebar-header  -->
       <div class="sidebar-search">
         <div>
-          <div class="input-group">
-            <input type="text" class="form-control search-menu" placeholder="Contactar por WhatsApp">
-            <button>WhatsApp</button>
-          </div>
+            <a href="https://api.whatsapp.com/send?phone=569"><button class="btn btn-secondary"><i class="fab fa-whatsapp"></i> Contactar por WhatsApp</button></a>
         </div>
       </div>
       <!-- sidebar-search  -->

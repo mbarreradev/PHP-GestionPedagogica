@@ -30,4 +30,6 @@ else // Continuamos a la página
 
     // Hacer filtro si tiene acceso al archivo y lo tiene comprado
     
+    // header("Location: https://repositorio.gestionpedagogica.cl/404");
+
 ?>

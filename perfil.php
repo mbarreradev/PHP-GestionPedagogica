@@ -192,17 +192,7 @@ function pageFullyLoaded(e) {
 												<td class="unidad"><?php echo $row['archivo_unidad']; ?></td>
                                                 <td class="asignatura"><?php echo $row['archivo_asignatura']; ?></td>
 												<td><?php echo $row['fecha_compra']; ?></td>
-												<td>
-												<div class="btn-group" role="group">
-													<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle tabla" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-													Opciones
-													</button>
-													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                                        <a class="dropdown-item" href="/verdocumento?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><i class="fas fa-cloud-download-alt"></i> Descargar</button></a>
-                                                        <a class="dropdown-item" href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><i class="fas fa-folder"></i> Ver orden</button></a>
-													</div>
-												</div>
-												</td>
+												<td><a href="/verdocumento?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><i class="fas fa-cloud-download-alt"></i> Descargar</button></a></td>
 											</tr>
 
 										<?php };  ?>
@@ -256,17 +246,7 @@ function pageFullyLoaded(e) {
 												<td class="unidad"><?php echo $row['archivo_unidad']; ?></td>
                                                 <td class="asignatura"><?php echo $row['archivo_asignatura']; ?></td>
 												<td><?php echo $row['fecha_compra']; ?></td>
-												<td>
-												<div class="btn-group" role="group">
-													<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle tabla" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-													Opciones
-													</button>
-													<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                                        <a class="dropdown-item" href="/verdocumento?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><i class="fas fa-cloud-download-alt"></i> Descargar</button></a>
-                                                        <a class="dropdown-item" href="/verorden?id=<?php echo $row['ordencompra_id']; ?>"><button class="btn btn-info tabla"><i class="fas fa-folder"></i> Ver orden</button></a>
-													</div>
-												</div>
-												</td>
+												<td><a href="/verdocumento?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success tabla"><i class="fas fa-cloud-download-alt"></i> Descargar</button></a></td>
 											</tr>
 
 										<?php };  ?>

@@ -61,7 +61,6 @@ else // Continuamos a la página
     	<script src="js/bootstrap.bundle.min.js"></script>
         <script src="js/sidebar.js"></script>
         <script src="js/list.min.js"></script>
-        <script src="js/moment-with-locales.js"></script>
 	</head>
 <body>
 <div class="page-wrapper chiller-theme toggled">
@@ -138,17 +137,15 @@ else // Continuamos a la página
 
         <section id="tabs" class="project-tab">
                 <div class="row">
-                    <div class="col-md-12">
-
-                            <div id="ordenes-pendientes">
+                    <div class="col-md-12" id="nav-usuarios">
                                 <div class="buscador arriba">
-									<input type="search" class="search form-control" placeholder="Puedes buscar por ID, nombre, apellido, rango o email"/>
+									<input type="search" class="search form-control" placeholder="Puedes buscar por nombre, apellido, rango o correo"/>
 								</div>
                                 <table id="tabla-matematica-planificacion" class="table" cellspacing="0">
                                     <thead>
 										<tr class="bg-azul">
                                             <th class="sort" data-sort="usuario">Usuario</th>
-                                            <th>Rango</th>
+                                            <th class="sort" data-sort="rango">Rango</th>
                                             <th class="sort" data-sort="correo">Correo</th>
                                             <th>Registrado el</th>
                                             <th>Último inicio de sesión</th>
@@ -193,7 +190,6 @@ else // Continuamos a la página
 										<ul class="pagination"></ul>
 									</div>
 								</div>
-                            </div>
                     </div>
                 </div>
         </section>
@@ -224,18 +220,12 @@ else // Continuamos a la página
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script type="text/javascript">
 		var options = {
-    valueNames: [ 'id', 'usuario', 'correo', 'rango'],
+    valueNames: ['usuario', 'correo', 'rango'],
     page: 10,
     pagination: true
 	};
 
-	var tablaOrdenesPendientes = new List('ordenes-pendientes', options);
-
-	var tablaMatematicasOrden = new List('nav-matematica-orden', options);
-	var tablaLenguajeOrden = new List('nav-lenguaje-orden', options);
-	var tablaTecnologiaOrden = new List('nav-tecnologia-orden', options);
-	var tablaMusicaOrden = new List('nav-musica-orden', options);
-	var tablaArtesVisualesOrden = new List('nav-artesvisuales-orden', options);
+	var tablaUsuarios = new List('nav-usuarios', options);
 
 	$('.Count').each(function () {
 		$(this).prop('Counter',0).animate({
