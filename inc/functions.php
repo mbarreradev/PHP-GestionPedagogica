@@ -1,8 +1,7 @@
 <?php
 
 // Función para crear un log a la tabla ordencompra
-function crearlog_ordencompra($url_id, $accion, $redirect) 
-{
+function crearlog_ordencompra($url_id, $accion, $redirect) {
     $fecha_actualizacion = date("Y-m-d H:i:s");
     global $conn;
 
@@ -30,8 +29,7 @@ function crearlog_ordencompra($url_id, $accion, $redirect)
 }
 
 // Función para enviar correos
-function enviar_correo($asunto, $body, $correo_destino)
-{
+function enviar_correo($asunto, $body, $correo_destino) {
     $mail = new PHPMailer\PHPMailer\PHPMailer();
     $mail->IsSMTP(); // enable SMTP
     $mail->CharSet = 'UTF-8';
@@ -59,4 +57,19 @@ function enviar_correo($asunto, $body, $correo_destino)
     }
 }
 
+// Función para ver si un usuario es dueño de un archivo o no
+function comprobar_dueno_archivo($usuario_id, $archivo_id) {
+
+    $sql_consulta = "SELECT * FROM ordencompra WHERE archivo_id = '".$archivo_id."' && usuario_id = '".$usuario_id."' && estado = 'Pagado'"; 
+    $rs_result1 = mysqli_query($conn, $sql_consulta);
+    $consulta_archivo = mysqli_fetch_assoc($rs_result1);
+
+    if(mysqli_num_rows($rs_result1) < 1) {
+        // Fallo, este usuario no tiene una compra finalizada de ese archivo
+        return 0;
+    } else {
+        // Exito
+        return 1;
+    }
+}
 ?>

@@ -88,7 +88,6 @@ Agregar botón cerrar orden (en caso de que el usuario nunca pagó)
 
 DOCUMENTOS:
 Estadisticas
-Nuevodocumento => HACIENDO
 Editardocumento
 Verdocumento => HACIENDO
 
@@ -102,7 +101,10 @@ Verperfil
 FALTA PASAR AL NUEVO DISEÑO
 COMPRAR
 VERORDEN
-
+NUEVODOCUMENTO
 
 
 https://repositorio.gestionpedagogica.cl/comprar?id=3
+
+
+PROMEDIO round($AVGRATE,1) de las reseñas
