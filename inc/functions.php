@@ -59,17 +59,31 @@ function enviar_correo($asunto, $body, $correo_destino) {
 
 // Función para ver si un usuario es dueño de un archivo o no
 function comprobar_dueno_archivo($usuario_id, $archivo_id) {
+    global $conn;
 
-    $sql_consulta = "SELECT * FROM ordencompra WHERE archivo_id = '".$archivo_id."' && usuario_id = '".$usuario_id."' && estado = 'Pagado'"; 
-    $rs_result1 = mysqli_query($conn, $sql_consulta);
-    $consulta_archivo = mysqli_fetch_assoc($rs_result1);
+    if ($rs_result3 = $conn->query("SELECT * FROM ordencompra WHERE archivo_id = '".$archivo_id."' && usuario_id = '".$usuario_id."' && estado_orden = 'Pagado'")) {
 
-    if(mysqli_num_rows($rs_result1) < 1) {
-        // Fallo, este usuario no tiene una compra finalizada de ese archivo
-        return 0;
-    } else {
-        // Exito
-        return 1;
+        /* determinar el número de filas del resultado */
+        $row_cnt = $rs_result3->num_rows;
+
+        if($row_cnt == 0) {
+            // Fallo
+            return 0;
+        } else {
+            // Exito, es dueño del archivo y lo tiene pagado
+            return 1;
+        }
+
+        /* cerrar el resultset */
+        $rs_result3->close();
     }
+}
+
+// Función para generar un token de descarga y guardarlo en ordencompra
+function generar_token_descarga($usuario_id, $archivo_id, $ordencompra_id) {
+    $token_int = random_int(1000000, 9999999);
+    $token_encriptado = md5($token_int);
+
+    return $token_encriptado;
 }
 ?>

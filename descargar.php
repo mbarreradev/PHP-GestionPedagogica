@@ -1,6 +1,7 @@
 <?php
 session_start();
-require 'inc/database.php';
+require_once 'inc/database.php';
+require_once 'inc/functions.php';
 
 if (!isset($_SESSION["fb_access_token"])) // Si no encuentra el access token de la sesión, se enviará a login
 {
@@ -11,25 +12,23 @@ else // Continuamos a la página
 
     // Consulta que muestra todos los datos del archivo
 	$url_id = trim(mysqli_real_escape_string($conn,$_GET['id'])); 
-	$sql_archivo_id = "SELECT link_archivo 
-    FROM 
-        archivo 
-    WHERE 
-        archivo_id = '".$url_id."' "; 
+    $sql_archivo_id = "SELECT * FROM archivo WHERE archivo_id = '".$url_id."' "; 
     $rs_link_archivo = mysqli_query($conn, $sql_archivo_id) or die ("(1) Problemas al seleccionar ".mysqli_error($conn));
-    // Se guarda en un variable el usuario_id
     $row = mysqli_fetch_assoc($rs_link_archivo);
-    // Guardamos el ordencompra_id del usuario en una variable
     $archivo_id = $row['link_archivo'];
-    //echo $archivo_id;
-    //echo "</br>";
     $file_path = "files/".$archivo_id;
-    //echo $file_path;
 
-    header("Location: https://repositorio.gestionpedagogica.cl/$file_path");
+    $archivo_id_int = $url_id;
+    $usuario_id = $_SESSION['usuario_id'];
 
-    // Hacer filtro si tiene acceso al archivo y lo tiene comprado
-    
-    // header("Location: https://repositorio.gestionpedagogica.cl/404");
+    $valor_dueno_archivo = comprobar_dueno_archivo($usuario_id,$archivo_id_int);
 
+    // Comprobación si es dueño del archivo y lo tiene pagado
+    if($valor_dueno_archivo == 0) {
+        // Lo devolvemos a un error 404
+        header("Location: https://repositorio.gestionpedagogica.cl/404");
+    } else {
+        // Enviamos a la ubicación del archivo
+        header("Location: https://repositorio.gestionpedagogica.cl/$file_path");
+    }
 ?>

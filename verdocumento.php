@@ -9,7 +9,6 @@ $sql1 = "SELECT * FROM archivo where archivo_id = '".$url_id."' ";
 $rs_result1 = mysqli_query($conn, $sql1);
 $consulta_archivo = mysqli_fetch_assoc($rs_result1);
 
-$archivo_id = $url_id;
 $archivo_fecha_subida = date("d-m-Y", strtotime($consulta_archivo["fecha_subida"]));
 $archivo_fecha_actualizacion = date("d-m-Y", strtotime($consulta_archivo["fecha_actualizacion"]));
 
@@ -33,16 +32,12 @@ else
     if (isset($_SESSION["fb_access_token"]))
     {
         // Consulta para traer los datos de usuario generales
-        $sql_datosusuariosgeneral = "SELECT nombres, apellidos, rango, avatar_url
-        FROM 
-            usuario
-        WHERE 
-            usuario_id = '".$_SESSION['usuario_id']."' "; 
+        $sql_datosusuariosgeneral = "SELECT nombres, apellidos, rango, avatar_url FROM usuario WHERE usuario_id = '".$_SESSION['usuario_id']."' "; 
         $rs_resultdatosgeneral = mysqli_query($conn, $sql_datosusuariosgeneral);
         $row_profile_general = mysqli_fetch_assoc($rs_resultdatosgeneral);
 
         // Comprobamos si es dueño del archivo
-        $valor_dueno_archivo = comprobar_dueno_archivo($_SESSION['usuario_id'],$archivo_id);
+        $valor_dueno_archivo = comprobar_dueno_archivo($_SESSION['usuario_id'],$url_id);
     }
 }
 
@@ -79,7 +74,13 @@ else
       <div class="d-flex justify-content-between">
         <h4 class="titulo"><?php echo $consulta_archivo["nombre"]; ?></h4>
         <div class="btn-group dropup btn-block options">
-            <a href="/administracion"><button type="button" class="btn btn-primary"><i class="fa fa-tachometer-alt"></i> Volver a la administración</button></a>
+          <?php 
+            if (isset($_SESSION["rango"]) == '2') {
+              echo '<a href="/administracion"><button type="button" class="btn btn-primary"><i class="fa fa-tachometer-alt"></i> Volver a la administración</button></a>';
+            } else {
+              echo '<a href="/perfil"><button type="button" class="btn btn-primary"><i class="fa fa-home"></i> Volver al perfil</button></a>';
+            }
+          ?>
         </div>
       </div>
       <hr>
@@ -90,32 +91,29 @@ else
 				  	<div class="card-body">
 						<div class="row">
 							<div class="col-sm">
-                                <?php echo $consulta_archivo["descripcion_corta"]; ?></br>
+                <?php echo $consulta_archivo["descripcion_corta"]; ?></br></br>
 								<strong>Valoración:</strong> <span><?php echo $consulta_archivo["valoracion"]; ?> <i class="fa fa-star" data-rating="2" style="font-size:15px;color:#ff9f00;"></i></span></br>
 								<strong>Fecha de subida:</strong> <span><?php echo $archivo_fecha_subida; ?></span> <strong>Última actualización:</strong> <span><?php echo $archivo_fecha_actualizacion; ?></span></br>
 								<hr class="bg-azul"/>
 								<a href="/planificaciones"><button type="button" class="btn btn-primary"><i class="fa fa-heart"></i> Agregar a favoritos</button></a>
-                                <a href="/descargar?id=<?php echo $row['archivo_id']; ?>"><button class="btn btn-success"><i class="fas fa-cloud-download-alt"></i> Descargar</button></a>
-                                <?php
-                                    if($row["estado"] === '1' AND isset($_SESSION["fb_access_token"])) // 1 disponible 0 no disponible
-                                    {
-                                        echo '<a href="#"><button type="button" data-name="'.$row["nombre"].'" data-price="'.$row["precio"].'" class="add-to-cart btn btn-xs btn-outline-primary">Agregar al carrito</button></a>';
-                                    }
-                                    else
-                                    {
-                                        echo 'asd';
-                                    }
-                                ?>
-
-                                <div class="btn-group" role="group">
-									<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									    Administración
-									</button>
-									<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                        <a class="dropdown-item" href="/editardocumento?id=<?php echo $archivo_id; ?>"><button class="btn btn-primary tabla"><i class="fas fa-pencil-alt"></i> Modificar</button></a>
-										<a class="dropdown-item" href="/estadisticas?id=<?php echo $archivo_id; ?>"><button class="btn btn-info tabla"><i class="fas fa-chart-line"></i> Estadísticas</button></a>
-									</div>
-								</div>
+                <?php
+                  if($valor_dueno_archivo == 0) {
+                    echo '<a href="#"><button type="button" data-name="'.$consulta_archivo["nombre"].'" data-price="'.$consulta_archivo["precio"].'" class="add-to-cart btn btn-xs btn-outline-primary">Agregar al carrito</button></a>';
+                  } else {
+                    echo '<a href="/descargar?id='.$url_id.'" target="_blank"><button class="btn btn-success"><i class="fas fa-cloud-download-alt"></i> Descargar</button></a>';
+                  }
+                                
+                  if (isset($_SESSION["rango"]) == '2') { ?>
+                  <div class="btn-group" role="group">
+                    <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Administración</button>
+									  <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                        <a class="dropdown-item" href="/editardocumento?id=<?php echo $url_id; ?>"><button class="btn btn-primary tabla"><i class="fas fa-pencil-alt"></i> Modificar</button></a>
+										    <a class="dropdown-item" href="/estadisticas?id=<?php echo $url_id; ?>"><button class="btn btn-info tabla"><i class="fas fa-chart-line"></i> Estadísticas</button></a>
+									  </div>
+								  </div>
+                  <?php
+                  } 
+                  ?>
 
 							</div>             
 							<div class="col-sm text-center">
@@ -145,6 +143,10 @@ else
 						<div class="col">
 							<h4 class="titulo">Descripción</h4>
 							<?php echo $consulta_archivo["descripcion_larga"]; ?>
+						</div>
+            <div class="col">
+							<h4 class="titulo">Este documento contiene</h4>
+							Texto
 						</div>
 					</div>
 				</div>

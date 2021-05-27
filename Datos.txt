@@ -108,3 +108,10 @@ https://repositorio.gestionpedagogica.cl/comprar?id=3
 
 
 PROMEDIO round($AVGRATE,1) de las reseñas
+
+
+
+se va a la página de descarga del archivo, se tiene que enviar un ?token=id que esta como un campo en el ordencompra, este es null hasta que la
+orden se pasa a "pagado", cuando se pase a pagado se genera un token md5 aleatorio, cuando se intente descargar este archivo se consulta a la tabla
+ordencompra si existe el tokenID (que tiene que ir enviado en la url) y si coincide el user_id registrado con el que esta conectado intentando bajar
+el archivo

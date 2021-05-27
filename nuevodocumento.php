@@ -1,6 +1,7 @@
 <?php
 session_start();
-require 'inc/database.php';
+require_once 'inc/database.php';
+require_once 'inc/functions.php';
 
 if (!isset($_SESSION["fb_access_token"])) // Si no encuentra el access token de la sesión, se enviará a login
 {
@@ -74,7 +75,7 @@ else // Continuamos a la página
         
         // Comprobamos que $uploadOk es 0 para ver si tiene algun error
         if ($uploadOk == 0) {
-            echo "</br>Ahora mismo el archivo no puede ser subido.";
+            echo "</br>Ahora mismo el documento no puede ser subido.";
         // si uploadOk sigue en 1, subimos el archivo
         } else {
             if (move_uploaded_file($_FILES["fileArchivo"]["tmp_name"], $target_file)) 
@@ -95,8 +96,8 @@ else // Continuamos a la página
 		}
 		else
 		{
-			//echo "Error sql log.";
-			echo "Error sql log." . $sql1 . "<br>" . $conn->error;
+			echo "Error sql log.";
+			//echo "Error sql log." . $sql1 . "<br>" . $conn->error;
 		}
     }
 
@@ -108,49 +109,36 @@ else // Continuamos a la página
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<meta name="description" content="">
 		<link rel="icon" href="favicon.ico">
-
-		<title>Administración - Gestión Pedagógica</title>
-
+		<title>Gestión Pedagógica</title>
 		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+        <link href="css/sidebar.css" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    	<script src="js/bootstrap.bundle.min.js"></script>
+        <script src="js/sidebar.js"></script>
+        <script src="js/moment-with-locales.js"></script>
+		<script src="js/list.min.js"></script>
 	</head>
-<body class="text-center">
+<body>
+<div class="page-wrapper chiller-theme toggled">
+  <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+    <i class="fas fa-bars"></i>
+  </a>
+  
+  <?php require 'inc/sidebar.php'; ?>
 
-    <div class="container d-flex p-3 mx-auto flex-column">
+  <main class="page-content">
+    <div class="container-fluid">
+      <div class="d-flex justify-content-between">
+        <h4 class="titulo">Subir nuevo documento</h4>
+        <div class="btn-group dropup btn-block options">
+            <a href="/administracion"><button type="button" class="btn btn-primary"><i class="fa fa-tachometer-alt"></i> Volver a la administración</button></a>
+        </div>
+      </div>
+      <hr>
 
-	<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-color border-azul-claro">
-		<img class="logo" src="/images/Logo.png" width="32" height="32"><h5 class="my-0 mr-md-auto font-weight-normal">Gestión Pedagógica</h5>
-      	<nav class="my-2 my-md-0 mr-md-3">
-		<a href="http://repositorio.gestionpedagogica.cl"><button class="btn btn-secondary" type="button">Inicio</button></a>
-		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hola <?php echo $row_profile_general["nombres"]; ?></button>
-		<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-			<a href="/perfil"><button class="dropdown-item" type="button">Perfil</button></a>
-			<a href="/ordenes"><button class="dropdown-item" type="button">Mis ordenes</button></a>
-			<a href="/logout"><button class="dropdown-item" type="button">Desconectar</button></a>
-		</div>
-		<?php 
-			if (isset($_SESSION["rango"]) == '2')
-			{ 
-				echo '<a href="/administracion"><button class="btn btn-secondary" type="button">Administración</button></a>';
-			}
-		?>
-        <a href="/contacto"><button class="btn btn-secondary" type="button">Contacto</button></a>
-      </nav>
-      <a class="btn btn-outline-success" href="#">Contactar por Whatsapp</a>
-    </div>
-
-    <div class="rounded border border-azul-claro p-3">
-        <div class="container">
-            <h4 class="d-flex justify-content-between align-items-center mb-3">
-                <span class="titulo">Crear nuevo archivo</span>
-                <div class="btn-group dropup btn-block options">
-                <a href="/administracion"><button type="button" class="btn btn-primary"><span class="material-icons">build</span> Volver a la administración</button></a>
-                </div>  
-            </h4>
-			<div class="card mb-3">
+        <div class="card mb-3">
 			    <div class="row no-gutters">
 				    <div class="col">
 				        <div class="card-body">
@@ -159,7 +147,7 @@ else // Continuamos a la página
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="nombre">Nombre</label>
-                                        <input type="text" id="txtNombre" name="txtNombre" class="form-control" placeholder="Nombre del archivo" required>
+                                        <input type="text" id="txtNombre" name="txtNombre" class="form-control" placeholder="Nombre del documento" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="asignatura">Asignatura</label>
@@ -212,6 +200,11 @@ else // Continuamos a la página
                                             <label for="precio">Precio</label>
                                             <input type="number" class="form-control" name="txtPrecio" id="txtPrecio" placeholder="Precio" required>
                                         </div>
+                                        
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" name="recomendado" id="recomendado">
+                                        <label class="custom-control-label" for="recomendado">Recomendar este documento en la página principal de Gestión Pedagógica *</label>
                                     </div>
 
                                 </div>
@@ -224,17 +217,27 @@ else // Continuamos a la página
                                         <label for="descripcionLarga">Descripción larga</label>
                                         <textarea name="txtDescripcionLarga" id="txtDescripcionLarga" class="form-control" placeholder="Descripción larga" style="width: 100%; height: 150px;" required></textarea>
                                     </div>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" name="recomendado" id="recomendado">
-                                        <label class="custom-control-label" for="recomendado">Recomendar archivo en la página principal de Gestión Pedagógica</label>
+                                    <div class="form-group">
+                                        <label for="descripcionLarga">Este documento contiene *</label>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" name="graficos" id="graficos">
+                                            <label class="custom-control-label" for="graficos">Gráficos</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" name="ejemplos" id="ejemplos">
+                                            <label class="custom-control-label" for="ejemplos">Ejemplos</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" name="ejercicios" id="ejercicios">
+                                            <label class="custom-control-label" for="ejercicios">Ejercicios</label>
+                                        </div>
                                     </div>
                                     <hr class="mb-4">
-
                                     <div class="form-group">
                                         <input type="file" id="fileArchivo" name="fileArchivo" class="form-control" required>
                                     </div>
 
-                                    <button type="submit" name="crear-submit" class="btn btn-primary btn-lg float-center">Crear nuevo archivo</button>
+                                    <button type="submit" name="crear-submit" class="btn btn-primary btn-lg float-center">Subir nuevo documento</button>
                                 </div>
                                 </div>
 				            </div>
@@ -242,18 +245,31 @@ else // Continuamos a la página
 				        </div>
 			        </div>
 			    </div>
-	        </div>
-        </div>
+	    </div>
 
-      <footer class="mastfoot margin-top">
-        <div class="inner">
-          <p class="footer">Copyright © 2020 Gestión Pedagógica</p>
+      <hr>
+
+      <footer class="text-center">
+        <div class="mb-2">
+          <small>
+            © 2021 Gestión Pedagógica
+            </a>
+          </small>
+        </div>
+        <div>
+          <a href="#" target="_blank">
+            <i class="fa fa-heart" style="color:red"></i>
+          </a>
+          <a href="#" target="_blank">
+            <i class="fa fa-heart" style="color:red"></i>
+          </a>
         </div>
       </footer>
     </div>
-
-    
-    <script src="js/bootstrap.bundle.min.js"></script>
-	
-  </body>
+  </main>
+  <!-- page-content" -->
+</div>
+<!-- page-wrapper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+</body>
 </html>
